@@ -6,26 +6,26 @@
   <title>Admin Panel - hiConstitution</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    body { background: #f4f6f8; font-family: 'Inter', sans-serif; }
+    body { background: var(--bg-light); font-family: 'Inter', sans-serif; color: var(--body-text); }
     .admin-nav { background: var(--navy-dark); padding: 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
-    .admin-nav h1 { font-size: 1.5rem; margin: 0; }
+    .admin-nav h1 { font-size: 1.5rem; margin: 0; color: #fff; }
     
     .admin-wrapper { max-width: 900px; margin: 40px auto; padding: 0 20px; padding-bottom: 100px; }
-    .box { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+    .box { background: var(--navy); border: 1px solid var(--border); border-radius: 12px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
     .box-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-light); padding-bottom: 15px; margin-bottom: 20px; }
-    .box-header h2 { font-size: 1.25rem; color: var(--navy); margin: 0; }
+    .box-header h2 { font-size: 1.25rem; color: #fff; margin: 0; }
     
     .flex-row { display: flex; gap: 16px; align-items: center; }
-    .flex-row > select { flex: 1; padding: 12px; font-size: 1rem; border-radius: 6px; border: 1px solid var(--border); outline: none; }
-    .flex-row > select:focus { border-color: var(--navy); }
+    .flex-row > select { flex: 1; padding: 12px; font-size: 1rem; border-radius: 6px; border: 1px solid var(--border); outline: none; background: var(--navy-light); color: #fff; }
+    .flex-row > select:focus { border-color: var(--saffron); }
 
     .form-group { margin-bottom: 20px; }
     .form-group label { display: block; font-size: 0.9rem; font-weight: 700; color: var(--dark-text); margin-bottom: 8px; }
-    .form-control { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; font-family: 'Inter', sans-serif; outline: none; }
-    .form-control:focus { border-color: var(--navy); }
+    .form-control { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; font-family: 'Inter', sans-serif; outline: none; background: var(--navy-light); color: #fff; }
+    .form-control:focus { border-color: var(--saffron); }
     
-    .btn-danger { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; cursor: pointer; }
-    .btn-danger:hover { background: #fecaca; }
+    .btn-danger { background: rgba(198, 40, 40, 0.2); color: #e57373; border: 1px solid rgba(198, 40, 40, 0.4); padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; cursor: pointer; }
+    .btn-danger:hover { background: rgba(198, 40, 40, 0.3); }
 
     /* HTML / Rich Text Toolbar */
     .rich-toolbar { 
@@ -33,35 +33,35 @@
       border-radius: 6px 6px 0 0; border: 1px solid var(--border); border-bottom: none; 
     }
     .rich-toolbar button { 
-      font-size: 0.85rem; font-weight: 600; background: white; border: 1px solid var(--border); 
+      font-size: 0.85rem; font-weight: 600; background: var(--navy-light); border: 1px solid var(--border); color: #fff;
       padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: 0.2s; 
     }
-    .rich-toolbar button:hover { background: var(--navy); color: white; border-color: var(--navy); }
+    .rich-toolbar button:hover { background: var(--saffron); color: white; border-color: var(--saffron); }
     .rich-toolbar .flex-spacer { flex: 1; }
     
     .editor-textarea { border-radius: 0 0 6px 6px; border-top: 1px solid var(--border); min-height: 160px; resize: vertical; }
     .editor-preview { 
       min-height: 160px; border: 1px solid var(--border); border-radius: 0 0 6px 6px; 
-      padding: 16px; background: #fffdf9; border-left: 4px solid var(--saffron); 
+      padding: 16px; background: var(--navy-light); border-left: 4px solid var(--saffron); 
       font-family: var(--font); color: var(--body-text); line-height: 1.8;
     }
 
     /* Status Bar */
     .status-bar {
-      position: fixed; bottom: 0; left: 0; right: 0; background: white;
+      position: fixed; bottom: 0; left: 0; right: 0; background: var(--navy);
       border-top: 1px solid var(--border); padding: 12px 20px; display: flex;
-      justify-content: space-between; align-items: center; z-index: 1000; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+      justify-content: space-between; align-items: center; z-index: 1000; box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
     }
-    .auto-save-text { font-size: 0.85rem; color: var(--green); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .auto-save-text { font-size: 0.85rem; color: var(--green-light); font-weight: 600; display: flex; align-items: center; gap: 6px; }
     .auto-save-text.typing { color: var(--saffron); }
     
     .hidden { display: none !important; }
 
     /* Tabs */
-    .admin-tabs { background: white; padding: 0 20px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; }
+    .admin-tabs { background: var(--navy); padding: 0 20px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; }
     .admin-tabs button { padding: 16px 24px; font-size: 1rem; font-weight: 600; background: none; border: none; border-bottom: 3px solid transparent; color: var(--muted); cursor: pointer; transition: 0.2s; }
-    .admin-tabs button.active { color: var(--navy); border-bottom-color: var(--navy); }
-    .admin-tabs button:hover { color: var(--navy); }
+    .admin-tabs button.active { color: var(--saffron); border-bottom-color: var(--saffron); }
+    .admin-tabs button:hover { color: #fff; }
   </style>
 </head>
 <body>
