@@ -1,0 +1,419 @@
+[
+  {
+    "partId": "I",
+    "partTitle": "Part I — The Union and its Territory",
+    "partDesc": "Articles 1 to 4 covering the naming and formation of states.",
+    "articles": [
+      {
+        "id": "1",
+        "title": "Article 1: Name and territory of the Union",
+        "preview": "India, that is Bharat, shall be a Union of States...",
+        "text": "Name and territory of the Union.—\n(1) India, that is Bharat, shall be a Union of States.\n(2) The States and the territories thereof shall be as specified in the First Schedule.\n(3) The territory of India shall comprise—\n(a) the territories of the States;\n(b) the Union territories specified in the First Schedule; and\n(c) such other territories as may be acquired.",
+        "simplified": "India (also called Bharat) is a Union of States. All state and union territory land, plus any future acquisitions, form the territory of India.",
+        "hindi": "(1) भारत, अर्थात् इंडिया, राज्यों का संघ होगा।\n(2) राज्य और उनके राज्यक्षेत्र वे होंगे जो पहली अनुसूची में विनिर्दिष्ट हैं।\n(3) भारत के राज्यक्षेत्र में—\n(क) राज्यों के राज्यक्षेत्र,\n(ख) पहली अनुसूची में विनिर्दिष्ट संघ राज्यक्षेत्र, और\n(ग) ऐसे अन्य राज्यक्षेत्र जो अर्जित किए जाएं, समाविष्ट होंगे।"
+      },
+      {
+        "id": "2",
+        "title": "Article 2: Admission or establishment of new States",
+        "preview": "Parliament may by law admit into the Union, or establish, new States...",
+        "text": "Admission or establishment of new States.—Parliament may by law admit into the Union, or establish, new States on such terms and conditions as it thinks fit.",
+        "simplified": "Parliament has the power to bring new states into India or establish new states through a law, on whatever terms it finds appropriate.",
+        "hindi": "संसद, विधि द्वारा, ऐसे निबंधनों और शर्तों पर, जो वह ठीक समझे, संघ में नए राज्यों का प्रवेश या उनकी स्थापना कर सकेगी।"
+      },
+      {
+        "id": "3",
+        "title": "Article 3: Formation of new States and alteration of areas, boundaries or names of existing States",
+        "preview": "Parliament may by law form new States, increase or diminish the area of any State, alter boundaries, or change the name of any State, subject to the constitutional procedure.",
+        "text": "Formation of new States and alteration of areas, boundaries or names of existing States.—Parliament may by law—\n(a) form a new State by separation of territory from any State or by uniting two or more States or parts of States or by uniting any territory to a part of any State;\n(b) increase the area of any State;\n(c) diminish the area of any State;\n(d) alter the boundaries of any State;\n(e) alter the name of any State:\nProvided that no Bill for the purpose shall be introduced in either House of Parliament except on the recommendation of the President and unless, where the proposal contained in the Bill affects the area, boundaries or name of any of the States, the Bill has been referred by the President to the Legislature of that State for expressing its views thereon within such period as may be specified in the reference or within such further period as the President may allow and the period so specified or allowed has expired.\nExplanation I.—In this article, in clauses (a) to (e), \"State\" includes a Union territory, but in the proviso, \"State\" does not include a Union territory.\nExplanation II.—The power conferred on Parliament by clause (a) includes the power to form a new State or Union territory by uniting a part of any State or Union territory to any other State or Union territory.",
+        "simplified": "Parliament can create a new State, merge or split territories, increase or reduce the area of a State, change boundaries, or rename a State. But such a Bill can be introduced only on the President's recommendation, and if a State is affected, its Legislature must first be given a chance to express its views."
+      },
+      {
+        "id": "4",
+        "title": "Article 4: Laws made under articles 2 and 3 to provide for the amendment of the First and the Fourth Schedules",
+        "preview": "A law made under Article 2 or Article 3 may amend the First and Fourth Schedules and include supplemental, incidental, and consequential provisions, and such a law is not treated as a constitutional amendment under Article 368.",
+        "text": "Laws made under articles 2 and 3 to provide for the amendment of the First and the Fourth Schedules and supplemental, incidental and consequential matters.—\n(1) Any law referred to in article 2 or article 3 shall contain such provisions for the amendment of the First Schedule and the Fourth Schedule as may be necessary to give effect to the provisions of the law and may also contain such supplemental, incidental and consequential provisions (including provisions as to representation in Parliament and in the Legislature or Legislatures of the State or States affected by such law) as Parliament may deem necessary.\n(2) No such law as aforesaid shall be deemed to be an amendment of this Constitution for the purposes of article 368.",
+        "simplified": "When Parliament makes a law under Article 2 or 3, it can also update the First and Fourth Schedules and add related provisions needed to make the change work. Even though these laws modify schedules connected to the Constitution, they are not treated as formal constitutional amendments under Article 368."
+      }
+    ]
+  },
+  {
+    "partId": "II",
+    "partTitle": "Part II — Citizenship",
+    "partDesc": "Articles 5 to 11 governing Indian citizenship at the commencement of the Constitution.",
+    "articles": [
+      {
+        "id": "5",
+        "title": "Article 5: Citizenship at the commencement of the Constitution",
+        "preview": "At the commencement of this Constitution, every person who has his domicile in the territory of India and— (a) who was born in the territory of India; or (b) either of whose parents was born in the territory of India; or (c) who has been ordinarily resident in the territory of India for not less than five years..."
+      },
+      {
+        "id": "6",
+        "title": "Article 6: Rights of citizenship of certain persons who have migrated to India from Pakistan",
+        "preview": "Notwithstanding anything in article 5, a person who has migrated to the territory of India from the territory now included in Pakistan shall be deemed to be a citizen of India at the commencement of this Constitution if he or either of his parents or any of his grand-parents was born in India as defined in the Government of India Act, 1935..."
+      },
+      {
+        "id": "7",
+        "title": "Article 7: Rights of citizenship of certain migrants to Pakistan",
+        "preview": "Notwithstanding anything in articles 5 and 6, a person who has after the first day of March, 1947, migrated from the territory of India to the territory now included in Pakistan shall not be deemed to be a citizen of India."
+      },
+      {
+        "id": "8",
+        "title": "Article 8: Rights of citizenship of certain persons of Indian origin residing outside India",
+        "preview": "Notwithstanding anything in article 5, any person who or either of whose parents or any of whose grand-parents was born in India as defined in the Government of India Act, 1935, and who is ordinarily residing in any country outside India as so defined shall be deemed to be a citizen of India..."
+      },
+      {
+        "id": "9",
+        "title": "Article 9: Persons voluntarily acquiring citizenship of a foreign State not to be citizens",
+        "preview": "No person shall be a citizen of India by virtue of article 5, or be deemed to be a citizen of India by virtue of article 6 or article 8, if he has voluntarily acquired the citizenship of any foreign State."
+      },
+      {
+        "id": "10",
+        "title": "Article 10: Continuance of the rights of citizenship",
+        "preview": "Every person who is or is deemed to be a citizen of India under any of the foregoing provisions of this Part shall, subject to the provisions of any law that may be made by Parliament, continue to be such citizen."
+      },
+      {
+        "id": "11",
+        "title": "Article 11: Parliament to regulate the right of citizenship by law",
+        "preview": "Nothing in the foregoing provisions of this Part shall derogate from the power of Parliament to make any provision with respect to the acquisition and termination of citizenship and all other matters relating to citizenship."
+      }
+    ]
+  },
+  {
+    "partId": "III",
+    "partTitle": "Part III — Fundamental Rights",
+    "partDesc": "Articles 12 to 35 encompassing the basic rights of all persons and citizens.",
+    "articles": [
+      {
+        "id": "12",
+        "title": "Article 12: Definition",
+        "preview": "In this Part, unless the context otherwise requires, 'the State' includes the Government and Parliament of India and the Government and the Legislature of each of the States and all local or other authorities within the territory of India or under the control of the Government of India."
+      },
+      {
+        "id": "13",
+        "title": "Article 13: Laws inconsistent with or in derogation of the fundamental rights",
+        "preview": "All laws in force in the territory of India immediately before the commencement of this Constitution, in so far as they are inconsistent with the provisions of this Part, shall, to the extent of such inconsistency, be void."
+      },
+      {
+        "id": "14",
+        "title": "Article 14: Equality before law",
+        "preview": "The State shall not deny to any person equality before the law or the equal protection of the laws within the territory of India."
+      },
+      {
+        "id": "15",
+        "title": "Article 15: Prohibition of discrimination on grounds of religion, race, caste, sex or place of birth",
+        "preview": "The State shall not discriminate against any citizen on grounds only of religion, race, caste, sex, place of birth or any of them."
+      },
+      {
+        "id": "21",
+        "title": "Article 21: Protection of life and personal liberty",
+        "preview": "No person shall be deprived of his life or personal liberty except according to procedure established by law."
+      },
+      {
+        "id": "32",
+        "title": "Article 32: Remedies for enforcement of rights",
+        "preview": "The right to move the Supreme Court by appropriate proceedings for the enforcement of the rights conferred by this Part is guaranteed."
+      }
+    ]
+  },
+  {
+    "partId": "IV",
+    "partTitle": "Part IV — Directive Principles of State Policy",
+    "partDesc": "Articles 36 to 51 encompassing the policy guidelines for the State.",
+    "articles": [
+      {
+        "id": "39",
+        "title": "Article 39: Certain principles of policy to be followed by the State",
+        "preview": "The State shall direct its policy towards securing equal pay for equal work, adequate livelihood, and preventing the concentration of wealth."
+      },
+      {
+        "id": "44",
+        "title": "Article 44: Uniform civil code for the citizens",
+        "preview": "The State shall endeavour to secure for the citizens a uniform civil code throughout the territory of India."
+      }
+    ]
+  },
+  {
+    "partId": "IVA",
+    "partTitle": "Part IVA — Fundamental Duties",
+    "partDesc": "Article 51A highlighting the eleven duties of every Indian citizen.",
+    "articles": [
+      {
+        "id": "51A",
+        "title": "Article 51A: Fundamental Duties",
+        "preview": "It shall be the duty of every citizen of India to abide by the Constitution, cherish its ideals, defend the country, and promote harmony."
+      }
+    ]
+  },
+  {
+    "partId": "V",
+    "partTitle": "Part V — The Union",
+    "partDesc": "Articles 52 to 151 dealing with the President, Parliament, and Supreme Court.",
+    "articles": [
+      {
+        "id": "52",
+        "title": "Article 52: The President of India",
+        "preview": "There shall be a President of India.",
+        "text": "There shall be a President of India.",
+        "simplified": "India will always have a President as the head of state.",
+        "hindi": "भारत का एक राष्ट्रपति होगा।"
+      },
+      {
+        "id": "74",
+        "title": "Article 74: Council of Ministers to aid and advise President",
+        "preview": "There shall be a Council of Ministers with the Prime Minister at the head...",
+        "text": "(1) There shall be a Council of Ministers with the Prime Minister at the head to aid and advise the President who shall, in the exercise of his functions, act in accordance with such advice.",
+        "simplified": "The President must act on the advice of the Council of Ministers, headed by the Prime Minister.",
+        "hindi": "राष्ट्रपति को सहायता और सलाह देने के लिए एक मंत्रिपरिषद होगी जिसका प्रधान प्रधानमंत्री होगा।"
+      },
+      {
+        "id": "124",
+        "title": "Article 124: Establishment and constitution of Supreme Court",
+        "preview": "There shall be a Supreme Court of India consisting of a Chief Justice of India...",
+        "text": "(1) There shall be a Supreme Court of India consisting of a Chief Justice of India and, until Parliament by law prescribes a larger number, of not more than seven other Judges.",
+        "simplified": "Establishes the Supreme Court of India, headed by the Chief Justice.",
+        "hindi": "भारत का एक उच्चतम न्यायालय होगा जो भारत के मुख्य न्यायमूर्ति और जब तक संसद विधि द्वारा अधिक संख्या विहित नहीं करती है तब तक सात से अनधिक अन्य न्यायाधीशों से मिलकर बनेगा।"
+      }
+    ]
+  },
+  {
+    "partId": "VI",
+    "partTitle": "Part VI — The States",
+    "partDesc": "Articles 152 to 237 dealing with State Executives, Legislature, and High Courts.",
+    "articles": [
+      {
+        "id": "153",
+        "title": "Article 153: Governors of States",
+        "preview": "There shall be a Governor for each State...",
+        "text": "There shall be a Governor for each State: Provided that nothing in this article shall prevent the appointment of the same person as Governor for two or more States.",
+        "simplified": "Every state must have a Governor. One person can also serve as the Governor for more than one state.",
+        "hindi": "प्रत्येक राज्य के लिए एक राज्यपाल होगा: परंतु इस अनुच्छेद की कोई बात एक ही व्यक्ति को दो या अधिक राज्यों के लिए राज्यपाल नियुक्त किए जाने से निवारित नहीं करेगी।"
+      },
+      {
+        "id": "214",
+        "title": "Article 214: High Courts for States",
+        "preview": "There shall be a High Court for each State.",
+        "text": "There shall be a High Court for each State.",
+        "simplified": "Every state must have a High Court as its highest judicial body.",
+        "hindi": "प्रत्येक राज्य के लिए एक उच्च न्यायालय होगा।"
+      }
+    ]
+  },
+  {
+    "partId": "VIII",
+    "partTitle": "Part VIII — The Union Territories",
+    "partDesc": "Articles 239 to 242 covering administration of Union Territories.",
+    "articles": [
+      {
+        "id": "239",
+        "title": "Article 239: Administration of Union territories",
+        "preview": "Every Union territory shall be administered by the President...",
+        "text": "(1) Save as otherwise provided by Parliament by law, every Union territory shall be administered by the President acting, to such extent as he thinks fit, through an administrator to be appointed by him...",
+        "simplified": "Union Territories are directly administered by the President through an appointed Administrator (like a Lieutenant Governor).",
+        "hindi": "संसद द्वारा बनाई गई विधि द्वारा यथा अन्यथा उपबंधित के सिवाय, प्रत्येक संघ राज्यक्षेत्र का प्रशासन राष्ट्रपति द्वारा किया जाएगा..."
+      }
+    ]
+  },
+  {
+    "partId": "IX",
+    "partTitle": "Part IX — The Panchayats",
+    "partDesc": "Articles 243 to 243O dealing with rural local self-government.",
+    "articles": [
+      {
+        "id": "243B",
+        "title": "Article 243B: Constitution of Panchayats",
+        "preview": "There shall be constituted in every State, Panchayats at the village, intermediate and district levels...",
+        "text": "(1) There shall be constituted in every State, Panchayats at the village, intermediate and district levels in accordance with the provisions of this Part.",
+        "simplified": "Mandates a three-tier Panchayat system (village, intermediate, and district levels) in every state to ensure local self-government.",
+        "hindi": "प्रत्येक राज्य में ग्राम, मध्यवर्ती और जिला स्तर पर पंचायतों का गठन किया जाएगा।"
+      }
+    ]
+  },
+  {
+    "partId": "IXA",
+    "partTitle": "Part IXA — The Municipalities",
+    "partDesc": "Articles 243P to 243ZG dealing with urban local bodies.",
+    "articles": [
+      {
+        "id": "243Q",
+        "title": "Article 243Q: Constitution of Municipalities",
+        "preview": "There shall be constituted in every State a Nagar Panchayat, a Municipal Council and a Municipal Corporation...",
+        "text": "(1) There shall be constituted in every State— (a) a Nagar Panchayat for a transitional area; (b) a Municipal Council for a smaller urban area; and (c) a Municipal Corporation for a larger urban area...",
+        "simplified": "Mandates three types of municipalities: Nagar Panchayats, Municipal Councils, and Municipal Corporations.",
+        "hindi": "प्रत्येक राज्य में एक नगर पंचायत, एक नगर पालिका परिषद और एक नगर निगम का गठन किया जाएगा..."
+      }
+    ]
+  },
+  {
+    "partId": "X",
+    "partTitle": "Part X — The Scheduled and Tribal Areas",
+    "partDesc": "Articles 244 to 244A.",
+    "articles": [
+      {
+        "id": "244",
+        "title": "Article 244: Administration of Scheduled Areas and Tribal Areas",
+        "preview": "The provisions of the Fifth Schedule shall apply to the administration and control of the Scheduled Areas...",
+        "text": "(1) The provisions of the Fifth Schedule shall apply to the administration and control of the Scheduled Areas and Scheduled Tribes in any State other than the States of Assam, Meghalaya, Tripura and Mizoram.",
+        "simplified": "Special administration rules apply to Scheduled and Tribal areas to protect indigenous populations.",
+        "hindi": "पांचवीं अनुसूची के उपबंध असम, मेघालय, त्रिपुरा और मिजोरम राज्यों से भिन्न किसी राज्य के अनुसूचित क्षेत्रों और अनुसूचित जनजातियों के प्रशासन और नियंत्रण को लागू होंगे।"
+      }
+    ]
+  },
+  {
+    "partId": "XI",
+    "partTitle": "Part XI — Relations Between the Union and the States",
+    "partDesc": "Articles 245 to 263 outlining legislative and administrative relations.",
+    "articles": [
+      {
+        "id": "245",
+        "title": "Article 245: Extent of laws made by Parliament and by the Legislatures of States",
+        "preview": "Parliament may make laws for the whole or any part of the territory of India...",
+        "text": "(1) Subject to the provisions of this Constitution, Parliament may make laws for the whole or any part of the territory of India, and the Legislature of a State may make laws for the whole or any part of the State.",
+        "simplified": "Parliament makes laws for the whole country, while state legislatures make laws only for their respective states.",
+        "hindi": "संसद भारत के संपूर्ण राज्यक्षेत्र या उसके किसी भाग के लिए विधि बना सकेगी और किसी राज्य का विधान-मंडल संपूर्ण राज्य या उसके किसी भाग के लिए विधि बना सकेगा।"
+      }
+    ]
+  },
+  {
+    "partId": "XII",
+    "partTitle": "Part XII — Finance, Property, Contracts and Suits",
+    "partDesc": "Articles 264 to 300A (includes Right to Property).",
+    "articles": [
+      {
+        "id": "300A",
+        "title": "Article 300A: Persons not to be deprived of property save by authority of law",
+        "preview": "No person shall be deprived of his property save by authority of law.",
+        "text": "No person shall be deprived of his property save by authority of law.",
+        "simplified": "The government cannot take away your property without a valid law allowing it. (This was formerly a Fundamental Right).",
+        "hindi": "किसी व्यक्ति को उसकी संपत्ति से विधि के प्राधिकार से ही वंचित किया जाएगा, अन्यथा नहीं।"
+      }
+    ]
+  },
+  {
+    "partId": "XIII",
+    "partTitle": "Part XIII — Trade, Commerce and Intercourse",
+    "partDesc": "Articles 301 to 307.",
+    "articles": [
+      {
+        "id": "301",
+        "title": "Article 301: Freedom of trade, commerce and intercourse",
+        "preview": "Trade, commerce and intercourse throughout the territory of India shall be free.",
+        "text": "Subject to the other provisions of this Part, trade, commerce and intercourse throughout the territory of India shall be free.",
+        "simplified": "People are free to trade and do business anywhere across India without unreasonable barriers between states.",
+        "hindi": "इस भाग के अन्य उपबंधों के अधीन रहते हुए, भारत के संपूर्ण राज्यक्षेत्र में व्यापार, वाणिज्य और समागम अबाध होगा।"
+      }
+    ]
+  },
+  {
+    "partId": "XIV",
+    "partTitle": "Part XIV — Services Under the Union and the States",
+    "partDesc": "Articles 308 to 323 including UPSC.",
+    "articles": [
+      {
+        "id": "315",
+        "title": "Article 315: Public Service Commissions for the Union and for the States",
+        "preview": "There shall be a Public Service Commission for the Union and a Public Service Commission for each State...",
+        "text": "(1) Subject to the provisions of this article, there shall be a Public Service Commission for the Union and a Public Service Commission for each State.",
+        "simplified": "Establishes the UPSC at the central level and State Public Service Commissions (SPSCs) at the state level to recruit civil servants.",
+        "hindi": "इस अनुच्छेद के उपबंधों के अधीन रहते हुए, संघ के लिए एक लोक सेवा आयोग और प्रत्येक राज्य के लिए एक लोक सेवा आयोग होगा।"
+      }
+    ]
+  },
+  {
+    "partId": "XV",
+    "partTitle": "Part XV — Elections",
+    "partDesc": "Articles 324 to 329A including Election Commission setup.",
+    "articles": [
+      {
+        "id": "324",
+        "title": "Article 324: Election Commission",
+        "preview": "The superintendence, direction and control of the preparation of the electoral rolls for, and the conduct of, all elections...",
+        "text": "(1) The superintendence, direction and control of the preparation of the electoral rolls for, and the conduct of, all elections to Parliament and to the Legislature of every State... shall be vested in a Commission.",
+        "simplified": "Creates an independent Election Commission of India to conduct free and fair elections across the country.",
+        "hindi": "संसद और प्रत्येक राज्य के विधान-मंडल के लिए कराए जाने वाले सभी निर्वाचनों के लिए निर्वाचक नामावली तैयार कराने का और उन सभी निर्वाचनों के संचालन का अधीक्षण, निदेशन और नियंत्रण एक आयोग में निहित होगा..."
+      }
+    ]
+  },
+  {
+    "partId": "XVI",
+    "partTitle": "Part XVI — Special Provisions Relating to Certain Classes",
+    "partDesc": "Articles 330 to 342 dealing with SC/ST reservations.",
+    "articles": [
+      {
+        "id": "330",
+        "title": "Article 330: Reservation of seats for SC and ST in the House of the People",
+        "preview": "Seats shall be reserved in the House of the People for the Scheduled Castes and Scheduled Tribes...",
+        "text": "(1) Seats shall be reserved in the House of the People for — (a) the Scheduled Castes; (b) the Scheduled Tribes...",
+        "simplified": "Ensures that a certain number of seats in the Lok Sabha are reserved for Scheduled Castes and Scheduled Tribes based on their population.",
+        "hindi": "लोक सभा में— (क) अनुसूचित जातियों के लिए; (ख) अनुसूचित जनजातियों के लिए... स्थान आरक्षित रहेंगे।"
+      }
+    ]
+  },
+  {
+    "partId": "XVII",
+    "partTitle": "Part XVII — Official Language",
+    "partDesc": "Articles 343 to 351.",
+    "articles": [
+      {
+        "id": "343",
+        "title": "Article 343: Official language of the Union",
+        "preview": "The official language of the Union shall be Hindi in Devanagari script.",
+        "text": "(1) The official language of the Union shall be Hindi in Devanagari script.",
+        "simplified": "Hindi in Devanagari script is the official language of the central government, with English allowed for official work.",
+        "hindi": "संघ की राजभाषा हिंदी और लिपि देवनागरी होगी।"
+      }
+    ]
+  },
+  {
+    "partId": "XVIII",
+    "partTitle": "Part XVIII — Emergency Provisions",
+    "partDesc": "Articles 352 to 360 covering National, State, and Financial Emergencies.",
+    "articles": [
+      {
+        "id": "352",
+        "title": "Article 352: Proclamation of Emergency",
+        "preview": "If the President is satisfied that a grave emergency exists whereby the security of India is threatened...",
+        "text": "(1) If the President is satisfied that a grave emergency exists whereby the security of India or of any part of the territory thereof is threatened, whether by war or external aggression or armed rebellion, he may, by Proclamation, make a declaration to that effect...",
+        "simplified": "The President can declare a National Emergency if India's security is threatened by war, external aggression, or armed rebellion.",
+        "hindi": "यदि राष्ट्रपति को समाधान हो जाता है कि गंभीर आपात विद्यमान है जिससे युद्ध या बाह्य आक्रमण या सशस्त्र विद्रोह के कारण भारत या उसके राज्यक्षेत्र के किसी भाग की सुरक्षा संकट में है, तो वह उद्घोषणा द्वारा इस आशय की घोषणा कर सकेगा।"
+      },
+      {
+        "id": "356",
+        "title": "Article 356: Failure of constitutional machinery in States",
+        "preview": "If the President is satisfied that the government of the State cannot be carried on in accordance with the Constitution...",
+        "text": "(1) If the President, on receipt of a report from the Governor of a State or otherwise, is satisfied that a situation has arisen in which the Government of the State cannot be carried on in accordance with the provisions of this Constitution, the President may by Proclamation assume to himself all or any of the functions of the Government of the State...",
+        "simplified": "Allows the central government to impose President's Rule in a state if the state government fails to function according to the Constitution.",
+        "hindi": "यदि राष्ट्रपति को किसी राज्य के राज्यपाल से प्रतिवेदन मिलने पर या अन्यथा, यह समाधान हो जाता है कि ऐसी स्थिति उत्पन्न हो गई है जिसमें उस राज्य का शासन इस संविधान के उपबंधों के अनुसार नहीं चलाया जा सकता है, तो राष्ट्रपति उद्घोषणा द्वारा उस राज्य की सरकार के सभी या कोई कृत्य अपने हाथ में ले सकेगा..."
+      }
+    ]
+  },
+  {
+    "partId": "XX",
+    "partTitle": "Part XX — Amendment of the Constitution",
+    "partDesc": "Article 368 covering powers and procedure for amending the Constitution.",
+    "articles": [
+      {
+        "id": "368",
+        "title": "Article 368: Power of Parliament to amend the Constitution",
+        "preview": "Parliament may in exercise of its constituent power amend by way of addition, variation or repeal any provision...",
+        "text": "(1) Notwithstanding anything in this Constitution, Parliament may in exercise of its constituent power amend by way of addition, variation or repeal any provision of this Constitution in accordance with the procedure laid down in this article.",
+        "simplified": "Gives Parliament the power to amend the Constitution, but only by following a specific process (usually requiring a special majority).",
+        "hindi": "इस संविधान में किसी बात के होते हुए भी, संसद अपनी संविधायी शक्ति का प्रयोग करते हुए इस संविधान के किसी उपबंध का परिवर्धन, परिवर्तन या निरसन के रूप में संशोधन इस अनुच्छेद में अधिकथित प्रक्रिया के अनुसार कर सकेगी।"
+      }
+    ]
+  },
+  {
+    "partId": "XXII",
+    "partTitle": "Part XXII — Short Title, Commencement, etc.",
+    "partDesc": "Articles 393 to 395.",
+    "articles": [
+      {
+        "id": "393",
+        "title": "Article 393: Short title",
+        "preview": "This Constitution may be called the Constitution of India.",
+        "text": "This Constitution may be called the Constitution of India.",
+        "simplified": "The official name of this document is the 'Constitution of India'.",
+        "hindi": "इस संविधान का संक्षिप्त नाम भारत का संविधान है।"
+      }
+    ]
+  }
+]

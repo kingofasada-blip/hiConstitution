@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - hiConstitution</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { background: #f4f6f8; font-family: 'Inter', sans-serif; }
+    .admin-nav { background: var(--navy-dark); padding: 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
+    .admin-nav h1 { font-size: 1.5rem; margin: 0; }
+    
+    .admin-wrapper { max-width: 900px; margin: 40px auto; padding: 0 20px; padding-bottom: 100px; }
+    .box { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+    .box-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-light); padding-bottom: 15px; margin-bottom: 20px; }
+    .box-header h2 { font-size: 1.25rem; color: var(--navy); margin: 0; }
+    
+    .flex-row { display: flex; gap: 16px; align-items: center; }
+    .flex-row > select { flex: 1; padding: 12px; font-size: 1rem; border-radius: 6px; border: 1px solid var(--border); outline: none; }
+    .flex-row > select:focus { border-color: var(--navy); }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.9rem; font-weight: 700; color: var(--dark-text); margin-bottom: 8px; }
+    .form-control { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; font-family: 'Inter', sans-serif; outline: none; }
+    .form-control:focus { border-color: var(--navy); }
+    
+    .btn-danger { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; cursor: pointer; }
+    .btn-danger:hover { background: #fecaca; }
+
+    /* HTML / Rich Text Toolbar */
+    .rich-toolbar { 
+      display: flex; gap: 8px; background: var(--bg-subtle); padding: 10px; 
+      border-radius: 6px 6px 0 0; border: 1px solid var(--border); border-bottom: none; 
+    }
+    .rich-toolbar button { 
+      font-size: 0.85rem; font-weight: 600; background: white; border: 1px solid var(--border); 
+      padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: 0.2s; 
+    }
+    .rich-toolbar button:hover { background: var(--navy); color: white; border-color: var(--navy); }
+    .rich-toolbar .flex-spacer { flex: 1; }
+    
+    .editor-textarea { border-radius: 0 0 6px 6px; border-top: 1px solid var(--border); min-height: 160px; resize: vertical; }
+    .editor-preview { 
+      min-height: 160px; border: 1px solid var(--border); border-radius: 0 0 6px 6px; 
+      padding: 16px; background: #fffdf9; border-left: 4px solid var(--saffron); 
+      font-family: var(--font); color: var(--body-text); line-height: 1.8;
+    }
+
+    /* Status Bar */
+    .status-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; background: white;
+      border-top: 1px solid var(--border); padding: 12px 20px; display: flex;
+      justify-content: space-between; align-items: center; z-index: 1000; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    }
+    .auto-save-text { font-size: 0.85rem; color: var(--green); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .auto-save-text.typing { color: var(--saffron); }
+    
+    .hidden { display: none !important; }
+
+    /* Tabs */
+    .admin-tabs { background: white; padding: 0 20px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; }
+    .admin-tabs button { padding: 16px 24px; font-size: 1rem; font-weight: 600; background: none; border: none; border-bottom: 3px solid transparent; color: var(--muted); cursor: pointer; transition: 0.2s; }
+    .admin-tabs button.active { color: var(--navy); border-bottom-color: var(--navy); }
+    .admin-tabs button:hover { color: var(--navy); }
+  </style>
+</head>
+<body>
+
+<div class="admin-nav">
+  <h1>⚙️ Constitution Admin Panel</h1>
+  <div>
+    <button class="btn btn-outline" id="loadLocalBtn">Reload Local JSON</button>
+    <button class="btn btn-primary" id="downloadBtn">⬇️ Download Updated JSON</button>
+  </div>
+</div>
+
+<div class="admin-tabs">
+  <button id="tabBtn-articles" class="active" onclick="switchTab('articles')">Articles & Parts</button>
+  <button id="tabBtn-schedules" onclick="switchTab('schedules')">Schedules</button>
+  <button id="tabBtn-quizzes" onclick="switchTab('quizzes')">Quizzes</button>
+</div>
+
+<div id="view-articles" class="admin-wrapper">
+
+  <div class="box" id="articlesOverviewBox">
+    <div class="box-header">
+      <h2>Content Overview</h2>
+    </div>
+    <div id="articlesOverviewStats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;">
+      <div class="editor-preview">Loading article stats…</div>
+    </div>
+  </div>
+
+  <!-- 1. PART SELECTION & EDITOR -->
+  <div class="box">
+    <div class="box-header">
+      <h2>1. Select Part</h2>
+      <button class="btn btn-outline-navy btn-sm" onclick="addNewPart()">+ Add New Part</button>
+    </div>
+    <div class="flex-row">
+      <select id="partSelect" onchange="onPartChange()">
+        <option value="-1">Loading Parts...</option>
+      </select>
+    </div>
+
+    <div id="partEditor" class="hidden" style="margin-top: 24px; padding-top: 24px; border-top: 1px dashed var(--border);">
+      <div class="form-group">
+        <label>Part ID (e.g., I, II, III)</label>
+        <input type="text" id="partId" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Part Title</label>
+        <input type="text" id="partTitle" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Part Description</label>
+        <textarea id="partDesc" class="form-control" rows="2"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. ARTICLE SELECTION & EDITOR -->
+  <div id="articleSection" class="box hidden">
+    <div class="box-header">
+      <h2>2. Select Article</h2>
+      <button class="btn btn-outline-navy btn-sm" onclick="addNewArticle()">+ Add New Article</button>
+    </div>
+    <div class="flex-row">
+      <select id="articleSelect" onchange="onArticleChange()">
+        <option value="-1">-- Select an Article --</option>
+      </select>
+    </div>
+
+    <div id="articleEditor" class="hidden" style="margin-top: 24px; padding-top: 24px; border-top: 1px dashed var(--border);">
+      
+      <div style="display:flex; justify-content:flex-end; margin-bottom:16px;">
+        <button class="btn-danger" onclick="deleteCurrentArticle()">🗑️ Delete This Article</button>
+      </div>
+
+      <div id="articleContentStatus" class="editor-preview" style="margin-bottom:18px;"></div>
+
+      <div class="form-group">
+        <label>Article ID (Number)</label>
+        <input type="text" id="artId" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Article Title</label>
+        <input type="text" id="artTitle" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Short Preview Text (Plain Text)</label>
+        <textarea id="artPreview" class="form-control" rows="2"></textarea>
+      </div>
+
+      <!-- Dynamic Text/HTML Editors will be injected here -->
+      <div id="richEditorsContainer"></div>
+      
+    </div>
+  </div>
+
+</div>
+
+<!-- SCHEDULES SECTION -->
+<div id="view-schedules" class="admin-wrapper hidden">
+  <div class="box">
+    <div class="box-header">
+      <h2>Select Schedule</h2>
+      <button class="btn btn-outline-navy btn-sm" onclick="addNewSchedule()">+ Add New Schedule</button>
+    </div>
+    <div class="flex-row">
+      <select id="schSelect" onchange="onScheduleChange()">
+        <option value="-1">Loading Schedules...</option>
+      </select>
+    </div>
+    <div id="scheduleEditor" class="hidden" style="margin-top: 24px; padding-top: 24px; border-top: 1px dashed var(--border);">
+      <div style="display:flex; justify-content:flex-end; margin-bottom:16px;">
+        <button class="btn-danger" onclick="deleteCurrentSchedule()">🗑️ Delete Schedule</button>
+      </div>
+      <div class="form-group"><label>Schedule ID (Number)</label><input type="text" id="schId" class="form-control"></div>
+      <div class="form-group"><label>Title</label><input type="text" id="schTitle" class="form-control"></div>
+      <div class="form-group"><label>Short Description</label><textarea id="schDesc" class="form-control" rows="2"></textarea></div>
+      <div class="form-group">
+        <label>Details (English) [HTML Supported]</label>
+        <div class="rich-toolbar">
+          <button type="button" onclick="insertAtCursor('schDetails', '<br><br>')">¶ Paragraph Break</button>
+          <button type="button" onclick="insertAtCursor('schDetails', '<b>', '</b>')"><b>B</b> Bold</button>
+          <button type="button" onclick="insertAtCursor('schDetails', '<i>', '</i>')"><i>I</i> Italic</button>
+        </div>
+        <textarea id="schDetails" class="form-control editor-textarea"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Details (Hindi) [HTML Supported]</label>
+        <div class="rich-toolbar">
+          <button type="button" onclick="insertAtCursor('schHindi', '<br><br>')">¶ Paragraph Break</button>
+          <button type="button" onclick="insertAtCursor('schHindi', '<b>', '</b>')"><b>B</b> Bold</button>
+          <button type="button" onclick="insertAtCursor('schHindi', '<i>', '</i>')"><i>I</i> Italic</button>
+        </div>
+        <textarea id="schHindi" class="form-control editor-textarea"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZZES SECTION -->
+<div id="view-quizzes" class="admin-wrapper hidden">
+  <div class="box">
+    <div class="box-header">
+      <h2>1. Select Quiz Category</h2>
+      <div style="display: flex; gap: 8px;">
+        <input type="file" id="quizCsvUpload" accept=".csv" style="display:none;" onchange="handleQuizCsvUpload(event)">
+        <button class="btn btn-outline-navy btn-sm" onclick="document.getElementById('quizCsvUpload').click()">📁 Upload CSV</button>
+        <button class="btn btn-outline-navy btn-sm" onclick="addNewQuizCat()">+ Add Category</button>
+      </div>
+    </div>
+    <div class="flex-row">
+      <select id="qCatSelect" onchange="onQuizCatChange()">
+        <option value="-1">Loading Quizzes...</option>
+      </select>
+    </div>
+    <div id="quizCatEditor" class="hidden" style="margin-top: 24px; padding-top: 24px; border-top: 1px dashed var(--border);">
+      <div class="form-group"><label>Category ID (url-friendly)</label><input type="text" id="qCatId" class="form-control"></div>
+      <div class="form-group"><label>Title</label><input type="text" id="qCatTitle" class="form-control"></div>
+      <div class="form-group"><label>Icon (Emoji)</label><input type="text" id="qCatIcon" class="form-control"></div>
+      <div class="form-group"><label>Description</label><input type="text" id="qCatDesc" class="form-control"></div>
+      <div class="form-group"><label>Difficulty</label>
+        <select id="qCatDiff" class="form-control">
+          <option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option><option value="mixed">Mixed</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div id="quizQuestionSection" class="box hidden">
+    <div class="box-header">
+      <h2>2. Select Question</h2>
+      <button class="btn btn-outline-navy btn-sm" onclick="addNewQuizQ()">+ Add Question</button>
+    </div>
+    <div class="flex-row">
+      <select id="qQSelect" onchange="onQuizQChange()">
+        <option value="-1">-- Select a Question --</option>
+      </select>
+    </div>
+    <div id="quizQEditor" class="hidden" style="margin-top: 24px; padding-top: 24px; border-top: 1px dashed var(--border);">
+      <div style="display:flex; justify-content:flex-end; margin-bottom:16px;">
+        <button class="btn-danger" onclick="deleteCurrentQuizQ()">🗑️ Delete Question</button>
+      </div>
+      <div class="form-group"><label>Question Text</label><textarea id="qText" class="form-control" rows="2"></textarea></div>
+      <div class="form-group"><label>Option A</label><input type="text" id="qOpt0" class="form-control"></div>
+      <div class="form-group"><label>Option B</label><input type="text" id="qOpt1" class="form-control"></div>
+      <div class="form-group"><label>Option C</label><input type="text" id="qOpt2" class="form-control"></div>
+      <div class="form-group"><label>Option D</label><input type="text" id="qOpt3" class="form-control"></div>
+      <div class="form-group"><label>Correct Answer</label>
+        <select id="qAns" class="form-control">
+          <option value="0">Option A</option><option value="1">Option B</option><option value="2">Option C</option><option value="3">Option D</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Explanation</label><textarea id="qExp" class="form-control" rows="3"></textarea></div>
+    </div>
+  </div>
+</div>
+
+<div class="status-bar">
+  <div class="auto-save-text" id="saveStatus">✅ All changes saved automatically to memory.</div>
+  <button class="btn btn-primary btn-sm" id="downloadBtn">⬇️ Download articles.json</button>
+</div>
+
+<script>
+  let articlesData = [];
+  let schedulesData = [];
+  let quizData = [];
+
+  let currentPartIdx = -1;
+  let currentArtIdx = -1;
+  let currentSchIdx = -1;
+  let currentQuizCatIdx = -1;
+  let currentQuizQIdx = -1;
+
+  let activeTab = 'articles';
+
+  // Load Data
+  document.addEventListener("DOMContentLoaded", loadData);
+  document.getElementById("loadLocalBtn").addEventListener("click", loadData);
+
+  function switchTab(tab) {
+    activeTab = tab;
+    document.querySelectorAll('.admin-wrapper').forEach(el => el.classList.add('hidden'));
+    document.getElementById('view-' + tab).classList.remove('hidden');
+    
+    document.querySelectorAll('.admin-tabs button').forEach(b => b.classList.remove('active'));
+    document.getElementById('tabBtn-' + tab).classList.add('active');
+    
+    document.getElementById('downloadBtn').textContent = `⬇️ Download ${tab === 'articles' ? 'articles' : (tab === 'schedules' ? 'schedules' : 'quiz')}.json`;
+  }
+
+  function loadData() {
+    Promise.all([
+      fetch('data/articles.json').then(r => r.ok ? r.json() : []),
+      fetch('data/schedules.json').then(r => r.ok ? r.json() : []),
+      fetch('data/quiz.json').then(r => r.ok ? r.json() : [])
+    ]).then(([arts, schs, qzs]) => {
+        articlesData = arts;
+        schedulesData = schs;
+        quizData = qzs;
+        
+        renderArticleOverview();
+        populatePartDropdown();
+        populateScheduleDropdown();
+        populateQuizCatDropdown();
+        
+        if (document.getElementById('richEditorsContainer').innerHTML === '') {
+          buildRichEditors();
+          initBindings();
+        }
+    }).catch(err => {
+      alert("Error loading JSON files. Ensure you are on a local server.");
+      console.error(err);
+    });
+  }
+
+  // HTML Insert Helpers
+  function insertAtCursor(textareaId, startTag, endTag = '') {
+    const txtarea = document.getElementById(textareaId);
+    const start = txtarea.selectionStart;
+    const end = txtarea.selectionEnd;
+    const selectedText = txtarea.value.substring(start, end);
+    const replacement = startTag + selectedText + endTag;
+    txtarea.value = txtarea.value.substring(0, start) + replacement + txtarea.value.substring(end);
+    txtarea.dispatchEvent(new Event('input')); // trigger auto-save
+    txtarea.focus();
+    txtarea.selectionStart = start + startTag.length;
+    txtarea.selectionEnd = start + startTag.length + selectedText.length;
+  }
+
+  function togglePreview(id) {
+    const txtarea = document.getElementById(id);
+    const preview = document.getElementById(id + '_preview');
+    if (txtarea.classList.contains('hidden')) {
+      txtarea.classList.remove('hidden');
+      preview.classList.add('hidden');
+    } else {
+      preview.innerHTML = txtarea.value.replace(/\n/g, '<br><br>');
+      txtarea.classList.add('hidden');
+      preview.classList.remove('hidden');
+    }
+  }
+
+  // Articles Rich Editors
+  const richFields = [
+    { id: 'artText', label: 'Original English Text (HTML Supported)' },
+    { id: 'artSimp', label: 'Simplified English Text (HTML Supported)' },
+    { id: 'artHin', label: 'Hindi Translation Text (HTML Supported)' }
+  ];
+  function buildRichEditors() {
+    const container = document.getElementById('richEditorsContainer');
+    let html = '';
+    richFields.forEach(field => {
+      html += `
+        <div class="form-group">
+          <label>${field.label}</label>
+          <div class="rich-toolbar">
+            <button type="button" onclick="insertAtCursor('${field.id}', '<br><br>')">¶ Paragraph Break</button>
+            <button type="button" onclick="insertAtCursor('${field.id}', '<b>', '</b>')"><b>B</b> Bold</button>
+            <button type="button" onclick="insertAtCursor('${field.id}', '<i>', '</i>')"><i>I</i> Italic</button>
+            <span class="flex-spacer"></span>
+            <button type="button" onclick="togglePreview('${field.id}')">👁️ Preview / Edit HTML</button>
+          </div>
+          <textarea id="${field.id}" class="form-control editor-textarea"></textarea>
+          <div id="${field.id}_preview" class="editor-preview hidden"></div>
+        </div>
+      `;
+    });
+    container.innerHTML = html;
+  }
+
+  // Auto-save Status
+  function triggerSave() {
+    const status = document.getElementById('saveStatus');
+    status.textContent = '✍️ Typing...';
+    status.classList.add('typing');
+    clearTimeout(window.saveTimer);
+    window.saveTimer = setTimeout(() => {
+      status.textContent = '✅ All changes saved automatically to memory.';
+      status.classList.remove('typing');
+      renderArticleOverview();
+      renderCurrentArticleStatus();
+    }, 600);
+  }
+
+  function countArticleCoverage() {
+    const articles = articlesData.flatMap(part => part.articles || []);
+    return {
+      parts: articlesData.length,
+      articles: articles.length,
+      withText: articles.filter(a => a.text && a.text.trim()).length,
+      withSimplified: articles.filter(a => a.simplified && a.simplified.trim()).length,
+      withHindi: articles.filter(a => a.hindi && a.hindi.trim()).length
+    };
+  }
+
+  function renderArticleOverview() {
+    const statsWrap = document.getElementById('articlesOverviewStats');
+    if (!statsWrap) return;
+    const stats = countArticleCoverage();
+    const cards = [
+      ['Parts', stats.parts],
+      ['Articles', stats.articles],
+      ['Original Ready', stats.withText],
+      ['Simplified Ready', stats.withSimplified],
+      ['Hindi Ready', stats.withHindi]
+    ];
+    statsWrap.innerHTML = cards.map(([label, value]) => `
+      <div class="editor-preview" style="min-height:auto;">
+        <div style="font-size:0.74rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">${label}</div>
+        <div style="font-size:1.7rem;font-weight:800;color:var(--navy);">${value}</div>
+      </div>
+    `).join('');
+  }
+
+  function renderCurrentArticleStatus() {
+    const box = document.getElementById('articleContentStatus');
+    if (!box) return;
+    if (currentPartIdx === -1 || currentArtIdx === -1 || !articlesData[currentPartIdx] || !articlesData[currentPartIdx].articles[currentArtIdx]) {
+      box.innerHTML = '<strong>Article coverage:</strong> Select an article to see what is filled and what is still missing.';
+      return;
+    }
+    const art = articlesData[currentPartIdx].articles[currentArtIdx];
+    const states = [
+      ['Original English', art.text && art.text.trim()],
+      ['Simplified English', art.simplified && art.simplified.trim()],
+      ['Hindi', art.hindi && art.hindi.trim()]
+    ];
+    box.innerHTML = states.map(([label, ready]) => `
+      <span style="display:inline-block;margin-right:10px;margin-bottom:8px;padding:5px 10px;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;background:${ready ? '#E8F5E9' : '#FFF3E8'};color:${ready ? 'var(--green)' : 'var(--saffron)'};">
+        ${label}: ${ready ? 'Ready' : 'Missing'}
+      </span>
+    `).join('');
+  }
+
+  // Binding Utility
+  function bindInput(id, objRefFn, field, dropdownUpdaterFn = null, isOpt = -1) {
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('input', (e) => {
+      triggerSave();
+      let obj = objRefFn();
+      if(!obj) return;
+      
+      let val = e.target.value;
+      if (field === 'answer') val = parseInt(val);
+      
+      if (isOpt > -1) {
+        if(!obj.options) obj.options = ["","","",""];
+        obj.options[isOpt] = val;
+      } else {
+        obj[field] = val;
+      }
+      
+      if (dropdownUpdaterFn) {
+         let sel = null;
+         if(dropdownUpdaterFn === populatePartDropdown) sel = document.getElementById('partSelect');
+         if(dropdownUpdaterFn === populateArticleDropdown) sel = document.getElementById('articleSelect');
+         if(dropdownUpdaterFn === populateScheduleDropdown) sel = document.getElementById('schSelect');
+         if(dropdownUpdaterFn === populateQuizCatDropdown) sel = document.getElementById('qCatSelect');
+         if(dropdownUpdaterFn === populateQuizQDropdown) sel = document.getElementById('qQSelect');
+         if(sel && sel.selectedIndex > 0) {
+            if (dropdownUpdaterFn === populatePartDropdown) sel.options[sel.selectedIndex].text = obj.partId + ' - ' + obj.partTitle;
+            if (dropdownUpdaterFn === populateArticleDropdown) sel.options[sel.selectedIndex].text = 'Article ' + obj.id + ' - ' + obj.title;
+            if (dropdownUpdaterFn === populateScheduleDropdown) sel.options[sel.selectedIndex].text = 'Schedule ' + obj.id + ' - ' + obj.title;
+            if (dropdownUpdaterFn === populateQuizCatDropdown) sel.options[sel.selectedIndex].text = obj.icon + ' ' + obj.title;
+            if (dropdownUpdaterFn === populateQuizQDropdown) sel.options[sel.selectedIndex].text = 'Q' + sel.selectedIndex + ': ' + (obj.q ? obj.q.substring(0,30)+'...' : 'New Question');
+        }
+      }
+    });
+  }
+
+  function initBindings() {
+    // Articles
+    bindInput('partId', () => currentPartIdx>-1 ? articlesData[currentPartIdx] : null, 'partId', populatePartDropdown);
+    bindInput('partTitle', () => currentPartIdx>-1 ? articlesData[currentPartIdx] : null, 'partTitle', populatePartDropdown);
+    bindInput('partDesc', () => currentPartIdx>-1 ? articlesData[currentPartIdx] : null, 'partDesc');
+    bindInput('artId', () => currentArtIdx>-1 ? articlesData[currentPartIdx].articles[currentArtIdx] : null, 'id', populateArticleDropdown);
+    bindInput('artTitle', () => currentArtIdx>-1 ? articlesData[currentPartIdx].articles[currentArtIdx] : null, 'title', populateArticleDropdown);
+    bindInput('artPreview', () => currentArtIdx>-1 ? articlesData[currentPartIdx].articles[currentArtIdx] : null, 'preview');
+    richFields.forEach(f => {
+      let k = f.id === 'artText' ? 'text' : (f.id === 'artSimp' ? 'simplified' : 'hindi');
+      bindInput(f.id, () => currentArtIdx>-1 ? articlesData[currentPartIdx].articles[currentArtIdx] : null, k);
+    });
+    
+    // Schedules
+    bindInput('schId', () => currentSchIdx>-1 ? schedulesData[currentSchIdx] : null, 'id', populateScheduleDropdown);
+    bindInput('schTitle', () => currentSchIdx>-1 ? schedulesData[currentSchIdx] : null, 'title', populateScheduleDropdown);
+    bindInput('schDesc', () => currentSchIdx>-1 ? schedulesData[currentSchIdx] : null, 'desc');
+    bindInput('schDetails', () => currentSchIdx>-1 ? schedulesData[currentSchIdx] : null, 'details');
+    bindInput('schHindi', () => currentSchIdx>-1 ? schedulesData[currentSchIdx] : null, 'hindi');
+
+    // Quizzes
+    bindInput('qCatId', () => currentQuizCatIdx>-1 ? quizData[currentQuizCatIdx] : null, 'id');
+    bindInput('qCatTitle', () => currentQuizCatIdx>-1 ? quizData[currentQuizCatIdx] : null, 'title', populateQuizCatDropdown);
+    bindInput('qCatIcon', () => currentQuizCatIdx>-1 ? quizData[currentQuizCatIdx] : null, 'icon', populateQuizCatDropdown);
+    bindInput('qCatDesc', () => currentQuizCatIdx>-1 ? quizData[currentQuizCatIdx] : null, 'description');
+    bindInput('qCatDiff', () => currentQuizCatIdx>-1 ? quizData[currentQuizCatIdx] : null, 'difficulty');
+    
+    bindInput('qText', () => currentQuizQIdx>-1 ? quizData[currentQuizCatIdx].questions[currentQuizQIdx] : null, 'q', populateQuizQDropdown);
+    bindInput('qOpt0', () => currentQuizQIdx>-1 ? quizData[currentQuizCatIdx].questions[currentQuizQIdx] : null, 'options', null, 0);
+    bindInput('qOpt1', () => currentQuizQIdx>-1 ? quizData[currentQuizCatIdx].questions[currentQuizQIdx] : null, 'options', null, 1);
+    bindInput('qOpt2', () => currentQuizQIdx>-1 ? quizData[currentQuizCatIdx].questions[currentQuizQIdx] : null, 'options', null, 2);
+    bindInput('qOpt3', () => currentQuizQIdx>-1 ? quizData[currentQuizCatIdx].questions[currentQuizQIdx] : null, 'options', null, 3);
+    bindInput('qAns', () => currentQuizQIdx>-1 ? quizData[currentQuizCatIdx].questions[currentQuizQIdx] : null, 'answer');
+    bindInput('qExp', () => currentQuizQIdx>-1 ? quizData[currentQuizCatIdx].questions[currentQuizQIdx] : null, 'explanation');
+  }
+
+  // --- ARTICLES UI ---
+  function populatePartDropdown() {
+    const pSel = document.getElementById('partSelect');
+    pSel.innerHTML = '<option value="-1">-- Select a Part --</option>';
+    articlesData.forEach((p, i) => pSel.innerHTML += `<option value="${i}">${p.partId} - ${p.partTitle}</option>`);
+  }
+  function populateArticleDropdown() {
+    const aSel = document.getElementById('articleSelect');
+    aSel.innerHTML = '<option value="-1">-- Select an Article --</option>';
+    if(currentPartIdx === -1) return;
+    (articlesData[currentPartIdx].articles || []).forEach((a, i) => {
+      const missing = [];
+      if (!(a.text && a.text.trim())) missing.push('Orig');
+      if (!(a.simplified && a.simplified.trim())) missing.push('Simple');
+      if (!(a.hindi && a.hindi.trim())) missing.push('Hindi');
+      const suffix = missing.length ? ` [Missing: ${missing.join(', ')}]` : ' [Complete]';
+      aSel.innerHTML += `<option value="${i}">Article ${a.id} - ${a.title}${suffix}</option>`;
+    });
+  }
+  function onPartChange() {
+    currentPartIdx = parseInt(document.getElementById('partSelect').value);
+    currentArtIdx = -1;
+    if (currentPartIdx === -1) {
+      document.getElementById('partEditor').classList.add('hidden');
+      document.getElementById('articleSection').classList.add('hidden');
+      return;
+    }
+    const part = articlesData[currentPartIdx];
+    document.getElementById('partId').value = part.partId || '';
+    document.getElementById('partTitle').value = part.partTitle || '';
+    document.getElementById('partDesc').value = part.partDesc || '';
+    document.getElementById('partEditor').classList.remove('hidden');
+    document.getElementById('articleSection').classList.remove('hidden');
+    document.getElementById('articleEditor').classList.add('hidden');
+    populateArticleDropdown();
+    renderCurrentArticleStatus();
+  }
+  function onArticleChange() {
+    currentArtIdx = parseInt(document.getElementById('articleSelect').value);
+    if(currentArtIdx === -1) { document.getElementById('articleEditor').classList.add('hidden'); renderCurrentArticleStatus(); return; }
+    const art = articlesData[currentPartIdx].articles[currentArtIdx];
+    document.getElementById('artId').value = art.id || '';
+    document.getElementById('artTitle').value = art.title || '';
+    document.getElementById('artPreview').value = art.preview || '';
+    document.getElementById('artText').value = art.text || '';
+    document.getElementById('artSimp').value = art.simplified || '';
+    document.getElementById('artHin').value = art.hindi || '';
+    richFields.forEach(f => {
+      document.getElementById(f.id).classList.remove('hidden');
+      document.getElementById(f.id + '_preview').classList.add('hidden');
+    });
+    document.getElementById('articleEditor').classList.remove('hidden');
+    renderCurrentArticleStatus();
+  }
+  function addNewPart() {
+    articlesData.push({ partId: "NEW", partTitle: "New Part", partDesc: "", articles: [] });
+    populatePartDropdown();
+    document.getElementById('partSelect').value = articlesData.length - 1;
+    onPartChange();
+  }
+  function addNewArticle() {
+    if(currentPartIdx === -1) return;
+    if(!articlesData[currentPartIdx].articles) articlesData[currentPartIdx].articles = [];
+    articlesData[currentPartIdx].articles.push({ id: "", title: "New Article", preview: "", text: "", simplified: "", hindi: "" });
+    populateArticleDropdown();
+    document.getElementById('articleSelect').value = articlesData[currentPartIdx].articles.length - 1;
+    onArticleChange();
+    renderArticleOverview();
+  }
+  function deleteCurrentArticle() {
+    if(currentPartIdx > -1 && currentArtIdx > -1) {
+      if(confirm("Are you sure you want to delete this article?")) {
+        articlesData[currentPartIdx].articles.splice(currentArtIdx, 1);
+        populateArticleDropdown();
+        onPartChange();
+        renderArticleOverview();
+      }
+    }
+  }
+
+  // --- SCHEDULES UI ---
+  function populateScheduleDropdown() {
+    const sel = document.getElementById('schSelect');
+    sel.innerHTML = '<option value="-1">-- Select a Schedule --</option>';
+    schedulesData.forEach((s, i) => sel.innerHTML += `<option value="${i}">Schedule ${s.id} - ${s.title}</option>`);
+  }
+  function onScheduleChange() {
+    currentSchIdx = parseInt(document.getElementById('schSelect').value);
+    if(currentSchIdx === -1) { document.getElementById('scheduleEditor').classList.add('hidden'); return; }
+    const s = schedulesData[currentSchIdx];
+    document.getElementById('schId').value = s.id || '';
+    document.getElementById('schTitle').value = s.title || '';
+    document.getElementById('schDesc').value = s.desc || '';
+    document.getElementById('schDetails').value = s.details || '';
+    document.getElementById('schHindi').value = s.hindi || '';
+    document.getElementById('scheduleEditor').classList.remove('hidden');
+  }
+  function addNewSchedule() {
+    schedulesData.push({ id: "", title: "New Schedule", desc: "", details: "", hindi: "" });
+    populateScheduleDropdown();
+    document.getElementById('schSelect').value = schedulesData.length - 1;
+    onScheduleChange();
+  }
+  function deleteCurrentSchedule() {
+    if(currentSchIdx > -1 && confirm("Delete this schedule?")) {
+      schedulesData.splice(currentSchIdx, 1);
+      populateScheduleDropdown();
+      document.getElementById('scheduleEditor').classList.add('hidden');
+    }
+  }
+
+  // --- QUIZZES UI ---
+  function populateQuizCatDropdown() {
+    const sel = document.getElementById('qCatSelect');
+    sel.innerHTML = '<option value="-1">-- Select a Category --</option>';
+    quizData.forEach((c, i) => sel.innerHTML += `<option value="${i}">${c.icon || ''} ${c.title}</option>`);
+  }
+  function onQuizCatChange() {
+    currentQuizCatIdx = parseInt(document.getElementById('qCatSelect').value);
+    currentQuizQIdx = -1;
+    if(currentQuizCatIdx === -1) {
+      document.getElementById('quizCatEditor').classList.add('hidden');
+      document.getElementById('quizQuestionSection').classList.add('hidden');
+      return;
+    }
+    const c = quizData[currentQuizCatIdx];
+    document.getElementById('qCatId').value = c.id || '';
+    document.getElementById('qCatTitle').value = c.title || '';
+    document.getElementById('qCatIcon').value = c.icon || '';
+    document.getElementById('qCatDesc').value = c.description || '';
+    document.getElementById('qCatDiff').value = c.difficulty || 'medium';
+    
+    document.getElementById('quizCatEditor').classList.remove('hidden');
+    document.getElementById('quizQuestionSection').classList.remove('hidden');
+    document.getElementById('quizQEditor').classList.add('hidden');
+    populateQuizQDropdown();
+  }
+  function addNewQuizCat() {
+    quizData.push({ id: "new-category", icon: "❓", title: "New Category", description: "", difficulty: "medium", questions: [] });
+    populateQuizCatDropdown();
+    document.getElementById('qCatSelect').value = quizData.length - 1;
+    onQuizCatChange();
+  }
+  
+  function populateQuizQDropdown() {
+    const sel = document.getElementById('qQSelect');
+    sel.innerHTML = '<option value="-1">-- Select a Question --</option>';
+    if(currentQuizCatIdx === -1) return;
+    (quizData[currentQuizCatIdx].questions || []).forEach((q, i) => {
+      sel.innerHTML += `<option value="${i}">Q${i+1}: ${q.q ? q.q.substring(0,30)+'...' : 'New Question'}</option>`;
+    });
+  }
+  function onQuizQChange() {
+    currentQuizQIdx = parseInt(document.getElementById('qQSelect').value);
+    if(currentQuizQIdx === -1) { document.getElementById('quizQEditor').classList.add('hidden'); return; }
+    const q = quizData[currentQuizCatIdx].questions[currentQuizQIdx];
+    document.getElementById('qText').value = q.q || '';
+    document.getElementById('qOpt0').value = (q.options && q.options[0]) ? q.options[0] : '';
+    document.getElementById('qOpt1').value = (q.options && q.options[1]) ? q.options[1] : '';
+    document.getElementById('qOpt2').value = (q.options && q.options[2]) ? q.options[2] : '';
+    document.getElementById('qOpt3').value = (q.options && q.options[3]) ? q.options[3] : '';
+    document.getElementById('qAns').value = q.answer !== undefined ? q.answer : 0;
+    document.getElementById('qExp').value = q.explanation || '';
+    document.getElementById('quizQEditor').classList.remove('hidden');
+  }
+  function addNewQuizQ() {
+    if(currentQuizCatIdx === -1) return;
+    if(!quizData[currentQuizCatIdx].questions) quizData[currentQuizCatIdx].questions = [];
+    quizData[currentQuizCatIdx].questions.push({ q: "", options: ["","","",""], answer: 0, explanation: "" });
+    populateQuizQDropdown();
+    document.getElementById('qQSelect').value = quizData[currentQuizCatIdx].questions.length - 1;
+    onQuizQChange();
+  }
+  function deleteCurrentQuizQ() {
+    if(currentQuizCatIdx > -1 && currentQuizQIdx > -1 && confirm("Delete question?")) {
+      quizData[currentQuizCatIdx].questions.splice(currentQuizQIdx, 1);
+      populateQuizQDropdown();
+      document.getElementById('quizQEditor').classList.add('hidden');
+    }
+  }
+
+  // --- QUIZ CSV UPLOAD ---
+  function handleQuizCsvUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) { parseQuizCsvToData(e.target.result); };
+    reader.readAsText(file);
+  }
+
+  function splitCSVRow(row) {
+    var result = []; var inQuotes = false; var cur = '';
+    for (var i = 0; i < row.length; i++) {
+      var c = row[i];
+      if (c === '"') {
+        if (inQuotes && row[i+1] === '"') { cur += '"'; i++; } else { inQuotes = !inQuotes; }
+      } else if (c === ',' && !inQuotes) { result.push(cur.trim()); cur = ''; }
+      else { cur += c; }
+    }
+    result.push(cur.trim());
+    return result;
+  }
+
+  function parseQuizCsvToData(text) {
+    const lines = text.split('\n').filter(l => l.trim());
+    if (lines.length < 2) { alert("Invalid or empty CSV."); return; }
+
+    let catMap = {}; let catOrder = [];
+    for (let i = 1; i < lines.length; i++) {
+      let cols = splitCSVRow(lines[i]);
+      if (cols.length < 11) continue;
+
+      let [categoryName, categoryId, icon, difficulty, question, optA, optB, optC, optD, correctIdx, explanation] = cols;
+      if (!catMap[categoryId]) {
+        catMap[categoryId] = { id: categoryId, icon: icon, title: categoryName, description: '', difficulty: difficulty || 'medium', questions: [] };
+        catOrder.push(categoryId);
+      }
+      catMap[categoryId].questions.push({
+        q: question,
+        options: [optA, optB, optC, optD],
+        answer: parseInt(correctIdx) || 0,
+        explanation: explanation
+      });
+    }
+
+    if (catOrder.length > 0) {
+      if (confirm("Uploading this CSV will replace your current quiz data in memory. Proceed?")) {
+        quizData = catOrder.map(id => catMap[id]);
+        populateQuizCatDropdown();
+        document.getElementById('qCatSelect').value = "-1";
+        onQuizCatChange();
+        triggerSave();
+        alert("Quiz data imported successfully! Click 'Download quiz.json' to save it.");
+      }
+    } else { alert("Could not parse valid quiz rows from the CSV."); }
+    
+    document.getElementById('quizCsvUpload').value = ""; // Reset input
+  }
+
+  // --- DOWNLOAD ---
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    let data, name;
+    if(activeTab === 'articles') { data = articlesData; name = 'articles.json'; }
+    else if(activeTab === 'schedules') { data = schedulesData; name = 'schedules.json'; }
+    else { data = quizData; name = 'quiz.json'; }
+    
+    const dataStr = JSON.stringify(data, null, 2);
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+</script>
+</body>
+</html>

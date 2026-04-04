@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schedule Details — hiConstitution</title>
+  <meta name="description" content="Read the complete details of this Schedule of the Indian Constitution." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .sch-page { padding-top: var(--navbar-h); min-height: 100vh; background: var(--bg-light); padding-bottom: 80px; }
+    .sch-header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      padding: 48px 0; color: var(--white); text-align: center;
+    }
+    .sch-header h1 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 10px; color: var(--white); }
+    .sch-header p { color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto; font-size: 1rem; }
+    .back-link { color: var(--saffron); font-size: 0.9rem; font-weight: 600; display: inline-block; margin-bottom: 16px; }
+    .back-link:hover { text-decoration: underline; }
+
+    /* View tabs */
+    .view-tabs-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: var(--navbar-h);
+      z-index: 100;
+    }
+    .view-tabs { display: flex; justify-content: center; gap: 0; }
+    .view-tab {
+      padding: 14px 24px; font-size: 0.88rem; font-weight: 600; color: var(--muted);
+      cursor: pointer; border-bottom: 3px solid transparent; transition: all var(--transition-fast);
+      background: none; border-top: none; border-left: none; border-right: none;
+    }
+    .view-tab:hover { color: var(--navy); }
+    .view-tab.active { color: var(--navy); border-bottom-color: var(--saffron); }
+
+    .sch-content-container { max-width: 800px; margin: 40px auto 40px; padding: 0 20px; }
+    .sch-content-panel { display: none; }
+    .sch-content-panel.active { display: block; }
+    
+    .sch-details-box {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--body-text);
+      border-top: 4px solid var(--saffron);
+    }
+    
+    .hindi-text { font-family: 'Noto Sans Devanagari', var(--font); font-size: 1.15rem; line-height: 2; }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-circle">हि</div>
+      <span class="logo-text">hi<span>Constitution</span></span>
+    </a>
+    <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read.html" class="nav-link active">Read</a></li>
+      <li><a href="study.html" class="nav-link">Study</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="sch-page">
+  <div class="sch-header">
+    <div class="container">
+      <a href="read.html" class="back-link">← Back to All Schedules</a>
+      <h1 id="schTitleDisplay">Loading Schedule...</h1>
+      <p id="schDescDisplay">Please wait while we fetch the details.</p>
+    </div>
+  </div>
+
+  <!-- View Tabs -->
+  <div class="view-tabs-bar" id="viewTabsBar" style="display:none;">
+    <div class="container">
+      <div class="view-tabs" role="tablist">
+        <button class="view-tab active" role="tab" data-view="english">English</button>
+        <button class="view-tab" role="tab" data-view="hindi">हिन्दी</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sch-content-container">
+    <div id="englishPanel" class="sch-content-panel active">
+      <div class="sch-details-box" id="schDetailsEn">Loading details...</div>
+    </div>
+    
+    <div id="hindiPanel" class="sch-content-panel">
+      <div class="sch-details-box hindi-text" id="schDetailsHi">हिंदी अनुवाद लोड हो रहा है...</div>
+    </div>
+  </div>
+</main>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,0.6);padding:32px 0;">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <a href="index.html" style="color:#fff;font-weight:700;font-size:0.95rem;">hiConstitution.com</a>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const schId = urlParams.get('id');
+
+    const enPanel = document.getElementById('schDetailsEn');
+    const hiPanel = document.getElementById('schDetailsHi');
+
+    if (!schId) {
+      enPanel.innerHTML = "<p style='text-align:center;'>No Schedule Selected. <a href='read.html'>Go back</a></p>";
+      return;
+    }
+
+    // Tab Toggle Logic
+    document.querySelectorAll('.view-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const view = tab.getAttribute('data-view');
+        document.getElementById('englishPanel').classList.remove('active');
+        document.getElementById('hindiPanel').classList.remove('active');
+        document.getElementById(view + 'Panel').classList.add('active');
+      });
+    });
+
+    fetch('data/schedules.json')
+      .then(res => res.json())
+      .then(data => {
+        const sch = data.find(s => s.id === schId);
+        
+        if (!sch) {
+          document.getElementById('schTitleDisplay').textContent = "Schedule Not Found";
+          document.getElementById('schDescDisplay').textContent = "We couldn't locate this schedule.";
+          enPanel.innerHTML = "<p style='text-align:center;'>This schedule does not exist.</p>";
+          return;
+        }
+
+        // Update Header and SEO Meta Tags
+        document.getElementById('schTitleDisplay').textContent = sch.title;
+        document.getElementById('schDescDisplay').textContent = sch.desc;
+        document.getElementById('viewTabsBar').style.display = 'block';
+        
+        document.title = `${sch.title} - Indian Constitution | hiConstitution`;
+        document.querySelector('meta[name="description"]').setAttribute("content", sch.desc);
+
+        // Render Text
+        enPanel.innerHTML = sch.details ? sch.details.replace(/\n/g, '<br><br>') : '';
+        
+        if (sch.hindi && sch.hindi.trim() !== '') {
+          hiPanel.innerHTML = sch.hindi.replace(/\n/g, '<br><br>');
+        } else {
+          hiPanel.innerHTML = "<span style='color:var(--muted); font-style:italic;'>हिंदी अनुवाद जल्द ही अपडेट किया जाएगा।</span>";
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        enPanel.innerHTML = "<p style='text-align:center;color:red;'>Error loading data. Ensure you are running a local server.</p>";
+      });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Read the Constitution — hiConstitution</title>
+  <meta name="description" content="Read the full Constitution of India. Explore the Preamble, Parts, and Schedules with a clean, easy-to-navigate interface." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .read-page { padding-top: var(--navbar-h); min-height: 100vh; background: var(--bg-light); padding-bottom: 80px; }
+    
+    /* Page Header */
+    .read-header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      padding: 56px 0;
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .read-header::before {
+      content: ''; position: absolute; top: -60px; right: 10%; width: 200px; height: 200px;
+      border-radius: 50%; background: rgba(255,107,0,0.1);
+    }
+    .read-header-inner { position: relative; z-index: 1; }
+    .read-header h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 12px; color: var(--white); }
+    .read-header p { color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+    .read-header-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .doc-container { max-width: 860px; margin: 0 auto; padding: 40px 20px 0; }
+
+    /* Preamble Card */
+    .preamble-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 40px;
+      text-align: center;
+      margin-bottom: 48px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition);
+    }
+    .preamble-card:hover { box-shadow: var(--shadow-md); border-color: transparent; }
+    .preamble-card h2 { color: var(--navy); margin-bottom: 20px; font-size: 1.6rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    .preamble-text {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--body-text);
+      font-style: italic;
+    }
+    .preamble-preview { display: block; }
+    .preamble-full { display: none; }
+    .preamble-card.open .preamble-preview { display: none; }
+    .preamble-card.open .preamble-full { display: block; }
+    .read-more-btn {
+      background: none; border: none; color: var(--saffron);
+      font-size: 0.95rem; font-weight: 700; cursor: pointer;
+      margin-top: 20px; display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font); letter-spacing: 0.05em;
+    }
+    .read-more-btn:hover { color: var(--navy); }
+
+    /* Section Titles */
+    .section-title {
+      font-size: 1.25rem; font-weight: 800; color: var(--dark-text);
+      margin-bottom: 24px; padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    /* Colorful Read Tabs */
+    .read-tabs-container {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 36px;
+      justify-content: center;
+    }
+    .read-tab-btn {
+      flex: 1;
+      max-width: 320px;
+      padding: 18px 24px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--border);
+      background: var(--white);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .read-tab-btn:hover { border-color: var(--navy); color: var(--navy); transform: translateY(-2px); }
+    .read-tab-btn.parts-tab.active {
+      background: var(--navy); color: var(--white); border-color: var(--navy);
+      box-shadow: 0 8px 24px rgba(26,35,126,0.3);
+    }
+    .read-tab-btn.schedules-tab.active {
+      background: var(--saffron); color: var(--white); border-color: var(--saffron);
+      box-shadow: 0 8px 24px rgba(255,107,0,0.3);
+    }
+
+    /* Accordion Styles */
+    .part-card-link {
+      display: block;
+      text-decoration: none;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+    .part-card-link:hover { border-color: var(--navy); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    
+    .part-info { flex: 1; }
+    .part-info h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 6px; }
+    .part-info p { font-size: 0.9rem; color: var(--muted); line-height: 1.4; max-width: 90%; margin: 0; }
+    .part-arrow { font-size: 1.5rem; color: var(--saffron); flex-shrink: 0; }
+
+    /* Toggles EN/HI */
+    .lang-toggles { display: flex; gap: 10px; margin-bottom: 28px; }
+    .lang-btn {
+      padding: 6px 16px; border-radius: 99px; border: 1px solid var(--border);
+      background: var(--white); font-size: 0.85rem; font-weight: 600;
+      color: var(--muted); cursor: pointer; transition: all 0.2s;
+    }
+    .lang-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .lang-btn:disabled { cursor: not-allowed; opacity: 0.6; }
+    .badge-soon {
+      background: var(--saffron); color: #fff; font-size: 0.65rem;
+      padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;
+    }
+
+    /* Article List inside Accordion */
+    .art-list-item {
+      border-left: 3px solid var(--border);
+      padding-left: 16px;
+      margin-bottom: 24px;
+      transition: border-color var(--transition-fast);
+    }
+    .art-list-item:hover { border-left-color: var(--saffron); }
+    .art-list-item:last-child { margin-bottom: 0; }
+    .art-title {
+      font-size: 1rem; font-weight: 700; color: var(--navy);
+      margin-bottom: 6px; display: inline-block; text-decoration: none;
+    }
+    .art-title:hover { text-decoration: underline; color: var(--saffron); }
+    .art-preview { font-size: 0.9rem; color: var(--body-text); line-height: 1.6; }
+
+    @media (max-width: 600px) {
+      .preamble-card { padding: 24px 20px; }
+      .accordion-header { padding: 16px; }
+      .accordion-content-inner { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-circle">हि</div>
+      <span class="logo-text">hi<span>Constitution</span></span>
+    </a>
+    <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read.html" class="nav-link active">Read</a></li>
+      <li><a href="study.html" class="nav-link">Study</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+      <li><a href="pulse.html" class="nav-link">Pulse</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="quiz.html" class="btn btn-primary btn-sm">Take Quiz</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="mobile-nav">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="read.html" class="nav-link active">Read</a>
+  <a href="study.html" class="nav-link">Study</a>
+  <a href="quiz.html" class="nav-link">Quiz</a>
+  <a href="pulse.html" class="nav-link">Pulse</a>
+</nav>
+
+<main class="read-page">
+  <!-- Header -->
+  <div class="read-header">
+    <div class="container read-header-inner">
+      <h1>Read the Constitution</h1>
+      <p>Navigate through the Preamble, all 22 Parts, and 12 Schedules of India's living document.</p>
+      <div class="read-header-actions">
+        <a href="library.html" class="btn btn-primary">Browse All Articles</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-container">
+    
+    <!-- PREAMBLE -->
+    <div class="preamble-card" id="preambleCard">
+      <h2>📜 The Preamble</h2>
+      
+      <!-- Short Preview -->
+      <div class="preamble-text preamble-preview">
+        "WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC and to secure to all its citizens..."
+      </div>
+      
+      <!-- Full Text -->
+      <div class="preamble-text preamble-full">
+        "WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC and to secure to all its citizens:<br><br>
+        JUSTICE, social, economic and political;<br>
+        LIBERTY of thought, expression, belief, faith and worship;<br>
+        EQUALITY of status and of opportunity;<br>
+        and to promote among them all<br>
+        FRATERNITY assuring the dignity of the individual and the unity and integrity of the Nation;<br><br>
+        IN OUR CONSTITUENT ASSEMBLY this twenty-sixth day of November, 1949, do HEREBY ADOPT, ENACT AND GIVE TO OURSELVES THIS CONSTITUTION."
+      </div>
+
+      <button class="read-more-btn" id="preambleBtn" onclick="togglePreamble()">Read Full Preamble ↓</button>
+    </div>
+
+    <!-- Document Tabs -->
+    <div class="read-tabs-container">
+      <button class="read-tab-btn parts-tab active" data-tab="parts-panel">📘 Parts of Constitution</button>
+      <button class="read-tab-btn schedules-tab" data-tab="schedules-panel">📑 Schedules</button>
+    </div>
+
+    <!-- PARTS -->
+    <div id="parts-panel" class="tab-panel active">
+      <div id="dynamicPartsContainer">
+        <div style="padding:40px; text-align:center; color:var(--muted);">Loading Constitution Parts...</div>
+      </div>
+    </div>
+
+    <!-- SCHEDULES -->
+    <div id="schedules-panel" class="tab-panel">
+      <div id="dynamicSchedulesContainer">
+        <div style="padding:40px; text-align:center; color:var(--muted);">Loading Schedules...</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,0.6);padding:32px 0;">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <a href="index.html" style="color:#fff;font-weight:700;font-size:0.95rem;">hiConstitution.com</a>
+    <p style="font-size:0.82rem;">© 2025 — Educational use only.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  function togglePreamble() {
+    const card = document.getElementById('preambleCard');
+    card.classList.toggle('open');
+    const btn = document.getElementById('preambleBtn');
+    btn.textContent = card.classList.contains('open') ? '↑ Show Less' : 'Read Full Preamble ↓';
+  }
+
+  function toggleAccordion(headerElement) {
+    const item = headerElement.parentElement;
+    item.classList.toggle('open');
+  }
+
+  // SEO Slug Generator
+  function createSlug(text) {
+    return text.toString().toLowerCase()
+      .replace(/\s+/g, '-')           // Replace spaces with -
+      .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+      .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+      .replace(/^-+/, '')             // Trim - from start of text
+      .replace(/-+$/, '');            // Trim - from end of text
+  }
+
+  // Fetch Data from JSON and render
+  document.addEventListener("DOMContentLoaded", function() {
+    // Setup Colorful Tabs
+    const readTabs = document.querySelectorAll('.read-tab-btn');
+    readTabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        readTabs.forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        
+        document.getElementById('parts-panel').classList.remove('active');
+        document.getElementById('schedules-panel').classList.remove('active');
+        document.getElementById(btn.getAttribute('data-tab')).classList.add('active');
+      });
+    });
+
+    fetch('data/articles.json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('dynamicPartsContainer');
+        container.innerHTML = ''; // clear loading text
+        
+        data.forEach(part => {
+          const partHtml = `
+            <a href="part.html?id=${part.partId}&slug=${createSlug(part.partTitle)}" class="part-card-link">
+              <div class="part-info">
+                <h3>${part.partTitle}</h3>
+                <p>${part.partDesc}</p>
+              </div>
+              <div class="part-arrow">→</div>
+            </a>
+          `;
+          container.innerHTML += partHtml;
+        });
+      })
+      .catch(err => {
+        console.error("Failed to load articles.json.", err);
+        document.getElementById('dynamicPartsContainer').innerHTML = 
+          '<div style="padding:40px; text-align:center; color:var(--red); background:#FFEBEE; border-radius:8px; border:1px solid #ffcdd2; margin-top:20px;"><strong>Error Loading Data!</strong><br><br>Browsers block reading JSON files directly from your computer (file:// protocol) due to security.<br>Please open this folder using a Local Server like <strong>VS Code Live Server</strong>.</div>';
+      });
+
+    // Fetch Schedules from JSON and render
+    fetch('data/schedules.json')
+      .then(response => response.json())
+      .then(data => {
+        const schContainer = document.getElementById('dynamicSchedulesContainer');
+        schContainer.innerHTML = ''; // clear loading text
+        
+        data.forEach(sch => {
+          const schHtml = `
+            <a href="schedule.html?id=${sch.id}&slug=${createSlug(sch.title)}" class="part-card-link">
+              <div class="part-info">
+                <h3>${sch.title}</h3>
+                <p>${sch.desc}</p>
+              </div>
+              <div class="part-arrow">→</div>
+            </a>
+          `;
+          schContainer.innerHTML += schHtml;
+        });
+      })
+      .catch(err => {
+        console.error("Failed to load schedules.json", err);
+        document.getElementById('dynamicSchedulesContainer').innerHTML = 
+          '<div style="padding:40px; text-align:center; color:var(--red);">Failed to load schedules. Ensure you are running a local server.</div>';
+      });
+  });
+</script>
+</body>
+</html>

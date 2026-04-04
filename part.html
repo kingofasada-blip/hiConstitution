@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Part Details — hiConstitution</title>
+  <meta name="description" content="Read the articles and provisions of this part of the Indian Constitution." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .part-page { padding-top: var(--navbar-h); min-height: 100vh; background: var(--bg-light); padding-bottom: 80px; }
+    .part-header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      padding: 48px 0; color: var(--white); text-align: center;
+    }
+    .part-header h1 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 10px; color: var(--white); }
+    .part-header p { color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto; font-size: 1rem; }
+    .back-link { color: var(--saffron); font-size: 0.9rem; font-weight: 600; display: inline-block; margin-bottom: 16px; }
+    .back-link:hover { text-decoration: underline; }
+
+    .article-list-container { max-width: 800px; margin: 40px auto 0; padding: 0 20px; }
+    
+    /* Colorful List View */
+    .article-list-item {
+      display: flex;
+      align-items: center;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      border-left: 5px solid var(--saffron);
+      transition: all 0.2s ease;
+      border-top: 1px solid var(--border-light);
+      border-right: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .article-list-item:hover {
+      transform: translateX(6px);
+      border-left-color: var(--navy);
+      box-shadow: var(--shadow-sm);
+      background: #F8F9FC;
+    }
+    .article-list-item:nth-child(even) { border-left-color: var(--green); }
+    .article-list-item:nth-child(even):hover { border-left-color: var(--navy); }
+    
+    .art-content { flex: 1; }
+    .art-content h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 6px; }
+    .art-content p { font-size: 0.9rem; color: var(--body-text); margin: 0; line-height: 1.5; }
+    .art-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .art-status {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 99px;
+      line-height: 1;
+    }
+    .art-status.ready { background: #E8F5E9; color: var(--green); }
+    .art-status.pending { background: #FFF3E8; color: var(--saffron); }
+    .art-arrow { font-size: 1.5rem; color: var(--muted); margin-left: 20px; transition: color 0.2s; }
+    .article-list-item:hover .art-arrow { color: var(--saffron); }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-circle">हि</div>
+      <span class="logo-text">hi<span>Constitution</span></span>
+    </a>
+    <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read.html" class="nav-link active">Read</a></li>
+      <li><a href="study.html" class="nav-link">Study</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+      <li><a href="pulse.html" class="nav-link">Pulse</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="part-page">
+  <div class="part-header">
+    <div class="container">
+      <a href="read.html" class="back-link">← Back to All Parts</a>
+      <h1 id="partTitleDisplay">Loading Part...</h1>
+      <p id="partDescDisplay">Please wait while we fetch the articles.</p>
+    </div>
+  </div>
+
+  <div class="article-list-container" id="articleListContainer">
+    <div style="text-align:center; padding: 40px; color: var(--muted);">Loading articles...</div>
+  </div>
+</main>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,0.6);padding:32px 0;">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <a href="index.html" style="color:#fff;font-weight:700;font-size:0.95rem;">hiConstitution.com</a>
+  </div>
+</footer>
+
+<script>
+  function createSlug(text) {
+    return text.toString().toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]+/g, '')
+      .replace(/\-\-+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '');
+  }
+
+  function status(label, ready) {
+    return `<span class="art-status ${ready ? 'ready' : 'pending'}">${label}</span>`;
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const partId = urlParams.get('id');
+
+    if (!partId) {
+      document.getElementById('articleListContainer').innerHTML = "<p style='text-align:center;'>No Part Selected. <a href='read.html'>Go back</a></p>";
+      return;
+    }
+
+    fetch('data/articles.json')
+      .then(res => res.json())
+      .then(data => {
+        const part = data.find(p => p.partId === partId);
+        
+        if (!part) {
+          document.getElementById('partTitleDisplay').textContent = "Part Not Found";
+          document.getElementById('articleListContainer').innerHTML = "<p style='text-align:center;'>This part does not exist.</p>";
+          return;
+        }
+
+        // Update Header and SEO Meta Tags
+        document.getElementById('partTitleDisplay').textContent = part.partTitle;
+        document.getElementById('partDescDisplay').textContent = part.partDesc;
+        
+        document.title = `${part.partTitle} - Indian Constitution | hiConstitution`;
+        document.querySelector('meta[name="description"]').setAttribute("content", part.partDesc);
+
+        // Render Colorful List
+        const container = document.getElementById('articleListContainer');
+        container.innerHTML = '';
+
+        if (!part.articles || part.articles.length === 0) {
+          container.innerHTML = `<div style="text-align:center; padding:40px; color:var(--muted); font-style:italic; background:#fff; border-radius:8px; border:1px solid var(--border);">Content being updated. Use Admin panel to add articles here.</div>`;
+          return;
+        }
+
+        part.articles.forEach(art => {
+          const item = document.createElement('a');
+          item.href = `library-article.html?id=${art.id}&slug=${createSlug(art.title)}`;
+          item.className = 'article-list-item';
+          const hasOriginal = Boolean(art.text && art.text.trim());
+          const hasSimplified = Boolean(art.simplified && art.simplified.trim());
+          const hasHindi = Boolean(art.hindi && art.hindi.trim());
+          
+          item.innerHTML = `
+            <div class="art-content">
+              <h3>${art.title}</h3>
+              <p>${art.preview}</p>
+              <div class="art-meta">
+                ${status('Original', hasOriginal)}
+                ${status('Simple', hasSimplified)}
+                ${status('Hindi', hasHindi)}
+              </div>
+            </div>
+            <div class="art-arrow">→</div>
+          `;
+          
+          container.appendChild(item);
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('articleListContainer').innerHTML = "<p style='text-align:center;color:red;'>Error loading data. Ensure you are running a local server.</p>";
+      });
+  });
+</script>
+</body>
+</html>

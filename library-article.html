@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Read Article · hiConstitution</title>
+  <meta name="description" content="Read Article 21 of the Indian Constitution — Right to Life and Personal Liberty — with original text, simplified explanation, landmark cases, and Hindi translation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .article-page { padding-top: var(--navbar-h); min-height: 100vh; background: var(--bg-light); }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 14px 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .breadcrumb a { color: var(--navy); transition: color var(--transition-fast); }
+    .breadcrumb a:hover { color: var(--saffron); }
+    .breadcrumb-sep { color: var(--border); }
+
+    /* Article header */
+    .article-header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      padding: 56px 0 64px;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .article-header::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,107,0,0.1);
+    }
+    .article-header-inner { position: relative; z-index: 1; }
+    .article-num-large {
+      font-size: 6rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.07);
+      line-height: 1;
+      position: absolute;
+      top: -16px; right: 0;
+      letter-spacing: -0.04em;
+    }
+    .article-header-meta {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .article-header h1 { color: var(--white); font-size: clamp(1.6rem,4vw,2.5rem); margin-bottom: 14px; }
+    .article-header-subtitle { color: rgba(255,255,255,0.65); font-size:0.95rem; max-width:560px; }
+    .article-header-statuses {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .status-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 99px;
+    }
+    .status-pill.ready { background: rgba(67,160,71,0.18); color: #C8E6C9; border: 1px solid rgba(67,160,71,0.3); }
+    .status-pill.pending { background: rgba(255,107,0,0.16); color: #FFD9BF; border: 1px solid rgba(255,107,0,0.28); }
+
+    /* View tabs */
+    .view-tabs-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: var(--navbar-h);
+      z-index: 100;
+    }
+    .view-tabs {
+      display: flex;
+      gap: 0;
+    }
+    .view-tab {
+      padding: 14px 24px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all var(--transition-fast);
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+    .view-tab:hover { color: var(--navy); }
+    .view-tab.active { color: var(--navy); border-bottom-color: var(--saffron); }
+
+    /* Main layout */
+    .article-main {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 32px;
+      padding: 36px 0 64px;
+    }
+
+    /* Content panel */
+    .article-content-panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+    }
+
+    /* Constitutional text */
+    .const-text {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--body-text);
+      font-style: italic;
+      border-left: 4px solid var(--saffron);
+      padding: 20px 24px;
+      background: #FFF9F5;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-bottom: 28px;
+    }
+
+    .article-section { margin-bottom: 32px; }
+    .article-section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .article-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border-light); }
+
+    .article-body-text {
+      font-size: 0.97rem;
+      line-height: 1.85;
+      color: var(--body-text);
+    }
+    .article-body-text p { margin-bottom: 16px; }
+
+    /* Vocab highlight */
+    .vocab-highlight {
+      color: var(--navy);
+      border-bottom: 1px dashed var(--navy);
+      cursor: help;
+      position: relative;
+    }
+    .vocab-tooltip {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 0;
+      background: var(--navy);
+      color: #fff;
+      font-size: 0.8rem;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      width: 240px;
+      line-height: 1.5;
+      z-index: 50;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-fast);
+      font-style: normal;
+    }
+    .vocab-highlight:hover .vocab-tooltip,
+    .vocab-highlight:focus .vocab-tooltip { opacity: 1; }
+
+    /* Cases */
+    .case-card {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 14px;
+    }
+    .case-name { font-weight: 700; color: var(--dark-text); font-size: 0.95rem; margin-bottom: 4px; }
+    .case-year { font-size: 0.78rem; color: var(--saffron); font-weight: 600; margin-bottom: 8px; }
+    .case-ruling { font-size: 0.88rem; color: var(--body-text); line-height: 1.6; }
+
+    /* Sidebar */
+    .article-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .side-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+    .side-card-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .key-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.88rem;
+      color: var(--body-text);
+      line-height: 1.5;
+    }
+    .key-point:last-child { border-bottom: none; }
+    .key-point-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+    .related-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.88rem;
+      color: var(--navy);
+      font-weight: 500;
+      transition: color var(--transition-fast);
+    }
+    .related-link:last-child { border-bottom: none; }
+    .related-link:hover { color: var(--saffron); }
+    .related-link-num { color: var(--muted); font-size: 0.78rem; }
+    .side-note {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    /* Hindi view */
+    .hindi-text {
+      font-size: 1.05rem;
+      line-height: 2;
+      color: var(--body-text);
+      font-family: 'Noto Sans Devanagari', var(--font);
+    }
+
+    /* Nav between articles */
+    .article-nav-bar {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    .article-nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .art-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--navy);
+      transition: all var(--transition-fast);
+    }
+    .art-nav-btn:hover { background: var(--bg-subtle); border-color: var(--navy); }
+    .art-nav-label { font-size: 0.72rem; color: var(--muted); font-weight: 400; display: block; }
+
+    @media (max-width: 900px) {
+      .article-main { grid-template-columns: 1fr; }
+      .article-sidebar { order: -1; }
+    }
+    @media (max-width: 600px) {
+      .article-content-panel { padding: 20px; }
+      .const-text { padding: 14px 16px; }
+      .article-num-large { font-size: 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<nav class="navbar" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-circle">हि</div>
+      <span class="logo-text">hi<span>Constitution</span></span>
+    </a>
+    <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read.html" class="nav-link">Read</a></li>
+      <li><a href="study.html" class="nav-link">Study</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+      <li><a href="pulse.html" class="nav-link">Pulse</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="quiz.html" class="btn btn-primary btn-sm">Take Quiz</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="mobile-nav">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="read.html" class="nav-link">Read</a>
+  <a href="study.html" class="nav-link">Study</a>
+  <a href="quiz.html" class="nav-link">Quiz</a>
+  <a href="pulse.html" class="nav-link">Pulse</a>
+</nav>
+
+<main class="article-page">
+
+  <!-- Article Header -->
+  <div class="article-header">
+    <div class="container">
+      <div class="article-header-inner">
+        <div class="article-num-large" aria-hidden="true" id="dyn-bg-num">--</div>
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">›</span>
+          <a href="read.html">Read</a>
+          <span class="breadcrumb-sep">›</span>
+          <span style="color:rgba(255,255,255,0.8);" id="dyn-bread-art">Article --</span>
+        </nav>
+        <div class="article-header-meta">
+          <span class="badge badge-navy" id="dyn-part-badge">Part --</span>
+          <span class="badge badge-saffron" id="dyn-updated-badge">Updated --</span>
+        </div>
+        <h1 id="dyn-main-title">Loading Article...</h1>
+        <p class="article-header-subtitle" id="dyn-header-subtitle">Please wait while we load the constitutional text and related reading tools.</p>
+        <div class="article-header-statuses" id="dyn-header-statuses"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Tabs -->
+  <div class="view-tabs-bar">
+    <div class="container">
+      <div class="view-tabs" role="tablist" aria-label="Article view options">
+        <button class="view-tab active" role="tab" data-view="english" aria-selected="true">English</button>
+        <button class="view-tab" role="tab" data-view="hindi" aria-selected="false">हिन्दी</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="article-main">
+
+      <!-- Content -->
+      <div>
+        <!-- ENGLISH VIEW -->
+        <div class="article-content-panel" data-view-content="english">
+          <div class="article-section">
+            <div class="article-section-title">Original Legal Text</div>
+            <blockquote class="const-text" id="dyn-original-text">
+              Loading original text...
+            </blockquote>
+          </div>
+
+          <div class="article-section" id="simplified-section">
+            <div class="article-section-title">Simplified Explanation</div>
+            <blockquote class="const-text" style="font-style:normal; background:#F8F9FC; border-left-color:var(--green);" id="dyn-simplified-text">
+              Simplified explanation is not available yet.
+            </blockquote>
+          </div>
+        </div><!-- /english -->
+
+        <!-- HINDI VIEW -->
+        <div class="article-content-panel" data-view-content="hindi" style="display:none;">
+          <div class="article-section">
+            <div class="article-section-title">मूल संवैधानिक पाठ</div>
+            <blockquote class="const-text hindi-text" id="dyn-hindi-text">
+              हिंदी अनुवाद लोड हो रहा है...
+            </blockquote>
+          </div>
+        </div><!-- /hindi -->
+      </div><!-- /content col -->
+
+      <!-- Sidebar -->
+      <aside class="article-sidebar">
+        <div class="side-card">
+          <div class="side-card-title">Article Details</div>
+          <div class="key-point"><span class="key-point-icon">📌</span><span><strong>Article:</strong> <span id="side-art-num">--</span></span></div>
+          <div class="key-point"><span class="key-point-icon">📁</span><span><strong>Part:</strong> <span id="side-part-id">--</span></span></div>
+          <div class="key-point"><span class="key-point-icon">🗂️</span><span><strong>Coverage:</strong> <span id="side-coverage">Checking…</span></span></div>
+          <div class="key-point"><span class="key-point-icon">🕒</span><span><strong>Page updated:</strong> <span id="side-last-updated">--</span></span></div>
+        </div>
+
+        <div class="side-card" style="background:var(--navy);border-color:var(--navy);">
+          <div class="side-card-title" style="color:rgba(255,255,255,0.5);">Test Your Knowledge</div>
+          <p style="font-size:0.88rem;color:rgba(255,255,255,0.75);margin-bottom:16px;line-height:1.6;" id="quizCardText">Check how much you know about the Constitution.</p>
+          <a href="quiz.html" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;" id="quizCardLink">Take Quiz →</a>
+        </div>
+
+        <div class="side-card">
+          <div class="side-card-title">Related Articles</div>
+          <div id="relatedArticlesList">
+            <p class="side-note">Related articles will appear here after the page loads.</p>
+          </div>
+        </div>
+      </aside>
+
+    </div><!-- /.article-main -->
+  </div><!-- /.container -->
+
+  <!-- Article Nav -->
+  <div class="article-nav-bar">
+    <div class="container">
+      <div class="article-nav-inner">
+        <a href="library.html" class="art-nav-btn" id="prevArticleLink" style="visibility:hidden;">
+          <span>←</span>
+          <span><span class="art-nav-label">Previous</span><span id="prevArticleLabel">Article</span></span>
+        </a>
+        <a href="library.html" class="btn btn-outline-navy btn-sm">Browse Library</a>
+        <a href="library.html" class="art-nav-btn" id="nextArticleLink" style="visibility:hidden;">
+          <span><span class="art-nav-label">Next</span><span id="nextArticleLabel">Article</span></span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Footer -->
+<footer style="background:var(--navy);color:rgba(255,255,255,0.6);padding:32px 0;">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <a href="index.html" style="color:#fff;font-weight:700;font-size:0.95rem;">hiConstitution.com</a>
+    <p style="font-size:0.82rem;">© 2025 — Educational use only.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/glossary.js"></script>
+<script>
+  function createSlug(text) {
+    return text.toString().toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]+/g, '')
+      .replace(/\-\-+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '');
+  }
+
+  function trimTitle(title) {
+    return title.replace(/^Article\s+[A-Za-z0-9]+\s*:\s*/i, '').trim();
+  }
+
+  function statusPill(label, ready) {
+    return '<span class="status-pill ' + (ready ? 'ready' : 'pending') + '">' + label + '</span>';
+  }
+
+  function escapeHtml(text) {
+    return String(text || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function buildQuizLink(foundPart, foundArt) {
+    const partMap = {
+      'III': 'fundamental-rights',
+      'IV': 'directive-principles',
+      'IVA': 'fundamental-duties',
+      'XVIII': 'emergency',
+      'XX': 'amendments',
+      'V': 'parliament'
+    };
+    const articleMap = {
+      '32': 'fundamental-rights',
+      '21': 'fundamental-rights',
+      '21A': 'fundamental-rights',
+      '44': 'directive-principles',
+      '51A': 'preamble',
+      '368': 'amendments'
+    };
+    const quizId = articleMap[foundArt.id] || partMap[foundPart.partId];
+    return quizId ? ('quiz.html?topic=' + encodeURIComponent(quizId)) : 'quiz.html';
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const artId = urlParams.get('id');
+    if (!artId) return;
+    
+    fetch('data/articles.json')
+      .then(res => res.json())
+      .then(data => {
+        let foundArt = null;
+        let foundPart = null;
+        const flatArticles = [];
+        
+        for (let part of data) {
+          for (let art of (part.articles || [])) {
+            flatArticles.push({ part, art });
+            if (art.id === artId) {
+              foundArt = art; foundPart = part; break;
+            }
+          }
+          if (foundArt) break;
+        }
+        
+        if (foundArt) {
+          // Update SEO Meta Tags
+          document.title = `${foundArt.title} - Indian Constitution | hiConstitution`;
+          let metaDesc = document.querySelector('meta[name="description"]');
+          if (metaDesc) {
+            metaDesc.setAttribute("content", foundArt.preview || `Read the original text, simplified meaning, and Hindi translation of ${foundArt.title}.`);
+          }
+
+          document.getElementById('dyn-bg-num').textContent = foundArt.id;
+          document.getElementById('dyn-bread-art').textContent = "Article " + foundArt.id;
+          document.getElementById('dyn-main-title').textContent = foundArt.title;
+          document.getElementById('dyn-part-badge').textContent = "Part " + foundPart.partId;
+          document.getElementById('dyn-header-subtitle').textContent = foundArt.preview || ('Read the original text and available explanations for ' + foundArt.title + '.');
+          document.getElementById('side-art-num').textContent = foundArt.id;
+          document.getElementById('side-part-id').textContent = foundPart.partId;
+          document.getElementById('dyn-updated-badge').textContent = 'Updated ' + new Date(document.lastModified).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+          document.getElementById('side-last-updated').textContent = new Date(document.lastModified).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+
+          const formatText = (text) => text ? text.replace(/\n/g, '<br><br>') : null;
+          const hasOriginal = Boolean(foundArt.text && foundArt.text.trim());
+          const hasSimplified = Boolean(foundArt.simplified && foundArt.simplified.trim());
+          const hasHindi = Boolean(foundArt.hindi && foundArt.hindi.trim());
+          
+          document.getElementById('dyn-original-text').innerHTML = formatText(foundArt.text) || foundArt.preview;
+          document.getElementById('dyn-header-statuses').innerHTML =
+            statusPill('Original ' + (hasOriginal ? 'ready' : 'pending'), hasOriginal) +
+            statusPill('Simple ' + (hasSimplified ? 'ready' : 'pending'), hasSimplified) +
+            statusPill('Hindi ' + (hasHindi ? 'ready' : 'pending'), hasHindi);
+          document.getElementById('side-coverage').textContent = [
+            hasOriginal ? 'Original' : 'Original pending',
+            hasSimplified ? 'Simplified' : 'Simplified pending',
+            hasHindi ? 'Hindi' : 'Hindi pending'
+          ].join(' · ');
+          
+          if (foundArt.simplified) {
+            document.getElementById('dyn-simplified-text').innerHTML = formatText(foundArt.simplified);
+            document.getElementById('simplified-section').style.display = 'block';
+          } else {
+            document.getElementById('simplified-section').style.display = 'none';
+          }
+          
+          if (foundArt.hindi) {
+            document.getElementById('dyn-hindi-text').innerHTML = formatText(foundArt.hindi);
+          } else {
+            document.getElementById('dyn-hindi-text').innerHTML = "<span style='color:var(--muted); font-style:italic;'>हिंदी अनुवाद जल्द ही अपडेट किया जाएगा। (Admin Panel से डेटा भरें)</span>";
+          }
+
+          const quizLink = buildQuizLink(foundPart, foundArt);
+          document.getElementById('quizCardLink').href = quizLink;
+          document.getElementById('quizCardText').textContent = 'Take a targeted quiz based on this article or its part of the Constitution.';
+
+          const currentIndex = flatArticles.findIndex(item => item.art.id === artId);
+          const prev = currentIndex > 0 ? flatArticles[currentIndex - 1] : null;
+          const next = currentIndex > -1 && currentIndex < flatArticles.length - 1 ? flatArticles[currentIndex + 1] : null;
+
+          if (prev) {
+            const prevLink = document.getElementById('prevArticleLink');
+            prevLink.href = 'library-article.html?id=' + encodeURIComponent(prev.art.id) + '&slug=' + createSlug(prev.art.title);
+            prevLink.style.visibility = 'visible';
+            document.getElementById('prevArticleLabel').textContent = trimTitle(prev.art.title);
+          }
+
+          if (next) {
+            const nextLink = document.getElementById('nextArticleLink');
+            nextLink.href = 'library-article.html?id=' + encodeURIComponent(next.art.id) + '&slug=' + createSlug(next.art.title);
+            nextLink.style.visibility = 'visible';
+            document.getElementById('nextArticleLabel').textContent = trimTitle(next.art.title);
+          }
+
+          const relatedArticles = (foundPart.articles || []).filter(art => art.id !== foundArt.id).slice(0, 4);
+          const relatedList = document.getElementById('relatedArticlesList');
+          if (relatedArticles.length) {
+            relatedList.innerHTML = relatedArticles.map(art => (
+              '<a class="related-link" href="library-article.html?id=' + encodeURIComponent(art.id) + '&slug=' + createSlug(art.title) + '">' +
+                '<span>' + escapeHtml(trimTitle(art.title)) + '</span>' +
+                '<span class="related-link-num">Art. ' + art.id + '</span>' +
+              '</a>'
+            )).join('');
+          } else {
+            relatedList.innerHTML = '<p class="side-note">More articles from this part will appear here as the library expands.</p>';
+          }
+        }
+      });
+  });
+</script>
+</body>
+</html>

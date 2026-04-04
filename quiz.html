@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz — hiConstitution</title>
+  <meta name="description" content="Test your knowledge of the Indian Constitution with daily challenges and topic-based quizzes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/quiz.css" />
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<nav class="navbar" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-circle">हि</div>
+      <span class="logo-text">hi<span>Constitution</span></span>
+    </a>
+    <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read.html" class="nav-link">Read</a></li>
+      <li><a href="study.html" class="nav-link">Study</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+      <li><a href="pulse.html" class="nav-link">Pulse</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="quiz.html" class="btn btn-primary btn-sm">Take Quiz</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="mobile-nav">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="read.html" class="nav-link">Read</a>
+  <a href="study.html" class="nav-link">Study</a>
+  <a href="quiz.html" class="nav-link">Quiz</a>
+  <a href="pulse.html" class="nav-link">Pulse</a>
+</nav>
+
+<main class="quiz-page">
+
+  <!-- Quiz Header -->
+  <div class="quiz-header">
+    <div class="container">
+      <div class="quiz-header-icon" aria-hidden="true">🎯</div>
+      <h1>Constitution Quiz Arena</h1>
+      <p>Test your knowledge with daily challenges and topic-based quizzes. Explanations included.</p>
+    </div>
+  </div>
+
+  <!-- Daily Challenge -->
+  <section class="daily-challenge-section">
+    <div class="container">
+      <div class="daily-challenge-layout">
+
+        <!-- Daily card -->
+        <div class="daily-card">
+          <div class="daily-badge">🌅 Daily Challenge</div>
+          <h2>Today's Constitutional Challenge</h2>
+          <p>A fresh set of questions every day, spanning all parts of the Constitution. Track your streak!</p>
+          <div class="daily-meta">
+            <span class="daily-meta-item">🕐 ~5 minutes</span>
+            <span class="daily-meta-item">📋 8 questions</span>
+            <span class="daily-meta-item">⚡ All topics</span>
+          </div>
+          <button class="btn-white" id="btnDailyChallenge">
+            Start Daily Challenge →
+          </button>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="leaderboard-card">
+          <h3>🏆 Top Scorers</h3>
+          <div class="leaderboard-entry">
+            <div class="rank-badge rank-1">1</div>
+            <div class="leader-name">Arjun M. <span class="leader-tag">Mumbai</span></div>
+            <div class="leader-score">98%</div>
+          </div>
+          <div class="leaderboard-entry">
+            <div class="rank-badge rank-2">2</div>
+            <div class="leader-name">Priya S. <span class="leader-tag">Delhi</span></div>
+            <div class="leader-score">95%</div>
+          </div>
+          <div class="leaderboard-entry">
+            <div class="rank-badge rank-3">3</div>
+            <div class="leader-name">Rahul V. <span class="leader-tag">Chennai</span></div>
+            <div class="leader-score">92%</div>
+          </div>
+          <div class="leaderboard-entry">
+            <div class="rank-badge rank-other">4</div>
+            <div class="leader-name">Meera K. <span class="leader-tag">Pune</span></div>
+            <div class="leader-score">89%</div>
+          </div>
+          <div class="leaderboard-entry">
+            <div class="rank-badge rank-other">5</div>
+            <div class="leader-name">Suresh T. <span class="leader-tag">Bengaluru</span></div>
+            <div class="leader-score">85%</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Grid -->
+  <section class="categories-section">
+    <div class="container">
+      <div style="margin-bottom:28px;">
+        <span class="section-label">Choose a Topic</span>
+        <h2 style="margin-bottom:8px;">Quiz Categories</h2>
+        <p style="color:var(--muted);font-size:0.92rem;">Select a topic to start a quiz. Your best scores are saved locally.</p>
+      </div>
+      <div class="categories-grid" id="categoriesGrid"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── Quiz Modal ── -->
+<div class="quiz-modal-overlay" id="quizModalOverlay" role="dialog" aria-modal="true" aria-labelledby="quizCategoryName">
+  <div class="quiz-modal" id="quizModal">
+
+    <!-- Modal header -->
+    <div class="quiz-modal-header">
+      <span class="quiz-category-name" id="quizCategoryName"></span>
+      <button class="btn-close-quiz" id="btnCloseQuiz" aria-label="Close quiz">✕</button>
+    </div>
+
+    <!-- Quiz content (questions) -->
+    <div id="quizContent">
+      <!-- Progress -->
+      <div class="quiz-progress-wrap">
+        <div class="quiz-progress-label">
+          <span id="qProgressLabel">Question 1 of 8</span>
+          <span id="qProgressScore">0 correct</span>
+        </div>
+        <div class="quiz-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+          <div class="quiz-progress-fill" id="qProgressFill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Question -->
+      <div class="quiz-q-area">
+        <div class="quiz-q-number" id="qNumber">Question 1</div>
+        <div class="quiz-question" id="qText"></div>
+      </div>
+
+      <!-- Options -->
+      <div class="quiz-options" id="qOptions"></div>
+
+      <!-- Explanation -->
+      <div class="quiz-explanation" id="qExplanation">
+        <div class="quiz-explanation-label">💡 Explanation</div>
+        <p class="quiz-explanation-text"></p>
+      </div>
+
+      <!-- Footer -->
+      <div class="quiz-modal-footer">
+        <button class="btn-next-q" id="btnNextQ">Next Question →</button>
+      </div>
+    </div><!-- /#quizContent -->
+
+    <!-- Score Screen -->
+    <div class="score-screen" id="scoreScreen">
+      <div class="score-circle" id="scoreCircle">
+        <span class="score-pct" id="scorePct">0%</span>
+        <span class="score-label">Score</span>
+      </div>
+      <div class="score-msg" id="scoreMsg"></div>
+      <div class="score-sub" id="scoreSub"></div>
+      <div class="score-stats">
+        <div class="score-stat">
+          <div class="score-stat-val" id="scoreCorrect">0</div>
+          <div class="score-stat-lbl">Correct</div>
+        </div>
+        <div class="score-stat">
+          <div class="score-stat-val" id="scoreIncorrect">0</div>
+          <div class="score-stat-lbl">Incorrect</div>
+        </div>
+        <div class="score-stat">
+          <div class="score-stat-val" id="scoreTotal">0</div>
+          <div class="score-stat-lbl">Total</div>
+        </div>
+      </div>
+      <div class="score-actions">
+        <button class="btn btn-primary" id="btnRestartQuiz">Try Again</button>
+        <button class="btn btn-outline-navy" id="btnExitQuiz">Choose Category</button>
+      </div>
+    </div><!-- /#scoreScreen -->
+
+  </div><!-- /.quiz-modal -->
+</div><!-- /.quiz-modal-overlay -->
+
+<!-- Footer -->
+<footer style="background:var(--navy);color:rgba(255,255,255,0.6);padding:32px 0;">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <a href="index.html" style="color:#fff;font-weight:700;font-size:0.95rem;">hiConstitution.com</a>
+    <p style="font-size:0.82rem;">© 2025 — Educational use only.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/quiz.js"></script>
+</body>
+</html>

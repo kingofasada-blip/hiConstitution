@@ -1,0 +1,86 @@
+[
+  {
+    "id": "1",
+    "title": "First Schedule",
+    "desc": "List of States and Union Territories.",
+    "details": "Contains the list of 28 States and 8 Union Territories and their respective territorial extents.",
+    "hindi": "इसमें 28 राज्यों और 8 केंद्र शासित प्रदेशों और उनके संबंधित क्षेत्रीय विस्तार की सूची शामिल है।"
+  },
+  {
+    "id": "2",
+    "title": "Second Schedule",
+    "desc": "Provisions regarding salaries and emoluments.",
+    "details": "Provisions as to the President, Governors of States, Speaker and the Deputy Speaker of the Lok Sabha and Legislative Assemblies, Judges of the Supreme Court and High Courts, and the Comptroller and Auditor-General of India.",
+    "hindi": "राष्ट्रपति, राज्यों के राज्यपालों, लोकसभा और विधानसभाओं के अध्यक्ष और उपाध्यक्ष, सर्वोच्च न्यायालय और उच्च न्यायालयों के न्यायाधीशों, और भारत के नियंत्रक और महालेखा परीक्षक के वेतन और भत्तों के संबंध में प्रावधान।"
+  },
+  {
+    "id": "3",
+    "title": "Third Schedule",
+    "desc": "Forms of Oaths or Affirmations.",
+    "details": "Contains the forms of Oaths or Affirmations for Union Ministers, Candidates for election to Parliament, Members of Parliament, Judges of the Supreme Court, and the Comptroller and Auditor-General of India.",
+    "hindi": ""
+  },
+  {
+    "id": "4",
+    "title": "Fourth Schedule",
+    "desc": "Rajya Sabha Seat Allocation.",
+    "details": "Allocation of seats in the Council of States (Rajya Sabha) to the States and the Union Territories.",
+    "hindi": ""
+  },
+  {
+    "id": "5",
+    "title": "Fifth Schedule",
+    "desc": "Administration of Scheduled Areas.",
+    "details": "Provisions as to the Administration and Control of Scheduled Areas and Scheduled Tribes.",
+    "hindi": ""
+  },
+  {
+    "id": "6",
+    "title": "Sixth Schedule",
+    "desc": "Administration of Tribal Areas in North-East.",
+    "details": "Provisions as to the Administration of Tribal Areas in the States of Assam, Meghalaya, Tripura and Mizoram.",
+    "hindi": ""
+  },
+  {
+    "id": "7",
+    "title": "Seventh Schedule",
+    "desc": "Division of Powers (3 Lists).",
+    "details": "Contains three lists detailing the division of powers between the Union and the States: List I (Union List), List II (State List), and List III (Concurrent List).",
+    "hindi": ""
+  },
+  {
+    "id": "8",
+    "title": "Eighth Schedule",
+    "desc": "Official Languages.",
+    "details": "Contains the list of 22 recognized official languages of India, including Hindi, Bengali, Telugu, Marathi, Tamil, Urdu, and others.",
+    "hindi": ""
+  },
+  {
+    "id": "9",
+    "title": "Ninth Schedule",
+    "desc": "Validation of certain Acts and Regulations.",
+    "details": "Validation of certain Acts and Regulations (originally intended to protect land reform laws from judicial review).",
+    "hindi": ""
+  },
+  {
+    "id": "10",
+    "title": "Tenth Schedule",
+    "desc": "Anti-Defection Law.",
+    "details": "Provisions as to disqualification of Members of Parliament and State Legislatures on the ground of defection (added by the 52nd Amendment in 1985).",
+    "hindi": ""
+  },
+  {
+    "id": "11",
+    "title": "Eleventh Schedule",
+    "desc": "Panchayati Raj.",
+    "details": "Specifies the powers, authority and responsibilities of Panchayats over 29 matters (added by the 73rd Amendment in 1992).",
+    "hindi": ""
+  },
+  {
+    "id": "12",
+    "title": "Twelfth Schedule",
+    "desc": "Municipalities.",
+    "details": "Specifies the powers, authority and responsibilities of Municipalities over 18 matters (added by the 74th Amendment in 1992).",
+    "hindi": ""
+  }
+]
