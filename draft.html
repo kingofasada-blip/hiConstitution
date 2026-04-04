@@ -94,6 +94,10 @@
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
     }
 
+    .draft-text-map {
+      display: none;
+    }
+
     .draft-section-head {
       margin-bottom: 24px;
     }
@@ -278,6 +282,59 @@
     .draft-source-link:hover {
       color: #fff;
       border-color: rgba(243, 115, 36, 0.3);
+    }
+
+    .draft-source-note {
+      margin-top: 14px;
+      margin-bottom: 18px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(243, 115, 36, 0.08);
+      border: 1px solid rgba(243, 115, 36, 0.18);
+      color: var(--body-text);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .draft-source-extract {
+      margin: 0 0 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      background: linear-gradient(180deg, #181818, #131313);
+      overflow: hidden;
+    }
+
+    .draft-source-extract summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 18px 20px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .draft-source-extract summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .draft-source-extract-body {
+      padding: 0 20px 20px;
+    }
+
+    .draft-source-extract-body p {
+      color: var(--body-text);
+      margin-bottom: 14px;
+    }
+
+    .draft-source-frame {
+      width: 100%;
+      min-height: 360px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      background: #101010;
     }
 
     .draft-reader-preamble {
@@ -631,6 +688,21 @@
           </p>
           <a href="data/draft-constitution-source.txt" class="draft-source-link">Open Working Source</a>
         </div>
+
+        <div class="draft-source-note">
+          Current status: structured reader kaafi complete hai, lekin exact verbatim raw source local file me abhi sirf available extract ke roop me preserved hai, aur woh currently `DC.42` tak hi complete hai. Isliye later sections me kai jagah structured summaries aur condensed article cards use kiye gaye hain, full line-by-line manuscript import nahi.
+        </div>
+
+        <details class="draft-source-extract">
+          <summary>
+            <span>Raw Source Extract</span>
+            <span>Available Verbatim Text</span>
+          </summary>
+          <div class="draft-source-extract-body">
+            <p>Yeh viewer local source file ka exact available extract dikhata hai. Is waqt stored verbatim text `Preamble` se `DC.42` tak available hai.</p>
+            <iframe src="data/draft-constitution-source.txt" title="Draft Constitution source extract" class="draft-source-frame"></iframe>
+          </div>
+        </details>
 
         <div class="draft-reader-preamble">
           <h3>PREAMBLE</h3>
@@ -1271,20 +1343,332 @@
               </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.73 - DC.100</strong>
-              <p>The remaining parliamentary provisions deal with presiding officers, vacancies, disqualifications, privileges, legislative procedure, Money Bills, financial business, language, rules of procedure and limits on discussion of judicial conduct.</p>
+              <strong>DC.73</strong>
+              <p>Chairman and Deputy Chairman of the Council of States.</p>
+              <div class="draft-article-text">
+                <p>73. The Vice-President of India shall be ex officio Chairman of the Council of States.</p>
+                <p>The Council of States shall, as soon as may be, choose one of its members to be Deputy Chairman and shall choose another member whenever that office becomes vacant.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.101 - DC.102</strong>
-              <p>The Draft protects parliamentary proceedings from judicial challenge on procedural irregularity and empowers the President to promulgate Ordinances when immediate action is needed while both Houses are not in session.</p>
+              <strong>DC.74</strong>
+              <p>Vacation, resignation and removal of Deputy Chairman.</p>
+              <div class="draft-article-text">
+                <p>74. The Deputy Chairman vacates office on ceasing to be a member, may resign by writing addressed to the Chairman, and may be removed for incapacity or want of confidence by a resolution passed by a majority of all the then members of the Council, subject to prior notice.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.103 - DC.123</strong>
-              <p>Chapter IV establishes the Supreme Court of India, fixes qualifications and removal safeguards for judges, and defines the Court&rsquo;s original, appellate, special leave, advisory and supplemental jurisdictions, along with the binding force of its declared law.</p>
+              <strong>DC.75</strong>
+              <p>Power to act as Chairman.</p>
+              <div class="draft-article-text">
+                <p>75. When the office of Chairman is vacant, or when the Vice-President is acting as or discharging the functions of the President, the Deputy Chairman shall perform the duties of the office.</p>
+                <p>During absence from a sitting, the Deputy Chairman or another person determined by rules or by the Council shall act as Chairman.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.124 - DC.127</strong>
-              <p>The final chapter of Part V creates the office of Auditor-General of India, secures its independence, assigns duties over Union and State accounts, and requires reports on Union accounts to be laid before Parliament through the President.</p>
+              <strong>DC.76</strong>
+              <p>Speaker and Deputy Speaker of the House of the People.</p>
+              <div class="draft-article-text">
+                <p>76. The House of the People shall, as soon as may be, choose two members to be respectively Speaker and Deputy Speaker, and shall fill those offices again whenever they become vacant.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.77</strong>
+              <p>Vacation, resignation and removal of Speaker and Deputy Speaker.</p>
+              <div class="draft-article-text">
+                <p>77. The Speaker or Deputy Speaker vacates office on ceasing to be a member, may resign by writing addressed to the appropriate presiding officer, and may be removed for incapacity or want of confidence by a majority of all the then members of the House of the People, subject to notice.</p>
+                <p>The Speaker, however, continues until immediately before the first meeting of the next House after dissolution.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.78</strong>
+              <p>Power to act as Speaker.</p>
+              <div class="draft-article-text">
+                <p>78. While the office of Speaker is vacant, the Deputy Speaker or, if necessary, a member appointed by the President shall perform the duties of the office.</p>
+                <p>During the Speaker&rsquo;s absence from a sitting, the Deputy Speaker or another person determined by rules or by the House shall act as Speaker.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.79</strong>
+              <p>Salaries and allowances of parliamentary officers.</p>
+              <div class="draft-article-text">
+                <p>79. Salaries and allowances of the Chairman and Deputy Chairman of the Council of States and the Speaker and Deputy Speaker of the House of the People shall be fixed by Parliament by law, and until then shall be as specified in the Second Schedule.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.80</strong>
+              <p>Voting, vacancies and quorum.</p>
+              <div class="draft-article-text">
+                <p>80. Questions at a sitting or joint sitting are generally decided by a majority of members present and voting, with the presiding officer having a casting vote in case of equality.</p>
+                <p>The Houses may act despite vacancies, but if fewer than one-sixth of members are present it becomes the duty of the presiding officer to adjourn or suspend the meeting.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.81</strong>
+              <p>Declaration by members before taking seats.</p>
+              <div class="draft-article-text">
+                <p>81. Every member of either House of Parliament must, before taking a seat, make and subscribe before the President or a person appointed by him a declaration in the form set out in the Third Schedule.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.82</strong>
+              <p>Vacation of seats.</p>
+              <div class="draft-article-text">
+                <p>82. No person shall be a member of both Houses of Parliament. The article also deals with vacancy arising from disqualification, resignation, and prolonged absence without permission.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.83</strong>
+              <p>Disqualifications for membership.</p>
+              <div class="draft-article-text">
+                <p>83. A person is disqualified for membership of either House if he holds an office of profit under the Government, is of unsound mind, is an undischarged insolvent, owes allegiance to a foreign power, or is otherwise disqualified by or under parliamentary law, subject to stated ministerial exceptions.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.84</strong>
+              <p>Penalty for sitting or voting when not qualified.</p>
+              <div class="draft-article-text">
+                <p>84. A person who knowingly sits or votes before making the required declaration, or while disqualified or prohibited, is liable to a monetary penalty for each day of such sitting or voting.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.85</strong>
+              <p>Privileges and immunities of members.</p>
+              <div class="draft-article-text">
+                <p>85. Subject to parliamentary rules, there shall be freedom of speech in Parliament. Members are protected from court proceedings in respect of speeches, votes and authorised publications.</p>
+                <p>Other privileges remain those defined by Parliament by law, and until so defined, those of the House of Commons at the commencement of the Constitution.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.86</strong>
+              <p>Salaries and allowances of members.</p>
+              <div class="draft-article-text">
+                <p>86. Members of either House of Parliament shall receive such salaries and allowances as Parliament may determine by law, and until then such allowances as were applicable to members of the Legislature of the Dominion of India immediately before commencement.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.87</strong>
+              <p>Ordinary legislative procedure.</p>
+              <div class="draft-article-text">
+                <p>87. Subject to provisions relating to Money Bills and financial Bills, a Bill may originate in either House of Parliament.</p>
+                <p>The article lays down the general rule that a Bill must be agreed to by both Houses, and also deals with lapse or continuance of pending Bills on prorogation or dissolution of the House of the People.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.88</strong>
+              <p>Joint sitting in case of disagreement.</p>
+              <div class="draft-article-text">
+                <p>88. Where one House rejects a Bill, the Houses finally disagree, or the other House fails to pass it within six months, the President may notify his intention to summon a joint sitting, except in the case of a Money Bill.</p>
+                <p>The article then regulates the holding of the joint sitting and the conditions under which the Bill is deemed to have been passed there.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.89</strong>
+              <p>Special procedure for Money Bills.</p>
+              <div class="draft-article-text">
+                <p>89. A Money Bill shall not be introduced in the Council of States.</p>
+                <p>After passing the House of the People it is sent to the Council of States for recommendations, which may be accepted or rejected by the House of the People, and if not returned within thirty days it is deemed passed in the form originally approved by the House of the People.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.90</strong>
+              <p>Definition of a Money Bill.</p>
+              <div class="draft-article-text">
+                <p>90. This article defines when a Bill is to be treated as a Money Bill by listing the financial subjects that may be contained in it, such as taxation, borrowing, supply, appropriation, charged expenditure and custody of public money.</p>
+                <p>The Speaker of the House of the People has the final decision on whether a Bill is a Money Bill, and the Speaker&rsquo;s certificate must be endorsed on such Bills.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.91</strong>
+              <p>Assent to Bills.</p>
+              <div class="draft-article-text">
+                <p>91. When a Bill has been passed by the Houses of Parliament it is presented to the President, who may assent or withhold assent.</p>
+                <p>In the case of a Bill other than a Money Bill, the President may within six weeks return it with a message requesting reconsideration and possible amendment.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.92</strong>
+              <p>Annual financial statement.</p>
+              <div class="draft-article-text">
+                <p>92. For every financial year, the President shall cause to be laid before both Houses a statement of the estimated receipts and expenditure of the Government of India.</p>
+                <p>The article distinguishes charged expenditure from other expenditure and lists the categories of expenditure charged upon the revenues of India.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.93</strong>
+              <p>Demands for grants.</p>
+              <div class="draft-article-text">
+                <p>93. Charged expenditure is not submitted to the vote of Parliament, though it may be discussed.</p>
+                <p>Other expenditure is submitted to the House of the People in the form of demands for grants, which may be assented to, refused, or reduced, and no demand may be made except on the recommendation of the President.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.94</strong>
+              <p>Authentication of expenditure schedule.</p>
+              <div class="draft-article-text">
+                <p>94. The President shall authenticate by signature a schedule specifying the grants made by the House of the People and the sums required for charged expenditure.</p>
+                <p>The schedule is laid before the House of the People but is not open to discussion or vote, and subject to subsequent provisions no expenditure is duly authorised unless specified in it.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.95</strong>
+              <p>Supplementary statements.</p>
+              <div class="draft-article-text">
+                <p>95. If further expenditure becomes necessary during a financial year beyond what has already been authorised, the President must lay a supplementary statement before both Houses, and the preceding financial provisions apply to it as well.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.96</strong>
+              <p>Excess demands.</p>
+              <div class="draft-article-text">
+                <p>96. Where expenditure requiring a vote of the House of the People has been incurred in excess of the amount granted for a service, a demand for the excess must be presented, and the provisions on grants and authorised expenditure apply correspondingly.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.97</strong>
+              <p>Special provisions as to financial Bills.</p>
+              <div class="draft-article-text">
+                <p>97. Bills or amendments dealing with specified financial matters may not be introduced or moved except on the recommendation of the President, and certain such Bills may not be introduced in the Council of States.</p>
+                <p>A Bill involving expenditure from the revenues of India also cannot be passed unless the President has recommended its consideration.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.98</strong>
+              <p>Rules of procedure.</p>
+              <div class="draft-article-text">
+                <p>98. Each House of Parliament may make rules for regulating its procedure and conduct of business, subject to the Constitution.</p>
+                <p>Until then, existing procedural rules continue subject to adaptation, and the President may make rules for joint sittings and communications between the Houses.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.99</strong>
+              <p>Language of parliamentary business.</p>
+              <div class="draft-article-text">
+                <p>99. Business in Parliament shall be transacted in Hindi or English.</p>
+                <p>The presiding officer may permit a member to address the House in his mother tongue, and may arrange for a summary in Hindi or English to be included in the official record.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.100</strong>
+              <p>Restriction on discussion of judicial conduct.</p>
+              <div class="draft-article-text">
+                <p>100. No discussion shall take place in Parliament with respect to the conduct of any judge of the Supreme Court or a High Court in the discharge of his duties except upon a motion for presenting an address to the President praying for removal.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.101</strong>
+              <p>Courts not to inquire into parliamentary proceedings.</p>
+              <div class="draft-article-text">
+                <p>101. The validity of parliamentary proceedings shall not be called in question on the ground of alleged irregularity of procedure.</p>
+                <p>Officers or members of Parliament exercising powers for regulating procedure, conduct of business, or maintaining order are also protected from court jurisdiction in respect of exercise of those powers.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.102</strong>
+              <p>Legislative powers of the President: Ordinances.</p>
+              <div class="draft-article-text">
+                <p>102. When both Houses of Parliament are not in session and immediate action is necessary, the President may promulgate Ordinances having the same force and effect as Acts of Parliament.</p>
+                <p>Such Ordinances must be laid before both Houses, cease after the prescribed period from reassembly unless approved, may be withdrawn, and are void to the extent that they contain provisions Parliament would not be competent to enact.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.103</strong>
+              <p>Constitution of the Supreme Court.</p>
+              <div class="draft-article-text">
+                <p>103. There shall be a Supreme Court of India consisting of a Chief Justice and at least seven other judges as Parliament may prescribe by law.</p>
+                <p>The article also governs appointment, qualifications, age of retirement, resignation, removal, oath and post-retirement restriction on practice.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.104</strong>
+              <p>Salaries and service conditions of Supreme Court judges.</p>
+              <div class="draft-article-text">
+                <p>104. Judges of the Supreme Court are entitled to such salaries, allowances, leave and pension rights as may be fixed by law, and until then as specified in the Second Schedule, with protection against disadvantageous variation after appointment.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.105 - DC.107</strong>
+              <p>Acting, ad hoc and retired judges.</p>
+              <div class="draft-article-text">
+                <p>105. When the office of Chief Justice is vacant, or the Chief Justice is unable to perform duties, another judge may be appointed to perform them.</p>
+                <p>106. Where there is no quorum, a High Court judge may be requested to attend as an ad hoc judge of the Supreme Court.</p>
+                <p>107. Former judges of the Supreme Court or Federal Court may, with consent, be requested to sit and act as judges of the Supreme Court.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.108</strong>
+              <p>Seat of the Supreme Court.</p>
+              <div class="draft-article-text">
+                <p>108. The Supreme Court shall be a court of record and shall sit in Delhi and at such other place or places as the Chief Justice may, with approval of the President, appoint from time to time.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.109</strong>
+              <p>Original jurisdiction in disputes.</p>
+              <div class="draft-article-text">
+                <p>109. Subject to stated exceptions, the Supreme Court has exclusive original jurisdiction in disputes between the Government of India and one or more States, between the Union and States on one side and other States on the other, and between two or more States where a legal right is involved.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.110 - DC.113</strong>
+              <p>Appellate and reference jurisdiction.</p>
+              <div class="draft-article-text">
+                <p>110. Appeals lie from High Courts where a substantial question of law as to interpretation of the Constitution is involved.</p>
+                <p>111. Civil appeals lie in specified cases involving valuation thresholds, property questions or certification that the case is fit for appeal.</p>
+                <p>112. The Supreme Court may grant special leave to appeal from judgments, decrees or final orders in cases outside articles 110 and 111.</p>
+                <p>113. Certain High Courts in Part III States may state cases for the opinion of the Supreme Court on material questions concerning applicability or interpretation of parliamentary or other State law.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.114 - DC.116</strong>
+              <p>Additional and supplemental jurisdiction.</p>
+              <div class="draft-article-text">
+                <p>114. Parliament may confer further jurisdiction and powers on the Supreme Court in Union List matters and, where authorised by law, in matters covered by special agreement between the Union and a State.</p>
+                <p>115. Parliament may also empower the Court to issue writs for purposes beyond enforcement of fundamental rights.</p>
+                <p>116. Supplemental powers may likewise be conferred to enable more effective exercise of constitutional jurisdiction.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.117 - DC.123</strong>
+              <p>Binding force, complete justice, advisory jurisdiction and administration of the Court.</p>
+              <div class="draft-article-text">
+                <p>117. The law declared by the Supreme Court is binding on all courts within the territory of India.</p>
+                <p>118. The Court may pass orders necessary for complete justice and exercise contempt and related powers.</p>
+                <p>119. The President may refer questions of public importance, and certain disputes, to the Court for opinion or decision.</p>
+                <p>120. All civil and judicial authorities in the territory of India shall act in aid of the Supreme Court.</p>
+                <p>121. The Court may make rules, subject to law and presidential approval, regarding practice and procedure.</p>
+                <p>122. Administrative expenses of the Court are charged on the revenues of India.</p>
+                <p>123. Certain references to High Courts in Part III States are specially defined for the purposes of this chapter.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.124</strong>
+              <p>Auditor-General of India.</p>
+              <div class="draft-article-text">
+                <p>124. There shall be an Auditor-General of India, appointed by the President and removable only in like manner and on like grounds as a judge of the Supreme Court.</p>
+                <p>The article also protects salary and service conditions, bars further office under the Union or States after demitting office, and charges audit expenses on the revenues of India.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.125</strong>
+              <p>Duties and powers regarding accounts.</p>
+              <div class="draft-article-text">
+                <p>125. The Auditor-General shall perform such duties and exercise such powers in relation to the accounts of the Government of India and of any State as may be prescribed by or under law made by Parliament.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.126</strong>
+              <p>Form of accounts.</p>
+              <div class="draft-article-text">
+                <p>126. Accounts of the Government of India shall be kept in such form as the Auditor-General may, with approval of the President, prescribe, and States must keep accounts in accordance with directions given in that behalf with the like approval.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.127</strong>
+              <p>Audit reports before Parliament.</p>
+              <div class="draft-article-text">
+                <p>127. Reports of the Auditor-General relating to the accounts of the Government of India shall be submitted to the President, who shall cause them to be laid before Parliament.</p>
+              </div>
             </div>
           </div>
         </details>
@@ -1301,35 +1685,427 @@
             <p>This part sets out the constitutional structure of the major States in Part I of the First Schedule. It covers the Governor, State executive, Legislature, emergency powers, scheduled and tribal areas, High Courts and State auditing arrangements.</p>
             <div class="draft-article-card">
               <strong>DC.128</strong>
-              <p>This opening article defines the expression &ldquo;State&rdquo; for the purposes of Part VI as a State specified in Part I of the First Schedule.</p>
+              <p>Meaning of State in Part VI.</p>
+              <div class="draft-article-text">
+                <p>128. In this Part, unless the context otherwise requires, the expression &ldquo;State&rdquo; means a State for the time being specified in Part I of the First Schedule.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.129 - DC.142</strong>
-              <p>These provisions establish the office of Governor, vest the executive power of the State in that office, and set out alternative methods for choosing a Governor. They also cover term, re-election or re-appointment, qualifications, oath, impeachment, pardoning power and the extent of State executive authority.</p>
+              <strong>DC.129</strong>
+              <p>Governor for each State.</p>
+              <div class="draft-article-text">
+                <p>129. There shall be a Governor for each State.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.143 - DC.147</strong>
-              <p>This group creates the Council of Ministers headed by the Chief Minister, defines the Governor&rsquo;s discretionary space in certain matters, deals with appointment of ministers and the Advocate-General, and requires business of the State to be carried on in the Governor&rsquo;s name.</p>
+              <strong>DC.130</strong>
+              <p>Executive power of the State.</p>
+              <div class="draft-article-text">
+                <p>130. The executive power of the State shall be vested in the Governor and may be exercised by him in accordance with the Constitution and the law.</p>
+                <p>The article also clarifies that existing functions of other authorities are not automatically transferred and that Parliament or the State Legislature may confer functions on authorities subordinate to the Governor.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.148 - DC.187</strong>
-              <p>These articles design the State Legislature, whether unicameral or bicameral, and regulate composition, qualifications, sessions, officers, legislative procedure, financial business, language, privileges and the Governor&rsquo;s ordinance-making power. This is the State-level parallel to the parliamentary machinery described earlier in Part V.</p>
+              <strong>DC.131</strong>
+              <p>Alternative methods for choosing the Governor.</p>
+              <div class="draft-article-text">
+                <p>131. The Draft records two alternatives for selection of a Governor:</p>
+                <p>One version provides for election by direct vote of the qualified voters of the State.</p>
+                <p>The alternative version provides for appointment by the President from a panel of four candidates elected by the State Legislature by proportional representation and secret ballot.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.132</strong>
+              <p>Term of office of Governor.</p>
+              <div class="draft-article-text">
+                <p>132. The Governor shall hold office for a term of five years from the date on which he enters upon office.</p>
+                <p>The article also provides for resignation, removal by impeachment, and continuation in office until a successor enters upon office.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.133</strong>
+              <p>Eligibility for re-election or re-appointment.</p>
+              <div class="draft-article-text">
+                <p>133. A person who holds, or has held, office as Governor shall be eligible for re-election or re-appointment to that office once, but only once.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.134</strong>
+              <p>Qualifications for Governor.</p>
+              <div class="draft-article-text">
+                <p>134. The Draft again records alternative versions.</p>
+                <p>Under the election model, a Governor must be a citizen of India, at least thirty-five years of age, and not disqualified for being chosen as a member of the Legislative Assembly, while also not holding disqualifying offices of emolument.</p>
+                <p>Under the appointment model, the person must likewise be a citizen of India, at least thirty-five years old, and not disqualified for being chosen as a member of the Legislative Assembly.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.135</strong>
+              <p>Conditions of the Governor&rsquo;s office.</p>
+              <div class="draft-article-text">
+                <p>135. The Governor shall not be a member of Parliament or of the Legislature of any State specified in the First Schedule, and if such a member is elected or appointed Governor, the seat is deemed vacant upon entering office.</p>
+                <p>The Governor shall not hold any other office of emolument, shall have an official residence, and emoluments fixed by State law shall not be diminished during the term of office.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.136</strong>
+              <p>Oath or affirmation of Governor.</p>
+              <div class="draft-article-text">
+                <p>136. Every Governor, and every person discharging the functions of Governor, shall before entering office make and subscribe an oath or affirmation to faithfully execute the office, preserve, protect and defend the Constitution and the law, and devote himself to the service and well-being of the people of the State.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.137</strong>
+              <p>Impeachment of the Governor.</p>
+              <div class="draft-article-text">
+                <p>137. A charge for violation of the Constitution may be preferred by the Legislative Assembly of the State, subject to notice and special majority requirements.</p>
+                <p>The Council of States then investigates the charge through a committee, and if the charge is sustained by the required majority, the Governor stands removed.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.138</strong>
+              <p>Provision for contingencies.</p>
+              <div class="draft-article-text">
+                <p>138. The Draft again notes alternatives: the Legislature of the State may make provision for discharge of the Governor&rsquo;s functions in contingencies not otherwise provided for, or the President may make such provision.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.139</strong>
+              <p>Time for filling vacancies in the office of Governor.</p>
+              <div class="draft-article-text">
+                <p>139. Elections, or elections to constitute a panel where that model is adopted, for filling vacancies caused by expiration of term must be completed before expiration.</p>
+                <p>Vacancies arising by death, resignation, removal or otherwise must be filled as soon as possible, and the new Governor holds office for a full five-year term.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.140</strong>
+              <p>Election disputes and legislative regulation.</p>
+              <div class="draft-article-text">
+                <p>140. Doubts and disputes connected with election of a Governor, or the election constituting a panel for appointment, shall be decided by the Supreme Court.</p>
+                <p>Subject to the Constitution, the State Legislature may regulate matters connected with the process.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.141</strong>
+              <p>Pardoning power of the Governor.</p>
+              <div class="draft-article-text">
+                <p>141. The Governor of a State has power to grant pardons, reprieves, respites or remissions of punishment, or suspend, remit or commute sentences, in relation to offences against laws on matters within the State Legislature&rsquo;s law-making power.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.142</strong>
+              <p>Extent of State executive power.</p>
+              <div class="draft-article-text">
+                <p>142. Subject to the Constitution, the executive power of each State extends to matters with respect to which the Legislature of the State has power to make laws and to certain rights, authority and jurisdiction exercisable under agreements with Part III States.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.143</strong>
+              <p>Council of Ministers to aid and advise the Governor.</p>
+              <div class="draft-article-text">
+                <p>143. There shall be a Council of ministers with the Chief Minister at the head to aid and advise the Governor, except where the Constitution requires him to act in his discretion.</p>
+                <p>The article also protects such advice from judicial inquiry and makes the Governor&rsquo;s decision final where a question arises whether a matter falls within his discretion.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.144</strong>
+              <p>Appointment and tenure of State ministers.</p>
+              <div class="draft-article-text">
+                <p>144. Ministers are appointed by the Governor and hold office during his pleasure.</p>
+                <p>The article also provides for oaths, membership requirements, certain special ministerial arrangements, observance of constitutional instructions, salaries and allowances, and specifies that appointment and dismissal of ministers are to be exercised by the Governor in his discretion.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.145</strong>
+              <p>Advocate-General for the State.</p>
+              <div class="draft-article-text">
+                <p>145. The Governor shall appoint a person qualified to be a High Court judge to be Advocate-General for the State.</p>
+                <p>The Advocate-General advises the Government of the State on legal matters, performs duties assigned by the Governor, retires on resignation of the Chief Minister subject to continuation until successor or reappointment, and receives remuneration determined by the Governor.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.146</strong>
+              <p>Conduct of State government business.</p>
+              <div class="draft-article-text">
+                <p>146. All executive action of the Government of a State shall be expressed to be taken in the name of the Governor.</p>
+                <p>Orders and instruments made in that name must be authenticated in the prescribed manner, and their validity cannot then be challenged on the ground that they were not made or executed by the Governor.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.147</strong>
+              <p>Duties of the Chief Minister toward the Governor.</p>
+              <div class="draft-article-text">
+                <p>147. The Chief Minister must communicate to the Governor all decisions of the Council of ministers relating to administration and proposals for legislation, furnish information the Governor may call for, and, when required, submit to the Council any matter decided by a minister but not considered by the Council.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.148</strong>
+              <p>Constitution of the State Legislature.</p>
+              <div class="draft-article-text">
+                <p>148. For every State there shall be a Legislature consisting of the Governor and either one House or two Houses, depending on the State.</p>
+                <p>Where there are two Houses, they are to be known as the Legislative Council and the Legislative Assembly; where there is one House, it is the Legislative Assembly.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.149</strong>
+              <p>Composition of the Legislative Assembly.</p>
+              <div class="draft-article-text">
+                <p>149. The Legislative Assembly of each State is to be composed of members chosen by direct election on the basis of adult suffrage.</p>
+                <p>The article also regulates territorial representation, population basis, minimum and maximum size of the Assembly, and readjustment after each census.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.150</strong>
+              <p>Composition of the Legislative Council.</p>
+              <div class="draft-article-text">
+                <p>150. In States having a Legislative Council, its size shall not exceed twenty-five per cent of the strength of the Legislative Assembly.</p>
+                <p>The article distributes membership among persons chosen from panels, members elected by the Legislative Assembly, and members nominated by the Governor, and also describes the formation of panels of qualified candidates.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.151</strong>
+              <p>Duration of the State Houses.</p>
+              <div class="draft-article-text">
+                <p>151. Every Legislative Assembly continues for five years unless sooner dissolved.</p>
+                <p>The Legislative Council, where it exists, is not subject to dissolution and as nearly as may be one-third of its members retire every third year.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.152</strong>
+              <p>Qualifications of members.</p>
+              <div class="draft-article-text">
+                <p>152. A person must be at least twenty-five years of age to be chosen to fill a seat in a Legislative Assembly and at least thirty-five years of age to be chosen to fill a seat in a Legislative Council.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.153</strong>
+              <p>Sessions, prorogation and dissolution.</p>
+              <div class="draft-article-text">
+                <p>153. The House or Houses of the State Legislature must meet at least twice a year, with no more than six months between the last sitting of one session and the first sitting of the next.</p>
+                <p>The Governor may summon, prorogue and dissolve the Legislative Assembly, and in specified matters acts in his discretion.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.154</strong>
+              <p>Governor&rsquo;s address and messages.</p>
+              <div class="draft-article-text">
+                <p>154. The Governor may address the Legislative Assembly or, where there are two Houses, either House or both Houses together, and may send messages to the House or Houses on Bills or other matters for consideration.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.155</strong>
+              <p>Special address at commencement of sessions.</p>
+              <div class="draft-article-text">
+                <p>155. At the commencement of every session, the Governor shall address the Legislative Assembly or both Houses assembled together and inform the Legislature of the cause of its summons.</p>
+                <p>Rules must provide for discussion of matters referred to in that address and for precedence of that discussion.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.156</strong>
+              <p>Rights of ministers and Advocate-General in the State Legislature.</p>
+              <div class="draft-article-text">
+                <p>156. Every minister and the Advocate-General for a State may speak in, and otherwise take part in, the proceedings of the Legislative Assembly, the Legislative Council where one exists, joint sittings, and committees of which he may be named a member, though not by virtue of this article entitled to vote.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.157 - DC.159</strong>
+              <p>Speaker and Deputy Speaker of the Legislative Assembly.</p>
+              <div class="draft-article-text">
+                <p>157. The Legislative Assembly shall choose two members to be Speaker and Deputy Speaker.</p>
+                <p>158. These officers vacate office on ceasing to be members, may resign, and may be removed by the Assembly subject to notice and majority requirements, with continuity of the Speaker after dissolution until the next Assembly meets.</p>
+                <p>159. Provision is made for acting as Speaker when the office is vacant or the Speaker is absent.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.160 - DC.162</strong>
+              <p>Chairman and Deputy Chairman of the Legislative Council.</p>
+              <div class="draft-article-text">
+                <p>160. The Legislative Council shall choose two of its members to be Chairman and Deputy Chairman.</p>
+                <p>161. These officers vacate office on ceasing to be members, may resign, and may be removed by the Council subject to notice and majority requirements.</p>
+                <p>162. Provision is made for acting as Chairman when the office is vacant or the Chairman is absent.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.163</strong>
+              <p>Salaries and allowances of State legislative officers.</p>
+              <div class="draft-article-text">
+                <p>163. Salaries and allowances of the Speaker and Deputy Speaker of the Legislative Assembly and of the Chairman and Deputy Chairman of the Legislative Council are to be fixed by State law and, until then, are as specified in the Second Schedule.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.164</strong>
+              <p>Voting, vacancies and quorum in State Houses.</p>
+              <div class="draft-article-text">
+                <p>164. Questions in a House or joint sitting of the State Legislature are generally decided by a majority of members present and voting, with the presiding officer having a casting vote in case of equality.</p>
+                <p>The House may act despite vacancies, but if there is no quorum, the presiding officer must adjourn or suspend the meeting. The quorum is ten members or one-sixth of the total membership, whichever is greater.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.165</strong>
+              <p>Declaration by members before taking seats.</p>
+              <div class="draft-article-text">
+                <p>165. Every member of the Legislative Assembly or Legislative Council must, before taking a seat, make and subscribe before the Governor or a person appointed by him a declaration in the form set out in the Third Schedule.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.166</strong>
+              <p>Vacation of seats.</p>
+              <div class="draft-article-text">
+                <p>166. No person shall be a member of both Houses of a State Legislature, nor both of Parliament and a State Legislature, and provision is to be made for vacation of one of the seats in such cases.</p>
+                <p>The article also addresses vacancies by disqualification, resignation and prolonged absence without permission.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.167</strong>
+              <p>Disqualifications for membership of the State Legislature.</p>
+              <div class="draft-article-text">
+                <p>167. A person is disqualified for being chosen as, and for being, a member of the State Legislature on grounds similar to parliamentary disqualification, such as office of profit, unsoundness of mind, insolvency, allegiance to a foreign power, or disqualification by law, subject to specified exceptions.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.168</strong>
+              <p>Decision on questions of disqualification.</p>
+              <div class="draft-article-text">
+                <p>168. Questions regarding disqualification of a member of the State Legislature are to be referred to the Governor, whose decision is final, subject to obtaining the opinion of the Election Commission where the Constitution so requires.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.169</strong>
+              <p>Penalty for sitting or voting when not qualified.</p>
+              <div class="draft-article-text">
+                <p>169. A person who knowingly sits or votes before making the required declaration, or while not qualified or while disqualified, is liable to a monetary penalty for each day of such sitting or voting.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.170</strong>
+              <p>Privileges and immunities of members.</p>
+              <div class="draft-article-text">
+                <p>170. Subject to legislative rules, there shall be freedom of speech in the State Legislature, and members are protected from court proceedings regarding speeches, votes and authorised publications.</p>
+                <p>Other privileges are to be defined by law and, until then, correspond to those of the House of Commons at the commencement of the Constitution.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.171</strong>
+              <p>Salaries and allowances of members.</p>
+              <div class="draft-article-text">
+                <p>171. Members of the Houses of the State Legislature are entitled to such salaries and allowances as may be determined by State law, and until then such allowances as were applicable before commencement.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.172 - DC.176</strong>
+              <p>Ordinary legislative procedure and joint sittings.</p>
+              <div class="draft-article-text">
+                <p>172. Subject to special provisions on Money Bills and financial Bills, a Bill may originate in either House of the State Legislature.</p>
+                <p>173. This article deals with disagreement between the Houses and provides for joint sittings in specified circumstances, other than in the case of Money Bills.</p>
+                <p>174. A Money Bill shall not be introduced in the Legislative Council and is subject to a special recommendation procedure by that House.</p>
+                <p>175. This article defines what counts as a Money Bill and gives finality to the Speaker&rsquo;s decision on that question.</p>
+                <p>176. When a Bill is passed by the Houses of the Legislature, it is presented to the Governor, who may assent, withhold assent, or, in some cases, reserve the Bill for the consideration of the President.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.177 - DC.182</strong>
+              <p>Financial procedure in the State Legislature.</p>
+              <div class="draft-article-text">
+                <p>177. The Governor shall cause an annual financial statement of State receipts and expenditure to be laid before the Legislature.</p>
+                <p>178. Charged expenditure is not submitted to vote, while other expenditure is presented as demands for grants to the Legislative Assembly.</p>
+                <p>179. The Governor authenticates the schedule of authorised expenditure.</p>
+                <p>180. Supplementary financial statements are required where further expenditure becomes necessary.</p>
+                <p>181. Excess demands must be presented where voted expenditure exceeds the amount granted.</p>
+                <p>182. Financial Bills require recommendation of the Governor and are subject to special rules parallel to those applicable in Parliament.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.183 - DC.186</strong>
+              <p>Rules, language and procedural protections.</p>
+              <div class="draft-article-text">
+                <p>183. Each House of the State Legislature may make rules regulating procedure and conduct of business, subject to the Constitution.</p>
+                <p>184. Business in the Legislature is to be transacted in the authorised language framework provided by the Draft, with scope for the presiding officer to permit use of another language in suitable cases.</p>
+                <p>185. Discussion of the conduct of judges is restricted except upon motions for removal.</p>
+                <p>186. Courts are not to inquire into legislative proceedings on grounds of procedural irregularity, and legislative officers exercising procedural powers are protected from court jurisdiction in respect of those powers.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.187</strong>
+              <p>Governor&rsquo;s Ordinance-making power.</p>
+              <div class="draft-article-text">
+                <p>187. When the State Legislature is not in session and immediate action is necessary, the Governor may promulgate Ordinances having the force of law.</p>
+                <p>The article also regulates laying before the Legislature, cessation, withdrawal, and invalidity to the extent the Ordinance could not constitutionally have been enacted by the State Legislature.</p>
+              </div>
             </div>
             <div class="draft-article-card">
               <strong>DC.188</strong>
-              <p>This article creates a grave emergency power for the Governor where peace and tranquillity of the State are threatened and government cannot be carried on in accordance with the Constitution.</p>
+              <p>Provisions in cases of grave emergencies.</p>
+              <div class="draft-article-text">
+                <p>188. If the Governor is satisfied that a grave emergency has arisen threatening the peace and tranquillity of the State and that government cannot be carried on in accordance with the Constitution, he may proclaim that his functions shall, to the specified extent, be exercised by him in his discretion.</p>
+                <p>The article allows incidental and consequential provisions, subject to the limitation that High Court provisions cannot be suspended, requires communication to the President, and limits the duration of such a proclamation unless earlier revoked.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.189 - DC.190</strong>
-              <p>These provisions define scheduled areas and tribal areas and apply the Fifth Schedule and Sixth Schedule to their administration and control.</p>
+              <strong>DC.189</strong>
+              <p>Definitions of scheduled and tribal areas.</p>
+              <div class="draft-article-text">
+                <p>189. This article defines &ldquo;scheduled areas&rdquo; and &ldquo;tribal areas&rdquo; by reference to the relevant tables appended to the Fifth and Sixth Schedules.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.191 - DC.209</strong>
-              <p>This large chapter deals with High Courts in the States, including constitution, appointment and service conditions of judges, acting and additional judges, writ jurisdiction, superintendence over subordinate courts, reconstitution of courts and extension or exclusion of jurisdiction.</p>
+              <strong>DC.190</strong>
+              <p>Application of the Fifth and Sixth Schedules.</p>
+              <div class="draft-article-text">
+                <p>190. The provisions of the Fifth Schedule apply to the administration and control of scheduled areas and scheduled tribes in States specified in Part I of the First Schedule, while the Sixth Schedule applies to the administration of tribal areas in Assam.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.210 - DC.211</strong>
-              <p>The final chapter permits a State to provide for an Auditor-in-Chief and lays down how audit reports relating to State accounts are to be submitted and laid before the State Legislature.</p>
+              <strong>DC.191 - DC.192</strong>
+              <p>Existing High Courts and their constitution.</p>
+              <div class="draft-article-text">
+                <p>191. This article declares which existing courts shall be deemed to be High Courts for constitutional purposes and provides for replacement, reconstitution or declaration of other courts as High Courts.</p>
+                <p>192. Every High Court is to be a court of record and is to consist of a Chief Justice and such other judges as the President considers necessary, subject to any fixed maximum.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.193 - DC.200</strong>
+              <p>Appointment, tenure and temporary judicial arrangements.</p>
+              <div class="draft-article-text">
+                <p>193. Judges of High Courts are appointed by the President after the required consultations and hold office until the prescribed age, subject to resignation, removal and transfer or elevation.</p>
+                <p>194. Provisions relating to investigation and proof of misbehaviour or incapacity apply correspondingly.</p>
+                <p>195. Judges must make the prescribed declaration before entering office.</p>
+                <p>196. Former judges are restricted from pleading or acting in courts or before authorities within the territory of India.</p>
+                <p>197. Salaries, allowances and pension rights are protected, subject to law.</p>
+                <p>198 to 200 provide for acting judges, additional judges and the recall of former judges to sit and act where necessary.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.201 - DC.205</strong>
+              <p>Jurisdiction, writs, superintendence and administration.</p>
+              <div class="draft-article-text">
+                <p>201. Existing jurisdiction and powers of High Courts continue, subject to the Constitution and competent legislation.</p>
+                <p>202. Every High Court has writ jurisdiction for enforcement of fundamental rights and for other purposes.</p>
+                <p>203. High Courts have superintendence over subordinate courts, including powers of transfer, rule-making and fee regulation.</p>
+                <p>204. Cases involving substantial constitutional questions may be withdrawn by the High Court from subordinate courts.</p>
+                <p>205. Administrative expenses of High Courts, including judicial salaries and staff salaries, are charged on State revenues.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.206 - DC.209</strong>
+              <p>Reconstitution and extension of High Court jurisdiction.</p>
+              <div class="draft-article-text">
+                <p>206. State Legislatures may constitute, reconstitute or amalgamate High Courts, subject to provisions preserving judges, staff and pending matters.</p>
+                <p>207. Parliament may extend or exclude the jurisdiction of a High Court to or from another State or area, subject to required consents.</p>
+                <p>208 and 209 contain supplementary rules for cases where a High Court exercises jurisdiction in relation to more than one State or area.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.210</strong>
+              <p>Auditor-in-Chief for a State.</p>
+              <div class="draft-article-text">
+                <p>210. A State Legislature may by law provide for appointment of an Auditor-in-Chief for the State. The article regulates appointment, removal, conditions of service, duties, pension, eligibility for future office and charging of salary and staff expenses on State revenues.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.211</strong>
+              <p>Audit reports before the State Legislature.</p>
+              <div class="draft-article-text">
+                <p>211. Reports of the Auditor-General of India or the Auditor-in-Chief of the State relating to State accounts shall be submitted to the Governor, who shall cause them to be laid before the Legislature of the State.</p>
+              </div>
             </div>
           </div>
         </details>
@@ -1387,20 +2163,147 @@
           <div class="draft-part-body">
             <p>This part lays down the constitutional relationship between the Union and the States. It covers legislative distribution, administrative directions, agreements with States, water disputes, inter-state trade and coordination mechanisms.</p>
             <div class="draft-article-card">
-              <strong>DC.216 - DC.232</strong>
-              <p>These articles contain the legislative scheme of the Draft Constitution. They distribute subjects through the Union List, State List and Concurrent List, create residuary power, regulate additional courts, emergency legislation, treaty implementation, State resolutions, repugnancy between laws, and limits on invalidation for want of recommendation.</p>
+              <strong>DC.216</strong>
+              <p>General extent of legislative power.</p>
+              <div class="draft-article-text">
+                <p>216. Subject to the Constitution, Parliament may make laws for the whole or any part of the territory of India, and the Legislature of a State may make laws for the whole or any part of the State.</p>
+                <p>No law made by Parliament is to be deemed invalid merely on the ground that it has extra-territorial operation.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.233 - DC.238</strong>
-              <p>This group covers administrative relations: States must comply with parliamentary law, the Union may issue directions, functions may be entrusted across levels of government, and special agreements may be entered into with States in Part III of the First Schedule.</p>
+              <strong>DC.217</strong>
+              <p>Distribution of legislative subjects.</p>
+              <div class="draft-article-text">
+                <p>217. Parliament has exclusive power over matters in the Union List, Parliament and the States share power over matters in the Concurrent List, and States in Part I of the First Schedule have exclusive power over matters in the State List, subject to the Constitution.</p>
+                <p>Parliament also has power to legislate on State List matters for areas not included in Part I or Part III of the First Schedule.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.218 - DC.222</strong>
+              <p>Legislation regarding courts and judicial structure.</p>
+              <div class="draft-article-text">
+                <p>218. Parliament has exclusive power to legislate regarding the constitution, organisation, jurisdiction and powers of the Supreme Court.</p>
+                <p>219. Parliament may establish additional courts for better administration of parliamentary laws or existing laws in Union List matters.</p>
+                <p>220 to 222 distribute legislative power over High Courts, including their constitution, organisation, jurisdiction, powers and procedure between Parliament and State Legislatures depending on the nature of the matter and the location of the Court.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.223</strong>
+              <p>Residuary legislative power.</p>
+              <div class="draft-article-text">
+                <p>223. Parliament has exclusive power to make laws with respect to matters not enumerated in the Concurrent List or State List, including the power to impose taxes not mentioned in either of those Lists.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.224 - DC.225</strong>
+              <p>Special limitations regarding certain States in Part III.</p>
+              <div class="draft-article-text">
+                <p>224. This article places specific limitations on Parliament&rsquo;s power in relation to posts and telegraphs, communications and corporations in certain States specified in Part III of the First Schedule.</p>
+                <p>225. Parliament&rsquo;s power to make laws for such States or groups of States is further made subject to the terms of agreements entered into with the Government of India and the limitations contained therein.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.226 - DC.228</strong>
+              <p>Parliamentary legislation in national emergency or national interest.</p>
+              <div class="draft-article-text">
+                <p>226. If the Council of States declares by the required special majority that it is necessary in the national interest, Parliament may legislate on matters in the State List specified in the resolution.</p>
+                <p>227. While a Proclamation of Emergency is in operation, Parliament may legislate for the whole or any part of India on State List matters.</p>
+                <p>228. State legislative power is not wholly extinguished, but parliamentary law prevails over inconsistent State law for so long as it remains in force.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.229</strong>
+              <p>Legislation by Parliament on request of States.</p>
+              <div class="draft-article-text">
+                <p>229. Where one or more States pass resolutions requesting Parliament to legislate on matters otherwise outside Parliament&rsquo;s power except under special provisions, Parliament may legislate accordingly for those States and for any other State that later adopts the law by resolution.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.230</strong>
+              <p>Implementation of treaties and conventions.</p>
+              <div class="draft-article-text">
+                <p>230. Notwithstanding the distribution of powers, Parliament may make laws for any State or part thereof for implementing any treaty, agreement or convention with any other country or countries.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.231</strong>
+              <p>Repugnancy between Union and State laws.</p>
+              <div class="draft-article-text">
+                <p>231. If a State law is repugnant to a law made by Parliament or to an existing law on a matter within Parliament&rsquo;s competence, the parliamentary or existing law prevails and the State law is void to the extent of repugnancy.</p>
+                <p>An exception is made where a State law on a Concurrent List matter has been reserved for the President and has received assent, though Parliament may later override it.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.232</strong>
+              <p>Effect of missing recommendations.</p>
+              <div class="draft-article-text">
+                <p>232. No Act of Parliament or of the Legislature of a State in Part I of the First Schedule is invalid merely because some recommendation required by the Constitution was not given, so long as assent to the Act was duly given by the competent constitutional authority.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.233</strong>
+              <p>Duty of States to comply with Union law.</p>
+              <div class="draft-article-text">
+                <p>233. The executive power of every State shall be so exercised as to ensure compliance with laws made by Parliament and existing laws applicable in that State, and the executive power of the Union extends to giving such directions to a State as may appear necessary for this purpose.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.234</strong>
+              <p>Union directions to protect executive power and communications.</p>
+              <div class="draft-article-text">
+                <p>234. The executive power of every State must be exercised so as not to impede or prejudice the executive power of the Union.</p>
+                <p>The Union may also give directions to a State regarding construction and maintenance of means of communication declared to be of national or military importance, subject to the article&rsquo;s saving clauses.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.235</strong>
+              <p>Entrustment of Union functions to States.</p>
+              <div class="draft-article-text">
+                <p>235. With the consent of a State Government, the President may entrust Union functions to that Government or its officers, conditionally or unconditionally.</p>
+                <p>The article also permits parliamentary laws to confer powers and impose duties on States or their authorities and provides for payment by the Union of agreed or arbitrated extra administrative costs.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.236 - DC.237</strong>
+              <p>Agreements with Part III States.</p>
+              <div class="draft-article-text">
+                <p>236. The Government of India may, by agreement with a State in Part III of the First Schedule, undertake legislative, executive or judicial functions vested in that State, subject to constitutional conditions.</p>
+                <p>237. A State in Part I of the First Schedule may, with previous sanction of the President, similarly undertake functions vested in a Part III State in matters within the State List or Concurrent List.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.238</strong>
+              <p>Full faith and credit.</p>
+              <div class="draft-article-text">
+                <p>238. Full faith and credit shall be given throughout the territory of India to public acts, records and judicial proceedings of the Union and of every State.</p>
+                <p>Final civil judgments and orders shall be capable of execution anywhere within the territory according to law, subject to the qualifications stated for certain Part III States.</p>
+              </div>
             </div>
             <div class="draft-article-card">
               <strong>DC.239 - DC.242</strong>
-              <p>These provisions create a constitutional process for inter-state water disputes through presidential reference to a commission, possible involvement of the Supreme Court on questions of law, and exclusion of ordinary court jurisdiction in matters that fall within this machinery.</p>
+              <p>Interference with water-supplies and water disputes machinery.</p>
+              <div class="draft-article-text">
+                <p>239. Where a State considers its interests in water from a natural source of supply prejudicially affected, it may complain to the President.</p>
+                <p>240. The President may appoint a Commission to investigate and report, with possible reference of substantial legal questions to the Supreme Court and with final presidential orders following the report.</p>
+                <p>241. Similar reference may be made by the President on behalf of States in Part II of the First Schedule.</p>
+                <p>242. Ordinary courts, including the Supreme Court, are barred from entertaining actions in respect of matters that could be taken under these water-dispute provisions.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.243 - DC.246</strong>
-              <p>The closing articles protect inter-state trade from preference and discrimination, permit certain tax and restriction powers, provide for an authority to enforce trade provisions, and allow the President to establish a coordination council for common inter-governmental concerns.</p>
+              <strong>DC.243 - DC.245</strong>
+              <p>Inter-State trade and commerce.</p>
+              <div class="draft-article-text">
+                <p>243. No preference is to be given to one State over another, nor discrimination made between States, by law or regulation relating to trade or commerce.</p>
+                <p>244. States may, however, impose non-discriminatory taxes on imported goods comparable to local goods and reasonable restrictions on trade in the public interest, subject to constitutional limitations.</p>
+                <p>245. Parliament is to appoint an authority for carrying out these trade provisions and may confer upon it the powers and duties it thinks necessary.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.246</strong>
+              <p>Coordination between States.</p>
+              <div class="draft-article-text">
+                <p>246. If it appears to the President that public interests would be served, he may by order establish a Council charged with inquiring into and advising upon disputes between States, discussing common subjects of interest, and making recommendations for better coordination of policy and action.</p>
+              </div>
             </div>
           </div>
         </details>
@@ -1416,20 +2319,151 @@
           <div class="draft-part-body">
             <p>This part organizes financial relations, public property, contracts and legal liabilities of the Union and the States. It is one of the most technical sections of the Draft Constitution.</p>
             <div class="draft-article-card">
-              <strong>DC.247 - DC.261</strong>
-              <p>These provisions deal with distribution of revenues between the Union and the States. They define revenue terms, assign specified duties and taxes, regulate sharing of income tax, surcharges, grants-in-aid, professional taxes, agreements with Part III States, and establish the Finance Commission to recommend financial distribution principles.</p>
+              <strong>DC.247</strong>
+              <p>Definitions for Part X.</p>
+              <div class="draft-article-text">
+                <p>247. For this Part, the Constitution defines key expressions including &ldquo;Finance Commission&rdquo; and clarifies the meaning of &ldquo;State&rdquo; and references to States in Part II of the First Schedule.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.262 - DC.267</strong>
-              <p>This middle group contains miscellaneous financial provisions on grants for public purposes, public accounts, tax immunities, electricity taxation, Union taxation of States in certain situations, and inter-governmental contribution for expenses and pensions.</p>
+              <strong>DC.248</strong>
+              <p>Meaning of revenues of India and of a State.</p>
+              <div class="draft-article-text">
+                <p>248. Subject to the succeeding provisions on assignment of the whole or part of certain taxes and duties, &ldquo;revenues of India&rdquo; include all revenues and public moneys raised or received by the Government of India, and &ldquo;revenues of the State&rdquo; similarly include those raised or received by the Government of a State.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.249 - DC.250</strong>
+              <p>Assignment of specified duties and taxes to States.</p>
+              <div class="draft-article-text">
+                <p>249. Certain stamp duties and duties of excise on medicinal and toilet preparations are levied by the Government of India but collected either by the Union or the States as specified, and their proceeds are assigned to the States where leviable.</p>
+                <p>250. Succession duties, estate duty on non-agricultural property, terminal taxes on goods or passengers carried by rail or air, and taxes on railway fares and freights are levied and collected by the Union but assigned to the States according to principles laid down by Parliament.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.251</strong>
+              <p>Distribution of income tax.</p>
+              <div class="draft-article-text">
+                <p>251. Taxes on income other than agricultural income are levied and collected by the Government of India and distributed between the Union and the States in the prescribed manner.</p>
+                <p>The article also defines relevant expressions, including taxes on income, Union emoluments and the meaning of &ldquo;prescribed&rdquo; in this context.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.252</strong>
+              <p>Union surcharge.</p>
+              <div class="draft-article-text">
+                <p>252. Parliament may increase certain duties and taxes referred to in the preceding provisions by a surcharge for Union purposes, and the whole proceeds of such surcharge form part of the revenues of India.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.253 - DC.254</strong>
+              <p>Union excise duties and export duty on jute.</p>
+              <div class="draft-article-text">
+                <p>253. No duties on salt shall be levied by the Union. Other Union duties of excise, except specified medicinal and toilet duties, are levied and collected by the Union, but Parliament may provide for payments out of Union revenues to States in respect of their proceeds.</p>
+                <p>254. A prescribed proportion of export duty on jute or jute-products is to be assigned to the States in which jute is grown, according to principles laid down by Parliament.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.255</strong>
+              <p>Grants-in-aid of revenues of States.</p>
+              <div class="draft-article-text">
+                <p>255. Parliament may provide for sums charged on the revenues of India as grants-in-aid to States in need of assistance.</p>
+                <p>The article also contains special provisions for development schemes benefiting Scheduled Tribes and Scheduled Areas, and for grants to Assam relating to tribal areas.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.256 - DC.257</strong>
+              <p>Taxes on professions and continuation of certain pre-existing levies.</p>
+              <div class="draft-article-text">
+                <p>256. Subject to constitutional limits, State Legislatures may make laws imposing taxes on professions, trades, callings and employments, within the monetary ceiling and related provisions stated in the article.</p>
+                <p>257. Certain taxes, duties, cesses or fees lawfully levied before commencement may continue notwithstanding their mention in the Union List, until Parliament provides otherwise.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.258 - DC.259</strong>
+              <p>Financial agreements with Part III States and calculation of net proceeds.</p>
+              <div class="draft-article-text">
+                <p>258. The Union may enter into agreements with States in Part III of the First Schedule regarding levy, collection and distribution of taxes or duties otherwise than in accordance with the general scheme of this Chapter, subject to duration and modification provisions.</p>
+                <p>259. The article defines &ldquo;net proceeds&rdquo; and provides that the Auditor-General of India shall ascertain and certify such proceeds, with the certificate being final.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.260 - DC.261</strong>
+              <p>Finance Commission and presidential presentation to Parliament.</p>
+              <div class="draft-article-text">
+                <p>260. The President shall periodically constitute a Finance Commission consisting of a Chairman and four other members, and the article sets out its advisory functions regarding tax distribution, grants-in-aid, agreements with Part III States and other financial matters referred by the President.</p>
+                <p>261. The President shall cause every recommendation of the Finance Commission, together with an explanatory memorandum of the action taken, to be laid before Parliament.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.262</strong>
+              <p>Grants for public purposes.</p>
+              <div class="draft-article-text">
+                <p>262. The Union or a State may make any grants for any public purpose, notwithstanding that the purpose is not one with respect to which Parliament or the Legislature of the State, as the case may be, may make laws.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.263</strong>
+              <p>Public accounts and custody of moneys.</p>
+              <div class="draft-article-text">
+                <p>263. The President and the Governor of a State may make rules to secure that revenues and public moneys are paid into the public accounts of India or of the State, and may regulate withdrawal, custody and related matters.</p>
+                <p>Parliament and State Legislatures may also legislate on these matters, in which case any such rules operate subject to the law.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.264 - DC.267</strong>
+              <p>Tax immunities and inter-governmental financial adjustments.</p>
+              <div class="draft-article-text">
+                <p>264. Property of the Union is, subject to parliamentary law, exempt from taxes imposed by or by any authority within a State, with certain continuance of pre-existing liability until otherwise provided.</p>
+                <p>265. States are restricted from taxing certain consumption or sale of electricity involving the Government of India and Union railways, except as Parliament may otherwise provide.</p>
+                <p>266. States are generally exempt from Union taxation in respect of lands, buildings and income, subject to the article&rsquo;s exception for trade or business and certain personal property or income of Rulers of Part III States.</p>
+                <p>267. Provision is made for contribution between the Union and States where expenses of courts, commissions or pensions charged on one set of revenues serve or relate partly to another government.</p>
+              </div>
             </div>
             <div class="draft-article-card">
               <strong>DC.268 - DC.269</strong>
-              <p>These articles regulate borrowing powers of the Union and the States, including limits, guarantees, loans from the Union, and the requirement of Union consent where earlier loans or guarantees remain outstanding.</p>
+              <p>Borrowing powers of the Union and the States.</p>
+              <div class="draft-article-text">
+                <p>268. The executive power of the Union extends to borrowing on the security of the revenues of India and to giving guarantees within limits fixed by parliamentary law.</p>
+                <p>269. States in Part I of the First Schedule may similarly borrow within India and give guarantees within limits fixed by State law, while the Government of India may make loans to States or guarantee their loans; where prior Union loans or guarantees remain outstanding, the State may not raise further loans without Union consent.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.270 - DC.274</strong>
-              <p>The final chapter governs succession to property, assets and liabilities from the Dominion and Provinces, vesting of ownerless property, public contracts, and the legal capacity of the Union and States to sue and be sued.</p>
+              <strong>DC.270</strong>
+              <p>Succession to property, assets and liabilities.</p>
+              <div class="draft-article-text">
+                <p>270. From commencement, the Government of India and the Governments of corresponding States in Part I of the First Schedule succeed respectively to the property, assets and liabilities of the Dominion of India and the corresponding Provinces, subject to adjustments arising from partition and reorganisation.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.271</strong>
+              <p>Escheat, lapse and bona vacantia.</p>
+              <div class="draft-article-text">
+                <p>271. Property in the territory of India, other than in certain Part III States, that would have accrued to the Crown by escheat, lapse or as bona vacantia is to vest either in the State or in the Union depending on location and the purposes for which it was held or used.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.272</strong>
+              <p>Power to acquire, hold and dispose of property and make contracts.</p>
+              <div class="draft-article-text">
+                <p>272. The executive power of the Union and of States in Part I of the First Schedule extends, subject to competent legislation, to grant, sale, disposition or mortgage of property held for governmental purposes, to acquisition of property for such purposes, and to the making of contracts.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.273</strong>
+              <p>Form and execution of contracts.</p>
+              <div class="draft-article-text">
+                <p>273. Contracts made in exercise of the executive power of the Union or a State must be expressed to be made by the President or the Governor, as the case may be, and executed on their behalf by authorised persons in the prescribed manner.</p>
+                <p>The President and Governors, and persons executing such contracts on their behalf, are protected from personal liability in respect of them.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.274</strong>
+              <p>Suits by and against the Government.</p>
+              <div class="draft-article-text">
+                <p>274. The Government of India may sue or be sued by the name of the Government of India, and the Government of a State in Part I of the First Schedule may sue or be sued by the name of the State.</p>
+                <p>The article also provides for substitution of the Government of India or the corresponding State in pending legal proceedings involving the Dominion of India or a Province at the date of commencement.</p>
+              </div>
             </div>
           </div>
         </details>
@@ -1446,15 +2480,48 @@
             <p>This part sets out the emergency architecture of the Draft Constitution, covering national emergency, central directions to States, fiscal modification and suspension of certain rights.</p>
             <div class="draft-article-card">
               <strong>DC.275</strong>
-              <p>The President may proclaim an emergency where the security of India is threatened by war or domestic violence, even where the danger is imminent rather than fully realised.</p>
+              <p>Proclamation of Emergency.</p>
+              <div class="draft-article-text">
+                <p>275. If the President is satisfied that a grave emergency exists whereby the security of India is threatened, whether by war or domestic violence, he may by proclamation make a declaration to that effect.</p>
+                <p>The article also provides for laying the proclamation before Parliament, approval by both Houses, duration, revocation, and even anticipatory proclamation where imminent danger exists.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.276 - DC.278</strong>
-              <p>During emergency, the Union gains wider authority to direct States and legislate across subjects. A separate article permits the President, upon a State proclamation, to assume State functions and shift legislative power to Parliament where constitutional government in the State has broken down.</p>
+              <strong>DC.276</strong>
+              <p>Effect of Emergency on Union power.</p>
+              <div class="draft-article-text">
+                <p>276. While a Proclamation of Emergency is in operation, the executive power of the Union extends to giving directions to any State on the manner in which its executive power is to be exercised.</p>
+                <p>Parliament also gains power to legislate more broadly and to confer powers or impose duties upon Union authorities in relation to any matter.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.279 - DC.280</strong>
-              <p>The concluding provisions permit the emergency period to override certain fundamental rights restrictions on State action and allow the President to suspend the right to constitutional remedies under article 25 for a limited period.</p>
+              <strong>DC.277</strong>
+              <p>Modification of financial provisions during Emergency.</p>
+              <div class="draft-article-text">
+                <p>277. While a Proclamation of Emergency is in operation, the President may direct that specified financial distribution provisions shall have effect subject to exceptions or modifications for a stated period.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.278</strong>
+              <p>Failure of constitutional machinery in a State.</p>
+              <div class="draft-article-text">
+                <p>278. If, on receipt of a proclamation from a Governor under article 188, the President is satisfied that government in the State cannot be carried on in accordance with the Constitution, he may assume State functions, shift legislative power to Parliament, and make incidental and consequential provisions.</p>
+                <p>The article also regulates duration, parliamentary approval, and the effect of laws made under such proclamation.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.279</strong>
+              <p>Emergency and Fundamental Rights restrictions.</p>
+              <div class="draft-article-text">
+                <p>279. While a Proclamation of Emergency is in operation, nothing in article 13 of Part III restricts the power of the State to make laws or take executive action which it would otherwise be competent to make or take.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.280</strong>
+              <p>Suspension of the right to constitutional remedies.</p>
+              <div class="draft-article-text">
+                <p>280. While a Proclamation of Emergency is in operation, the President may by order declare that the rights guaranteed by article 25 shall remain suspended for the stated period, not extending beyond six months after the emergency ceases.</p>
+              </div>
             </div>
           </div>
         </details>
@@ -1470,12 +2537,61 @@
           <div class="draft-part-body">
             <p>This part governs public services under the Union and the States, including service safeguards, continuity rules and the framework of Public Service Commissions.</p>
             <div class="draft-article-card">
-              <strong>DC.281 - DC.283</strong>
-              <p>These opening provisions define the relevant State category for this part, allow legislatures to regulate recruitment and conditions of service, and protect civil servants against dismissal, removal or reduction in rank without a reasonable opportunity to show cause, subject to stated exceptions.</p>
+              <strong>DC.281</strong>
+              <p>Meaning of State in Part XII.</p>
+              <div class="draft-article-text">
+                <p>281. In this Part, unless the context otherwise requires, the expression &ldquo;State&rdquo; means a State for the time being specified in Part I of the First Schedule.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.284 - DC.288</strong>
-              <p>The later articles establish Union and State Public Service Commissions, allow joint arrangements, regulate appointment and tenure of members, define consultation duties on recruitment and disciplinary matters, permit additional functions by law, and charge commission expenses on public revenues.</p>
+              <strong>DC.282</strong>
+              <p>Regulation of services and service safeguards.</p>
+              <div class="draft-article-text">
+                <p>282. The appropriate Legislature may regulate recruitment and conditions of service of persons appointed to public services and posts under the Union or a State.</p>
+                <p>No such civil servant may be dismissed, removed or reduced in rank without a reasonable opportunity of showing cause, except in the cases specifically provided.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.283</strong>
+              <p>Continuance of existing service rules.</p>
+              <div class="draft-article-text">
+                <p>283. Until other provision is made under the Constitution, existing service rules applicable before commencement continue in force so far as they are consistent with the Constitution.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.284</strong>
+              <p>Public Service Commissions.</p>
+              <div class="draft-article-text">
+                <p>284. There shall be a Public Service Commission for the Union and for each State, subject to the article&rsquo;s provision for joint Commissions, shared arrangements and service by the Union Commission to State needs with approval.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.285</strong>
+              <p>Appointment and conditions of office of Commission members.</p>
+              <div class="draft-article-text">
+                <p>285. The Chairman and members of the Union and State Public Service Commissions are appointed by the President or the Governor, as the case may be, and the article regulates composition, tenure, conditions of service and post-office ineligibilities.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.286</strong>
+              <p>Functions of Public Service Commissions.</p>
+              <div class="draft-article-text">
+                <p>286. Public Service Commissions conduct examinations for appointments and are to be consulted on methods of recruitment, appointments, promotions, transfers, disciplinary matters and certain claims relating to service, subject to regulations and specified exceptions.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.287</strong>
+              <p>Additional functions.</p>
+              <div class="draft-article-text">
+                <p>287. Parliament or the Legislature of a State may provide for the exercise of additional functions by the relevant Public Service Commission, subject to the conditions stated in the article.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.288</strong>
+              <p>Expenses of Public Service Commissions.</p>
+              <div class="draft-article-text">
+                <p>288. The expenses of the Union or a State Public Service Commission, including salaries, allowances and pensions of members and staff, are charged on the revenues of India or of the State, as the case may be.</p>
+              </div>
             </div>
           </div>
         </details>
@@ -1492,11 +2608,25 @@
             <p>This part places elections under constitutional superintendence and authorises legislative frameworks for electoral machinery.</p>
             <div class="draft-article-card">
               <strong>DC.289</strong>
-              <p>The superintendence, direction and control of parliamentary and presidential elections is vested in a commission appointed by the President, while corresponding State electoral responsibilities are vested in a commission appointed by the Governor.</p>
+              <p>Election Commissions and superintendence of elections.</p>
+              <div class="draft-article-text">
+                <p>289. The superintendence, direction and control of all elections to Parliament and to the offices of President and Vice-President are vested in a Commission appointed by the President.</p>
+                <p>Corresponding powers over elections to the Legislature of a State and to the office of Governor or related panel are vested in a Commission appointed by the Governor of the State.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.290 - DC.291</strong>
-              <p>Parliament and State Legislatures are respectively empowered to make laws on electoral procedure, constitution of Houses and delimitation of constituencies.</p>
+              <strong>DC.290</strong>
+              <p>Parliamentary power over election law.</p>
+              <div class="draft-article-text">
+                <p>290. Subject to the Constitution, Parliament may from time to time make provision with respect to all matters relating to or connected with elections to either House of Parliament, including matters necessary for securing due constitution of the Houses and delimitation of constituencies.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.291</strong>
+              <p>State power over election law.</p>
+              <div class="draft-article-text">
+                <p>291. Subject to the Constitution, the Legislature of a State in Part I of the First Schedule may make provision regarding elections to the House or Houses of the State Legislature, including due constitution of those Houses and delimitation of constituencies.</p>
+              </div>
             </div>
           </div>
         </details>
@@ -1513,15 +2643,31 @@
             <p>This part contains the Draft Constitution&rsquo;s special provisions relating to minorities, including representation, services, educational grants and supervisory officers.</p>
             <div class="draft-article-card">
               <strong>DC.292 - DC.295</strong>
-              <p>These articles provide for reserved seats in the House of the People and State Legislative Assemblies for specified communities, along with nomination powers for Anglo-Indian representation where considered inadequate.</p>
+              <p>Reserved representation and nomination.</p>
+              <div class="draft-article-text">
+                <p>292. Seats are reserved in the House of the People for specified communities, including the Muslim community, Scheduled Castes, scheduled tribes and, in certain States, the Indian Christian community.</p>
+                <p>293. The President may nominate not more than two Anglo-Indians to the House of the People if that community is not adequately represented.</p>
+                <p>294. Seats are similarly reserved in State Legislative Assemblies for specified communities, with special provisions for autonomous districts of Assam.</p>
+                <p>295. The Governor may nominate members of the Anglo-Indian community to a State Legislative Assembly where representation is inadequate.</p>
+              </div>
             </div>
             <div class="draft-article-card">
               <strong>DC.296 - DC.298</strong>
-              <p>This group concerns minority claims in public services and temporary protections for the Anglo-Indian community in appointments and educational grants during the transition period.</p>
+              <p>Minority claims in services and special Anglo-Indian protections.</p>
+              <div class="draft-article-text">
+                <p>296. The claims of all minority communities are to be taken into consideration, consistently with efficiency of administration, in appointments to services and posts under the Union or certain States.</p>
+                <p>297. Temporary arrangements are made regarding appointments of the Anglo-Indian community to specified Union services.</p>
+                <p>298. Temporary educational grants for the Anglo-Indian community are preserved for a limited period, subject to gradual reduction and stated conditions.</p>
+              </div>
             </div>
             <div class="draft-article-card">
               <strong>DC.299 - DC.301</strong>
-              <p>The closing provisions establish Special Officers for minorities, provide for a commission on the administration of scheduled areas and welfare of scheduled tribes, and permit appointment of a commission to investigate socially and educationally backward classes.</p>
+              <p>Special Officers and Commissions.</p>
+              <div class="draft-article-text">
+                <p>299. There shall be a Special Officer for minorities for the Union and a corresponding Special Officer for each State in Part I of the First Schedule, charged with investigation and reporting on minority safeguards.</p>
+                <p>300. The President may appoint a Commission to report on administration of scheduled areas and welfare of scheduled tribes, and the Union may give directions to States for tribal welfare schemes.</p>
+                <p>301. The President may appoint a Commission to investigate the conditions of socially and educationally backward classes and recommend steps for their advancement.</p>
+              </div>
             </div>
           </div>
         </details>
@@ -1538,11 +2684,19 @@
             <p>This part contains immunities for constitutional heads and a general interpretation clause for the Draft Constitution.</p>
             <div class="draft-article-card">
               <strong>DC.302</strong>
-              <p>This article grants significant immunity to the President and Governors from court proceedings while in office, subject to limited constitutional exceptions and notice requirements in civil proceedings concerning personal acts.</p>
+              <p>Immunities of the President and Governors.</p>
+              <div class="draft-article-text">
+                <p>302. The President and Governors are not answerable to any court for exercise and performance of constitutional powers and duties, subject to the stated constitutional exceptions.</p>
+                <p>The article also bars criminal proceedings during tenure, prevents arrest or imprisonment, and imposes notice requirements for certain civil proceedings regarding personal acts.</p>
+              </div>
             </div>
             <div class="draft-article-card">
               <strong>DC.303</strong>
-              <p>The interpretation article defines numerous recurring expressions, including agricultural income, Anglo-Indian, corporation tax, existing law, pension, public notification, scheduled castes, scheduled tribes, and references to Ordinances and laws.</p>
+              <p>General definitions and interpretation.</p>
+              <div class="draft-article-text">
+                <p>303. This article defines numerous recurring constitutional expressions such as agricultural income, Anglo-Indian, corporation tax, existing law, pension, public notification, scheduled castes, scheduled tribes and many others.</p>
+                <p>It also applies the General Clauses Act, 1897 for interpretation and clarifies that references to Acts or laws include Ordinances where the context permits.</p>
+              </div>
             </div>
           </div>
         </details>
@@ -1559,11 +2713,19 @@
             <p>This part sets out the amendment procedure for the Constitution and protects certain representational provisions for a limited initial period.</p>
             <div class="draft-article-card">
               <strong>DC.304</strong>
-              <p>Amendment may be initiated by Bill and generally requires special majorities in both Houses of Parliament, with additional ratification by specified States where the amendment concerns key federal matters such as legislative lists, representation or Supreme Court powers. A special route is also provided for certain State-specific institutional changes.</p>
+              <p>Procedure for amendment of the Constitution.</p>
+              <div class="draft-article-text">
+                <p>304. An amendment of the Constitution may generally be initiated by introduction of a Bill in either House of Parliament and requires passage in each House by the required special majorities.</p>
+                <p>Where the amendment concerns specified federal subjects such as the legislative Lists, representation of States in Parliament or powers of the Supreme Court, further ratification by prescribed numbers of States is required.</p>
+                <p>The article also provides a special route for amendments concerning the method of choosing a Governor or the number of Houses in the Legislature of a State in Part I of the First Schedule.</p>
+              </div>
             </div>
             <div class="draft-article-card">
               <strong>DC.305</strong>
-              <p>This article temporarily protects reservation-related provisions for Muslims, Scheduled Castes, Scheduled Tribes and Indian Christians from amendment for ten years, after which they would lapse unless continued by constitutional amendment.</p>
+              <p>Temporary protection of certain reservation provisions.</p>
+              <div class="draft-article-text">
+                <p>305. Notwithstanding article 304, the constitutional provisions relating to reservation of seats for Muslims, Scheduled Castes, scheduled tribes or Indian Christians in Parliament or in certain State Legislatures shall not be amended during a period of ten years from commencement and shall thereafter cease unless continued by amendment of the Constitution.</p>
+              </div>
             </div>
           </div>
         </details>
@@ -1580,19 +2742,62 @@
             <p>This part addresses the transition from the old constitutional order to the new one, including continuation of laws, provisional institutions and adaptation powers.</p>
             <div class="draft-article-card">
               <strong>DC.306</strong>
-              <p>Parliament is given temporary power for five years to legislate on specified transitional economic and rehabilitation subjects as if they were in the Concurrent List.</p>
+              <p>Temporary parliamentary power over certain subjects.</p>
+              <div class="draft-article-text">
+                <p>306. For five years from commencement, Parliament may legislate as if certain specified subjects, including trade and commerce in key commodities, relief and rehabilitation of displaced persons, and connected offences and jurisdiction, were in the Concurrent List.</p>
+              </div>
             </div>
             <div class="draft-article-card">
               <strong>DC.307</strong>
-              <p>Existing law continues in force unless altered, repealed or amended by competent authority, and the President may adapt such law by order to bring it into conformity with the Constitution during the transition.</p>
+              <p>Continuance and adaptation of existing laws.</p>
+              <div class="draft-article-text">
+                <p>307. Subject to the Constitution, all law in force in the territory of India immediately before commencement continues in force until altered, repealed or amended by competent authority.</p>
+                <p>The President may by Order adapt and modify such law to bring it into accord with the Constitution, and the article also contains explanations on the meaning of law in force and related transitional matters.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.308 - DC.310</strong>
-              <p>These articles transition the Federal Court and High Courts into the new constitutional structure, preserve pending proceedings and continue judicial functioning subject to the Constitution.</p>
+              <strong>DC.308</strong>
+              <p>Transition of the Federal Court to the Supreme Court.</p>
+              <div class="draft-article-text">
+                <p>308. Judges of the Federal Court become judges of the Supreme Court unless they elect otherwise, pending proceedings stand transferred, and jurisdiction of His Majesty in Council in appeals from Indian courts ceases, with pending matters moving to the Supreme Court.</p>
+              </div>
             </div>
             <div class="draft-article-card">
-              <strong>DC.311 - DC.313</strong>
-              <p>The final transitional provisions allow the Constituent Assembly and existing provincial institutions to function temporarily as constitutional bodies, provide for provisional President and Governors, and authorise the President to remove early difficulties by order.</p>
+              <strong>DC.309</strong>
+              <p>Continuance of courts and authorities.</p>
+              <div class="draft-article-text">
+                <p>309. All courts of civil, criminal and revenue jurisdiction, and all judicial, executive and ministerial authorities and officers throughout the territory of India, continue to exercise their respective functions subject to the Constitution.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.310</strong>
+              <p>Transition of High Court judges.</p>
+              <div class="draft-article-text">
+                <p>310. Judges of High Courts in Provinces holding office immediately before commencement become judges of the corresponding High Courts in the States, unless they elect otherwise, and receive the service protections provided under the Constitution.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.311</strong>
+              <p>Temporary functioning of the Constituent Assembly as Parliament.</p>
+              <div class="draft-article-text">
+                <p>311. Until both Houses of Parliament are duly constituted and summoned, the Constituent Assembly of the Dominion of India is to exercise the powers and perform the duties conferred on Parliament, including making laws necessary for the constitution of Parliament and elections thereto.</p>
+                <p>The article also provides for the Speaker of the Constituent Assembly and for a provisional President of India.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.312</strong>
+              <p>Temporary functioning of existing provincial institutions.</p>
+              <div class="draft-article-text">
+                <p>312. Until the State Legislatures in Part I of the First Schedule are duly constituted, the corresponding provincial legislatures are to exercise constitutional powers and duties.</p>
+                <p>The article also provides for continuation of Speakers, Chairmen, provisional Governors and existing provincial ministers in transitional roles.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.313</strong>
+              <p>Power to remove difficulties.</p>
+              <div class="draft-article-text">
+                <p>313. The President may by Order make adaptations, variations, additions or repeals in the Constitution for the purpose of removing difficulties in the transition from the Government of India Act framework, subject to the limitation that no such order may be made after the first meeting of duly constituted Parliament.</p>
+              </div>
             </div>
           </div>
         </details>
@@ -1609,11 +2814,17 @@
             <p>This final part closes the Draft Constitution by providing for commencement and repeal of the earlier imperial framework.</p>
             <div class="draft-article-card">
               <strong>DC.314</strong>
-              <p>This article provides for the date on which the Constitution is to come into force.</p>
+              <p>Commencement.</p>
+              <div class="draft-article-text">
+                <p>314. This Constitution shall come into force on the date specified in the text.</p>
+              </div>
             </div>
             <div class="draft-article-card">
               <strong>DC.315</strong>
-              <p>The concluding article repeals the Indian Independence Act, 1947, the Government of India Act, 1935, and related amending and supplemental enactments, after which the Schedules follow.</p>
+              <p>Repeals.</p>
+              <div class="draft-article-text">
+                <p>315. The Indian Independence Act, 1947, the Government of India Act, 1935, including the India (Central Government and Legislature) Act, 1946, and all other enactments amending or supplementing the Government of India Act, 1935, shall cease to have effect.</p>
+              </div>
             </div>
           </div>
         </details>
