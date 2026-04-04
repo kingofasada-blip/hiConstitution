@@ -3,16 +3,250 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>hiConstitution — Learn the Indian Constitution</title>
+  <title>hiConstitution - Learn the Indian Constitution</title>
   <meta name="description" content="Explore, understand, and master the Constitution of India through articles, quizzes, timelines, and study tools." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    :root {
+      --page-bg: #0F0F0F;
+      --surface-dark: #1A1A1A;
+      --surface-soft: #252525;
+      --text-heading: #FFFFFF;
+      --text-body: #A1A1A1;
+      --accent-orange: #F37324;
+      --border-dark: rgba(255, 255, 255, 0.08);
+      --shadow-dark: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    html {
+      background: var(--page-bg);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top right, rgba(243, 115, 36, 0.08), transparent 22%),
+        linear-gradient(180deg, #111111 0%, var(--page-bg) 100%);
+      color: var(--text-body);
+      font-family: "Inter", sans-serif;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: "Lora", serif;
+      color: var(--text-heading);
+    }
+
+    h4, h5, h6,
+    .navbar-logo,
+    .logo-text,
+    .art21-title,
+    .aotd-title,
+    .feature-card h3,
+    .timeline-year {
+      color: var(--text-heading);
+    }
+
+    p,
+    .nav-link,
+    .hero-sub,
+    .section-header p,
+    .feature-card p,
+    .timeline-title,
+    .timeline-details-content p,
+    .aotd-snippet,
+    .aotd-date,
+    footer p,
+    footer a {
+      color: var(--text-body);
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .hero-headline span,
+    .section-label,
+    .feature-link,
+    .logo-text span,
+    .art21-label,
+    .text-saffron {
+      color: var(--accent-orange);
+    }
+
+    .navbar,
+    .navbar.scrolled {
+      background: rgba(15, 15, 15, 0.92);
+      border-bottom: 1px solid var(--border-dark);
+      box-shadow: none;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .logo-circle {
+      background: var(--surface-soft);
+      color: var(--accent-orange);
+      border: 1px solid rgba(243, 115, 36, 0.25);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text-heading);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hamburger span {
+      background: var(--text-heading);
+    }
+
+    .mobile-nav {
+      background: var(--surface-dark);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 15% 20%, rgba(243, 115, 36, 0.12), transparent 20%),
+        linear-gradient(135deg, #141414 0%, #0F0F0F 60%, #121212 100%);
+    }
+
+    .hero::before {
+      background: radial-gradient(circle, rgba(243, 115, 36, 0.12) 0%, transparent 70%);
+    }
+
+    .hero::after {
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
+    }
+
+    .hero-badge {
+      background: rgba(243, 115, 36, 0.12);
+      border: 1px solid rgba(243, 115, 36, 0.28);
+      color: #ffb485;
+    }
+
+    .hero-sub {
+      color: var(--text-body);
+    }
+
+    .btn {
+      border-radius: 8px;
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: var(--accent-orange);
+      color: #FFFFFF;
+      border-color: var(--accent-orange);
+      box-shadow: 0 10px 24px rgba(243, 115, 36, 0.22);
+    }
+
+    .btn-primary:hover {
+      background: #d9651f;
+      border-color: #d9651f;
+      color: #FFFFFF;
+    }
+
+    .btn-outline,
+    .btn-outline-navy {
+      background: var(--surface-soft);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-outline:hover,
+    .btn-outline-navy:hover {
+      background: #303030;
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .art21-card,
+    .timeline-details-panel,
+    .aotd-card,
+    .feature-card,
+    .card {
+      background: linear-gradient(180deg, var(--surface-soft), var(--surface-dark));
+      border: 1px solid var(--border-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .art21-title,
+    .timeline-details-content h3,
+    .section-header h2,
+    .feature-card h3,
+    .aotd-title {
+      color: var(--text-heading);
+    }
+
+    .art21-quote {
+      color: #d0d0d0;
+      border-left-color: var(--accent-orange);
+    }
+
+    .art21-tag,
+    .badge-saffron,
+    .badge-navy {
+      background: rgba(243, 115, 36, 0.12);
+      color: #ffb485;
+    }
+
+    .bg-light,
+    .timeline-section,
+    .aotd-section {
+      background: transparent;
+    }
+
+    .timeline-track::before {
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12), transparent);
+    }
+
+    .timeline-dot {
+      background: var(--surface-soft);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: var(--text-body);
+    }
+
+    .timeline-item:hover .timeline-dot {
+      background: #333333;
+      border-color: #444444;
+      color: #FFFFFF;
+    }
+
+    .timeline-item.active .timeline-dot {
+      background: var(--accent-orange);
+      border-color: var(--accent-orange);
+      color: #FFFFFF;
+    }
+
+    .timeline-year {
+      color: var(--text-heading);
+    }
+
+    .timeline-details-year,
+    .aotd-number,
+    .art21-number {
+      color: rgba(255, 255, 255, 0.08);
+    }
+
+    footer {
+      background: var(--surface-dark) !important;
+      color: var(--text-body) !important;
+    }
+
+    footer .navbar-logo span,
+    footer h4 {
+      color: #FFFFFF !important;
+    }
+
+    footer .logo-circle {
+      background: #222222;
+    }
+  </style>
 </head>
 <body>
 
-<!-- ── Navbar ── -->
 <nav class="navbar" aria-label="Main navigation">
   <div class="navbar-inner">
     <a href="index.html" class="navbar-logo">
@@ -35,7 +269,6 @@
   </div>
 </nav>
 
-<!-- Mobile nav -->
 <nav class="mobile-nav" aria-label="Mobile navigation">
   <a href="index.html" class="nav-link">Home</a>
   <a href="read.html" class="nav-link">Read</a>
@@ -44,7 +277,6 @@
   <a href="pulse.html" class="nav-link">Pulse</a>
 </nav>
 
-<!-- ── Hero ── -->
 <section class="hero" aria-label="Hero">
   <div class="container">
     <div class="hero-inner">
@@ -54,7 +286,7 @@
           Understand the <span>Constitution</span> of India
         </h1>
         <p class="hero-sub">
-          Every article, every right, every duty — explained simply and clearly.
+          Every article, every right, every duty - explained simply and clearly.
           Study smarter, quiz yourself, and track what's happening in constitutional law today.
         </p>
         <div class="hero-ctas">
@@ -70,14 +302,13 @@
           <blockquote class="art21-quote">
             "No person shall be deprived of his life or personal liberty except according to procedure established by law."
           </blockquote>
-          <span class="art21-tag">⚖️ Fundamental Rights &nbsp;·&nbsp; Part III</span>
+          <span class="art21-tag">Fundamental Rights &nbsp;&middot;&nbsp; Part III</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── Features ── -->
 <section class="section-pad bg-light">
   <div class="container">
     <div class="section-header">
@@ -90,7 +321,7 @@
         <div class="feature-icon">📖</div>
         <h3>Read the Constitution</h3>
         <p>Browse all 448 articles with simplified English explanations and real legal language side by side.</p>
-        <span class="feature-link">Browse Articles →</span>
+        <span class="feature-link">Browse Articles &rarr;</span>
       </a>
       <div class="feature-card feature-card-static">
         <div class="feature-icon">🏛️</div>
@@ -110,12 +341,12 @@
         <p>This section will be connected in the next step. Right now only the layout is being prepared.</p>
         <span class="feature-link">Coming Next</span>
       </div>
-      <div class="feature-card feature-card-static">
+      <a href="draft.html" class="feature-card">
         <div class="feature-icon">📚</div>
         <h3>Draft Constitution of India</h3>
-        <p>This section will be connected in the next step. Right now only the layout is being prepared.</p>
-        <span class="feature-link">Coming Next</span>
-      </div>
+        <p>Explore the 1948 draft through structured notes on the Drafting Committee and a document-style outline inspired by the original study prarup.</p>
+        <span class="feature-link">Open Draft &rarr;</span>
+      </a>
       <div class="feature-card feature-card-static">
         <div class="feature-icon">⭐</div>
         <h3>Important Facts</h3>
@@ -126,7 +357,6 @@
   </div>
 </section>
 
-<!-- ── Timeline Teaser ── -->
 <section class="timeline-section section-pad" aria-label="Constitutional timeline">
   <div class="container">
     <div class="section-header">
@@ -149,12 +379,11 @@
       </div>
     </div>
     <div style="text-align:center;margin-top:36px;">
-      <a href="study.html" class="btn btn-outline-navy">See Full Timeline →</a>
+      <a href="study.html" class="btn btn-outline-navy">See Full Timeline &rarr;</a>
     </div>
   </div>
 </section>
 
-<!-- ── Article of the Day ── -->
 <section class="aotd-section section-pad" aria-label="Article of the Day">
   <div class="container">
     <div class="aotd-card">
@@ -164,18 +393,17 @@
           <span class="badge badge-navy">Part III</span>
           <span class="aotd-date" id="aotdDate"></span>
         </div>
-        <h2 class="aotd-title">Article 32 — Right to Constitutional Remedies</h2>
+        <h2 class="aotd-title">Article 32 - Right to Constitutional Remedies</h2>
         <p class="aotd-snippet">
           Called the "heart and soul of the Constitution" by Dr. B.R. Ambedkar, Article 32 guarantees every citizen the right to move the Supreme Court for enforcement of Fundamental Rights. It empowers the Court to issue writs including habeas corpus, mandamus, prohibition, certiorari, and quo warranto.
         </p>
-        <a href="library-article.html" class="btn btn-primary">Read Full Article →</a>
+        <a href="library-article.html" class="btn btn-primary">Read Full Article &rarr;</a>
       </div>
       <div class="aotd-number" aria-hidden="true">32</div>
     </div>
   </div>
 </section>
 
-<!-- ── Footer ── -->
 <footer style="background:var(--navy);color:rgba(255,255,255,0.7);padding:48px 0 32px;">
   <div class="container">
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:40px;">
@@ -198,15 +426,15 @@
       <div>
         <h4 style="color:#fff;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">Quick Articles</h4>
         <ul style="display:flex;flex-direction:column;gap:10px;list-style:none;">
-          <li><a href="library-article.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Article 14 — Right to Equality</a></li>
-          <li><a href="library-article.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Article 19 — Freedom of Speech</a></li>
-          <li><a href="library-article.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Article 21 — Right to Life</a></li>
-          <li><a href="library-article.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Article 32 — Constitutional Remedies</a></li>
+          <li><a href="library-article.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Article 14 - Right to Equality</a></li>
+          <li><a href="library-article.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Article 19 - Freedom of Speech</a></li>
+          <li><a href="library-article.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Article 21 - Right to Life</a></li>
+          <li><a href="library-article.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Article 32 - Constitutional Remedies</a></li>
         </ul>
       </div>
     </div>
     <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-      <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);">© 2025 hiConstitution.com — For educational purposes only.</p>
+      <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);">&copy; 2025 hiConstitution.com - For educational purposes only.</p>
       <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);">Content based on the Constitution of India as amended.</p>
     </div>
   </div>
@@ -216,3 +444,4 @@
 <script src="js/timeline.js"></script>
 </body>
 </html>
+

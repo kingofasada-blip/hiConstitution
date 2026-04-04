@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Draft Constitution of India - hiConstitution</title>
+  <meta name="description" content="Explore the 1948 Draft Constitution of India through a structured outline, drafting committee notes, and an academic document-style layout." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .draft-page {
+      padding-top: var(--navbar-h);
+      min-height: 100vh;
+      padding-bottom: 88px;
+      background:
+        radial-gradient(circle at top right, rgba(243, 115, 36, 0.08), transparent 20%),
+        linear-gradient(180deg, #101010 0%, #0f0f0f 100%);
+    }
+
+    .draft-hero {
+      padding: 56px 0 28px;
+    }
+
+    .draft-shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .draft-title-card {
+      background: linear-gradient(180deg, #1f1f1f, #171717);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 28px;
+      padding: 42px 36px;
+      text-align: center;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+      margin-bottom: 32px;
+    }
+
+    .draft-icon {
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 20px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(243, 115, 36, 0.28), rgba(243, 115, 36, 0.14));
+      border: 1px solid rgba(243, 115, 36, 0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .draft-title-card h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .draft-title-card p {
+      max-width: 680px;
+      margin: 0 auto;
+      color: var(--body-text);
+      font-size: 1.02rem;
+    }
+
+    .draft-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: center;
+      margin: 26px 0 42px;
+      color: var(--saffron);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+
+    .draft-flow-arrow {
+      font-size: 1.4rem;
+      color: rgba(243, 115, 36, 0.8);
+    }
+
+    .draft-notes,
+    .draft-text-map {
+      background: linear-gradient(180deg, #1b1b1b, #151515);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 24px;
+      padding: 30px;
+      margin-bottom: 28px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+    }
+
+    .draft-section-head {
+      margin-bottom: 24px;
+    }
+
+    .draft-section-head span {
+      display: inline-block;
+      color: var(--saffron);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .draft-section-head h2 {
+      margin-bottom: 10px;
+      color: #fff;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+    }
+
+    .draft-section-head p {
+      color: var(--body-text);
+      max-width: 720px;
+    }
+
+    .draft-note-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .draft-note-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .draft-note-card h3 {
+      color: #fff;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .draft-note-card p {
+      color: var(--body-text);
+      font-size: 0.95rem;
+    }
+
+    .draft-outline {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .draft-preamble-card {
+      background: linear-gradient(135deg, #f6ecdf 0%, #ecd9c3 100%);
+      color: #2c241f;
+      border-radius: 18px;
+      padding: 18px 20px;
+      border: 1px solid rgba(243, 115, 36, 0.18);
+    }
+
+    .draft-preamble-card strong {
+      display: block;
+      font-family: "Lora", serif;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+      color: #2c241f;
+    }
+
+    .draft-part-block {
+      padding: 8px 0 2px;
+    }
+
+    .draft-part-label {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
+      padding: 10px 16px 8px;
+      background: linear-gradient(135deg, #f0dfcd 0%, #e8d1bc 100%);
+      color: #2e251f;
+      border: 2px solid rgba(91, 72, 59, 0.35);
+      border-radius: 12px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+      margin-bottom: 14px;
+    }
+
+    .draft-part-label strong {
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+    }
+
+    .draft-part-label span {
+      font-size: 0.78rem;
+      opacity: 0.82;
+      margin-top: 3px;
+    }
+
+    .draft-article-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-left: 8px;
+    }
+
+    .draft-article-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #f8eee3 0%, #efdecf 100%);
+      border: 1px solid rgba(151, 122, 98, 0.18);
+      border-radius: 14px;
+      color: #312821;
+    }
+
+    .draft-article-row strong {
+      color: #2d241e;
+      font-size: 0.98rem;
+    }
+
+    .draft-article-row span {
+      color: #6f5d50;
+      font-size: 0.9rem;
+    }
+
+    .draft-article-dot {
+      color: #c46c2d;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .draft-more-note {
+      margin-top: 22px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: rgba(243, 115, 36, 0.08);
+      border: 1px solid rgba(243, 115, 36, 0.14);
+      color: #ffc7a2;
+      font-size: 0.94rem;
+    }
+
+    .draft-reader {
+      margin-top: 28px;
+      background: linear-gradient(180deg, #181818, #121212);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+    }
+
+    .draft-reader-tools {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .draft-reader-tools p {
+      max-width: 620px;
+      margin: 0;
+    }
+
+    .draft-source-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: rgba(243, 115, 36, 0.12);
+      border: 1px solid rgba(243, 115, 36, 0.18);
+      color: #ffc7a2;
+      font-weight: 600;
+    }
+
+    .draft-source-link:hover {
+      color: #fff;
+      border-color: rgba(243, 115, 36, 0.3);
+    }
+
+    .draft-reader-preamble {
+      background: linear-gradient(135deg, #f8efe6 0%, #eedfce 100%);
+      border-radius: 20px;
+      padding: 26px 24px;
+      border: 1px solid rgba(155, 120, 92, 0.18);
+      color: #2c241f;
+      margin-bottom: 18px;
+    }
+
+    .draft-reader-preamble h3 {
+      color: #2c241f;
+      margin-bottom: 14px;
+      font-size: 1.3rem;
+    }
+
+    .draft-reader-preamble p {
+      color: #4b3f36;
+      line-height: 1.85;
+      margin-bottom: 14px;
+    }
+
+    .draft-part-details {
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.02);
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .draft-part-details[open] {
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .draft-part-summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .draft-part-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .draft-part-summary strong {
+      display: block;
+      color: #fff;
+      font-family: "Lora", serif;
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+    }
+
+    .draft-part-summary span {
+      color: var(--body-text);
+      font-size: 0.92rem;
+    }
+
+    .draft-part-count {
+      color: #ffc7a2;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .draft-part-body {
+      padding: 0 20px 20px;
+    }
+
+    .draft-part-body p {
+      margin-bottom: 12px;
+    }
+
+    .draft-part-body h4 {
+      color: #fff;
+      font-size: 1rem;
+      margin: 18px 0 10px;
+    }
+
+    .draft-article-card {
+      background: linear-gradient(135deg, #f8eee3 0%, #efdece 100%);
+      color: #2d241e;
+      border-radius: 14px;
+      padding: 16px 18px;
+      border: 1px solid rgba(151, 122, 98, 0.16);
+      margin-bottom: 12px;
+    }
+
+    .draft-article-card strong {
+      display: block;
+      color: #2d241e;
+      margin-bottom: 6px;
+      font-size: 0.98rem;
+    }
+
+    .draft-article-card p {
+      color: #5f5248;
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .draft-article-text {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .draft-article-text p {
+      color: #4f433a;
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.72;
+    }
+
+    .draft-article-text ul {
+      margin: 0;
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: #4f433a;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .draft-article-text li {
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .draft-title-card,
+      .draft-notes,
+      .draft-text-map,
+      .draft-reader {
+        padding: 24px 20px;
+      }
+
+      .draft-note-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .draft-article-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-circle">हि</div>
+      <span class="logo-text">hi<span>Constitution</span></span>
+    </a>
+    <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read.html" class="nav-link">Read</a></li>
+      <li><a href="study.html" class="nav-link active">Study</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+      <li><a href="pulse.html" class="nav-link">Pulse</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="quiz.html" class="btn btn-primary btn-sm">Take Quiz</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<nav class="mobile-nav" aria-label="Mobile navigation">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="read.html" class="nav-link">Read</a>
+  <a href="study.html" class="nav-link active">Study</a>
+  <a href="quiz.html" class="nav-link">Quiz</a>
+  <a href="pulse.html" class="nav-link">Pulse</a>
+</nav>
+
+<main class="draft-page">
+  <section class="draft-hero">
+    <div class="draft-shell">
+      <div class="draft-title-card">
+        <div class="draft-icon">DC</div>
+        <h1>Draft Constitution of India</h1>
+        <p>
+          A structured reading space for the 1948 Draft Constitution, designed around the drafting process, the role of the Drafting Committee, and a document-style outline inspired by the original study prarup.
+        </p>
+      </div>
+
+      <div class="draft-flow" aria-hidden="true">
+        <div>Draft Constitution of India</div>
+        <div class="draft-flow-arrow">↓</div>
+        <div>Short Notes on Drafting Committee and Its Work</div>
+        <div class="draft-flow-arrow">↓</div>
+        <div>Text of Draft Constitution of India</div>
+      </div>
+
+      <section class="draft-notes" aria-labelledby="draftingCommitteeTitle">
+        <div class="draft-section-head">
+          <span>Short Note</span>
+          <h2 id="draftingCommitteeTitle">Drafting Committee and Its Work</h2>
+          <p>
+            The 1948 Draft was the working backbone of India's constitution-making process. These notes summarize how the document was prepared, debated, revised, and ultimately transformed into the Constitution of India.
+          </p>
+        </div>
+
+        <div class="draft-note-grid">
+          <article class="draft-note-card">
+            <h3>1. From Early Ideas to a Working Draft</h3>
+            <p>
+              The constitutional groundwork was first organized by Sir B.N. Rau, the Constitutional Adviser to the Constituent Assembly. His preliminary text consolidated recommendations from multiple committees before the Drafting Committee took it up for rigorous revision.
+            </p>
+          </article>
+
+          <article class="draft-note-card">
+            <h3>2. Ambedkar's Committee and the 1948 Draft</h3>
+            <p>
+              Between October 1947 and February 1948, the Drafting Committee chaired by Dr. B.R. Ambedkar examined, modified, and expanded Rau's framework. On February 21, 1948, the first Draft Constitution of India was formally presented to the President of the Constituent Assembly.
+            </p>
+          </article>
+
+          <article class="draft-note-card">
+            <h3>3. Structure and Transparency</h3>
+            <p>
+              The 1948 Draft contained 315 Articles, 18 Functional Parts, and 8 Schedules. It addressed citizenship, rights, federalism, executive powers, and other institutional questions. The Committee also added explanatory notes and footnotes where major changes or possible controversies were involved.
+            </p>
+          </article>
+
+          <article class="draft-note-card">
+            <h3>4. Public Scrutiny and Democratic Feedback</h3>
+            <p>
+              After publication in February 1948, the Draft was circulated widely to provincial governments, ministries, members of the judiciary, and the public. Through March to October 1948, the Committee reviewed extensive feedback and refined the text accordingly.
+            </p>
+          </article>
+
+          <article class="draft-note-card">
+            <h3>5. Formal Introduction and Debate</h3>
+            <p>
+              Dr. B.R. Ambedkar formally introduced the Draft in the Constituent Assembly on November 4, 1948. His speech defended the parliamentary form of government and addressed criticism, including concerns that the Draft had not given enough centrality to village-based administration.
+            </p>
+          </article>
+
+          <article class="draft-note-card">
+            <h3>6. Legacy and Adoption</h3>
+            <p>
+              The Assembly then entered a long article-by-article debate stretching across 1948 and 1949. Out of 165 sittings of the Constituent Assembly, 114 were devoted to the Draft. This process culminated in adoption on November 26, 1949, and commencement on January 26, 1950.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="draft-text-map" aria-labelledby="draftTextMapTitle">
+        <div class="draft-section-head">
+          <span>Text Outline</span>
+          <h2 id="draftTextMapTitle">Text of Draft Constitution of India</h2>
+          <p>
+            This first working layout follows the prarup structure: a preamble at the top, then part-wise blocks with draft article rows below each heading. The outline can now be expanded in the next step with full digitized content.
+          </p>
+        </div>
+
+        <div class="draft-outline">
+          <div class="draft-preamble-card">
+            <strong>Preamble</strong>
+            <div>Opening constitutional statement and philosophical foundation of the Draft.</div>
+          </div>
+
+          <section class="draft-part-block" aria-labelledby="partOneTitle">
+            <div class="draft-part-label">
+              <strong>PART I</strong>
+              <span>Title</span>
+            </div>
+            <div class="draft-article-list">
+              <div class="draft-article-row">
+                <div>
+                  <strong id="partOneTitle">DC Art. 1</strong>
+                  <span>The Union and its constitutional identity in the opening structure of the Draft.</span>
+                </div>
+                <div class="draft-article-dot">•</div>
+              </div>
+              <div class="draft-article-row">
+                <div>
+                  <strong>DC Art. 2</strong>
+                  <span>Foundational territorial and structural clause in the early draft arrangement.</span>
+                </div>
+                <div class="draft-article-dot">•</div>
+              </div>
+              <div class="draft-article-row">
+                <div>
+                  <strong>DC Art. 3</strong>
+                  <span>Draft article placeholder in the current mapped prarup.</span>
+                </div>
+                <div class="draft-article-dot">•</div>
+              </div>
+              <div class="draft-article-row">
+                <div>
+                  <strong>DC Art. 4</strong>
+                  <span>Draft article placeholder in the current mapped prarup.</span>
+                </div>
+                <div class="draft-article-dot">•</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="draft-part-block" aria-labelledby="partTwoTitle">
+            <div class="draft-part-label">
+              <strong>PART II</strong>
+              <span>Title</span>
+            </div>
+            <div class="draft-article-list">
+              <div class="draft-article-row">
+                <div>
+                  <strong id="partTwoTitle">DC Art. 5</strong>
+                  <span>Initial article entry for the second part of the draft outline.</span>
+                </div>
+                <div class="draft-article-dot">•</div>
+              </div>
+              <div class="draft-article-row">
+                <div>
+                  <strong>DC Art. 6</strong>
+                  <span>Second article entry for the current sample structure of Part II.</span>
+                </div>
+                <div class="draft-article-dot">•</div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="draft-more-note">
+          This page now has the full academic structure in place. The next build step can connect all remaining Parts, all draft articles, and article-level detail pages using a dedicated data file.
+        </div>
+      </section>
+
+      <section class="draft-reader" aria-labelledby="draftReaderTitle">
+        <div class="draft-section-head">
+          <span>Primary Text</span>
+          <h2 id="draftReaderTitle">Text of Draft Constitution of India</h2>
+        </div>
+
+        <div class="draft-reader-tools">
+          <p>
+            Tumhare diye hue raw text ko ab yahan structured reading format me arrange kiya gaya hai. Preamble ko full readable form me rakha hai, aur Parts ko collapsible academic blocks me organize kiya gaya hai.
+          </p>
+          <a href="data/draft-constitution-source.txt" class="draft-source-link">Open Working Source</a>
+        </div>
+
+        <div class="draft-reader-preamble">
+          <h3>PREAMBLE</h3>
+          <p>WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN DEMOCRATIC REPUBLIC and to secure to all its citizens:</p>
+          <p>JUSTICE, social, economic and political;</p>
+          <p>LIBERTY of thought, expression, belief, faith and worship;</p>
+          <p>EQUALITY of status and of opportunity;</p>
+          <p>and to promote among them all</p>
+          <p>FRATERNITY assuring the dignity of the individual and the unity of the Nation;</p>
+          <p>IN OUR CONSTITUENT ASSEMBLY this_____ of (day of May, 1948 A.D.), do HEREBY ADOPT, ENACT AND GIVE TO OURSELVES THIS CONSTITUTION.</p>
+        </div>
+
+        <details class="draft-part-details" open>
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART I</strong>
+              <span>The Union and Its Territory and Jurisdiction</span>
+            </div>
+            <div class="draft-part-count">DC.1 - DC.4</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This opening part defines India as a Union of States, identifies the territorial composition of India, and lays down Parliament's authority over admission, establishment, alteration, and reorganization of States.</p>
+            <div class="draft-article-card">
+              <strong>DC.1</strong>
+              <p>The Union and its territorial composition.</p>
+              <div class="draft-article-text">
+                <p>1. (1) India shall be a Union of States.</p>
+                <p>(2) The States shall mean the States for the time being specified in Parts I, II and III of the First Schedule.</p>
+                <p>(3) The territory of India shall comprise-</p>
+                <ul>
+                  <li>(a) The territories of the States;</li>
+                  <li>(b) The territories for the time being specified in Part IV of the First Schedule; and</li>
+                  <li>(c) Such other territories as may be acquired.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.2</strong>
+              <p>Admission or establishment of new States.</p>
+              <div class="draft-article-text">
+                <p>2. Parliament may, from time to time, by law admit into the Union, or establish, new States on such terms and conditions as it thinks fit.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.3</strong>
+              <p>Formation and alteration of States.</p>
+              <div class="draft-article-text">
+                <p>3. Parliament may by law-</p>
+                <ul>
+                  <li>(a) Form a new State by separation of territory from a State or by uniting two or more States or parts of States;</li>
+                  <li>(b) Increase the area of any State;</li>
+                  <li>(c) Diminish the area of any State;</li>
+                  <li>(d) Alter the boundaries of any State;</li>
+                  <li>(e) Alter the name of any State.</li>
+                </ul>
+                <p>Provided that no Bill for the purpose shall be introduced in either House of Parliament except by the Government of India and unless the required representation, resolution, views, or consent mentioned in the Draft have been obtained.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.4</strong>
+              <p>Supplementary and consequential provisions.</p>
+              <div class="draft-article-text">
+                <p>4. (1) Any law referred to in article 2 or article 3 of this Constitution shall contain such provisions for the amendment of the First Schedule as may be necessary to give effect to the provisions of the law and may also contain such incidental and consequential provisions as Parliament may deem necessary.</p>
+                <p>(2) No such law as aforesaid shall be deemed to be an amendment of this Constitution for the purposes of article 304.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART II</strong>
+              <span>Citizenship</span>
+            </div>
+            <div class="draft-part-count">DC.5 - DC.6</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part defines who would be treated as a citizen at the commencement of the Constitution and gives Parliament future power to legislate on acquisition and termination of citizenship.</p>
+            <div class="draft-article-card">
+              <strong>DC.5</strong>
+              <p>Citizenship at the commencement of the Constitution.</p>
+              <div class="draft-article-text">
+                <p>5. At the date of commencement of this Constitution-</p>
+                <ul>
+                  <li>(a) Every person who or either of whose parents or any of whose grandparents was born in the territory of India as defined in this Constitution and who has not made his permanent abode in any foreign State after the first day of April, 1947; and</li>
+                  <li>(b) Every person who or either of whose parents or any of whose grandparents was born in India as defined in the Government of India Act, 1935, or in Burma, Ceylon or Malaya, and who has his domicile in the territory of India as defined in this Constitution,</li>
+                </ul>
+                <p>shall be a citizen of India, provided that he has not acquired the citizenship of any foreign State before the date of commencement of this Constitution.</p>
+                <p>Explanation.- For the purposes of clause (b), domicile could be established under the principles mentioned in the Draft, including declaration before the District Magistrate and residence requirements.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.6</strong>
+              <p>Parliament's future power over citizenship.</p>
+              <div class="draft-article-text">
+                <p>6. Parliament may, by law, make further provision regarding the acquisition and termination of citizenship and all other matters relating thereto.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART III</strong>
+              <span>Fundamental Rights</span>
+            </div>
+            <div class="draft-part-count">DC.7 - DC.27</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part sets out the draft framework of enforceable rights. It defines the State, voids inconsistent laws, establishes equality and liberty guarantees, protects religion, minorities, property, and constitutional remedies.</p>
+            <h4>General and Equality</h4>
+            <div class="draft-article-card">
+              <strong>DC.7</strong>
+              <p>Definition of the State.</p>
+              <div class="draft-article-text">
+                <p>7. In this Part, unless the context otherwise requires, “the State” includes the Government and Parliament of India and the Government and the Legislature of each of the States and all local or other authorities within the territory of India.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.8</strong>
+              <p>Inconsistent laws to be void.</p>
+              <div class="draft-article-text">
+                <p>8. (1) All laws in force immediately before the commencement of this Constitution in the territory of India, in so far as they are inconsistent with the provisions of this Part, shall, to the extent of such inconsistency, be void.</p>
+                <p>(2) The State shall not make any law which takes away or abridges the rights conferred by this Part and any law made in contravention shall, to the extent of the contravention, be void, subject to the proviso regarding removal of inequality or discrimination arising out of existing law.</p>
+                <p>(3) “Law” includes any Ordinance, order, bye-law, rule, regulation, notification, custom or usage having the force of law.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.9</strong>
+              <p>Non-discrimination in public access.</p>
+              <div class="draft-article-text">
+                <p>9. (1) The State shall not discriminate against any citizen on grounds only of religion, race, caste, sex or any of them, especially in matters of access to public spaces and facilities.</p>
+                <p>(2) Nothing in this article shall prevent the State from making any special provision for women and children.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.10</strong>
+              <p>Equality of opportunity in employment.</p>
+              <div class="draft-article-text">
+                <p>10. Equality of opportunity is guaranteed in matters of employment under the State, with provisions preserving reservation for backward classes and denominational requirements in religious institutions.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.11</strong>
+              <p>Abolition of untouchability.</p>
+              <div class="draft-article-text">
+                <p>11. “Untouchability” is abolished and its practice in any form is forbidden. Enforcement of disability arising from it shall be an offence punishable in accordance with law.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.12</strong>
+              <p>Abolition of titles.</p>
+              <div class="draft-article-text">
+                <p>12. No title shall be conferred by the State. Citizens shall not accept titles from foreign States, and persons holding public office shall not accept presents, emoluments, titles, or offices from foreign States without presidential consent.</p>
+              </div>
+            </div>
+            <h4>Freedoms and Personal Liberty</h4>
+            <div class="draft-article-card">
+              <strong>DC.13</strong>
+              <p>Freedoms of speech, assembly, movement, residence, property, and profession.</p>
+              <div class="draft-article-text">
+                <p>13. Citizens are guaranteed rights of speech and expression, peaceful assembly, association, movement, residence, property, and profession, subject to specific restrictions on grounds such as public order, morality, health, decency, and protection of aboriginal tribes.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.14</strong>
+              <p>Protection in respect of conviction for offences.</p>
+              <div class="draft-article-text">
+                <p>14. No person shall be convicted except for violation of a law in force at the time of the act, nor punished more than once for the same offence, nor compelled to be a witness against himself.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.15</strong>
+              <p>Life and personal liberty.</p>
+              <div class="draft-article-text">
+                <p>15. No person shall be deprived of his life or personal liberty except according to procedure established by law, nor denied equality before the law or equal protection of the laws.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.16</strong>
+              <p>Freedom of trade, commerce and intercourse.</p>
+              <div class="draft-article-text">
+                <p>16. Subject to article 244 and any law made by Parliament, trade, commerce and intercourse throughout the territory of India shall be free.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.17</strong>
+              <p>Prohibition of traffic in human beings and forced labour.</p>
+              <div class="draft-article-text">
+                <p>17. Traffic in human beings, begar, and similar forms of forced labour are prohibited, while compulsory public service may still be imposed without discrimination.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.18</strong>
+              <p>Child labour restriction.</p>
+              <div class="draft-article-text">
+                <p>18. No child below the age of fourteen years shall be employed in a factory, mine, or any other hazardous employment.</p>
+              </div>
+            </div>
+            <h4>Religion and Culture</h4>
+            <div class="draft-article-card">
+              <strong>DC.19</strong>
+              <p>Freedom of conscience and religion.</p>
+              <div class="draft-article-text">
+                <p>19. All persons are equally entitled to freedom of conscience and to profess, practise, and propagate religion, subject to public order, morality, health, and reform-related State legislation.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.20</strong>
+              <p>Rights of religious denominations.</p>
+              <div class="draft-article-text">
+                <p>20. Religious denominations may establish institutions, manage religious affairs, own and acquire property, and administer such property according to law.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.21</strong>
+              <p>No compulsory taxation for promotion of religion.</p>
+              <div class="draft-article-text">
+                <p>21. No person may be compelled to pay taxes specifically appropriated to the promotion or maintenance of any particular religion or denomination.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.22</strong>
+              <p>Religious instruction in educational institutions.</p>
+              <div class="draft-article-text">
+                <p>22. The article regulates religious instruction in State-maintained and State-aided institutions, protects consent, and permits community-specific instruction outside working hours.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.23</strong>
+              <p>Cultural and educational rights.</p>
+              <div class="draft-article-text">
+                <p>23. Sections of citizens with distinct language, script, or culture may conserve them, and minorities are protected in educational admission and management rights.</p>
+              </div>
+            </div>
+            <h4>Property and Remedies</h4>
+            <div class="draft-article-card">
+              <strong>DC.24</strong>
+              <p>Right to property.</p>
+              <div class="draft-article-text">
+                <p>24. Property cannot be taken except by authority of law and compensation principles must be laid down for acquisition, subject to exceptions relating to existing law, taxation, public health, and danger prevention.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.25</strong>
+              <p>Right to constitutional remedies.</p>
+              <div class="draft-article-text">
+                <p>25. The right to move the Supreme Court for enforcement of the rights in this Part is guaranteed, and the Court may issue writs including habeas corpus, mandamus, prohibition, quo warranto, and certiorari.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.26</strong>
+              <p>Restrictions for armed forces and public order forces.</p>
+              <div class="draft-article-text">
+                <p>26. Parliament may restrict or abrogate the rights in this Part in their application to armed forces and forces maintaining public order to ensure discipline and proper discharge of duties.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.27</strong>
+              <p>Parliament's exclusive legislative role in specified rights-related matters.</p>
+              <div class="draft-article-text">
+                <p>27. Parliament alone is empowered to legislate on certain matters required under this Part and to prescribe punishment for offences declared under it, subject to continuation of existing law until altered.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART IV</strong>
+              <span>Directive Principles of State Policy</span>
+            </div>
+            <div class="draft-part-count">DC.28 - DC.40</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part lays down the social and economic goals the State must pursue in governance. The principles are not enforceable in court, but the Draft calls them fundamental to the making of laws and public policy.</p>
+            <div class="draft-article-card">
+              <strong>DC.28</strong>
+              <p>Meaning of the State in Part IV.</p>
+              <div class="draft-article-text">
+                <p>28. In this Part, unless the context otherwise requires, &ldquo;the State&rdquo; has the same meaning as in Part III of this Constitution.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.29</strong>
+              <p>Nature of the Directive Principles.</p>
+              <div class="draft-article-text">
+                <p>29. The provisions contained in this Part shall not be enforceable by any court, but the principles therein laid down are nevertheless fundamental in the governance of the country and it shall be the duty of the State to apply these principles in making laws.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.30</strong>
+              <p>Promotion of welfare.</p>
+              <div class="draft-article-text">
+                <p>30. The State shall strive to promote the welfare of the people by securing and protecting as effectively as it may a social order in which justice, social, economic and political, shall inform all the institutions of the national life.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.31</strong>
+              <p>Principles of economic and social justice.</p>
+              <div class="draft-article-text">
+                <p>31. The State shall, in particular, direct its policy towards securing:</p>
+                <p>(i) That the citizens, men and women equally, have the right to an adequate means of livelihood;</p>
+                <p>(ii) That the ownership and control of the material resources of the community are so distributed as best to subserve the common good;</p>
+                <p>(iii) That the operation of the economic system does not result in the concentration of wealth and means of production to the common detriment;</p>
+                <p>(iv) That there is equal pay for equal work for both men and women;</p>
+                <p>(v) That the strength and health of workers, men and women and the tender age of children are not abused and that citizens are not forced by economic necessity to enter avocations unsuited to their age or strength;</p>
+                <p>(vi) That childhood and youth are protected against exploitation and against moral and material abandonment.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.32</strong>
+              <p>Right to work, education and assistance.</p>
+              <div class="draft-article-text">
+                <p>32. The State shall, within the limits of its economic capacity and development, make effective provision for securing the right to work, to education and to public assistance in case of unemployment, old age, sickness, disablement, and other cases of undeserved want.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.33</strong>
+              <p>Humane conditions of work.</p>
+              <div class="draft-article-text">
+                <p>33. The State shall make provision for securing just and humane conditions of work and for maternity relief.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.34</strong>
+              <p>Living wage and standard of life.</p>
+              <div class="draft-article-text">
+                <p>34. The State shall endeavour to secure, by suitable legislation or economic organisation or in any other way, to all workers, industrial or otherwise, work, a living wage, conditions of work ensuring a decent standard of life and full enjoyment of leisure and social and cultural opportunities.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.35</strong>
+              <p>Uniform civil code.</p>
+              <div class="draft-article-text">
+                <p>35. The State shall endeavour to secure for the citizens a uniform civil code throughout the territory of India.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.36</strong>
+              <p>Free and compulsory education.</p>
+              <div class="draft-article-text">
+                <p>36. Every citizen is entitled to free primary education and the State shall endeavour to provide, within a period of ten years from the commencement of this Constitution, for free and compulsory education for all children until they complete the age of fourteen years.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.37</strong>
+              <p>Protection of weaker sections.</p>
+              <div class="draft-article-text">
+                <p>37. The State shall promote with special care the educational and economic interests of the weaker sections of the people, and, in particular, of the Scheduled Castes and the scheduled tribes, and shall protect them from social injustice and all forms of exploitation.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.38</strong>
+              <p>Nutrition, living standard and public health.</p>
+              <div class="draft-article-text">
+                <p>38. The State shall regard the raising of the level of nutrition and the standard of living of its people and the improvement of public health as among its primary duties.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.39</strong>
+              <p>Protection of monuments and historic objects.</p>
+              <div class="draft-article-text">
+                <p>39. It shall be the obligation of the State to protect every monument or place or object of artistic or historic interest, declared by Parliament by law to be of national importance, from spoliation, destruction, removal, disposal or export, as the case may be, and to preserve and maintain according to law made by Parliament all such monuments or places or objects.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.40</strong>
+              <p>International peace and security.</p>
+              <div class="draft-article-text">
+                <p>40. The State shall promote international peace and security by the prescription of open, just and honourable relations between nations, by the firm establishment of the understandings of international law as the actual rule of conduct among governments and by the maintenance of justice and respect for treaty obligations in the dealings of organised people with one another.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART V</strong>
+              <span>The Union</span>
+            </div>
+            <div class="draft-part-count">DC.41 onward</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>Part V begins the constitutional design of the Union government. In the supplied Draft text it covers the President, Vice-President, Council of Ministers, Parliament, legislative procedure, finance, ordinances, the Supreme Court and the Auditor-General of India.</p>
+            <div class="draft-article-card">
+              <strong>DC.41</strong>
+              <p>President of India.</p>
+              <div class="draft-article-text">
+                <p>41. There shall be a President of India.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.42</strong>
+              <p>Executive power of the Union.</p>
+              <div class="draft-article-text">
+                <p>42. (1) The executive power of the Union shall be vested in the President and may be exercised by him in accordance with the Constitution and the law.</p>
+                <p>(2) Without prejudice to the generality of the foregoing provision, the supreme command of the Defence Forces of India shall be vested in the President and the exercise thereof shall be regulated by law.</p>
+                <p>(3) Nothing in this article shall:</p>
+                <p>(a) Be deemed to transfer to the President any functions conferred by any existing law on the Government of any State or other authority; or</p>
+                <p>(b) Prevent Parliament from conferring by law functions on authorities other than the President.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.43</strong>
+              <p>Electoral college for the President.</p>
+              <div class="draft-article-text">
+                <p>43. The President shall be elected by the members of an electoral college consisting of:</p>
+                <p>(a) The members of both Houses of Parliament; and</p>
+                <p>(b) The elected members of the Legislatures of the States.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.44</strong>
+              <p>Uniformity in representation at presidential election.</p>
+              <div class="draft-article-text">
+                <p>44. This article lays down the voting formula for the presidential election so as to secure, as far as practicable, uniformity in the scale of representation of different States.</p>
+                <p>It specifies how the votes of elected State legislators and elected members of Parliament are to be calculated, provides for election by proportional representation through the single transferable vote, and requires secret ballot.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.45</strong>
+              <p>Term of office of President.</p>
+              <div class="draft-article-text">
+                <p>45. The President shall hold office for a term of five years from the date on which he enters upon office.</p>
+                <p>The article also provides for resignation, removal by impeachment, and continuation in office until a successor enters upon office.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.46</strong>
+              <p>Eligibility for re-election.</p>
+              <div class="draft-article-text">
+                <p>46. A person who holds, or has held, office as President shall be eligible for re-election once, but only once.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.47</strong>
+              <p>Qualifications for election as President.</p>
+              <div class="draft-article-text">
+                <p>47. A candidate for President must be a citizen of India, must have completed the age of thirty-five years, and must be qualified for election as a member of the House of the People.</p>
+                <p>The article further disqualifies persons holding offices or positions of emolument under the Union, States, or local authorities, subject to stated ministerial exceptions.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.48</strong>
+              <p>Conditions of the President&rsquo;s office.</p>
+              <div class="draft-article-text">
+                <p>48. The President shall not be a member of Parliament or a State Legislature, shall not hold any other office of emolument, and shall have an official residence.</p>
+                <p>Emoluments and allowances are to be fixed by Parliament and cannot be diminished during the term of office.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.49</strong>
+              <p>Oath or affirmation.</p>
+              <div class="draft-article-text">
+                <p>49. Before entering office, the President or any person acting as President must make and subscribe an oath or affirmation to faithfully execute the office, preserve, protect and defend the Constitution and the law, and devote himself to the service and well-being of the people of India.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.50</strong>
+              <p>Impeachment of the President.</p>
+              <div class="draft-article-text">
+                <p>50. Either House of Parliament may prefer a charge for violation of the Constitution.</p>
+                <p>The article lays down notice requirements, special majority thresholds, investigation by the other House, the President&rsquo;s right to appear and be represented, and removal upon a sustaining resolution passed by the required majority.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.51</strong>
+              <p>Time for filling vacancies in the office of President.</p>
+              <div class="draft-article-text">
+                <p>51. Elections to fill a vacancy caused by expiration of the presidential term must be completed before the term expires.</p>
+                <p>Where vacancy occurs by death, resignation, removal or otherwise, the election must be held as soon as possible and in no case later than six months, and the person elected holds office for a full five-year term.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.52</strong>
+              <p>Vice-President of India.</p>
+              <div class="draft-article-text">
+                <p>52. There shall be a Vice-President of India.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.53</strong>
+              <p>Vice-President as ex officio Chairman.</p>
+              <div class="draft-article-text">
+                <p>53. The Vice-President shall be ex officio Chairman of the Council of States and shall not hold any other office or position of emolument.</p>
+                <p>While acting as President or discharging presidential functions, he shall not perform the duties of Chairman of the Council of States.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.54</strong>
+              <p>Vice-President to act as President.</p>
+              <div class="draft-article-text">
+                <p>54. In the event of a vacancy in the office of President, the Vice-President shall act as President until a new President enters upon office.</p>
+                <p>He shall also discharge the functions of the President during absence, illness or other inability, and during that period he enjoys the powers and immunities of the President.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.55</strong>
+              <p>Election and qualifications of Vice-President.</p>
+              <div class="draft-article-text">
+                <p>55. The Vice-President shall be elected by the members of both Houses of Parliament assembled at a joint meeting by proportional representation through the single transferable vote and by secret ballot.</p>
+                <p>The article also sets out disqualifications, qualifications, vacation of legislative seat on election, and the rule for filling vacancies.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.56</strong>
+              <p>Term and removal of Vice-President.</p>
+              <div class="draft-article-text">
+                <p>56. The Vice-President shall hold office for five years, subject to resignation, removal for incapacity or want of confidence by the Council of States with agreement of the House of the People, and continuation until a successor enters office.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.57</strong>
+              <p>Other contingencies.</p>
+              <div class="draft-article-text">
+                <p>57. Parliament may make such provision as it thinks fit for the discharge of the functions of the President in any contingency not otherwise provided for in this chapter.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.58</strong>
+              <p>Election disputes and regulation by Parliament.</p>
+              <div class="draft-article-text">
+                <p>58. Doubts and disputes arising out of or in connection with the election of the President or Vice-President shall be inquired into and decided by the Supreme Court, whose decision shall be final.</p>
+                <p>Subject to the Constitution, Parliament may by law regulate matters connected with such elections.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.59</strong>
+              <p>Pardoning power of the President.</p>
+              <div class="draft-article-text">
+                <p>59. The President shall have the power to grant pardons, reprieves, respites or remissions of punishment, or to suspend, remit or commute sentences in cases of Court Martial, offences relating to matters within Parliament&rsquo;s exclusive law-making field, and in all cases of sentence of death.</p>
+                <p>The article also preserves powers exercisable by armed forces authorities and by Governors or Rulers in relation to certain death sentences.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.60</strong>
+              <p>Extent of the executive power of the Union.</p>
+              <div class="draft-article-text">
+                <p>60. Subject to the Constitution, the executive power of the Union extends to matters on which Parliament may make laws and to the exercise of rights, authority and jurisdiction exercisable by the Government of India under treaty or agreement.</p>
+                <p>It further limits extension into State fields except where the Constitution or a parliamentary law expressly provides otherwise, and preserves certain continuing State executive functions until Parliament otherwise provides.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.61</strong>
+              <p>Council of Ministers to aid and advise.</p>
+              <div class="draft-article-text">
+                <p>61. There shall be a Council of ministers with the Prime Minister at the head to aid and advise the President in the exercise of his functions.</p>
+                <p>The article also bars courts from inquiring into whether any advice was tendered and, if so, what advice was tendered.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.62</strong>
+              <p>Appointment, responsibility and tenure of ministers.</p>
+              <div class="draft-article-text">
+                <p>62. The Prime Minister shall be appointed by the President and other ministers shall be appointed on the advice of the Prime Minister.</p>
+                <p>Ministers hold office during the pleasure of the President, the Council is collectively responsible to the House of the People, ministers must take oaths of office and secrecy, and a minister who is not a member of either House of Parliament for six consecutive months ceases to be a minister.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.63</strong>
+              <p>Attorney-General for India.</p>
+              <div class="draft-article-text">
+                <p>63. The President shall appoint as Attorney-General for India a person qualified to be appointed a judge of the Supreme Court.</p>
+                <p>The Attorney-General is to advise the Government of India on legal matters, perform legal duties assigned by the President, has right of audience in all courts in the territory of India, and holds office during the pleasure of the President.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.64</strong>
+              <p>Conduct of government business in the President&rsquo;s name.</p>
+              <div class="draft-article-text">
+                <p>64. All executive action of the Government of India shall be expressed to be taken in the name of the President.</p>
+                <p>Orders and instruments made in the President&rsquo;s name are to be authenticated in the prescribed manner, and once so authenticated their validity cannot be challenged on the ground that they were not made or executed by the President.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.65</strong>
+              <p>Duties of the Prime Minister toward the President.</p>
+              <div class="draft-article-text">
+                <p>65. The Prime Minister must communicate to the President all decisions of the Council of ministers relating to administration and proposals for legislation, furnish information the President may call for, and, when required, submit for consideration of the Council any matter decided by a minister but not considered by the Council.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.66</strong>
+              <p>Constitution of Parliament.</p>
+              <div class="draft-article-text">
+                <p>66. There shall be a Parliament for the Union which shall consist of the President and two Houses to be known respectively as the Council of States and the House of the People.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.67</strong>
+              <p>Composition of the two Houses.</p>
+              <div class="draft-article-text">
+                <p>67. This long article lays down the composition of the Council of States and the House of the People, including nominated members, representatives of States, principles of territorial representation, direct election, adult suffrage, representation of territories other than States, and readjustment after census.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.68</strong>
+              <p>Duration of the Houses.</p>
+              <div class="draft-article-text">
+                <p>68. The Council of States is not subject to dissolution, and as nearly as possible one-third of its members retire every second year.</p>
+                <p>The House of the People normally continues for five years, unless sooner dissolved, though its life may be extended while a Proclamation of Emergency is in operation, subject to stated limits.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.69</strong>
+              <p>Sessions, prorogation and dissolution.</p>
+              <div class="draft-article-text">
+                <p>69. Parliament must meet at least twice each year, with no more than six months between the last sitting of one session and the first sitting of the next.</p>
+                <p>The President may summon the Houses, prorogue them, and dissolve the House of the People.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.70</strong>
+              <p>President&rsquo;s address and messages.</p>
+              <div class="draft-article-text">
+                <p>70. The President may address either House or both Houses assembled together and may require the attendance of members for that purpose.</p>
+                <p>He may also send messages to either House with respect to Bills or other matters, and the receiving House must consider the matter with all convenient despatch.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.71</strong>
+              <p>Special address at the commencement of sessions.</p>
+              <div class="draft-article-text">
+                <p>71. At the commencement of every session, the President shall address both Houses assembled together and inform Parliament of the causes of its summons.</p>
+                <p>Rules of procedure must provide for discussion of matters referred to in such address and for precedence of that discussion over other business.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.72</strong>
+              <p>Rights of ministers and the Attorney-General in Parliament.</p>
+              <div class="draft-article-text">
+                <p>72. Every minister and the Attorney-General of India has the right to speak in, and otherwise take part in, the proceedings of either House, any joint sitting of the Houses, and any committee of Parliament of which he may be named a member, though not by virtue of this article to vote.</p>
+              </div>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.73 - DC.100</strong>
+              <p>The remaining parliamentary provisions deal with presiding officers, vacancies, disqualifications, privileges, legislative procedure, Money Bills, financial business, language, rules of procedure and limits on discussion of judicial conduct.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.101 - DC.102</strong>
+              <p>The Draft protects parliamentary proceedings from judicial challenge on procedural irregularity and empowers the President to promulgate Ordinances when immediate action is needed while both Houses are not in session.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.103 - DC.123</strong>
+              <p>Chapter IV establishes the Supreme Court of India, fixes qualifications and removal safeguards for judges, and defines the Court&rsquo;s original, appellate, special leave, advisory and supplemental jurisdictions, along with the binding force of its declared law.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.124 - DC.127</strong>
+              <p>The final chapter of Part V creates the office of Auditor-General of India, secures its independence, assigns duties over Union and State accounts, and requires reports on Union accounts to be laid before Parliament through the President.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART VI</strong>
+              <span>The States in Part I of the First Schedule</span>
+            </div>
+            <div class="draft-part-count">DC.128 onward</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part sets out the constitutional structure of the major States in Part I of the First Schedule. It covers the Governor, State executive, Legislature, emergency powers, scheduled and tribal areas, High Courts and State auditing arrangements.</p>
+            <div class="draft-article-card">
+              <strong>DC.128</strong>
+              <p>This opening article defines the expression &ldquo;State&rdquo; for the purposes of Part VI as a State specified in Part I of the First Schedule.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.129 - DC.142</strong>
+              <p>These provisions establish the office of Governor, vest the executive power of the State in that office, and set out alternative methods for choosing a Governor. They also cover term, re-election or re-appointment, qualifications, oath, impeachment, pardoning power and the extent of State executive authority.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.143 - DC.147</strong>
+              <p>This group creates the Council of Ministers headed by the Chief Minister, defines the Governor&rsquo;s discretionary space in certain matters, deals with appointment of ministers and the Advocate-General, and requires business of the State to be carried on in the Governor&rsquo;s name.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.148 - DC.187</strong>
+              <p>These articles design the State Legislature, whether unicameral or bicameral, and regulate composition, qualifications, sessions, officers, legislative procedure, financial business, language, privileges and the Governor&rsquo;s ordinance-making power. This is the State-level parallel to the parliamentary machinery described earlier in Part V.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.188</strong>
+              <p>This article creates a grave emergency power for the Governor where peace and tranquillity of the State are threatened and government cannot be carried on in accordance with the Constitution.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.189 - DC.190</strong>
+              <p>These provisions define scheduled areas and tribal areas and apply the Fifth Schedule and Sixth Schedule to their administration and control.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.191 - DC.209</strong>
+              <p>This large chapter deals with High Courts in the States, including constitution, appointment and service conditions of judges, acting and additional judges, writ jurisdiction, superintendence over subordinate courts, reconstitution of courts and extension or exclusion of jurisdiction.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.210 - DC.211</strong>
+              <p>The final chapter permits a State to provide for an Auditor-in-Chief and lays down how audit reports relating to State accounts are to be submitted and laid before the State Legislature.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART VII</strong>
+              <span>The States in Part II of the First Schedule</span>
+            </div>
+            <div class="draft-part-count">DC.212 - DC.214</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part concerns States in Part II of the First Schedule, including their administration through the President and the possible creation of local legislatures or advisory bodies.</p>
+            <div class="draft-article-card">
+              <strong>DC.212</strong>
+              <p>States in Part II of the First Schedule are to be administered by the President, usually through a Chief Commissioner or Lieutenant-Governor, though in some cases administration may be carried out through the Governor or Ruler of a neighbouring State after consultation and ascertainment of local wishes.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.213</strong>
+              <p>The President may create or continue for such a State a local Legislature, a Council of Advisers, or both, with such constitution, powers and functions as may be specified by order.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.214</strong>
+              <p>Until otherwise provided, the existing constitutional arrangements relating to Coorg, including its Legislative Council and revenue-expenditure setup, are continued.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART VIII</strong>
+              <span>Territories in Part IV and Other Territories</span>
+            </div>
+            <div class="draft-part-count">DC.215</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part provides for the administration of territories in Part IV of the First Schedule and any other territories not otherwise specified.</p>
+            <div class="draft-article-card">
+              <strong>DC.215</strong>
+              <p>The President may administer these territories through a Chief Commissioner or other appointed authority and may make regulations for their peace and good government, including repeal or amendment of otherwise applicable law.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART IX</strong>
+              <span>Relations Between the Union and the States</span>
+            </div>
+            <div class="draft-part-count">DC.216 onward</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part lays down the constitutional relationship between the Union and the States. It covers legislative distribution, administrative directions, agreements with States, water disputes, inter-state trade and coordination mechanisms.</p>
+            <div class="draft-article-card">
+              <strong>DC.216 - DC.232</strong>
+              <p>These articles contain the legislative scheme of the Draft Constitution. They distribute subjects through the Union List, State List and Concurrent List, create residuary power, regulate additional courts, emergency legislation, treaty implementation, State resolutions, repugnancy between laws, and limits on invalidation for want of recommendation.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.233 - DC.238</strong>
+              <p>This group covers administrative relations: States must comply with parliamentary law, the Union may issue directions, functions may be entrusted across levels of government, and special agreements may be entered into with States in Part III of the First Schedule.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.239 - DC.242</strong>
+              <p>These provisions create a constitutional process for inter-state water disputes through presidential reference to a commission, possible involvement of the Supreme Court on questions of law, and exclusion of ordinary court jurisdiction in matters that fall within this machinery.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.243 - DC.246</strong>
+              <p>The closing articles protect inter-state trade from preference and discrimination, permit certain tax and restriction powers, provide for an authority to enforce trade provisions, and allow the President to establish a coordination council for common inter-governmental concerns.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART X</strong>
+              <span>Finance, Property, Contracts</span>
+            </div>
+            <div class="draft-part-count">DC.247 onward</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part organizes financial relations, public property, contracts and legal liabilities of the Union and the States. It is one of the most technical sections of the Draft Constitution.</p>
+            <div class="draft-article-card">
+              <strong>DC.247 - DC.261</strong>
+              <p>These provisions deal with distribution of revenues between the Union and the States. They define revenue terms, assign specified duties and taxes, regulate sharing of income tax, surcharges, grants-in-aid, professional taxes, agreements with Part III States, and establish the Finance Commission to recommend financial distribution principles.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.262 - DC.267</strong>
+              <p>This middle group contains miscellaneous financial provisions on grants for public purposes, public accounts, tax immunities, electricity taxation, Union taxation of States in certain situations, and inter-governmental contribution for expenses and pensions.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.268 - DC.269</strong>
+              <p>These articles regulate borrowing powers of the Union and the States, including limits, guarantees, loans from the Union, and the requirement of Union consent where earlier loans or guarantees remain outstanding.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.270 - DC.274</strong>
+              <p>The final chapter governs succession to property, assets and liabilities from the Dominion and Provinces, vesting of ownerless property, public contracts, and the legal capacity of the Union and States to sue and be sued.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART XI</strong>
+              <span>Emergency Provisions</span>
+            </div>
+            <div class="draft-part-count">DC.275 - DC.280</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part sets out the emergency architecture of the Draft Constitution, covering national emergency, central directions to States, fiscal modification and suspension of certain rights.</p>
+            <div class="draft-article-card">
+              <strong>DC.275</strong>
+              <p>The President may proclaim an emergency where the security of India is threatened by war or domestic violence, even where the danger is imminent rather than fully realised.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.276 - DC.278</strong>
+              <p>During emergency, the Union gains wider authority to direct States and legislate across subjects. A separate article permits the President, upon a State proclamation, to assume State functions and shift legislative power to Parliament where constitutional government in the State has broken down.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.279 - DC.280</strong>
+              <p>The concluding provisions permit the emergency period to override certain fundamental rights restrictions on State action and allow the President to suspend the right to constitutional remedies under article 25 for a limited period.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART XII</strong>
+              <span>Services Under the Union and the States</span>
+            </div>
+            <div class="draft-part-count">DC.281 onward</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part governs public services under the Union and the States, including service safeguards, continuity rules and the framework of Public Service Commissions.</p>
+            <div class="draft-article-card">
+              <strong>DC.281 - DC.283</strong>
+              <p>These opening provisions define the relevant State category for this part, allow legislatures to regulate recruitment and conditions of service, and protect civil servants against dismissal, removal or reduction in rank without a reasonable opportunity to show cause, subject to stated exceptions.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.284 - DC.288</strong>
+              <p>The later articles establish Union and State Public Service Commissions, allow joint arrangements, regulate appointment and tenure of members, define consultation duties on recruitment and disciplinary matters, permit additional functions by law, and charge commission expenses on public revenues.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART XIII</strong>
+              <span>Elections</span>
+            </div>
+            <div class="draft-part-count">DC.289 - DC.291</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part places elections under constitutional superintendence and authorises legislative frameworks for electoral machinery.</p>
+            <div class="draft-article-card">
+              <strong>DC.289</strong>
+              <p>The superintendence, direction and control of parliamentary and presidential elections is vested in a commission appointed by the President, while corresponding State electoral responsibilities are vested in a commission appointed by the Governor.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.290 - DC.291</strong>
+              <p>Parliament and State Legislatures are respectively empowered to make laws on electoral procedure, constitution of Houses and delimitation of constituencies.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART XIV</strong>
+              <span>Special Provisions Relating to Minorities</span>
+            </div>
+            <div class="draft-part-count">DC.292 onward</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part contains the Draft Constitution&rsquo;s special provisions relating to minorities, including representation, services, educational grants and supervisory officers.</p>
+            <div class="draft-article-card">
+              <strong>DC.292 - DC.295</strong>
+              <p>These articles provide for reserved seats in the House of the People and State Legislative Assemblies for specified communities, along with nomination powers for Anglo-Indian representation where considered inadequate.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.296 - DC.298</strong>
+              <p>This group concerns minority claims in public services and temporary protections for the Anglo-Indian community in appointments and educational grants during the transition period.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.299 - DC.301</strong>
+              <p>The closing provisions establish Special Officers for minorities, provide for a commission on the administration of scheduled areas and welfare of scheduled tribes, and permit appointment of a commission to investigate socially and educationally backward classes.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART XV</strong>
+              <span>Miscellaneous</span>
+            </div>
+            <div class="draft-part-count">DC.302 - DC.303</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part contains immunities for constitutional heads and a general interpretation clause for the Draft Constitution.</p>
+            <div class="draft-article-card">
+              <strong>DC.302</strong>
+              <p>This article grants significant immunity to the President and Governors from court proceedings while in office, subject to limited constitutional exceptions and notice requirements in civil proceedings concerning personal acts.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.303</strong>
+              <p>The interpretation article defines numerous recurring expressions, including agricultural income, Anglo-Indian, corporation tax, existing law, pension, public notification, scheduled castes, scheduled tribes, and references to Ordinances and laws.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART XVI</strong>
+              <span>Amendment of the Constitution</span>
+            </div>
+            <div class="draft-part-count">DC.304 - DC.305</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part sets out the amendment procedure for the Constitution and protects certain representational provisions for a limited initial period.</p>
+            <div class="draft-article-card">
+              <strong>DC.304</strong>
+              <p>Amendment may be initiated by Bill and generally requires special majorities in both Houses of Parliament, with additional ratification by specified States where the amendment concerns key federal matters such as legislative lists, representation or Supreme Court powers. A special route is also provided for certain State-specific institutional changes.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.305</strong>
+              <p>This article temporarily protects reservation-related provisions for Muslims, Scheduled Castes, Scheduled Tribes and Indian Christians from amendment for ten years, after which they would lapse unless continued by constitutional amendment.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART XVII</strong>
+              <span>Temporary and Transitional Provisions</span>
+            </div>
+            <div class="draft-part-count">DC.306 onward</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This part addresses the transition from the old constitutional order to the new one, including continuation of laws, provisional institutions and adaptation powers.</p>
+            <div class="draft-article-card">
+              <strong>DC.306</strong>
+              <p>Parliament is given temporary power for five years to legislate on specified transitional economic and rehabilitation subjects as if they were in the Concurrent List.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.307</strong>
+              <p>Existing law continues in force unless altered, repealed or amended by competent authority, and the President may adapt such law by order to bring it into conformity with the Constitution during the transition.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.308 - DC.310</strong>
+              <p>These articles transition the Federal Court and High Courts into the new constitutional structure, preserve pending proceedings and continue judicial functioning subject to the Constitution.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.311 - DC.313</strong>
+              <p>The final transitional provisions allow the Constituent Assembly and existing provincial institutions to function temporarily as constitutional bodies, provide for provisional President and Governors, and authorise the President to remove early difficulties by order.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="draft-part-details">
+          <summary class="draft-part-summary">
+            <div>
+              <strong>PART XVIII</strong>
+              <span>Commencement and Repeals</span>
+            </div>
+            <div class="draft-part-count">DC.314 - DC.315</div>
+          </summary>
+          <div class="draft-part-body">
+            <p>This final part closes the Draft Constitution by providing for commencement and repeal of the earlier imperial framework.</p>
+            <div class="draft-article-card">
+              <strong>DC.314</strong>
+              <p>This article provides for the date on which the Constitution is to come into force.</p>
+            </div>
+            <div class="draft-article-card">
+              <strong>DC.315</strong>
+              <p>The concluding article repeals the Indian Independence Act, 1947, the Government of India Act, 1935, and related amending and supplemental enactments, after which the Schedules follow.</p>
+            </div>
+          </div>
+        </details>
+      </section>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>hiConstitution.com</p>
+      <p>Educational use only.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
