@@ -79,6 +79,10 @@
       font-size: 0.78rem;
     }
 
+    .draft-flow {
+      display: none;
+    }
+
     .draft-flow-arrow {
       font-size: 1.4rem;
       color: rgba(243, 115, 36, 0.8);
@@ -349,13 +353,84 @@
     .draft-reader-preamble h3 {
       color: #2c241f;
       margin-bottom: 14px;
-      font-size: 1.3rem;
+      font-size: 1.5rem;
+      font-family: "Lora", serif;
+      letter-spacing: 0.04em;
     }
 
     .draft-reader-preamble p {
       color: #4b3f36;
       line-height: 1.85;
       margin-bottom: 14px;
+    }
+
+    .draft-reader-preamble summary {
+      list-style: none;
+      cursor: pointer;
+    }
+
+    .draft-reader-preamble summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .draft-preamble-preview {
+      font-family: "Lora", serif;
+      font-size: 1.18rem;
+      line-height: 1.8;
+      color: #332820;
+      margin-bottom: 14px;
+    }
+
+    .draft-preamble-preview em,
+    .draft-preamble-full em {
+      font-style: italic;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .draft-read-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(155, 120, 92, 0.24);
+      background: rgba(255, 255, 255, 0.48);
+      color: #7a4521;
+      font-weight: 700;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .draft-preamble-full {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(155, 120, 92, 0.18);
+    }
+
+    .draft-inline-expand {
+      margin-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      padding-top: 12px;
+    }
+
+    .draft-inline-expand summary {
+      list-style: none;
+      cursor: pointer;
+      color: var(--saffron);
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .draft-inline-expand summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .draft-inline-expand .draft-article-text {
+      margin-top: 12px;
     }
 
     .draft-part-details {
@@ -704,16 +779,24 @@
           </div>
         </details>
 
-        <div class="draft-reader-preamble">
+        <details class="draft-reader-preamble">
           <h3>PREAMBLE</h3>
-          <p>WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN DEMOCRATIC REPUBLIC and to secure to all its citizens:</p>
-          <p>JUSTICE, social, economic and political;</p>
-          <p>LIBERTY of thought, expression, belief, faith and worship;</p>
-          <p>EQUALITY of status and of opportunity;</p>
-          <p>and to promote among them all</p>
-          <p>FRATERNITY assuring the dignity of the individual and the unity of the Nation;</p>
-          <p>IN OUR CONSTITUENT ASSEMBLY this_____ of (day of May, 1948 A.D.), do HEREBY ADOPT, ENACT AND GIVE TO OURSELVES THIS CONSTITUTION.</p>
-        </div>
+          <summary>
+            <div class="draft-preamble-preview">
+              WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a <em>SOVEREIGN DEMOCRATIC REPUBLIC</em> and to secure to all its citizens <em>JUSTICE</em>, <em>LIBERTY</em>, <em>EQUALITY</em>...
+            </div>
+            <span class="draft-read-toggle">Read Full</span>
+          </summary>
+          <div class="draft-preamble-full">
+            <p>WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a <em>SOVEREIGN DEMOCRATIC REPUBLIC</em> and to secure to all its citizens:</p>
+            <p><em>JUSTICE</em>, social, economic and political;</p>
+            <p><em>LIBERTY</em> of thought, expression, belief, faith and worship;</p>
+            <p><em>EQUALITY</em> of status and of opportunity;</p>
+            <p>and to promote among them all</p>
+            <p><em>FRATERNITY</em> assuring the dignity of the individual and the unity of the Nation;</p>
+            <p>IN OUR CONSTITUENT ASSEMBLY this_____ of (day of May, 1948 A.D.), do HEREBY ADOPT, ENACT AND GIVE TO OURSELVES THIS CONSTITUTION.</p>
+          </div>
+        </details>
 
         <details class="draft-part-details" open>
           <summary class="draft-part-summary">
@@ -728,46 +811,58 @@
             <div class="draft-article-card">
               <strong>DC.1</strong>
               <p>The Union and its territorial composition.</p>
-              <div class="draft-article-text">
-                <p>1. (1) India shall be a Union of States.</p>
-                <p>(2) The States shall mean the States for the time being specified in Parts I, II and III of the First Schedule.</p>
-                <p>(3) The territory of India shall comprise-</p>
-                <ul>
-                  <li>(a) The territories of the States;</li>
-                  <li>(b) The territories for the time being specified in Part IV of the First Schedule; and</li>
-                  <li>(c) Such other territories as may be acquired.</li>
-                </ul>
-              </div>
+              <details class="draft-inline-expand">
+                <summary>Read Full</summary>
+                <div class="draft-article-text">
+                  <p>1. (1) India shall be a Union of States.</p>
+                  <p>(2) The States shall mean the States for the time being specified in Parts I, II and III of the First Schedule.</p>
+                  <p>(3) The territory of India shall comprise-</p>
+                  <ul>
+                    <li>(a) The territories of the States;</li>
+                    <li>(b) The territories for the time being specified in Part IV of the First Schedule; and</li>
+                    <li>(c) Such other territories as may be acquired.</li>
+                  </ul>
+                </div>
+              </details>
             </div>
             <div class="draft-article-card">
               <strong>DC.2</strong>
               <p>Admission or establishment of new States.</p>
-              <div class="draft-article-text">
-                <p>2. Parliament may, from time to time, by law admit into the Union, or establish, new States on such terms and conditions as it thinks fit.</p>
-              </div>
+              <details class="draft-inline-expand">
+                <summary>Read Full</summary>
+                <div class="draft-article-text">
+                  <p>2. Parliament may, from time to time, by law admit into the Union, or establish, new States on such terms and conditions as it thinks fit.</p>
+                </div>
+              </details>
             </div>
             <div class="draft-article-card">
               <strong>DC.3</strong>
               <p>Formation and alteration of States.</p>
-              <div class="draft-article-text">
-                <p>3. Parliament may by law-</p>
-                <ul>
-                  <li>(a) Form a new State by separation of territory from a State or by uniting two or more States or parts of States;</li>
-                  <li>(b) Increase the area of any State;</li>
-                  <li>(c) Diminish the area of any State;</li>
-                  <li>(d) Alter the boundaries of any State;</li>
-                  <li>(e) Alter the name of any State.</li>
-                </ul>
-                <p>Provided that no Bill for the purpose shall be introduced in either House of Parliament except by the Government of India and unless the required representation, resolution, views, or consent mentioned in the Draft have been obtained.</p>
-              </div>
+              <details class="draft-inline-expand">
+                <summary>Read Full</summary>
+                <div class="draft-article-text">
+                  <p>3. Parliament may by law-</p>
+                  <ul>
+                    <li>(a) Form a new State by separation of territory from a State or by uniting two or more States or parts of States;</li>
+                    <li>(b) Increase the area of any State;</li>
+                    <li>(c) Diminish the area of any State;</li>
+                    <li>(d) Alter the boundaries of any State;</li>
+                    <li>(e) Alter the name of any State.</li>
+                  </ul>
+                  <p>Provided that no Bill for the purpose shall be introduced in either House of Parliament except by the Government of India and unless the required representation, resolution, views, or consent mentioned in the Draft have been obtained.</p>
+                </div>
+              </details>
             </div>
             <div class="draft-article-card">
               <strong>DC.4</strong>
               <p>Supplementary and consequential provisions.</p>
-              <div class="draft-article-text">
-                <p>4. (1) Any law referred to in article 2 or article 3 of this Constitution shall contain such provisions for the amendment of the First Schedule as may be necessary to give effect to the provisions of the law and may also contain such incidental and consequential provisions as Parliament may deem necessary.</p>
-                <p>(2) No such law as aforesaid shall be deemed to be an amendment of this Constitution for the purposes of article 304.</p>
-              </div>
+              <details class="draft-inline-expand">
+                <summary>Read Full</summary>
+                <div class="draft-article-text">
+                  <p>4. (1) Any law referred to in article 2 or article 3 of this Constitution shall contain such provisions for the amendment of the First Schedule as may be necessary to give effect to the provisions of the law and may also contain such incidental and consequential provisions as Parliament may deem necessary.</p>
+                  <p>(2) No such law as aforesaid shall be deemed to be an amendment of this Constitution for the purposes of article 304.</p>
+                </div>
+              </details>
             </div>
           </div>
         </details>
