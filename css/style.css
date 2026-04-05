@@ -9,20 +9,20 @@
 :root {
   --saffron:      #F37324;
   --saffron-light:#ffb485;
-  --navy:         #1A1A1A;
-  --navy-dark:    #0F0F0F;
-  --navy-light:   #252525;
-  --white:        #1A1A1A;
-  --bg-light:     #0F0F0F;
-  --bg-subtle:    #252525;
-  --dark-text:    #FFFFFF;
-  --body-text:    #A1A1A1;
-  --muted:        #808080;
+  --navy:         #1A237E;
+  --navy-dark:    #12185B;
+  --navy-light:   #283593;
+  --white:        #FFFFFF;
+  --bg-light:     #F8F9FA;
+  --bg-subtle:    #F1F3F5;
+  --dark-text:    #1A1A1A;
+  --body-text:    #4A4A4A;
+  --muted:        #6C757D;
   --green:        #2e7d32;
   --green-light:  #81c784;
   --red:          #c62828;
-  --border:       rgba(255, 255, 255, 0.08);
-  --border-light: rgba(255, 255, 255, 0.04);
+  --border:       rgba(0, 0, 0, 0.08);
+  --border-light: rgba(0, 0, 0, 0.04);
 
   --shadow-sm:    0 4px 12px rgba(0,0,0,0.2);
   --shadow-md:    0 8px 24px rgba(0,0,0,0.3);
@@ -52,8 +52,7 @@ html {
 body {
   font-family: var(--font);
   color: var(--dark-text);
-  background: radial-gradient(circle at top right, rgba(243, 115, 36, 0.08), transparent 22%),
-              linear-gradient(180deg, #111111 0%, #0F0F0F 100%);
+  background: var(--bg-light);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -165,7 +164,7 @@ p { color: var(--body-text); }
   top: 0; left: 0; right: 0;
   height: var(--navbar-h);
   z-index: 1000;
-  background: rgba(15, 15, 15, 0.92);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-light);
@@ -173,7 +172,7 @@ p { color: var(--body-text); }
 }
 .navbar.scrolled {
   box-shadow: var(--shadow-md);
-  background: rgba(15, 15, 15, 0.98);
+  background: rgba(255, 255, 255, 0.98);
 }
 .navbar-inner {
   display: flex;
@@ -223,11 +222,15 @@ p { color: var(--body-text); }
   color: var(--body-text);
   transition: all var(--transition-fast);
 }
-.nav-link:hover, .nav-link.active {
+.nav-link:hover {
   color: var(--navy);
   background: var(--bg-subtle);
 }
-.nav-link.active { font-weight: 600; }
+.nav-link.active {
+  font-weight: 700;
+  color: var(--saffron) !important;
+  background: var(--bg-subtle);
+}
 
 .navbar-actions {
   display: flex;

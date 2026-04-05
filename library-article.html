@@ -16,15 +16,15 @@
     .breadcrumb {
       padding: 14px 0;
       font-size: 0.82rem;
-      color: var(--muted);
+      color: rgba(255, 255, 255, 0.6);
       display: flex;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
     }
-    .breadcrumb a { color: var(--navy); transition: color var(--transition-fast); }
+    .breadcrumb a { color: rgba(255, 255, 255, 0.85); transition: color var(--transition-fast); }
     .breadcrumb a:hover { color: var(--saffron); }
-    .breadcrumb-sep { color: var(--border); }
+    .breadcrumb-sep { color: rgba(255, 255, 255, 0.4); }
 
     /* Article header */
     .article-header {
@@ -85,26 +85,32 @@
       position: sticky;
       top: var(--navbar-h);
       z-index: 100;
+      padding: 12px 0;
     }
     .view-tabs {
-      display: flex;
-      gap: 0;
+      display: inline-flex;
+      background: var(--bg-subtle);
+      padding: 5px;
+      border-radius: 99px;
+      gap: 4px;
     }
     .view-tab {
-      padding: 14px 24px;
-      font-size: 0.88rem;
-      font-weight: 600;
+      padding: 8px 32px;
+      font-size: 0.95rem;
+      font-weight: 700;
       color: var(--muted);
       cursor: pointer;
-      border-bottom: 3px solid transparent;
-      transition: all var(--transition-fast);
-      background: none;
-      border-top: none;
-      border-left: none;
-      border-right: none;
+      background: transparent;
+      border: none;
+      border-radius: 99px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .view-tab:hover { color: var(--navy); }
-    .view-tab.active { color: var(--navy); border-bottom-color: var(--saffron); }
+    .view-tab.active {
+      background: var(--white);
+      color: var(--navy);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
 
     /* Main layout */
     .article-main {
@@ -285,7 +291,6 @@
 
     @media (max-width: 900px) {
       .article-main { grid-template-columns: 1fr; }
-      .article-sidebar { order: -1; }
     }
     @media (max-width: 600px) {
       .article-content-panel { padding: 20px; }
@@ -305,7 +310,7 @@
     </a>
     <ul class="navbar-nav" role="list">
       <li><a href="index.html" class="nav-link">Home</a></li>
-      <li><a href="read.html" class="nav-link">Read</a></li>
+      <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>
       <li><a href="study.html" class="nav-link">Study</a></li>
       <li><a href="quiz.html" class="nav-link">Quiz</a></li>
       <li><a href="pulse.html" class="nav-link">Pulse</a></li>
@@ -336,7 +341,7 @@
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="index.html">Home</a>
           <span class="breadcrumb-sep">›</span>
-          <a href="read.html">Read</a>
+        <a href="read-the-constitution.html">Read</a>
           <span class="breadcrumb-sep">›</span>
           <span style="color:rgba(255,255,255,0.8);" id="dyn-bread-art">Article --</span>
         </nav>

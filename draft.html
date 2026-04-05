@@ -140,15 +140,42 @@
       padding: 20px;
     }
 
+    .draft-note-card summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .draft-note-card summary::-webkit-details-marker {
+      display: none;
+    }
+
     .draft-note-card h3 {
       color: #fff;
-      margin-bottom: 10px;
-      font-size: 1.2rem;
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .draft-note-arrow {
+      color: var(--saffron);
+      font-size: 0.9rem;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .draft-note-card[open] .draft-note-arrow {
+      transform: rotate(180deg);
     }
 
     .draft-note-card p {
       color: var(--body-text);
       font-size: 0.95rem;
+      margin-top: 14px;
+      line-height: 1.6;
     }
 
     .draft-outline {
@@ -592,7 +619,7 @@
     </a>
     <ul class="navbar-nav" role="list">
       <li><a href="index.html" class="nav-link">Home</a></li>
-      <li><a href="read.html" class="nav-link">Read</a></li>
+      <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>
       <li><a href="study.html" class="nav-link active">Study</a></li>
       <li><a href="quiz.html" class="nav-link">Quiz</a></li>
       <li><a href="pulse.html" class="nav-link">Pulse</a></li>
@@ -608,7 +635,7 @@
 
 <nav class="mobile-nav" aria-label="Mobile navigation">
   <a href="index.html" class="nav-link">Home</a>
-  <a href="read.html" class="nav-link">Read</a>
+  <a href="read-the-constitution.html" class="nav-link">Read</a>
   <a href="study.html" class="nav-link active">Study</a>
   <a href="quiz.html" class="nav-link">Quiz</a>
   <a href="pulse.html" class="nav-link">Pulse</a>
@@ -643,47 +670,65 @@
         </div>
 
         <div class="draft-note-grid">
-          <article class="draft-note-card">
-            <h3>1. From Early Ideas to a Working Draft</h3>
+          <details class="draft-note-card">
+            <summary>
+              <h3>1. From Early Ideas to a Working Draft</h3>
+              <span class="draft-note-arrow">▼</span>
+            </summary>
             <p>
               The constitutional groundwork was first organized by Sir B.N. Rau, the Constitutional Adviser to the Constituent Assembly. His preliminary text consolidated recommendations from multiple committees before the Drafting Committee took it up for rigorous revision.
             </p>
-          </article>
+          </details>
 
-          <article class="draft-note-card">
-            <h3>2. Ambedkar's Committee and the 1948 Draft</h3>
+          <details class="draft-note-card">
+            <summary>
+              <h3>2. Ambedkar's Committee and the 1948 Draft</h3>
+              <span class="draft-note-arrow">▼</span>
+            </summary>
             <p>
               Between October 1947 and February 1948, the Drafting Committee chaired by Dr. B.R. Ambedkar examined, modified, and expanded Rau's framework. On February 21, 1948, the first Draft Constitution of India was formally presented to the President of the Constituent Assembly.
             </p>
-          </article>
+          </details>
 
-          <article class="draft-note-card">
-            <h3>3. Structure and Transparency</h3>
+          <details class="draft-note-card">
+            <summary>
+              <h3>3. Structure and Transparency</h3>
+              <span class="draft-note-arrow">▼</span>
+            </summary>
             <p>
               The 1948 Draft contained 315 Articles, 18 Functional Parts, and 8 Schedules. It addressed citizenship, rights, federalism, executive powers, and other institutional questions. The Committee also added explanatory notes and footnotes where major changes or possible controversies were involved.
             </p>
-          </article>
+          </details>
 
-          <article class="draft-note-card">
-            <h3>4. Public Scrutiny and Democratic Feedback</h3>
+          <details class="draft-note-card">
+            <summary>
+              <h3>4. Public Scrutiny and Democratic Feedback</h3>
+              <span class="draft-note-arrow">▼</span>
+            </summary>
             <p>
               After publication in February 1948, the Draft was circulated widely to provincial governments, ministries, members of the judiciary, and the public. Through March to October 1948, the Committee reviewed extensive feedback and refined the text accordingly.
             </p>
-          </article>
+          </details>
 
-          <article class="draft-note-card">
-            <h3>5. Formal Introduction and Debate</h3>
+          <details class="draft-note-card">
+            <summary>
+              <h3>5. Formal Introduction and Debate</h3>
+              <span class="draft-note-arrow">▼</span>
+            </summary>
             <p>
               Dr. B.R. Ambedkar formally introduced the Draft in the Constituent Assembly on November 4, 1948. His speech defended the parliamentary form of government and addressed criticism, including concerns that the Draft had not given enough centrality to village-based administration.
             </p>
-          </article>
+          </details>
 
-          <article class="draft-note-card">
-            <h3>6. Legacy and Adoption</h3>
+          <details class="draft-note-card">
+            <summary>
+              <h3>6. Legacy and Adoption</h3>
+              <span class="draft-note-arrow">▼</span>
+            </summary>
             <p>
               The Assembly then entered a long article-by-article debate stretching across 1948 and 1949. Out of 165 sittings of the Constituent Assembly, 114 were devoted to the Draft. This process culminated in adoption on November 26, 1949, and commencement on January 26, 1950.
             </p>
-          </article>
+          </details>
         </div>
       </section>
 

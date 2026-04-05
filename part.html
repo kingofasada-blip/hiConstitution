@@ -42,7 +42,7 @@
       transform: translateX(6px);
       border-left-color: var(--navy);
       box-shadow: var(--shadow-sm);
-      background: var(--navy-light);
+      background: var(--bg-subtle);
     }
     .article-list-item:nth-child(even) { border-left-color: var(--green); }
     .article-list-item:nth-child(even):hover { border-left-color: var(--navy); }
@@ -77,7 +77,7 @@
     </a>
     <ul class="navbar-nav" role="list">
       <li><a href="index.html" class="nav-link">Home</a></li>
-      <li><a href="read.html" class="nav-link active">Read</a></li>
+      <li><a href="read-the-constitution.html" class="nav-link active">Read</a></li>
       <li><a href="study.html" class="nav-link">Study</a></li>
       <li><a href="quiz.html" class="nav-link">Quiz</a></li>
       <li><a href="pulse.html" class="nav-link">Pulse</a></li>
@@ -88,7 +88,7 @@
 <main class="part-page">
   <div class="part-header">
     <div class="container">
-      <a href="read.html" class="back-link">← Back to All Parts</a>
+      <a href="read-the-constitution.html" class="back-link">← Back to All Parts</a>
       <h1 id="partTitleDisplay">Loading Part...</h1>
       <p id="partDescDisplay">Please wait while we fetch the articles.</p>
     </div>
@@ -124,7 +124,7 @@
     const partId = urlParams.get('id');
 
     if (!partId) {
-      document.getElementById('articleListContainer').innerHTML = "<p style='text-align:center;'>No Part Selected. <a href='read.html'>Go back</a></p>";
+      document.getElementById('articleListContainer').innerHTML = "<p style='text-align:center;'>No Part Selected. <a href='read-the-constitution.html'>Go back</a></p>";
       return;
     }
 
