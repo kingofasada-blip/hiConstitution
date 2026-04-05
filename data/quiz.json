@@ -1,0 +1,53 @@
+[
+  {
+    "id": "fundamental-rights",
+    "icon": "⚖️",
+    "title": "Fundamental Rights",
+    "description": "Articles 12–35: rights guaranteed to every person in India.",
+    "difficulty": "medium",
+    "questions": [
+      {
+        "q": "Under which article of the Constitution is the Right to Equality guaranteed?",
+        "options": [
+          "Article 12",
+          "Article 14",
+          "Article 19",
+          "Article 21"
+        ],
+        "answer": 1,
+        "explanation": "Article 14 guarantees the right to equality before law and equal protection of laws. It applies to all persons, not just citizens."
+      },
+      {
+        "q": "Dr. B.R. Ambedkar described which article as the \"heart and soul of the Constitution\"?",
+        "options": [
+          "Article 14",
+          "Article 19",
+          "Article 21",
+          "Article 32"
+        ],
+        "answer": 3,
+        "explanation": "Article 32 — the Right to Constitutional Remedies — was called the \"heart and soul of the Constitution\" by Dr. Ambedkar because it gives citizens the right to enforce their Fundamental Rights in the Supreme Court."
+      }
+    ]
+  },
+  {
+    "id": "preamble",
+    "icon": "📜",
+    "title": "Preamble",
+    "description": "The introductory statement of the Constitution and its key values.",
+    "difficulty": "easy",
+    "questions": [
+      {
+        "q": "Which words were added to the Preamble by the 42nd Constitutional Amendment (1976)?",
+        "options": [
+          "Democratic and Republic",
+          "Socialist and Secular",
+          "Justice and Fraternity",
+          "Sovereign and Integrity"
+        ],
+        "answer": 1,
+        "explanation": "The 42nd Amendment (1976) added \"Socialist,\" \"Secular,\" and \"Integrity\" to the Preamble."
+      }
+    ]
+  }
+]

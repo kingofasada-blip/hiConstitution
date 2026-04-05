@@ -233,7 +233,11 @@
   <div id="quizQuestionSection" class="box hidden">
     <div class="box-header">
       <h2>2. Select Question</h2>
-      <button class="btn btn-outline-navy btn-sm" onclick="addNewQuizQ()">+ Add Question</button>
+      <div style="display: flex; gap: 8px;">
+        <input type="file" id="catQuizCsvUpload" accept=".csv" style="display:none;" onchange="handleCatQuizCsvUpload(event)">
+        <button class="btn btn-outline-navy btn-sm" onclick="document.getElementById('catQuizCsvUpload').click()">📁 Upload Category Sheet</button>
+        <button class="btn btn-outline-navy btn-sm" onclick="addNewQuizQ()">+ Add Question</button>
+      </div>
     </div>
     <div class="flex-row">
       <select id="qQSelect" onchange="onQuizQChange()">
@@ -746,6 +750,52 @@
     } else { alert("Could not parse valid quiz rows from the CSV."); }
     
     document.getElementById('quizCsvUpload').value = ""; // Reset input
+  }
+
+  // --- CATEGORY-SPECIFIC QUIZ CSV UPLOAD ---
+  function handleCatQuizCsvUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) { parseCatQuizCsv(e.target.result); };
+    reader.readAsText(file);
+  }
+
+  function parseCatQuizCsv(text) {
+    if (currentQuizCatIdx === -1) {
+      alert("Please select a category first.");
+      return;
+    }
+    const lines = text.split('\n').filter(l => l.trim());
+    if (lines.length < 2) { alert("Invalid or empty CSV."); return; }
+
+    let addedCount = 0;
+    for (let i = 1; i < lines.length; i++) {
+      let cols = splitCSVRow(lines[i]);
+      // Expected columns: Question, OptA, OptB, OptC, OptD, CorrectIdx, Explanation
+      if (cols.length < 7) continue;
+
+      let [question, optA, optB, optC, optD, correctIdx, explanation] = cols;
+      
+      if (!quizData[currentQuizCatIdx].questions) quizData[currentQuizCatIdx].questions = [];
+      
+      quizData[currentQuizCatIdx].questions.push({
+        q: question,
+        options: [optA, optB, optC, optD],
+        answer: parseInt(correctIdx) || 0,
+        explanation: explanation || ""
+      });
+      addedCount++;
+    }
+    
+    if (addedCount > 0) {
+      alert(addedCount + " questions added to the category!");
+      populateQuizQDropdown();
+      triggerSave();
+    } else {
+      alert("Could not parse valid question rows from the CSV. Please check the format.");
+    }
+    document.getElementById('catQuizCsvUpload').value = "";
   }
 
   // --- DOWNLOAD ---

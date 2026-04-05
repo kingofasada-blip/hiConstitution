@@ -373,6 +373,10 @@
       display: none;
     }
 
+    .draft-reader-preamble details[open] summary {
+      display: none;
+    }
+
     .draft-preamble-preview {
       font-family: "Lora", serif;
       font-size: 1.18rem;
@@ -479,6 +483,19 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .draft-part-count::after {
+      content: '▼';
+      font-size: 0.9rem;
+      transition: transform 0.3s ease;
+    }
+
+    .draft-part-details[open] .draft-part-count::after {
+      transform: rotate(180deg);
     }
 
     .draft-part-body {
@@ -757,48 +774,30 @@
           <h2 id="draftReaderTitle">Text of Draft Constitution of India</h2>
         </div>
 
-        <div class="draft-reader-tools">
-          <p>
-            Tumhare diye hue raw text ko ab yahan structured reading format me arrange kiya gaya hai. Preamble ko full readable form me rakha hai, aur Parts ko collapsible academic blocks me organize kiya gaya hai.
-          </p>
-          <a href="data/draft-constitution-source.txt" class="draft-source-link">Open Working Source</a>
-        </div>
-
-        <div class="draft-source-note">
-          Current status: structured reader kaafi complete hai, lekin exact verbatim raw source local file me abhi sirf available extract ke roop me preserved hai, aur woh currently `DC.42` tak hi complete hai. Isliye later sections me kai jagah structured summaries aur condensed article cards use kiye gaye hain, full line-by-line manuscript import nahi.
-        </div>
-
-        <details class="draft-source-extract">
-          <summary>
-            <span>Raw Source Extract</span>
-            <span>Available Verbatim Text</span>
-          </summary>
-          <div class="draft-source-extract-body">
-            <p>Yeh viewer local source file ka exact available extract dikhata hai. Is waqt stored verbatim text `Preamble` se `DC.42` tak available hai.</p>
-            <iframe src="data/draft-constitution-source.txt" title="Draft Constitution source extract" class="draft-source-frame"></iframe>
-          </div>
-        </details>
-
-        <details class="draft-reader-preamble">
+      <div class="draft-reader-preamble">
           <h3>PREAMBLE</h3>
+        <div class="draft-preamble-preview">
+          WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a <em>SOVEREIGN DEMOCRATIC REPUBLIC</em> and to secure to all its citizens:
+          </div>
+        <details>
           <summary>
-            <div class="draft-preamble-preview">
-              WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a <em>SOVEREIGN DEMOCRATIC REPUBLIC</em> and to secure to all its citizens <em>JUSTICE</em>, <em>LIBERTY</em>, <em>EQUALITY</em>...
-            </div>
-            <span class="draft-read-toggle">Read Full</span>
+            <span class="draft-read-toggle">Read Full ↓</span>
           </summary>
           <div class="draft-preamble-full">
-            <p>WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a <em>SOVEREIGN DEMOCRATIC REPUBLIC</em> and to secure to all its citizens:</p>
             <p><em>JUSTICE</em>, social, economic and political;</p>
             <p><em>LIBERTY</em> of thought, expression, belief, faith and worship;</p>
             <p><em>EQUALITY</em> of status and of opportunity;</p>
             <p>and to promote among them all</p>
             <p><em>FRATERNITY</em> assuring the dignity of the individual and the unity of the Nation;</p>
             <p>IN OUR CONSTITUENT ASSEMBLY this_____ of (day of May, 1948 A.D.), do HEREBY ADOPT, ENACT AND GIVE TO OURSELVES THIS CONSTITUTION.</p>
+            <div style="margin-top: 18px;">
+              <span class="draft-read-toggle" onclick="this.closest('details').removeAttribute('open')">Read Less ↑</span>
+            </div>
           </div>
         </details>
+      </div>
 
-        <details class="draft-part-details" open>
+        <details class="draft-part-details">
           <summary class="draft-part-summary">
             <div>
               <strong>PART I</strong>
@@ -811,58 +810,46 @@
             <div class="draft-article-card">
               <strong>DC.1</strong>
               <p>The Union and its territorial composition.</p>
-              <details class="draft-inline-expand">
-                <summary>Read Full</summary>
-                <div class="draft-article-text">
-                  <p>1. (1) India shall be a Union of States.</p>
-                  <p>(2) The States shall mean the States for the time being specified in Parts I, II and III of the First Schedule.</p>
-                  <p>(3) The territory of India shall comprise-</p>
-                  <ul>
-                    <li>(a) The territories of the States;</li>
-                    <li>(b) The territories for the time being specified in Part IV of the First Schedule; and</li>
-                    <li>(c) Such other territories as may be acquired.</li>
-                  </ul>
-                </div>
-              </details>
+              <div class="draft-article-text">
+                <p>1. (1) India shall be a Union of States.</p>
+                <p>(2) The States shall mean the States for the time being specified in Parts I, II and III of the First Schedule.</p>
+                <p>(3) The territory of India shall comprise-</p>
+                <ul>
+                  <li>(a) The territories of the States;</li>
+                  <li>(b) The territories for the time being specified in Part IV of the First Schedule; and</li>
+                  <li>(c) Such other territories as may be acquired.</li>
+                </ul>
+              </div>
             </div>
             <div class="draft-article-card">
               <strong>DC.2</strong>
               <p>Admission or establishment of new States.</p>
-              <details class="draft-inline-expand">
-                <summary>Read Full</summary>
-                <div class="draft-article-text">
-                  <p>2. Parliament may, from time to time, by law admit into the Union, or establish, new States on such terms and conditions as it thinks fit.</p>
-                </div>
-              </details>
+              <div class="draft-article-text">
+                <p>2. Parliament may, from time to time, by law admit into the Union, or establish, new States on such terms and conditions as it thinks fit.</p>
+              </div>
             </div>
             <div class="draft-article-card">
               <strong>DC.3</strong>
               <p>Formation and alteration of States.</p>
-              <details class="draft-inline-expand">
-                <summary>Read Full</summary>
-                <div class="draft-article-text">
-                  <p>3. Parliament may by law-</p>
-                  <ul>
-                    <li>(a) Form a new State by separation of territory from a State or by uniting two or more States or parts of States;</li>
-                    <li>(b) Increase the area of any State;</li>
-                    <li>(c) Diminish the area of any State;</li>
-                    <li>(d) Alter the boundaries of any State;</li>
-                    <li>(e) Alter the name of any State.</li>
-                  </ul>
-                  <p>Provided that no Bill for the purpose shall be introduced in either House of Parliament except by the Government of India and unless the required representation, resolution, views, or consent mentioned in the Draft have been obtained.</p>
-                </div>
-              </details>
+              <div class="draft-article-text">
+                <p>3. Parliament may by law-</p>
+                <ul>
+                  <li>(a) Form a new State by separation of territory from a State or by uniting two or more States or parts of States;</li>
+                  <li>(b) Increase the area of any State;</li>
+                  <li>(c) Diminish the area of any State;</li>
+                  <li>(d) Alter the boundaries of any State;</li>
+                  <li>(e) Alter the name of any State.</li>
+                </ul>
+                <p>Provided that no Bill for the purpose shall be introduced in either House of Parliament except by the Government of India and unless the required representation, resolution, views, or consent mentioned in the Draft have been obtained.</p>
+              </div>
             </div>
             <div class="draft-article-card">
               <strong>DC.4</strong>
               <p>Supplementary and consequential provisions.</p>
-              <details class="draft-inline-expand">
-                <summary>Read Full</summary>
-                <div class="draft-article-text">
-                  <p>4. (1) Any law referred to in article 2 or article 3 of this Constitution shall contain such provisions for the amendment of the First Schedule as may be necessary to give effect to the provisions of the law and may also contain such incidental and consequential provisions as Parliament may deem necessary.</p>
-                  <p>(2) No such law as aforesaid shall be deemed to be an amendment of this Constitution for the purposes of article 304.</p>
-                </div>
-              </details>
+              <div class="draft-article-text">
+                <p>4. (1) Any law referred to in article 2 or article 3 of this Constitution shall contain such provisions for the amendment of the First Schedule as may be necessary to give effect to the provisions of the law and may also contain such incidental and consequential provisions as Parliament may deem necessary.</p>
+                <p>(2) No such law as aforesaid shall be deemed to be an amendment of this Constitution for the purposes of article 304.</p>
+              </div>
             </div>
           </div>
         </details>
