@@ -52,47 +52,73 @@
     }
     .intro-box blockquote strong { color: var(--saffron); font-style: normal; display: block; margin-top: 8px; font-size: 0.9rem; }
 
-    .intro-dropdown {
-      margin-top: 12px;
+    /* --- Horizontal Scroll Peek UI --- */
+    .facts-slider-container {
+      width: 100%;
+      overflow: hidden;
+      margin: 20px 0 60px;
+    }
+    .facts-horizontal-scroll {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 24px;
+      padding: 20px max(5%, calc(50% - 400px)); /* Safe padding for perfect centering */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE */
+    }
+    .facts-horizontal-scroll::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+    
+    .fact-card {
+      flex: 0 0 90%;
+      max-width: 800px;
+      height: 65vh;
+      min-height: 460px;
+      scroll-snap-align: center;
       background: var(--white);
       border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 18px 24px;
+      border-radius: var(--radius-lg);
+      padding: 30px;
       box-shadow: var(--shadow-sm);
-      transition: background var(--transition-fast);
-    }
-    .intro-dropdown[open] { background: var(--bg-light); }
-    .intro-summary {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--navy);
-      cursor: pointer;
-      list-style: none;
+      transform: scale(0.95);
+      opacity: 0.6;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      outline: none;
+      flex-direction: column;
+      cursor: pointer;
     }
-    .intro-summary::-webkit-details-marker { display: none; }
-    .intro-summary::after {
-      content: '▼';
-      font-size: 0.85rem;
-      color: var(--saffron);
-      transition: transform 0.3s ease;
+    @media(min-width: 768px) {
+      .fact-card { height: 600px; padding: 40px; }
     }
-    .intro-dropdown[open] .intro-summary::after { transform: rotate(180deg); }
+    .fact-card.active {
+      transform: scale(1);
+      opacity: 1;
+      box-shadow: var(--shadow-lg);
+      border-color: var(--navy);
+      cursor: default;
+    }
     
-    .intro-dropdown-content {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border-light);
+    .fact-card-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light);
     }
-    .intro-dropdown-content p { color: var(--body-text); font-size: 0.95rem; line-height: 1.6; margin-bottom: 12px; }
-    .intro-dropdown-content h4 { color: var(--navy); margin-top: 20px; margin-bottom: 10px; font-size: 0.98rem; }
-    .intro-dropdown-content ul { margin-left: 20px; list-style-type: disc; color: var(--body-text); font-size: 0.95rem; line-height: 1.6; }
-    .intro-dropdown-content ul li { margin-bottom: 10px; }
-    .intro-dropdown-content ul ul { margin-top: 8px; list-style-type: circle; }
-    .intro-dropdown-content strong { color: var(--navy); }
+    .fact-card-header h3 { font-size: 1.3rem; color: var(--navy); margin: 0; line-height: 1.4; }
+    .fact-card-arrow { color: var(--saffron); font-size: 1.3rem; transition: transform 0.3s; flex-shrink: 0; margin-left: 12px; }
+    .fact-card:hover:not(.active) .fact-card-arrow { transform: translateX(4px); }
+    .fact-card.active .fact-card-arrow { opacity: 0; } /* Hide arrow when focused */
+    
+    .fact-card-body { overflow-y: auto; padding-right: 16px; flex: 1; }
+    .fact-card-body::-webkit-scrollbar { width: 4px; }
+    .fact-card-body::-webkit-scrollbar-track { background: transparent; }
+    .fact-card-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    .fact-card-body::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+    
+    .fact-card-body p { color: var(--body-text); font-size: 1rem; line-height: 1.7; margin-bottom: 14px; }
+    .fact-card-body h4 { color: var(--navy); margin-top: 24px; margin-bottom: 12px; font-size: 1.05rem; }
+    .fact-card-body ul { margin-left: 20px; list-style-type: disc; color: var(--body-text); font-size: 1rem; line-height: 1.7; }
+    .fact-card-body ul li { margin-bottom: 10px; }
+    .fact-card-body ul ul { margin-top: 8px; list-style-type: circle; }
+    .fact-card-body strong { color: var(--navy); }
   </style>
 </head>
 <body>
@@ -137,10 +163,17 @@
         <strong>— Dr. B.R. Ambedkar</strong>
       </blockquote>
     </div>
+  </div>
 
-    <details class="intro-dropdown">
-      <summary class="intro-summary">1. Historical Background: The Crucible of the Constitution</summary>
-      <div class="intro-dropdown-content">
+  <div class="facts-slider-container">
+    <div class="facts-horizontal-scroll">
+      
+      <div class="fact-card">
+        <div class="fact-card-header">
+          <h3>1. Historical Background: The Crucible of the Constitution</h3>
+          <span class="fact-card-arrow">➔</span>
+        </div>
+        <div class="fact-card-body">
         <p>The genesis of the Constitution is inextricably linked to the socio-political awakening during the Indian freedom struggle and subsequent legislative enactments by the British government.</p>
         <h4>The Revolutionary &amp; Ideological Spark</h4>
         <ul>
@@ -163,11 +196,14 @@
           <li><strong>Government of India Act, 1935:</strong> Passed in February 1935, this Act serves as the primary structural foundation for the modern Constitution.</li>
         </ul>
       </div>
-    </details>
+      </div>
 
-    <details class="intro-dropdown">
-      <summary class="intro-summary">2. The Constituent Assembly: Crafting the Republic</summary>
-      <div class="intro-dropdown-content">
+      <div class="fact-card">
+        <div class="fact-card-header">
+          <h3>2. The Constituent Assembly: Crafting the Republic</h3>
+          <span class="fact-card-arrow">➔</span>
+        </div>
+        <div class="fact-card-body">
         <ul>
           <li><strong>Inception:</strong> The radical idea for a Constituent Assembly was first proposed by M.N. Roy in 1934 and materialized under the 1946 Cabinet Mission Plan.</li>
           <li><strong>Composition:</strong> Originally 389 members, revised to 299 post-Partition. This included 292 delegates from British India and 93 from Princely States. Members were indirectly elected by provincial assemblies using a single transferable vote system.</li>
@@ -184,11 +220,14 @@
           <li><strong>The Labor of Creation:</strong> The process spanned exactly 2 years, 11 months, and 18 days, covering 11 sessions over 165 days. The final draft was submitted on November 4, 1948.</li>
         </ul>
       </div>
-    </details>
+      </div>
 
-    <details class="intro-dropdown">
-      <summary class="intro-summary">3. The Global Synthesis: "A Bag of Borrowings"</summary>
-      <div class="intro-dropdown-content">
+      <div class="fact-card">
+        <div class="fact-card-header">
+          <h3>3. The Global Synthesis: "A Bag of Borrowings"</h3>
+          <span class="fact-card-arrow">➔</span>
+        </div>
+        <div class="fact-card-body">
         <p>India's Constitution is a sophisticated synthesis of global legal systems, adapted for local needs.</p>
         <ul>
           <li><strong>Govt. of India Act, 1935:</strong> Federal scheme, emergency provisions, Public Service Commissions, office of the Governor, and judicial structures.</li>
@@ -204,11 +243,14 @@
           <li><strong>Japan:</strong> "Procedure established by law."</li>
         </ul>
       </div>
-    </details>
+      </div>
 
-    <details class="intro-dropdown">
-      <summary class="intro-summary">4. Key Provisions &amp; Landmark Amendments</summary>
-      <div class="intro-dropdown-content">
+      <div class="fact-card">
+        <div class="fact-card-header">
+          <h3>4. Key Provisions &amp; Landmark Amendments</h3>
+          <span class="fact-card-arrow">➔</span>
+        </div>
+        <div class="fact-card-body">
         <ul>
           <li><strong>Article 1:</strong> Unambiguously states, "India, that is Bharat, shall be a Union of States."</li>
           <li><strong>The Seventh Schedule:</strong> Defines power via the Union List (originally 97 subjects), State List (66), and Concurrent List (47).</li>
@@ -220,11 +262,14 @@
           <li><strong>Women's Reservation (106th Amendment, 2023):</strong> Reserved 33% of seats in Lok Sabha and State Assemblies for women.</li>
         </ul>
       </div>
-    </details>
+      </div>
 
-    <details class="intro-dropdown">
-      <summary class="intro-summary">5. Judicial Interpretations &amp; Landmark Cases</summary>
-      <div class="intro-dropdown-content">
+      <div class="fact-card">
+        <div class="fact-card-header">
+          <h3>5. Judicial Interpretations &amp; Landmark Cases</h3>
+          <span class="fact-card-arrow">➔</span>
+        </div>
+        <div class="fact-card-body">
         <ul>
           <li><strong>Kameshwar Singh vs. State of Bihar (1951):</strong> The crucible for the First Amendment. Zamindars challenged land reforms under Article 14. Its striking down by the court prompted the creation of the Ninth Schedule.</li>
           <li><strong>Kesavananda Bharati vs. State of Kerala (1973):</strong> A 13-judge bench established the "Basic Structure Doctrine," ruling that Parliament cannot alter the foundational features of the Constitution.</li>
@@ -232,11 +277,14 @@
           <li><strong>I.R. Coelho vs. State of Tamil Nadu (2007):</strong> Ruled that laws added to the Ninth Schedule after the Kesavananda verdict (April 24, 1973) are subject to judicial review.</li>
         </ul>
       </div>
-    </details>
+      </div>
 
-    <details class="intro-dropdown">
-      <summary class="intro-summary">6. Craftsmanship &amp; Historical Trivia</summary>
-      <div class="intro-dropdown-content">
+      <div class="fact-card">
+        <div class="fact-card-header">
+          <h3>6. Craftsmanship &amp; Historical Trivia</h3>
+          <span class="fact-card-arrow">➔</span>
+        </div>
+        <div class="fact-card-body">
         <ul>
           <li><strong>The Master Calligrapher:</strong> Prem Behari Narain Raizada spent six months in Room 204 of Constitution House, using over 250 pen nibs to write the document in a flowing italic script.</li>
           <li><strong>Raizada’s Conditions:</strong> When Prime Minister Nehru offered payment, Raizada refused financial compensation and instead requested two conditions:
@@ -258,8 +306,9 @@
         </ul>
         <p style="margin-top: 16px; font-weight: 600; color: var(--saffron);">The Preamble is the soul of the document, declaring ultimate sovereignty rests with "We, the People."</p>
       </div>
-    </details>
+      </div>
 
+    </div>
   </div>
 </main>
 
@@ -271,5 +320,35 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollContainer = document.querySelector('.facts-horizontal-scroll');
+    const cards = document.querySelectorAll('.fact-card');
+
+    // 1. Interactivity: Click to center the card
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        if (!card.classList.contains('active')) {
+          card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      });
+    });
+
+    // 2. Logic for the "active" state scale effect using Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          cards.forEach(c => c.classList.remove('active'));
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      root: scrollContainer,
+        threshold: 0.5 // Card becomes active when 50% of it is in the viewport
+    });
+
+    cards.forEach(card => observer.observe(card));
+  });
+</script>
 </body>
 </html>
