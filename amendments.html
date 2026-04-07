@@ -19,15 +19,11 @@
       text-align: center;
       position: relative;
       overflow: hidden;
-      cursor: pointer;
-      transition: opacity var(--transition-fast);
     }
-    .amend-header:hover { opacity: 0.95; }
     .amend-header h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 12px; color: var(--white); }
     .amend-header p { color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
     
-    .amend-container { max-width: 900px; margin: 40px auto; padding: 0 20px; display: none; }
-    .amend-container.active { display: block; animation: fadeIn 0.4s ease; }
+    .amend-container { max-width: 900px; margin: 40px auto; padding: 0 20px; animation: fadeIn 0.4s ease; }
     
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
@@ -105,6 +101,41 @@
     }
     .amend-changes-box strong { color: var(--saffron); display: block; margin-bottom: 6px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
+    .intro-dropdown {
+      margin-top: 12px;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+    }
+    .intro-summary {
+      font-weight: 700;
+      color: var(--navy);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      outline: none;
+    }
+    .intro-summary::-webkit-details-marker {
+      display: none;
+    }
+    .intro-summary::after {
+      content: '▼';
+      font-size: 0.85rem;
+      color: var(--saffron);
+      transition: transform 0.3s ease;
+    }
+    .intro-dropdown[open] .intro-summary::after {
+      transform: rotate(180deg);
+    }
+    .intro-dropdown-content {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-light);
+    }
+
     @media (max-width: 600px) {
       .amend-summary { padding: 16px; gap: 12px; }
       .amend-badge { width: 40px; height: 40px; font-size: 1rem; }
@@ -137,8 +168,8 @@
   <!-- 1. Main Entry Point -->
   <div class="amend-header" id="amendHeader">
     <div class="container">
-      <h1>Amendments ↓</h1>
-      <p>Click here to explore the history of changes made to the Indian Constitution.</p>
+      <h1>Constitutional Amendments</h1>
+      <p>Explore the history of changes made to the Indian Constitution.</p>
     </div>
   </div>
 
@@ -149,52 +180,65 @@
       <h2>Amendment of the Indian Constitution: Provisions, Procedures, and Types</h2>
       <p>The Constitution of India is designed to be a "living document," meaning it is not static but evolves alongside the needs of the nation. To facilitate this evolution, the framers included specific mechanisms for its modification.</p>
 
-      <h3 style="font-size: 1.1rem; color: var(--navy); margin-top: 24px; margin-bottom: 8px;">1. Meaning of Constitutional Amendment</h3>
-      <p>A Constitutional Amendment is the formal process of modifying the nation’s supreme law. This includes the addition, variation, or removal of any existing provision. The primary objective is to ensure the Constitution remains relevant to changing socio-political and economic realities while safeguarding its core values and fundamental principles.</p>
+      <details class="intro-dropdown">
+        <summary class="intro-summary">1. Constitutional Basis (Article 368)</summary>
+        <div class="intro-dropdown-content">
+          <p>The authority and detailed procedure for amending the Constitution are enshrined in Article 368, located in Part XX. These provisions outline the boundaries of the Parliament's power and the specific steps required to enact changes.</p>
+        </div>
+      </details>
 
-      <h3 style="font-size: 1.1rem; color: var(--navy); margin-top: 24px; margin-bottom: 8px;">2. Constitutional Basis (Article 368)</h3>
-      <p>The authority and detailed procedure for amending the Constitution are enshrined in Article 368, located in Part XX. These provisions outline the boundaries of the Parliament's power and the specific steps required to enact changes.</p>
-
-      <h3 style="font-size: 1.1rem; color: var(--navy); margin-top: 24px; margin-bottom: 8px;">3. The Amendment Procedure</h3>
-      <p>According to Article 368, the process follows a strict legislative path:</p>
-      <ul style="margin-top: 10px; margin-left: 20px; color: var(--body-text); font-size: 0.95rem; line-height: 1.6;">
-        <li><strong>Initiation:</strong> An amendment bill can be introduced in either House of Parliament (Lok Sabha or Rajya Sabha). It cannot be initiated in State Legislatures.</li>
-        <li><strong>Introduction:</strong> The bill may be introduced by a Minister or a Private Member. Notably, the prior recommendation of the President is not required.</li>
-        <li><strong>Voting Requirement:</strong> The bill must be passed in each House by a Special Majority. This is defined as:
-          <ul style="margin-top: 5px; margin-left: 20px; list-style-type: circle;">
-            <li>A majority (more than 50%) of the total membership of the House.</li>
-            <li>A majority of two-thirds of the members present and voting.</li>
+      <details class="intro-dropdown">
+        <summary class="intro-summary">2. The Amendment Procedure</summary>
+        <div class="intro-dropdown-content">
+          <p>According to Article 368, the process follows a strict legislative path:</p>
+          <ul style="margin-top: 10px; margin-left: 20px; color: var(--body-text); font-size: 0.95rem; line-height: 1.6;">
+            <li><strong>Initiation:</strong> An amendment bill can be introduced in either House of Parliament (Lok Sabha or Rajya Sabha). It cannot be initiated in State Legislatures.</li>
+            <li><strong>Introduction:</strong> The bill may be introduced by a Minister or a Private Member. Notably, the prior recommendation of the President is not required.</li>
+            <li><strong>Voting Requirement:</strong> The bill must be passed in each House by a Special Majority. This is defined as:
+              <ul style="margin-top: 5px; margin-left: 20px; list-style-type: circle;">
+                <li>A majority (more than 50%) of the total membership of the House.</li>
+                <li>A majority of two-thirds of the members present and voting.</li>
+              </ul>
+            </li>
+            <li><strong>No Joint Sitting:</strong> Each House must pass the bill independently. If there is a deadlock between the two Houses, there is no provision for a joint sitting to resolve the disagreement.</li>
+            <li><strong>State Ratification (Federal Provisions):</strong> If the amendment seeks to change "federal" provisions (those affecting the states), it must be ratified by the legislatures of at least half of the states via a Simple Majority.</li>
+            <li><strong>Presidential Assent:</strong> Once passed by Parliament (and ratified by states if necessary), the bill is presented to the President.</li>
+            <li><strong>Mandatory Approval:</strong> The President must give their assent. Unlike ordinary bills, the President cannot withhold assent or return the bill for reconsideration.</li>
+            <li><strong>Transformation into Law:</strong> Upon receiving the President's signature, the bill becomes a Constitutional Amendment Act, and the Constitution is officially updated.</li>
           </ul>
-        </li>
-        <li><strong>No Joint Sitting:</strong> Each House must pass the bill independently. If there is a deadlock between the two Houses, there is no provision for a joint sitting to resolve the disagreement.</li>
-        <li><strong>State Ratification (Federal Provisions):</strong> If the amendment seeks to change "federal" provisions (those affecting the states), it must be ratified by the legislatures of at least half of the states via a Simple Majority.</li>
-        <li><strong>Presidential Assent:</strong> Once passed by Parliament (and ratified by states if necessary), the bill is presented to the President.</li>
-        <li><strong>Mandatory Approval:</strong> The President must give their assent. Unlike ordinary bills, the President cannot withhold assent or return the bill for reconsideration.</li>
-        <li><strong>Transformation into Law:</strong> Upon receiving the President's signature, the bill becomes a Constitutional Amendment Act, and the Constitution is officially updated.</li>
-      </ul>
+        </div>
+      </details>
 
-      <h3 style="font-size: 1.1rem; color: var(--navy); margin-top: 24px; margin-bottom: 8px;">4. Categories of Amendments</h3>
-      <p>While Article 368 specifically mentions two types of amendments, the Constitution can effectively be changed in three ways:</p>
-      <ul style="margin-top: 10px; margin-left: 20px; color: var(--body-text); font-size: 0.95rem; line-height: 1.6;">
-        <li style="margin-bottom: 10px;"><strong>A. Amendment by Simple Majority (Outside Article 368)</strong><br>
-        Certain provisions can be changed by a simple majority of members present and voting (similar to ordinary legislation). Legally, these are not considered amendments under Article 368.<br>
-        <em>Examples:</em> Creation or admission of new states; alteration of state boundaries or names; abolition or creation of Legislative Councils in states.</li>
-        
-        <li style="margin-bottom: 10px;"><strong>B. Amendment by Special Majority</strong><br>
-        The majority of constitutional provisions are amended through this method.<br>
-        <em>Requirements:</em> Majority of total membership + 2/3rd of members present and voting.<br>
-        <em>Examples:</em> Fundamental Rights; Directive Principles of State Policy (DPSP); and any other provision not covered by the other two categories.</li>
-        
-        <li style="margin-bottom: 10px;"><strong>C. Amendment by Special Majority + State Consent</strong><br>
-        This method is reserved for provisions that impact the federal structure of the country.<br>
-        <em>Requirements:</em> Special Majority in Parliament + consent of half of the State Legislatures by a Simple Majority.<br>
-        <em>Note:</em> There is no specific timeframe within which states must provide their consent. As soon as the 50% threshold is reached, the requirement is satisfied.<br>
-        <em>Examples:</em> The method of electing the President; the extent of executive powers of the Union and States; provisions concerning the Supreme Court and High Courts.</li>
-      </ul>
+      <details class="intro-dropdown">
+        <summary class="intro-summary">3. Categories of Amendments</summary>
+        <div class="intro-dropdown-content">
+          <p>While Article 368 specifically mentions two types of amendments, the Constitution can effectively be changed in three ways:</p>
+          <ul style="margin-top: 10px; margin-left: 20px; color: var(--body-text); font-size: 0.95rem; line-height: 1.6;">
+            <li style="margin-bottom: 10px;"><strong>A. Amendment by Simple Majority (Outside Article 368)</strong><br>
+            Certain provisions can be changed by a simple majority of members present and voting (similar to ordinary legislation). Legally, these are not considered amendments under Article 368.<br>
+            <em>Examples:</em> Creation or admission of new states; alteration of state boundaries or names; abolition or creation of Legislative Councils in states.</li>
+            
+            <li style="margin-bottom: 10px;"><strong>B. Amendment by Special Majority</strong><br>
+            The majority of constitutional provisions are amended through this method.<br>
+            <em>Requirements:</em> Majority of total membership + 2/3rd of members present and voting.<br>
+            <em>Examples:</em> Fundamental Rights; Directive Principles of State Policy (DPSP); and any other provision not covered by the other two categories.</li>
+            
+            <li style="margin-bottom: 10px;"><strong>C. Amendment by Special Majority + State Consent</strong><br>
+            This method is reserved for provisions that impact the federal structure of the country.<br>
+            <em>Requirements:</em> Special Majority in Parliament + consent of half of the State Legislatures by a Simple Majority.<br>
+            <em>Note:</em> There is no specific timeframe within which states must provide their consent. As soon as the 50% threshold is reached, the requirement is satisfied.<br>
+            <em>Examples:</em> The method of electing the President; the extent of executive powers of the Union and States; provisions concerning the Supreme Court and High Courts.</li>
+          </ul>
+        </div>
+      </details>
 
-      <h3 style="font-size: 1.1rem; color: var(--navy); margin-top: 24px; margin-bottom: 8px;">5. The Doctrine of Basic Structure</h3>
-      <p>While Parliament has broad powers to amend the Constitution, these powers are not absolute. In the landmark Kesavananda Bharati case (1973), the Supreme Court established the Doctrine of Basic Structure.<br><br>
-      This doctrine asserts that there are certain fundamental features of the Constitution—such as secularism, federalism, and judicial review—that are so essential that they cannot be altered or destroyed by any amendment. This serves as a vital check on the Parliament's power, ensuring the original spirit of the Constitution remains intact.</p>
+      <details class="intro-dropdown">
+        <summary class="intro-summary">4. The Doctrine of Basic Structure</summary>
+        <div class="intro-dropdown-content">
+          <p>While Parliament has broad powers to amend the Constitution, these powers are not absolute. In the landmark Kesavananda Bharati case (1973), the Supreme Court established the Doctrine of Basic Structure.<br><br>
+          This doctrine asserts that there are certain fundamental features of the Constitution—such as secularism, federalism, and judicial review—that are so essential that they cannot be altered or destroyed by any amendment. This serves as a vital check on the Parliament's power, ensuring the original spirit of the Constitution remains intact.</p>
+        </div>
+      </details>
     </div>
 
     <!-- 4. Navigation / Search Bar -->
@@ -221,22 +265,9 @@
 <script src="js/main.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const header = document.getElementById('amendHeader');
-    const container = document.getElementById('amendContainer');
     const listWrap = document.getElementById('amendList');
     const searchInput = document.getElementById('searchAmendments');
     let amendmentsData = [];
-
-    // Toggle main container
-    header.addEventListener('click', () => {
-      container.classList.toggle('active');
-      // Optional: scroll slightly to view the content better if opened
-      if (container.classList.contains('active')) {
-        setTimeout(() => {
-          header.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-      }
-    });
 
     // Fetch and render data
     fetch('data/amendments.json')
