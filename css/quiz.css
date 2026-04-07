@@ -101,7 +101,7 @@
   z-index: 1;
 }
 .daily-card p {
-  color: var(--body-text);
+  color: rgba(255, 255, 255, 0.75);
   margin-bottom: 24px;
   position: relative;
   z-index: 1;
@@ -119,7 +119,7 @@
   align-items: center;
   gap: 6px;
   font-size: 0.88rem;
-  color: var(--body-text);
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 500;
 }
 .btn-white {

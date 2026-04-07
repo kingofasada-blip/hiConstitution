@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Constitutional Amendments — hiConstitution</title>
+  <meta name="description" content="Explore the history and details of all Constitutional Amendments of India." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .amendments-page { padding-top: var(--navbar-h); min-height: 100vh; background: var(--bg-light); padding-bottom: 80px; }
+    
+    .amend-header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      padding: 56px 0;
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: opacity var(--transition-fast);
+    }
+    .amend-header:hover { opacity: 0.95; }
+    .amend-header h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 12px; color: var(--white); }
+    .amend-header p { color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+    
+    .amend-container { max-width: 900px; margin: 40px auto; padding: 0 20px; display: none; }
+    .amend-container.active { display: block; animation: fadeIn 0.4s ease; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .intro-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--saffron);
+    }
+    .intro-box h2 { font-size: 1.4rem; color: var(--navy); margin-bottom: 12px; }
+    .intro-box p { font-size: 0.95rem; color: var(--body-text); line-height: 1.6; }
+
+    .search-bar-container { margin-bottom: 30px; position: relative; }
+    .search-input {
+      width: 100%; padding: 14px 20px 14px 45px;
+      font-size: 1rem; border: 1px solid var(--border);
+      border-radius: var(--radius-md); outline: none;
+      transition: border-color var(--transition-fast);
+    }
+    .search-input:focus { border-color: var(--navy); }
+    .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: var(--muted); }
+
+    .amend-list { display: flex; flex-direction: column; gap: 16px; }
+    
+    .amend-strip {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: all var(--transition-fast);
+    }
+    .amend-strip:hover { box-shadow: var(--shadow-sm); border-color: var(--border-light); }
+    
+    .amend-summary {
+      display: flex; align-items: center; gap: 20px;
+      padding: 20px; cursor: pointer; user-select: none;
+    }
+    
+    .amend-badge {
+      width: 50px; height: 50px; flex-shrink: 0;
+      background: var(--bg-subtle); color: var(--navy);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; font-weight: 800; border: 2px solid var(--border);
+    }
+    .amend-strip:hover .amend-badge { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    
+    .amend-info { flex: 1; }
+    .amend-info-top { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; flex-wrap: wrap; }
+    .amend-title { font-size: 1.1rem; font-weight: 700; color: var(--dark-text); }
+    .amend-year { font-size: 0.8rem; font-weight: 600; color: var(--saffron); background: rgba(243,115,36,0.1); padding: 2px 8px; border-radius: 99px; }
+    .amend-gist { font-size: 0.9rem; color: var(--body-text); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    
+    .amend-arrow { font-size: 1.2rem; color: var(--muted); transition: transform 0.3s ease; }
+    .amend-strip.open .amend-arrow { transform: rotate(90deg); color: var(--navy); }
+    
+    .amend-details {
+      max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+      background: var(--bg-light); border-top: 1px solid var(--border-light);
+    }
+    .amend-strip.open .amend-details { max-height: 800px; }
+    .amend-details-inner { padding: 20px 20px 24px 90px; font-size: 0.95rem; color: var(--body-text); line-height: 1.7; }
+    .amend-details-inner ul { margin-top: 10px; padding-left: 20px; list-style-type: disc; }
+    
+    .amend-changes-box {
+      background: rgba(243, 115, 36, 0.05);
+      border: 1px solid rgba(243, 115, 36, 0.2);
+      border-radius: var(--radius-md);
+      padding: 14px 18px; margin-bottom: 16px; font-size: 0.9rem; color: var(--navy); line-height: 1.6;
+    }
+    .amend-changes-box strong { color: var(--saffron); display: block; margin-bottom: 6px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    @media (max-width: 600px) {
+      .amend-summary { padding: 16px; gap: 12px; }
+      .amend-badge { width: 40px; height: 40px; font-size: 1rem; }
+      .amend-details-inner { padding: 16px 16px 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-circle">हि</div>
+      <span class="logo-text">hi<span>Constitution</span></span>
+    </a>
+    <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>
+      <li><a href="study.html" class="nav-link">Study</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+      <li><a href="pulse.html" class="nav-link">Pulse</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main class="amendments-page">
+  <!-- 1. Main Entry Point -->
+  <div class="amend-header" id="amendHeader">
+    <div class="container">
+      <h1>Amendments ↓</h1>
+      <p>Click here to explore the history of changes made to the Indian Constitution.</p>
+    </div>
+  </div>
+
+  <div class="amend-container" id="amendContainer">
+    
+    <!-- 2. Introductory Section (Notes) -->
+    <div class="intro-box">
+      <h2>Amendment of the Indian Constitution: Provisions, Procedures, and Types</h2>
+      <p>The Constitution of India is designed to be a "living document," meaning it is not static but evolves alongside the needs of the nation. To facilitate this evolution, the framers included specific mechanisms for its modification.</p>
+
+      <h3 style="font-size: 1.1rem; color: var(--navy); margin-top: 24px; margin-bottom: 8px;">1. Meaning of Constitutional Amendment</h3>
+      <p>A Constitutional Amendment is the formal process of modifying the nation’s supreme law. This includes the addition, variation, or removal of any existing provision. The primary objective is to ensure the Constitution remains relevant to changing socio-political and economic realities while safeguarding its core values and fundamental principles.</p>
+
+      <h3 style="font-size: 1.1rem; color: var(--navy); margin-top: 24px; margin-bottom: 8px;">2. Constitutional Basis (Article 368)</h3>
+      <p>The authority and detailed procedure for amending the Constitution are enshrined in Article 368, located in Part XX. These provisions outline the boundaries of the Parliament's power and the specific steps required to enact changes.</p>
+
+      <h3 style="font-size: 1.1rem; color: var(--navy); margin-top: 24px; margin-bottom: 8px;">3. The Amendment Procedure</h3>
+      <p>According to Article 368, the process follows a strict legislative path:</p>
+      <ul style="margin-top: 10px; margin-left: 20px; color: var(--body-text); font-size: 0.95rem; line-height: 1.6;">
+        <li><strong>Initiation:</strong> An amendment bill can be introduced in either House of Parliament (Lok Sabha or Rajya Sabha). It cannot be initiated in State Legislatures.</li>
+        <li><strong>Introduction:</strong> The bill may be introduced by a Minister or a Private Member. Notably, the prior recommendation of the President is not required.</li>
+        <li><strong>Voting Requirement:</strong> The bill must be passed in each House by a Special Majority. This is defined as:
+          <ul style="margin-top: 5px; margin-left: 20px; list-style-type: circle;">
+            <li>A majority (more than 50%) of the total membership of the House.</li>
+            <li>A majority of two-thirds of the members present and voting.</li>
+          </ul>
+        </li>
+        <li><strong>No Joint Sitting:</strong> Each House must pass the bill independently. If there is a deadlock between the two Houses, there is no provision for a joint sitting to resolve the disagreement.</li>
+        <li><strong>State Ratification (Federal Provisions):</strong> If the amendment seeks to change "federal" provisions (those affecting the states), it must be ratified by the legislatures of at least half of the states via a Simple Majority.</li>
+        <li><strong>Presidential Assent:</strong> Once passed by Parliament (and ratified by states if necessary), the bill is presented to the President.</li>
+        <li><strong>Mandatory Approval:</strong> The President must give their assent. Unlike ordinary bills, the President cannot withhold assent or return the bill for reconsideration.</li>
+        <li><strong>Transformation into Law:</strong> Upon receiving the President's signature, the bill becomes a Constitutional Amendment Act, and the Constitution is officially updated.</li>
+      </ul>
+
+      <h3 style="font-size: 1.1rem; color: var(--navy); margin-top: 24px; margin-bottom: 8px;">4. Categories of Amendments</h3>
+      <p>While Article 368 specifically mentions two types of amendments, the Constitution can effectively be changed in three ways:</p>
+      <ul style="margin-top: 10px; margin-left: 20px; color: var(--body-text); font-size: 0.95rem; line-height: 1.6;">
+        <li style="margin-bottom: 10px;"><strong>A. Amendment by Simple Majority (Outside Article 368)</strong><br>
+        Certain provisions can be changed by a simple majority of members present and voting (similar to ordinary legislation). Legally, these are not considered amendments under Article 368.<br>
+        <em>Examples:</em> Creation or admission of new states; alteration of state boundaries or names; abolition or creation of Legislative Councils in states.</li>
+        
+        <li style="margin-bottom: 10px;"><strong>B. Amendment by Special Majority</strong><br>
+        The majority of constitutional provisions are amended through this method.<br>
+        <em>Requirements:</em> Majority of total membership + 2/3rd of members present and voting.<br>
+        <em>Examples:</em> Fundamental Rights; Directive Principles of State Policy (DPSP); and any other provision not covered by the other two categories.</li>
+        
+        <li style="margin-bottom: 10px;"><strong>C. Amendment by Special Majority + State Consent</strong><br>
+        This method is reserved for provisions that impact the federal structure of the country.<br>
+        <em>Requirements:</em> Special Majority in Parliament + consent of half of the State Legislatures by a Simple Majority.<br>
+        <em>Note:</em> There is no specific timeframe within which states must provide their consent. As soon as the 50% threshold is reached, the requirement is satisfied.<br>
+        <em>Examples:</em> The method of electing the President; the extent of executive powers of the Union and States; provisions concerning the Supreme Court and High Courts.</li>
+      </ul>
+
+      <h3 style="font-size: 1.1rem; color: var(--navy); margin-top: 24px; margin-bottom: 8px;">5. The Doctrine of Basic Structure</h3>
+      <p>While Parliament has broad powers to amend the Constitution, these powers are not absolute. In the landmark Kesavananda Bharati case (1973), the Supreme Court established the Doctrine of Basic Structure.<br><br>
+      This doctrine asserts that there are certain fundamental features of the Constitution—such as secularism, federalism, and judicial review—that are so essential that they cannot be altered or destroyed by any amendment. This serves as a vital check on the Parliament's power, ensuring the original spirit of the Constitution remains intact.</p>
+    </div>
+
+    <!-- 4. Navigation / Search Bar -->
+    <div class="search-bar-container">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchAmendments" class="search-input" placeholder="Search amendments by year, number, or keyword (e.g., GST, Panchayat)...">
+    </div>
+
+    <!-- 3. The List Layout (Numbered Strips) -->
+    <div class="amend-list" id="amendList">
+      <div style="text-align:center; padding:40px; color:var(--muted);">Loading amendments...</div>
+    </div>
+
+  </div>
+</main>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,0.6);padding:32px 0;">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <a href="index.html" style="color:#fff;font-weight:700;font-size:0.95rem;">hiConstitution.com</a>
+    <p style="font-size:0.82rem;">© 2025 — Educational use only.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.getElementById('amendHeader');
+    const container = document.getElementById('amendContainer');
+    const listWrap = document.getElementById('amendList');
+    const searchInput = document.getElementById('searchAmendments');
+    let amendmentsData = [];
+
+    // Toggle main container
+    header.addEventListener('click', () => {
+      container.classList.toggle('active');
+      // Optional: scroll slightly to view the content better if opened
+      if (container.classList.contains('active')) {
+        setTimeout(() => {
+          header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    });
+
+    // Fetch and render data
+    fetch('data/amendments.json')
+      .then(res => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
+      })
+      .then(data => {
+        // Reverse the array to show the latest amendment first
+        amendmentsData = data.sort((a, b) => b.number - a.number);
+        renderAmendments(amendmentsData);
+      })
+      .catch(err => {
+        console.error(err);
+        listWrap.innerHTML = `<div style="text-align:center; color:#c62828; padding: 30px; background:#FFEBEE; border-radius:8px; border:1px solid #ffcdd2; margin-top:20px;">
+          <strong>⚠️ Error Loading Data!</strong><br><br>
+          Either you are not running a Local Server, or there is a <strong>Syntax Error</strong> (like a missing comma or unescaped quote) in your <code>amendments.json</code> file.<br><br>
+          <em>Press F12 to open the Developer Console for exact error details.</em>
+        </div>`;
+      });
+
+    function renderAmendments(data) {
+      listWrap.innerHTML = '';
+      if (data.length === 0) {
+        listWrap.innerHTML = '<div style="text-align:center; padding: 20px; color:var(--muted);">No amendments found matching your search.</div>';
+        return;
+      }
+
+      data.forEach(item => {
+        const strip = document.createElement('div');
+        strip.className = 'amend-strip';
+        
+        // Format the details safely to prevent undefined errors
+        const formattedDetails = (item.details || '').replace(/\n- /g, '<br>• ').replace(/\\n/g, '<br>');
+        const changesHtml = item.changes ? `<div class="amend-changes-box"><strong>📌 Articles Affected (Notes):</strong>${(item.changes || '').replace(/\n/g, '<br>')}</div>` : '';
+        
+        strip.innerHTML = `
+          <div class="amend-summary">
+            <div class="amend-badge">${item.number}</div>
+            <div class="amend-info">
+              <div class="amend-info-top">
+                <span class="amend-title">${item.title}</span>
+                <span class="amend-year">${item.year}</span>
+              </div>
+              <div class="amend-gist">${item.gist}</div>
+            </div>
+            <div class="amend-arrow">➔</div>
+          </div>
+          <div class="amend-details">
+            <div class="amend-details-inner">
+              ${changesHtml}
+              <div style="color: var(--body-text);">${formattedDetails}</div>
+            </div>
+          </div>
+        `;
+
+        // Accordion click interactivity
+        strip.querySelector('.amend-summary').addEventListener('click', () => {
+          const isOpen = strip.classList.contains('open');
+          // Close all others
+          document.querySelectorAll('.amend-strip').forEach(s => s.classList.remove('open'));
+          // Toggle current
+          if (!isOpen) {
+            strip.classList.add('open');
+            // Smooth scroll to make sure the open content is visible
+            setTimeout(() => {
+              strip.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 300);
+          }
+        });
+
+        listWrap.appendChild(strip);
+      });
+    }
+
+    // Search filter
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      const filtered = amendmentsData.filter(a => 
+        a.title.toLowerCase().includes(q) ||
+        a.year.toString().includes(q) ||
+        a.gist.toLowerCase().includes(q) ||
+        a.details.toLowerCase().includes(q) ||
+        a.number.toString() === q
+      );
+      renderAmendments(filtered);
+    });
+  });
+</script>
+</body>
+</html>

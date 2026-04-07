@@ -263,16 +263,12 @@
     }
 
     /* Nav between articles */
-    .article-nav-bar {
-      background: var(--white);
-      border-top: 1px solid var(--border);
-      padding: 20px 0;
-    }
     .article-nav-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
+      gap: 10px;
+      margin-top: 24px;
     }
     .art-nav-btn {
       display: inline-flex;
@@ -285,6 +281,9 @@
       font-weight: 600;
       color: var(--navy);
       transition: all var(--transition-fast);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      max-width: 42%;
     }
     .art-nav-btn:hover { background: var(--bg-subtle); border-color: var(--navy); }
     .art-nav-label { font-size: 0.72rem; color: var(--muted); font-weight: 400; display: block; }
@@ -400,6 +399,24 @@
         </div><!-- /hindi -->
       </div><!-- /content col -->
 
+      <!-- Article Nav (Next / Prev) -->
+      <div class="article-nav-inner">
+        <a href="#" class="art-nav-btn" id="prevArticleLink" style="visibility:hidden;">
+          <span style="flex-shrink:0;">←</span>
+          <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+            <span class="art-nav-label">Previous</span><span id="prevArticleLabel">Article</span>
+          </span>
+        </a>
+        <a href="read-the-constitution.html" style="font-size: 0.88rem; font-weight: 600; color: var(--muted); text-decoration: none;">🏠 All</a>
+        <a href="#" class="art-nav-btn" id="nextArticleLink" style="visibility:hidden; flex-direction:row-reverse; text-align:right;">
+          <span style="flex-shrink:0;">→</span>
+          <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+            <span class="art-nav-label">Next</span><span id="nextArticleLabel">Article</span>
+          </span>
+        </a>
+      </div>
+    </div><!-- /content col wrapper ends here -->
+
       <!-- Sidebar -->
       <aside class="article-sidebar">
         <div class="side-card">
@@ -426,23 +443,6 @@
 
     </div><!-- /.article-main -->
   </div><!-- /.container -->
-
-  <!-- Article Nav -->
-  <div class="article-nav-bar">
-    <div class="container">
-      <div class="article-nav-inner">
-        <a href="library.html" class="art-nav-btn" id="prevArticleLink" style="visibility:hidden;">
-          <span>←</span>
-          <span><span class="art-nav-label">Previous</span><span id="prevArticleLabel">Article</span></span>
-        </a>
-        <a href="library.html" class="btn btn-outline-navy btn-sm">Browse Library</a>
-        <a href="library.html" class="art-nav-btn" id="nextArticleLink" style="visibility:hidden;">
-          <span><span class="art-nav-label">Next</span><span id="nextArticleLabel">Article</span></span>
-          <span>→</span>
-        </a>
-      </div>
-    </div>
-  </div>
 
 </main>
 
@@ -543,7 +543,7 @@
           document.getElementById('dyn-updated-badge').textContent = 'Updated ' + new Date(document.lastModified).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
           document.getElementById('side-last-updated').textContent = new Date(document.lastModified).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 
-          const formatText = (text) => text ? text.replace(/\n/g, '<br><br>') : null;
+          const formatText = (text) => text ? text.split('\n').filter(p => p.trim() !== '').map(p => '<p>' + p + '</p>').join('') : null;
           const hasOriginal = Boolean(foundArt.text && foundArt.text.trim());
           const hasSimplified = Boolean(foundArt.simplified && foundArt.simplified.trim());
           const hasHindi = Boolean(foundArt.hindi && foundArt.hindi.trim());

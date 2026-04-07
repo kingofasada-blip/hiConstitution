@@ -110,13 +110,24 @@
 
   <!-- Category Grid -->
   <section class="categories-section">
-    <div class="container">
+    <div class="container" id="mainCategoriesSection">
       <div style="margin-bottom:28px;">
         <span class="section-label">Choose a Topic</span>
         <h2 style="margin-bottom:8px;">Quiz Categories</h2>
-        <p style="color:var(--muted);font-size:0.92rem;">Select a topic to start a quiz. Your best scores are saved locally.</p>
+        <p style="color:var(--muted);font-size:0.92rem;">Select a topic to view available quizzes. Your best scores are saved locally.</p>
       </div>
       <div class="categories-grid" id="categoriesGrid"></div>
+    </div>
+
+    <!-- Sub-category / Quiz List Section -->
+    <div class="container hidden" id="quizListSection">
+      <button class="btn btn-outline-navy btn-sm" style="margin-bottom: 24px;" onclick="showCategoriesView()">← Back to Categories</button>
+      <div style="margin-bottom:28px;">
+        <span class="section-label" id="subCatLabel">Category Name</span>
+        <h2 style="margin-bottom:8px;">Available Quizzes</h2>
+        <p style="color:var(--muted);font-size:0.92rem;" id="subCatDesc">Select a quiz to start testing your knowledge.</p>
+      </div>
+      <div class="categories-grid" id="quizzesGrid"></div>
     </div>
   </section>
 
