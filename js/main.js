@@ -219,12 +219,53 @@
   });
 })();
 
-/* ── Article of the day date stamp ── */
-(function setAotdDate() {
+/* ── Article of the Day Logic ── */
+(function initArticleOfTheDay() {
   const el = document.getElementById('aotdDate');
   if (!el) return;
+  
   const d = new Date();
   el.textContent = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  const AOTD_DATABASE = [
+    { num: "21", title: "Right to Life & Personal Liberty", quote: "\"No person shall be deprived of his life or personal liberty except according to procedure established by law.\"", tag: "Fundamental Rights · Part III", part: "Part III", badge: "Fundamental Right", snippet: "A cornerstone of the Constitution, Article 21 has been expansively interpreted by the Supreme Court to include the right to privacy, clean environment, and free legal aid, making it the most dynamic fundamental right." },
+    { num: "32", title: "Right to Constitutional Remedies", quote: "\"The right to move the Supreme Court by appropriate proceedings for the enforcement of the rights conferred by this Part is guaranteed.\"", tag: "Fundamental Rights · Part III", part: "Part III", badge: "Fundamental Right", snippet: "Called the 'heart and soul of the Constitution' by Dr. B.R. Ambedkar, Article 32 empowers every citizen to approach the Supreme Court directly to enforce their Fundamental Rights through writs." },
+    { num: "14", title: "Right to Equality", quote: "\"The State shall not deny to any person equality before the law or the equal protection of the laws within the territory of India.\"", tag: "Fundamental Rights · Part III", part: "Part III", badge: "Fundamental Right", snippet: "Article 14 ensures that no person is above the law and that everyone is treated equally by the State, forming the foundation of the Rule of Law in India." },
+    { num: "19", title: "Freedom of Speech and Expression", quote: "\"All citizens shall have the right to freedom of speech and expression; to assemble peaceably...\"", tag: "Fundamental Rights · Part III", part: "Part III", badge: "Fundamental Right", snippet: "Article 19 guarantees six essential freedoms to citizens, including speech, assembly, and movement, subject to reasonable restrictions for sovereignty and public order." },
+    { num: "51A", title: "Fundamental Duties", quote: "\"It shall be the duty of every citizen of India to abide by the Constitution and respect its ideals and institutions...\"", tag: "Fundamental Duties · Part IVA", part: "Part IVA", badge: "Fundamental Duty", snippet: "Added by the 42nd Amendment, these 11 duties serve as a constant reminder to citizens that while the Constitution grants them rights, it also expects them to observe certain basic norms of democratic conduct." },
+    { num: "44", title: "Uniform Civil Code", quote: "\"The State shall endeavour to secure for the citizens a uniform civil code throughout the territory of India.\"", tag: "Directive Principles · Part IV", part: "Part IV", badge: "Directive Principle", snippet: "A significant and highly debated Directive Principle that guides the State to formulate a single set of personal laws governing marriage, divorce, and inheritance for all citizens." },
+    { num: "368", title: "Power to Amend the Constitution", quote: "\"Parliament may in exercise of its constituent power amend by way of addition, variation or repeal any provision of this Constitution...\"", tag: "Amendment Power · Part XX", part: "Part XX", badge: "Constitutional Power", snippet: "This article grants Parliament the power to amend the Constitution, keeping it a 'living document'. However, the Supreme Court ruled that the 'Basic Structure' cannot be altered." },
+    { num: "15", title: "Prohibition of Discrimination", quote: "\"The State shall not discriminate against any citizen on grounds only of religion, race, caste, sex, place of birth or any of them.\"", tag: "Fundamental Rights · Part III", part: "Part III", badge: "Fundamental Right", snippet: "Article 15 prohibits discrimination by the State and ensures equal access to public places, while allowing special provisions for women, children, and socially/educationally backward classes." },
+    { num: "17", title: "Abolition of Untouchability", quote: "\"Untouchability is abolished and its practice in any form is forbidden.\"", tag: "Fundamental Rights · Part III", part: "Part III", badge: "Fundamental Right", snippet: "A historic provision aimed at eradicating a centuries-old social evil, Article 17 makes the practice of untouchability a punishable offence under the law." },
+    { num: "40", title: "Organisation of Village Panchayats", quote: "\"The State shall take steps to organise village panchayats and endow them with such powers and authority...\"", tag: "Directive Principles · Part IV", part: "Part IV", badge: "Directive Principle", snippet: "Reflecting Gandhian ideals, Article 40 directs the State to organize village panchayats as units of self-government, which was later fully realized through the 73rd Amendment." },
+    { num: "52", title: "The President of India", quote: "\"There shall be a President of India.\"", tag: "The Union · Part V", part: "Part V", badge: "Executive Power", snippet: "This concise yet powerful article establishes the highest office of the land, making the President the head of state and the supreme commander of the Indian Armed Forces." },
+    { num: "324", title: "Election Commission", quote: "\"The superintendence, direction and control of the preparation of the electoral rolls for, and the conduct of, all elections... shall be vested in a Commission.\"", tag: "Elections · Part XV", part: "Part XV", badge: "Constitutional Body", snippet: "Article 324 guarantees the independence of the Election Commission of India, ensuring free and fair elections for Parliament and State Legislatures." }
+  ];
+
+  const start = new Date(d.getFullYear(), 0, 0);
+  const diff = d - start;
+  const oneDay = 1000 * 60 * 60 * 24;
+  const dayOfYear = Math.floor(diff / oneDay);
+  const article = AOTD_DATABASE[dayOfYear % AOTD_DATABASE.length];
+
+  const heroNum = document.getElementById('heroAotdNum');
+  if (heroNum) {
+    heroNum.textContent = article.num;
+    document.getElementById('heroAotdTitle').textContent = article.title;
+    document.getElementById('heroAotdQuote').textContent = article.quote;
+    document.getElementById('heroAotdTag').innerHTML = article.tag.replace(' · ', ' &nbsp;&middot;&nbsp; ');
+  }
+
+  const bottomNum = document.getElementById('bottomAotdNum');
+  if (bottomNum) {
+    bottomNum.textContent = article.num;
+    document.getElementById('bottomAotdTitle').textContent = `Article ${article.num} - ${article.title}`;
+    document.getElementById('bottomAotdBadge').textContent = article.badge;
+    document.getElementById('bottomAotdPart').textContent = article.part;
+    document.getElementById('bottomAotdSnippet').textContent = article.snippet;
+    const link = document.getElementById('bottomAotdLink');
+    if (link) link.href = `library-article.html?id=${article.num}`;
+  }
 })();
 
 /* ── Note card expand/collapse ── */

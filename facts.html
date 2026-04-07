@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Important Facts — hiConstitution</title>
+  <meta name="description" content="Discover historical trivia, global borrowings, and the craftsmanship behind the Constitution of India." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .facts-page { padding-top: var(--navbar-h); min-height: 100vh; background: var(--bg-light); padding-bottom: 80px; }
+    
+    .facts-header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      padding: 56px 0;
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .facts-header h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 12px; color: var(--white); }
+    .facts-header p { color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+    
+    .facts-container { max-width: 900px; margin: 40px auto; padding: 0 20px; animation: fadeIn 0.4s ease; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .intro-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--saffron);
+    }
+    .intro-box h2 { font-size: 1.4rem; color: var(--navy); margin-bottom: 12px; }
+    .intro-box p { font-size: 0.95rem; color: var(--body-text); line-height: 1.6; }
+    .intro-box blockquote {
+      background: rgba(243, 115, 36, 0.05);
+      border-left: 4px solid var(--saffron);
+      padding: 16px 20px;
+      margin: 20px 0 0 0;
+      font-style: italic;
+      color: var(--navy);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .intro-box blockquote strong { color: var(--saffron); font-style: normal; display: block; margin-top: 8px; font-size: 0.9rem; }
+
+    .intro-dropdown {
+      margin-top: 12px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px 24px;
+      box-shadow: var(--shadow-sm);
+      transition: background var(--transition-fast);
+    }
+    .intro-dropdown[open] { background: var(--bg-light); }
+    .intro-summary {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      outline: none;
+    }
+    .intro-summary::-webkit-details-marker { display: none; }
+    .intro-summary::after {
+      content: '▼';
+      font-size: 0.85rem;
+      color: var(--saffron);
+      transition: transform 0.3s ease;
+    }
+    .intro-dropdown[open] .intro-summary::after { transform: rotate(180deg); }
+    
+    .intro-dropdown-content {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-light);
+    }
+    .intro-dropdown-content p { color: var(--body-text); font-size: 0.95rem; line-height: 1.6; margin-bottom: 12px; }
+    .intro-dropdown-content h4 { color: var(--navy); margin-top: 20px; margin-bottom: 10px; font-size: 0.98rem; }
+    .intro-dropdown-content ul { margin-left: 20px; list-style-type: disc; color: var(--body-text); font-size: 0.95rem; line-height: 1.6; }
+    .intro-dropdown-content ul li { margin-bottom: 10px; }
+    .intro-dropdown-content ul ul { margin-top: 8px; list-style-type: circle; }
+    .intro-dropdown-content strong { color: var(--navy); }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-circle">हि</div>
+      <span class="logo-text">hi<span>Constitution</span></span>
+    </a>
+    <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>
+      <li><a href="study.html" class="nav-link">Study</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+      <li><a href="pulse.html" class="nav-link">Pulse</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="quiz.html" class="btn btn-primary btn-sm">Take Quiz</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main class="facts-page">
+  <div class="facts-header">
+    <div class="container">
+      <h1>Important Facts</h1>
+      <p>Discover fascinating historical trivia and the craftsmanship behind India's supreme law.</p>
+    </div>
+  </div>
+
+  <div class="facts-container">
+    
+    <div class="intro-box">
+      <h2>The Constitution of India: A Legacy of Democracy</h2>
+      <p>The Constitution of India is the foundational legal and political framework of the nation. Adopted on November 26, 1949 (now celebrated as Constitution Day), and enforced on January 26, 1950, it transformed the Dominion of India into a Sovereign, Socialist, Secular, and Democratic Republic.</p>
+      <blockquote>
+        "However good a Constitution may be, if those who are implementing it are not good, it will prove to be bad. However bad a Constitution may be, if those implementing it are good, it will prove to be good."
+        <strong>— Dr. B.R. Ambedkar</strong>
+      </blockquote>
+    </div>
+
+    <details class="intro-dropdown">
+      <summary class="intro-summary">1. Historical Background: The Crucible of the Constitution</summary>
+      <div class="intro-dropdown-content">
+        <p>The genesis of the Constitution is inextricably linked to the socio-political awakening during the Indian freedom struggle and subsequent legislative enactments by the British government.</p>
+        <h4>The Revolutionary &amp; Ideological Spark</h4>
+        <ul>
+          <li><strong>The Chapekar Brothers (1897):</strong> The foundation of the British Empire was shaken early on by Damodar Hari, Balkrishna Hari, and Vasudev Hari, who orchestrated the first localized revolutionary blast on June 22, 1897.</li>
+          <li><strong>The Martyrdom of Khudiram Bose:</strong> Born on December 3, 1889, in Mohobani, Midnapore, he became a symbol of youth sacrifice, martyred at just 18 years old.</li>
+          <li><strong>The "Lal-Bal-Pal" Triumvirate:</strong> Lala Lajpat Rai (Punjab), Bal Gangadhar Tilak (Maharashtra), and Bipin Chandra Pal (Bengal) vociferously articulated the demand for self-governance.</li>
+          <li><strong>Tilak’s Galvanizing Declaration:</strong> "Swaraj is no alms that we Indians have to beg for. Swaraj is my birthright, and I shall have it."</li>
+        </ul>
+        <h4>Early Constitutional Blueprints</h4>
+        <ul>
+          <li><strong>The Swaraj Bill (1895):</strong> Influenced by Tilak, it demanded freedom of speech, the right to property, and equality before the law.</li>
+          <li><strong>The Motilal Nehru Report (1928):</strong> Drafted by Nehru and eight Congress leaders to define a constitutional framework.</li>
+          <li><strong>Karachi Session (1931):</strong> Resolutions passed here further refined the vision for civil liberties.</li>
+          <li><strong>Sapru Report (1945):</strong> A final major draft by Dr. Tej Bahadur Sapru before the Constituent Assembly was formed.</li>
+        </ul>
+        <h4>Legislative Milestones (British India)</h4>
+        <ul>
+          <li><strong>Government of India Act, 1919:</strong> Introduced 'dyarchy' (dual government) in provinces, delegating subjects like health, education, and agriculture to Indian ministers.</li>
+          <li><strong>Simon Commission &amp; Round Table Conferences:</strong> The 1919 Act was reviewed by the Simon Commission (1928). The resulting deadlock led to three Round Table Conferences (1930, 1931, 1932) and the subsequent "White Papers."</li>
+          <li><strong>Government of India Act, 1935:</strong> Passed in February 1935, this Act serves as the primary structural foundation for the modern Constitution.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="intro-dropdown">
+      <summary class="intro-summary">2. The Constituent Assembly: Crafting the Republic</summary>
+      <div class="intro-dropdown-content">
+        <ul>
+          <li><strong>Inception:</strong> The radical idea for a Constituent Assembly was first proposed by M.N. Roy in 1934 and materialized under the 1946 Cabinet Mission Plan.</li>
+          <li><strong>Composition:</strong> Originally 389 members, revised to 299 post-Partition. This included 292 delegates from British India and 93 from Princely States. Members were indirectly elected by provincial assemblies using a single transferable vote system.</li>
+          <li><strong>Leadership:</strong>
+            <ul>
+              <li>Interim President: Dr. Sachchidananda Sinha (First meeting: Dec 9, 1946).</li>
+              <li>President: Dr. Rajendra Prasad.</li>
+              <li>Vice Presidents: H.C. Mukherjee and V.T. Krishnamachari.</li>
+              <li>Constitutional Advisor: Sir B.N. Rau.</li>
+            </ul>
+          </li>
+          <li><strong>The 15 Women Architects:</strong> Includes pioneers like Sarojini Naidu, Sucheta Kripalani, Rajkumari Amrit Kaur, Dakshayani Velayudhan, and Durgabai Deshmukh.</li>
+          <li><strong>The Drafting Committee:</strong> Constituted on August 29, 1947. This 7-member body was chaired by Dr. B.R. Ambedkar.</li>
+          <li><strong>The Labor of Creation:</strong> The process spanned exactly 2 years, 11 months, and 18 days, covering 11 sessions over 165 days. The final draft was submitted on November 4, 1948.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="intro-dropdown">
+      <summary class="intro-summary">3. The Global Synthesis: "A Bag of Borrowings"</summary>
+      <div class="intro-dropdown-content">
+        <p>India's Constitution is a sophisticated synthesis of global legal systems, adapted for local needs.</p>
+        <ul>
+          <li><strong>Govt. of India Act, 1935:</strong> Federal scheme, emergency provisions, Public Service Commissions, office of the Governor, and judicial structures.</li>
+          <li><strong>United Kingdom:</strong> Parliamentary governance, Rule of Law, legislative speaker, single citizenship, bicameralism, and prerogative writs.</li>
+          <li><strong>United States:</strong> Preamble, Fundamental Rights, Judicial Review, Independence of Judiciary, Electoral College, and the President as Supreme Commander.</li>
+          <li><strong>Ireland:</strong> Directive Principles of State Policy (DPSP), Presidential election methodology, and Rajya Sabha nominations.</li>
+          <li><strong>Canada:</strong> Strong Central government, distribution of powers, and residuary powers vested in the Center.</li>
+          <li><strong>France:</strong> Ideals of Liberty, Equality, and Fraternity; the concept of a "Republic."</li>
+          <li><strong>Germany (Weimar):</strong> Suspension of Fundamental Rights during Emergency.</li>
+          <li><strong>USSR (Russia):</strong> Fundamental Duties and the ideals of Justice (Social, Economic, Political) in the Preamble.</li>
+          <li><strong>Australia:</strong> Concurrent List, Freedom of Trade and Commerce, and joint sittings of Parliament.</li>
+          <li><strong>South Africa:</strong> Amendment procedures and election of Rajya Sabha members.</li>
+          <li><strong>Japan:</strong> "Procedure established by law."</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="intro-dropdown">
+      <summary class="intro-summary">4. Key Provisions &amp; Landmark Amendments</summary>
+      <div class="intro-dropdown-content">
+        <ul>
+          <li><strong>Article 1:</strong> Unambiguously states, "India, that is Bharat, shall be a Union of States."</li>
+          <li><strong>The Seventh Schedule:</strong> Defines power via the Union List (originally 97 subjects), State List (66), and Concurrent List (47).</li>
+          <li><strong>First Amendment (1951):</strong> Placed reasonable restrictions on free speech and created the Ninth Schedule to protect land reforms (Zamindari Abolition) from judicial review.</li>
+          <li><strong>The "Mini Constitution" (42nd Amendment, 1976):</strong> Inserted "Socialist" and "Secular" into the Preamble and codified Fundamental Duties during the Emergency.</li>
+          <li><strong>Emergency Safeguards (44th Amendment, 1978):</strong> Introduced to prevent future misuse of emergency powers (Article 356) and safeguard civil liberties.</li>
+          <li><strong>Voting Age (61st Amendment, 1989):</strong> Lowered from 21 to 18.</li>
+          <li><strong>Right to Education (86th Amendment, 2002):</strong> Guaranteed free education for children aged 6 to 14.</li>
+          <li><strong>Women's Reservation (106th Amendment, 2023):</strong> Reserved 33% of seats in Lok Sabha and State Assemblies for women.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="intro-dropdown">
+      <summary class="intro-summary">5. Judicial Interpretations &amp; Landmark Cases</summary>
+      <div class="intro-dropdown-content">
+        <ul>
+          <li><strong>Kameshwar Singh vs. State of Bihar (1951):</strong> The crucible for the First Amendment. Zamindars challenged land reforms under Article 14. Its striking down by the court prompted the creation of the Ninth Schedule.</li>
+          <li><strong>Kesavananda Bharati vs. State of Kerala (1973):</strong> A 13-judge bench established the "Basic Structure Doctrine," ruling that Parliament cannot alter the foundational features of the Constitution.</li>
+          <li><strong>S.R. Bommai vs. Union of India (1994):</strong> Curtailed the arbitrary use of Article 356 (President's Rule), mandating that a government's majority must be tested on the floor of the House.</li>
+          <li><strong>I.R. Coelho vs. State of Tamil Nadu (2007):</strong> Ruled that laws added to the Ninth Schedule after the Kesavananda verdict (April 24, 1973) are subject to judicial review.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="intro-dropdown">
+      <summary class="intro-summary">6. Craftsmanship &amp; Historical Trivia</summary>
+      <div class="intro-dropdown-content">
+        <ul>
+          <li><strong>The Master Calligrapher:</strong> Prem Behari Narain Raizada spent six months in Room 204 of Constitution House, using over 250 pen nibs to write the document in a flowing italic script.</li>
+          <li><strong>Raizada’s Conditions:</strong> When Prime Minister Nehru offered payment, Raizada refused financial compensation and instead requested two conditions:
+            <ul>
+              <li>He be allowed to sign his name on every page of the Constitution.</li>
+              <li>His grandfather's name (Ram Prasad Saxena) be included alongside his on the final page.</li>
+            </ul>
+          </li>
+          <li><strong>Artistic Illumination:</strong> Artists Nandalal Bose and Beohar Rammanohar Sinha wove India's history into the law:
+            <ul>
+              <li>Fundamental Rights: Features Lord Rama, Sita, and Lakshmana returning to Ayodhya.</li>
+              <li>Directive Principles: Features Lord Krishna and Arjuna.</li>
+              <li>Other Pages: Feature Buddha, Mahavira, Nataraja, Chhatrapati Shivaji, and Rani Lakshmibai.</li>
+            </ul>
+          </li>
+          <li><strong>Purna Swaraj Connection:</strong> January 26 was chosen to honor the 1930 declaration of "Complete Independence" from the Lahore session.</li>
+          <li><strong>Scientific Preservation:</strong> Original copies are stored in hermetically sealed, nitrogen-filled glass receptacles (upgraded from helium in the 1980s). The National Physical Laboratory collaborated with the Getty Conservation Institute (experts in Egyptian mummies) to ensure their safety.</li>
+          <li><strong>Cost &amp; Weight:</strong> Produced at a cost of ₹6.4 million (₹64 lakhs). The manuscript weighs approximately 3.75 kg (though some historical accounts mention up to 13 kg including binding).</li>
+        </ul>
+        <p style="margin-top: 16px; font-weight: 600; color: var(--saffron);">The Preamble is the soul of the document, declaring ultimate sovereignty rests with "We, the People."</p>
+      </div>
+    </details>
+
+  </div>
+</main>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,0.6);padding:32px 0;">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <a href="index.html" style="color:#fff;font-weight:700;font-size:0.95rem;">hiConstitution.com</a>
+    <p style="font-size:0.82rem;">© 2025 — Educational use only.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
