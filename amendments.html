@@ -90,9 +90,8 @@
       background: var(--bg-light); border-top: 1px solid var(--border-light);
     }
     .amend-strip.open .amend-details { max-height: 4000px; }
-    .amend-details-inner { padding: 20px 20px 24px 90px; font-size: 0.95rem; color: var(--body-text); line-height: 1.7; overflow-x: auto; }
+    .amend-details-inner { padding: 20px 20px 24px 90px; font-size: 0.95rem; color: var(--body-text); line-height: 1.7; }
     .amend-details-inner ul { margin-top: 10px; padding-left: 20px; list-style-type: disc; }
-    .amend-details-inner table { min-width: 600px; }
     
     .amend-changes-box {
       background: rgba(243, 115, 36, 0.05);
@@ -141,6 +140,29 @@
       .amend-summary { padding: 16px; gap: 12px; }
       .amend-badge { width: 40px; height: 40px; font-size: 1rem; }
       .amend-details-inner { padding: 16px 16px 20px 16px; }
+
+      /* Convert table to up-down stacked cards on mobile */
+      .amend-details-inner table, 
+      .amend-details-inner tbody, 
+      .amend-details-inner tr, 
+      .amend-details-inner td, 
+      .amend-details-inner th {
+        display: block;
+        width: 100% !important;
+      }
+      .amend-details-inner tr:first-child { display: none; } /* Hides the table headers */
+      .amend-details-inner tr {
+        margin-bottom: 12px;
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: var(--radius-sm);
+      }
+      .amend-details-inner td {
+        padding: 12px !important;
+        border: none !important;
+        border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+      }
+      .amend-details-inner td:last-child { border-bottom: none !important; }
+      .amend-details-inner td:first-child { background-color: rgba(0,0,0,0.02); }
     }
   </style>
 </head>
