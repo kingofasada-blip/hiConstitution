@@ -89,9 +89,10 @@
       max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
       background: var(--bg-light); border-top: 1px solid var(--border-light);
     }
-    .amend-strip.open .amend-details { max-height: 800px; }
-    .amend-details-inner { padding: 20px 20px 24px 90px; font-size: 0.95rem; color: var(--body-text); line-height: 1.7; }
+    .amend-strip.open .amend-details { max-height: 4000px; }
+    .amend-details-inner { padding: 20px 20px 24px 90px; font-size: 0.95rem; color: var(--body-text); line-height: 1.7; overflow-x: auto; }
     .amend-details-inner ul { margin-top: 10px; padding-left: 20px; list-style-type: disc; }
+    .amend-details-inner table { min-width: 600px; }
     
     .amend-changes-box {
       background: rgba(243, 115, 36, 0.05);
