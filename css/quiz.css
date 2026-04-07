@@ -6,7 +6,7 @@
 .quiz-page { padding-top: var(--navbar-h); min-height: 100vh; background: var(--bg-light); }
 
 .quiz-header {
-  background: linear-gradient(135deg, #141414 0%, #0F0F0F 60%, #121212 100%);
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
   border-bottom: 1px solid var(--border);
   padding: 56px 0 64px;
   text-align: center;

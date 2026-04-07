@@ -11,14 +11,14 @@
   <link rel="stylesheet" href="css/style.css" />
   <style>
     :root {
-      --page-bg: #0F0F0F;
-      --surface-dark: #1A1A1A;
-      --surface-soft: #252525;
-      --text-heading: #FFFFFF;
-      --text-body: #A1A1A1;
+      --page-bg: #F8F9FA;
+      --surface-dark: #FFFFFF;
+      --surface-soft: #FFFFFF;
+      --text-heading: var(--navy);
+      --text-body: var(--body-text);
       --accent-orange: #F37324;
-      --border-dark: rgba(255, 255, 255, 0.08);
-      --shadow-dark: 0 20px 50px rgba(0, 0, 0, 0.35);
+      --border-dark: var(--border);
+      --shadow-dark: var(--shadow-sm);
     }
 
     html {
@@ -28,7 +28,7 @@
     body {
       background:
         radial-gradient(circle at top right, rgba(243, 115, 36, 0.08), transparent 22%),
-        linear-gradient(180deg, #111111 0%, var(--page-bg) 100%);
+        linear-gradient(180deg, #FFFFFF 0%, var(--page-bg) 100%);
       color: var(--text-body);
       font-family: "Inter", sans-serif;
       line-height: 1.6;
@@ -77,7 +77,7 @@
 
     .navbar,
     .navbar.scrolled {
-      background: rgba(15, 15, 15, 0.92);
+      background: rgba(255, 255, 255, 0.95);
       border-bottom: 1px solid var(--border-dark);
       box-shadow: none;
       backdrop-filter: blur(12px);
@@ -85,30 +85,30 @@
     }
 
     .logo-circle {
-      background: var(--surface-soft);
+      background: var(--navy);
       color: var(--accent-orange);
-      border: 1px solid rgba(243, 115, 36, 0.25);
+      border: none;
     }
 
     .nav-link:hover,
     .nav-link.active {
-      color: var(--text-heading);
-      background: rgba(255, 255, 255, 0.06);
+      color: var(--navy);
+      background: var(--bg-subtle);
     }
 
     .hamburger span {
-      background: var(--text-heading);
+      background: var(--navy);
     }
 
     .mobile-nav {
-      background: var(--surface-dark);
+      background: var(--white);
       border-bottom: 1px solid var(--border-dark);
     }
 
     .hero {
       background:
         radial-gradient(circle at 15% 20%, rgba(243, 115, 36, 0.12), transparent 20%),
-        linear-gradient(135deg, #141414 0%, #0F0F0F 60%, #121212 100%);
+        linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 60%, #F1F3F5 100%);
     }
 
     .hero::before {
@@ -116,13 +116,17 @@
     }
 
     .hero::after {
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0, 0, 0, 0.02) 0%, transparent 70%);
     }
 
     .hero-badge {
       background: rgba(243, 115, 36, 0.12);
       border: 1px solid rgba(243, 115, 36, 0.28);
-      color: #ffb485;
+      color: var(--saffron);
+    }
+
+    .hero-headline {
+      color: var(--text-heading);
     }
 
     .hero-sub {
@@ -151,26 +155,34 @@
     .btn-outline,
     .btn-outline-navy {
       background: var(--surface-soft);
-      color: #FFFFFF;
-      border-color: rgba(255, 255, 255, 0.12);
+      color: var(--navy);
+      border-color: rgba(26, 35, 126, 0.2);
     }
 
     .btn-outline:hover,
     .btn-outline-navy:hover {
-      background: #303030;
+      background: var(--navy);
       color: #FFFFFF;
-      border-color: rgba(255, 255, 255, 0.2);
+      border-color: var(--navy);
     }
 
     .art21-card,
     .timeline-details-panel,
-    .aotd-card,
     .feature-card,
     .card {
-      background: linear-gradient(180deg, var(--surface-soft), var(--surface-dark));
+      background: var(--white);
       border: 1px solid var(--border-dark);
       box-shadow: var(--shadow-dark);
     }
+
+    .aotd-card {
+      background: linear-gradient(180deg, var(--navy-light) 0%, var(--navy) 100%);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+    }
+    .aotd-card h2.aotd-title { color: #FFFFFF; }
+    .aotd-card p.aotd-snippet { color: rgba(255,255,255,0.8); }
+    .aotd-card .aotd-date { color: rgba(255,255,255,0.6); }
 
     .art21-title,
     .timeline-details-content h3,
@@ -181,7 +193,7 @@
     }
 
     .art21-quote {
-      color: #d0d0d0;
+      color: var(--body-text);
       border-left-color: var(--accent-orange);
     }
 
@@ -189,7 +201,7 @@
     .badge-saffron,
     .badge-navy {
       background: rgba(243, 115, 36, 0.12);
-      color: #ffb485;
+      color: var(--saffron);
     }
 
     .bg-light,
@@ -199,18 +211,18 @@
     }
 
     .timeline-track::before {
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12), transparent);
+      background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent);
     }
 
     .timeline-dot {
       background: var(--surface-soft);
-      border-color: rgba(255, 255, 255, 0.1);
+      border-color: var(--border);
       color: var(--text-body);
     }
 
     .timeline-item:hover .timeline-dot {
-      background: #333333;
-      border-color: #444444;
+      background: var(--navy-light);
+      border-color: var(--saffron);
       color: #FFFFFF;
     }
 
@@ -227,11 +239,11 @@
     .timeline-details-year,
     .aotd-number,
     .art21-number {
-      color: rgba(255, 255, 255, 0.08);
+      color: rgba(26, 35, 126, 0.06);
     }
 
     footer {
-      background: var(--surface-dark) !important;
+      background: var(--navy) !important;
       color: var(--text-body) !important;
     }
 
@@ -241,7 +253,8 @@
     }
 
     footer .logo-circle {
-      background: #222222;
+      background: var(--white);
+      color: var(--navy);
     }
   </style>
 </head>
