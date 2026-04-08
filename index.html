@@ -133,6 +133,24 @@
       color: var(--text-body);
     }
 
+    .hero-motto {
+      font-family: "Lora", serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--navy);
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .hero-motto::before,
+    .hero-motto::after {
+      content: '✦';
+      font-size: 1.2rem;
+      color: var(--accent-orange);
+    }
+
     .btn {
       border-radius: 8px;
       font-family: "Inter", sans-serif;
@@ -302,10 +320,9 @@
           Every article, every right, every duty - explained simply and clearly.
           Study smarter, quiz yourself, and track what's happening in constitutional law today.
         </p>
-        <div class="hero-ctas">
-        <a href="read-the-constitution.html" class="btn btn-primary btn-lg">Read Constitution</a>
-          <a href="quiz.html" class="btn btn-outline btn-lg">Take a Quiz</a>
-        </div>
+      <div class="hero-motto">
+        हमारा संविधान, हमारा अभिमान
+      </div>
       </div>
       <div class="hero-visual">
         <div class="art21-card" role="img" aria-label="Article 21 feature card">
@@ -336,12 +353,12 @@
         <p>Browse all 448 articles with simplified English explanations and real legal language side by side.</p>
         <span class="feature-link">Browse Articles &rarr;</span>
       </a>
-      <div class="feature-card feature-card-static">
+      <a href="making.html" class="feature-card">
         <div class="feature-icon">🏛️</div>
         <h3>Constitution Making</h3>
-        <p>This section will be connected in the next step. Right now only the layout is being prepared.</p>
-        <span class="feature-link">Coming Next</span>
-      </div>
+        <p>Explore the stages, committees, and framers of the Constituent Assembly through an interactive layout.</p>
+        <span class="feature-link">Explore Making &rarr;</span>
+      </a>
       <a href="amendments.html" class="feature-card">
         <div class="feature-icon">📝</div>
         <h3>Amendments</h3>

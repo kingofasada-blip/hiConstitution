@@ -290,6 +290,14 @@
       </div>
       <div class="form-group"><label>Explanation</label><textarea id="qExp" class="form-control" rows="3"></textarea></div>
     </div>
+    
+    <!-- Quick Paste from Word Feature -->
+    <div id="quickPasteSection" class="hidden" style="margin-top: 24px; padding: 16px; background: #E8EAFF; border: 1px solid var(--navy); border-radius: 8px;">
+      <h4 style="margin-bottom: 8px; color: var(--navy);">⚡ Quick Paste from Word</h4>
+      <p style="font-size: 0.82rem; margin-bottom: 12px; color: var(--muted); line-height: 1.5;">Format:<br><strong>Q:</strong> Right to Equality किस आर्टिकल में है?<br><strong>A:</strong> Article 12<br><strong>B:</strong> Article 14<br><strong>C:</strong> Article 19<br><strong>D:</strong> Article 21<br><strong>Ans:</strong> B<br><strong>Exp:</strong> Article 14 सभी को समानता का अधिकार देता है।</p>
+      <textarea id="quickPasteArea" class="form-control" rows="6" placeholder="Paste multiple questions here..."></textarea>
+      <button class="btn btn-primary btn-sm" style="margin-top: 12px;" onclick="processQuickPaste()">➕ Add These Questions</button>
+    </div>
   </div>
 </div>
 
@@ -683,6 +691,7 @@
     document.getElementById('quizCatEditor').classList.remove('hidden');
     document.getElementById('quizQuestionSection').classList.remove('hidden');
     document.getElementById('quizQEditor').classList.add('hidden');
+    document.getElementById('quickPasteSection').classList.add('hidden');
     populateQuizQDropdown();
   }
   function addNewQuizCat() {
@@ -703,6 +712,7 @@
   function onQuizQChange() {
     currentQuizQIdx = parseInt(document.getElementById('qQSelect').value);
     if(currentQuizQIdx === -1) { document.getElementById('quizQEditor').classList.add('hidden'); return; }
+    document.getElementById('quickPasteSection').classList.remove('hidden');
     const q = quizData[currentQuizCatIdx].questions[currentQuizQIdx];
     document.getElementById('qText').value = q.q || '';
     document.getElementById('qOpt0').value = (q.options && q.options[0]) ? q.options[0] : '';
@@ -907,8 +917,8 @@
   }
 
   function parseCatQuizCsv(text) {
-    if (currentQuizCatIdx === -1) {
-      alert("Please select a category first.");
+    if (currentQuizCatIdx === -1 || currentQuizIdx === -1) {
+      alert("Please select a Category AND a Quiz first.");
       return;
     }
     const lines = text.split('\n').filter(l => l.trim());
@@ -922,9 +932,11 @@
 
       let [question, optA, optB, optC, optD, correctIdx, explanation] = cols;
       
-      if (!quizData[currentQuizCatIdx].questions) quizData[currentQuizCatIdx].questions = [];
+      if (!quizData[currentQuizCatIdx].quizzes[currentQuizIdx].questions) {
+        quizData[currentQuizCatIdx].quizzes[currentQuizIdx].questions = [];
+      }
       
-      quizData[currentQuizCatIdx].questions.push({
+      quizData[currentQuizCatIdx].quizzes[currentQuizIdx].questions.push({
         q: question,
         options: [optA, optB, optC, optD],
         answer: parseInt(correctIdx) || 0,
@@ -934,13 +946,62 @@
     }
     
     if (addedCount > 0) {
-      alert(addedCount + " questions added to the category!");
+      alert(addedCount + " questions added to the quiz!");
       populateQuizQDropdown();
       triggerSave();
     } else {
       alert("Could not parse valid question rows from the CSV. Please check the format.");
     }
     document.getElementById('catQuizCsvUpload').value = "";
+  }
+
+  // --- QUICK PASTE FROM WORD ---
+  function processQuickPaste() {
+    if (currentQuizCatIdx === -1 || currentQuizIdx === -1) {
+      alert("Please select a Category AND a Quiz first.");
+      return;
+    }
+    const text = document.getElementById('quickPasteArea').value;
+    if (!text.trim()) {
+      alert("Please paste some text first.");
+      return;
+    }
+
+    const blocks = text.split(/Q:/i).filter(b => b.trim());
+    let added = 0;
+
+    if (!quizData[currentQuizCatIdx].quizzes[currentQuizIdx].questions) {
+      quizData[currentQuizCatIdx].quizzes[currentQuizIdx].questions = [];
+    }
+
+    blocks.forEach(block => {
+      const lines = block.split('\n').map(l => l.trim()).filter(l => l);
+      let q = lines[0], optA = "", optB = "", optC = "", optD = "", ans = 0, exp = "";
+      
+      lines.forEach(line => {
+        if (line.match(/^A:/i)) optA = line.replace(/^A:\s*/i, '');
+        else if (line.match(/^B:/i)) optB = line.replace(/^B:\s*/i, '');
+        else if (line.match(/^C:/i)) optC = line.replace(/^C:\s*/i, '');
+        else if (line.match(/^D:/i)) optD = line.replace(/^D:\s*/i, '');
+        else if (line.match(/^Ans:/i)) {
+          let aStr = line.replace(/^Ans:\s*/i, '').toUpperCase();
+          if (aStr === 'A') ans = 0; else if (aStr === 'B') ans = 1; else if (aStr === 'C') ans = 2; else if (aStr === 'D') ans = 3;
+        }
+        else if (line.match(/^Exp:/i)) exp = line.replace(/^Exp:\s*/i, '');
+      });
+
+      if (q && optA && optB) {
+        quizData[currentQuizCatIdx].quizzes[currentQuizIdx].questions.push({ q, options: [optA, optB, optC, optD], answer: ans, explanation: exp });
+        added++;
+      }
+    });
+
+    if (added > 0) {
+      alert(added + " questions added successfully! Don't forget to click 'Download quiz.json'.");
+      document.getElementById('quickPasteArea').value = '';
+      populateQuizQDropdown();
+      triggerSave();
+    } else { alert("Could not parse questions. Please check the format (Q:, A:, B:, C:, D:, Ans:, Exp:)."); }
   }
 
   // --- DOWNLOAD ---
