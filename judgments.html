@@ -58,26 +58,6 @@
       line-height: 1.7;
     }
 
-    .judgments-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 22px;
-    }
-
-    .judgments-meta-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      font-size: 0.86rem;
-      font-weight: 600;
-      color: var(--white);
-    }
-
     .judgments-main {
       padding: 32px 0 72px;
     }
@@ -343,13 +323,7 @@
     <div class="container">
       <span class="section-label">Landmark Judgments</span>
       <h1>Supreme Court Cases That Shaped Constitutional India</h1>
-      <p>
-        Imported from your Google Doc and arranged in arrow-based slabs. Serial numbering has been removed, and bold emphasis from the source has been preserved where it was available in the document export.
-      </p>
-      <div class="judgments-meta">
-        <span class="judgments-meta-chip">Chronological Order</span>
-        <span class="judgments-meta-chip" id="heroJudgmentCount">Loading cases...</span>
-      </div>
+      <p><strong>Exploring Judicial Landmarks:</strong> A Curated Collection of Supreme Court Judgments that Shaped India's Constitutional Landscape.</p>
     </div>
   </section>
 
@@ -411,7 +385,6 @@
     const listEl = document.getElementById('judgmentsList');
     const searchEl = document.getElementById('judgmentSearch');
     const countEl = document.getElementById('judgmentsCount');
-    const heroCountEl = document.getElementById('heroJudgmentCount');
     let judgments = [];
 
     function buildCard(item, index) {
@@ -494,11 +467,16 @@
       })
       .then((data) => {
         judgments = Array.isArray(data) ? data : [];
-        heroCountEl.textContent = `${judgments.length} cases imported`;
-        render(judgments);
+        const params = new URLSearchParams(window.location.search);
+        const presetQuery = params.get('q');
+        if (presetQuery) {
+          searchEl.value = presetQuery;
+          applyFilter();
+        } else {
+          render(judgments);
+        }
       })
       .catch(() => {
-        heroCountEl.textContent = 'Import unavailable';
         countEl.textContent = 'Load failed';
         listEl.innerHTML = '<div class="judgments-empty">Judgments could not be loaded right now.</div>';
       });
