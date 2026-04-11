@@ -82,6 +82,7 @@
   <button id="tabBtn-schedules" onclick="switchTab('schedules')">Schedules</button>
   <button id="tabBtn-quizzes" onclick="switchTab('quizzes')">Quizzes</button>
   <button id="tabBtn-judgments" onclick="switchTab('judgments')">Judgments</button>
+  <button id="tabBtn-making" onclick="switchTab('making')">Making</button>
 </div>
 
 <div id="view-articles" class="admin-wrapper">
@@ -197,6 +198,7 @@
           <button type="button" onclick="insertAtCursor('schDetails', '<br><br>')">¶ Paragraph Break</button>
           <button type="button" onclick="insertAtCursor('schDetails', '<b>', '</b>')"><b>B</b> Bold</button>
           <button type="button" onclick="insertAtCursor('schDetails', '<i>', '</i>')"><i>I</i> Italic</button>
+          <button type="button" onclick="insertImagePrompt('schDetails')">🖼️ Image</button>
         </div>
         <textarea id="schDetails" class="form-control editor-textarea"></textarea>
       </div>
@@ -206,6 +208,7 @@
           <button type="button" onclick="insertAtCursor('schHindi', '<br><br>')">¶ Paragraph Break</button>
           <button type="button" onclick="insertAtCursor('schHindi', '<b>', '</b>')"><b>B</b> Bold</button>
           <button type="button" onclick="insertAtCursor('schHindi', '<i>', '</i>')"><i>I</i> Italic</button>
+          <button type="button" onclick="insertImagePrompt('schHindi')">🖼️ Image</button>
         </div>
         <textarea id="schHindi" class="form-control editor-textarea"></textarea>
       </div>
@@ -329,9 +332,54 @@
           <button type="button" onclick="insertAtCursor('judgDetails', '<br><br>')">¶ Paragraph Break</button>
           <button type="button" onclick="insertAtCursor('judgDetails', '<strong>', '</strong>')"><b>B</b> Bold</button>
           <button type="button" onclick="insertAtCursor('judgDetails', '<i>', '</i>')"><i>I</i> Italic</button>
+          <button type="button" onclick="insertImagePrompt('judgDetails')">🖼️ Image</button>
         </div>
         <textarea id="judgDetails" class="form-control editor-textarea"></textarea>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAKING SECTION -->
+<div id="view-making" class="admin-wrapper hidden">
+  <div class="box">
+    <div class="box-header">
+      <h2>1. Stages of Making</h2>
+      <button class="btn btn-outline-navy btn-sm" onclick="addNewStage()">+ Add Stage</button>
+    </div>
+    <div class="flex-row">
+      <select id="stageSelect" onchange="onStageChange()"><option value="-1">Loading Stages...</option></select>
+    </div>
+    <div id="stageEditor" class="hidden" style="margin-top: 24px; padding-top: 24px; border-top: 1px dashed var(--border);">
+      <div style="display:flex; justify-content:flex-end; margin-bottom:16px;">
+        <button class="btn-danger" onclick="deleteCurrentStage()">🗑️ Delete Stage</button>
+      </div>
+      <div class="form-group"><label>Stage Title</label><input type="text" id="stageTitle" class="form-control"></div>
+      <div class="form-group"><label>Dates</label><input type="text" id="stageDates" class="form-control"></div>
+      <div class="form-group">
+        <label>Detailed Facts / Events [HTML Supported]</label>
+        <div class="rich-toolbar">
+          <button type="button" onclick="insertAtCursor('stageDetails', '<br><br>')">¶ Paragraph Break</button>
+          <button type="button" onclick="insertAtCursor('stageDetails', '<b>', '</b>')"><b>B</b> Bold</button>
+          <button type="button" onclick="insertImagePrompt('stageDetails')">🖼️ Add Image</button>
+        </div>
+        <textarea id="stageDetails" class="form-control editor-textarea"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="box">
+    <div class="box-header">
+      <h2>2. The Framers</h2>
+      <button class="btn btn-outline-navy btn-sm" onclick="addNewFramer()">+ Add Framer</button>
+    </div>
+    <div class="flex-row"><select id="framerSelect" onchange="onFramerChange()"><option value="-1">Loading Framers...</option></select></div>
+    <div id="framerEditor" class="hidden" style="margin-top: 24px; padding-top: 24px; border-top: 1px dashed var(--border);">
+      <div style="display:flex; justify-content:flex-end; margin-bottom:16px;"><button class="btn-danger" onclick="deleteCurrentFramer()">🗑️ Delete Framer</button></div>
+      <div class="form-group"><label>Full Name</label><input type="text" id="framerName" class="form-control"></div>
+      <div class="form-group"><label>Photo URL (e.g. assets/ambedkar.jpg or https://...)</label><input type="text" id="framerPhoto" class="form-control" placeholder="Leave empty for initials"></div>
+      <div class="form-group"><label>Party</label><input type="text" id="framerParty" class="form-control"></div>
+      <div class="form-group"><label>Constituency</label><input type="text" id="framerConst" class="form-control"></div>
+      <div class="form-group"><label>Roles / Committees</label><input type="text" id="framerRoles" class="form-control"></div>
     </div>
   </div>
 </div>
@@ -346,6 +394,30 @@
   let schedulesData = [];
   let quizData = [];
   let judgmentsData = [];
+  
+  let defaultMakingData = {
+    stages: [
+      { title: "First Session", dates: "9-23 December, 1946", details: "<p><span class='fact-tag fact-blue'>Inaugural Meeting</span> The Constituent Assembly met for the first time in New Delhi.</p><p><span class='fact-tag fact-orange'>Objective Resolution</span> Introduced by Jawaharlal Nehru on Dec 13, laying the philosophical fundamentals.</p>" },
+      { title: "Second Session", dates: "20-25 January, 1947", details: "<p><span class='fact-tag fact-green'>Resolution Adopted</span> The Assembly unanimously adopted the Objective Resolution on January 22, 1947.</p>" },
+      { title: "Third Session", dates: "28 April – 2 May, 1947", details: "<p><span class='fact-tag fact-orange'>Princely States Join</span> Representatives from the Princely States took their seats in the Assembly.</p>" },
+      { title: "Fourth Session", dates: "14-31 July, 1947", details: "<p><span class='fact-tag fact-green'>National Flag</span> On July 22, 1947, the Assembly adopted the Free India National Flag.</p>" },
+      { title: "Fifth Session", dates: "14-30 August, 1947", details: "<p><span class='fact-tag fact-blue'>Midnight Session</span> The Assembly met at midnight on August 14 to assume power for independent India.</p><p><span class='fact-tag fact-green'>Drafting Committee</span> Appointed on August 29, 1947, with Dr. B.R. Ambedkar as its Chairman.</p>" },
+      { title: "Sixth Session", dates: "27 January, 1948", details: "<p><span class='fact-tag fact-orange'>Short Session</span> A brief session held to discuss minor procedural matters.</p>" },
+      { title: "Seventh Session", dates: "4 November, 1948 – 8 January, 1949", details: "<p><span class='fact-tag fact-blue'>First Reading</span> Dr. B.R. Ambedkar introduced the final Draft Constitution and delivered a brilliant speech defending its provisions.</p>" },
+      { title: "Eighth Session", dates: "16 May – 16 June, 1949", details: "<p><span class='fact-tag fact-green'>Debates Continue</span> Intensive clause-by-clause debates continued, focusing heavily on Fundamental Rights and Directive Principles.</p>" },
+      { title: "Ninth Session", dates: "30 July – 18 September, 1949", details: "<p><span class='fact-tag fact-orange'>Crucial Debates</span> The Assembly saw fierce debates regarding the Official Language and Citizenship.</p>" },
+      { title: "Tenth Session", dates: "6-17 October, 1949", details: "<p><span class='fact-tag fact-green'>Second Reading Completed</span> The second reading of the Constitution, the most rigorous part of the drafting process, was finally concluded.</p>" },
+      { title: "Eleventh Session", dates: "14-26 November, 1949", details: "<p><span class='fact-tag fact-blue'>Third Reading</span> Final revisions and the third reading of the draft.</p><p><span class='fact-tag fact-green'>Adoption Day</span> On November 26, 1949, the Constitution was officially adopted, enacted, and given to the people of India.</p>" },
+      { title: "Final Meeting", dates: "24 January, 1950", details: "<p><span class='fact-tag fact-orange'>Signatures</span> The Assembly met once again on 24 January, 1950, when the members appended their signatures to the Constitution of India.</p><p><span class='fact-tag fact-blue'>National Anthem & Song</span> 'Jana Gana Mana' and 'Vande Mataram' adopted.</p>" }
+    ],
+    framers: [
+      { name: "Dr. B.R. Ambedkar", party: "Scheduled Castes Federation", constituency: "Bombay (earlier Bengal)", committees: "Chairman, Drafting Committee", initials: "BA", photoUrl: "" },
+      { name: "Dr. Rajendra Prasad", party: "Indian National Congress", constituency: "Bihar", committees: "President of the Assembly", initials: "RP", photoUrl: "" },
+      { name: "Jawaharlal Nehru", party: "Indian National Congress", constituency: "United Provinces", committees: "Union Power, Union Constitution", initials: "JN", photoUrl: "" },
+      { name: "Sardar Vallabhbhai Patel", party: "Indian National Congress", constituency: "Bombay", committees: "Provincial Constitution, Advisory Comm.", initials: "SP", photoUrl: "" }
+    ]
+  };
+  let makingData = { stages: [], framers: [] };
 
   let currentPartIdx = -1;
   let currentArtIdx = -1;
@@ -354,6 +426,8 @@
   let currentQuizIdx = -1;
   let currentQuizQIdx = -1;
   let currentJudgIdx = -1;
+  let currentStageIdx = -1;
+  let currentFramerIdx = -1;
 
   let activeTab = 'articles';
 
@@ -374,6 +448,7 @@
     if(tab === 'schedules') dlName = 'schedules.json';
     if(tab === 'quizzes') dlName = 'quiz.json';
     if(tab === 'judgments') dlName = 'judgments.json';
+    if(tab === 'making') dlName = 'making.json';
     document.getElementById('downloadBtn').textContent = `⬇️ Download ${dlName}`;
   }
 
@@ -382,18 +457,22 @@
       fetch('data/articles.json').then(r => r.ok ? r.json() : []),
       fetch('data/schedules.json').then(r => r.ok ? r.json() : []),
       fetch('data/quiz.json').then(r => r.ok ? r.json() : []),
-      fetch('data/judgments.json').then(r => r.ok ? r.json() : [])
-    ]).then(([arts, schs, qzs, judgs]) => {
+      fetch('data/judgments.json').then(r => r.ok ? r.json() : []),
+      fetch('data/making.json').then(r => r.ok ? r.json() : defaultMakingData)
+    ]).then(([arts, schs, qzs, judgs, mkng]) => {
         articlesData = arts;
         schedulesData = schs;
         quizData = qzs;
         judgmentsData = judgs;
+        makingData = mkng;
         
         renderArticleOverview();
         populatePartDropdown();
         populateScheduleDropdown();
         populateQuizCatDropdown();
         populateJudgmentDropdown();
+        populateStageDropdown();
+        populateFramerDropdown();
         
         if (document.getElementById('richEditorsContainer').innerHTML === '') {
           buildRichEditors();
@@ -417,6 +496,14 @@
     txtarea.focus();
     txtarea.selectionStart = start + startTag.length;
     txtarea.selectionEnd = start + startTag.length + selectedText.length;
+  }
+  
+  function insertImagePrompt(textareaId) {
+    const url = prompt("Enter image URL (e.g., https://example.com/photo.jpg or assets/photo.jpg):");
+    if (url && url.trim() !== '') {
+      const imgTag = `\n<img src="${url.trim()}" alt="Image" style="max-width:100%; height:auto; border-radius:8px; margin:16px 0; display:block;">\n`;
+      insertAtCursor(textareaId, imgTag);
+    }
   }
 
   function togglePreview(id) {
@@ -449,6 +536,7 @@
             <button type="button" onclick="insertAtCursor('${field.id}', '<br><br>')">¶ Paragraph Break</button>
             <button type="button" onclick="insertAtCursor('${field.id}', '<b>', '</b>')"><b>B</b> Bold</button>
             <button type="button" onclick="insertAtCursor('${field.id}', '<i>', '</i>')"><i>I</i> Italic</button>
+            <button type="button" onclick="insertImagePrompt('${field.id}')">🖼️ Image</button>
             <span class="flex-spacer"></span>
             <button type="button" onclick="togglePreview('${field.id}')">👁️ Preview / Edit HTML</button>
           </div>
@@ -551,6 +639,8 @@
          if(dropdownUpdaterFn === populateQuizCatDropdown) sel = document.getElementById('qCatSelect');
          if(dropdownUpdaterFn === populateQuizQDropdown) sel = document.getElementById('qQSelect');
          if(dropdownUpdaterFn === populateJudgmentDropdown) sel = document.getElementById('judgSelect');
+         if(dropdownUpdaterFn === populateStageDropdown) sel = document.getElementById('stageSelect');
+         if(dropdownUpdaterFn === populateFramerDropdown) sel = document.getElementById('framerSelect');
          if(sel && sel.selectedIndex > 0) {
             if (dropdownUpdaterFn === populatePartDropdown) sel.options[sel.selectedIndex].text = obj.partId + ' - ' + obj.partTitle;
             if (dropdownUpdaterFn === populateArticleDropdown) sel.options[sel.selectedIndex].text = 'Article ' + obj.id + ' - ' + obj.title;
@@ -558,6 +648,8 @@
             if (dropdownUpdaterFn === populateQuizCatDropdown) sel.options[sel.selectedIndex].text = obj.icon + ' ' + obj.title;
             if (dropdownUpdaterFn === populateQuizQDropdown) sel.options[sel.selectedIndex].text = 'Q' + sel.selectedIndex + ': ' + (obj.q ? obj.q.substring(0,30)+'...' : 'New Question');
             if (dropdownUpdaterFn === populateJudgmentDropdown) sel.options[sel.selectedIndex].text = (obj.year || '') + ' - ' + (obj.title || 'New Judgment');
+            if (dropdownUpdaterFn === populateStageDropdown) sel.options[sel.selectedIndex].text = obj.title || 'New Stage';
+            if (dropdownUpdaterFn === populateFramerDropdown) sel.options[sel.selectedIndex].text = obj.name || 'New Framer';
         }
       }
     });
@@ -607,6 +699,17 @@
     bindInput('judgTitle', () => currentJudgIdx>-1 ? judgmentsData[currentJudgIdx] : null, 'title', populateJudgmentDropdown);
     bindInput('judgGist', () => currentJudgIdx>-1 ? judgmentsData[currentJudgIdx] : null, 'gist');
     bindInput('judgDetails', () => currentJudgIdx>-1 ? judgmentsData[currentJudgIdx] : null, 'details');
+    
+    // Making
+    bindInput('stageTitle', () => currentStageIdx>-1 ? makingData.stages[currentStageIdx] : null, 'title', populateStageDropdown);
+    bindInput('stageDates', () => currentStageIdx>-1 ? makingData.stages[currentStageIdx] : null, 'dates');
+    bindInput('stageDetails', () => currentStageIdx>-1 ? makingData.stages[currentStageIdx] : null, 'details');
+    
+    bindInput('framerName', () => currentFramerIdx>-1 ? makingData.framers[currentFramerIdx] : null, 'name', populateFramerDropdown);
+    bindInput('framerPhoto', () => currentFramerIdx>-1 ? makingData.framers[currentFramerIdx] : null, 'photoUrl');
+    bindInput('framerParty', () => currentFramerIdx>-1 ? makingData.framers[currentFramerIdx] : null, 'party');
+    bindInput('framerConst', () => currentFramerIdx>-1 ? makingData.framers[currentFramerIdx] : null, 'constituency');
+    bindInput('framerRoles', () => currentFramerIdx>-1 ? makingData.framers[currentFramerIdx] : null, 'committees');
   }
 
   // --- ARTICLES UI ---
@@ -821,6 +924,56 @@
       document.getElementById('judgmentEditor').classList.add('hidden');
     }
   }
+
+  // --- MAKING UI ---
+  function populateStageDropdown() {
+    const sel = document.getElementById('stageSelect');
+    sel.innerHTML = '<option value="-1">-- Select a Stage --</option>';
+    makingData.stages.forEach((s, i) => sel.innerHTML += `<option value="${i}">${s.title || 'New Stage'}</option>`);
+  }
+  function onStageChange() {
+    currentStageIdx = parseInt(document.getElementById('stageSelect').value);
+    if(currentStageIdx === -1) { document.getElementById('stageEditor').classList.add('hidden'); return; }
+    const s = makingData.stages[currentStageIdx];
+    document.getElementById('stageTitle').value = s.title || '';
+    document.getElementById('stageDates').value = s.dates || '';
+    // If old format (facts array) exists, migrate it to details string
+    let html = s.details || '';
+    if(!html && s.facts) html = s.facts.map(f => `<p style="margin-bottom: 12px; color: var(--body-text);">${f}</p>`).join('');
+    document.getElementById('stageDetails').value = html;
+    document.getElementById('stageEditor').classList.remove('hidden');
+  }
+  function addNewStage() {
+    makingData.stages.push({ title: "New Stage", dates: "", details: "" });
+    populateStageDropdown();
+    document.getElementById('stageSelect').value = makingData.stages.length - 1;
+    onStageChange();
+  }
+  function deleteCurrentStage() {
+    if(currentStageIdx > -1 && confirm("Delete stage?")) { makingData.stages.splice(currentStageIdx, 1); populateStageDropdown(); document.getElementById('stageEditor').classList.add('hidden'); }
+  }
+  
+  function populateFramerDropdown() {
+    const sel = document.getElementById('framerSelect');
+    sel.innerHTML = '<option value="-1">-- Select a Framer --</option>';
+    makingData.framers.forEach((f, i) => sel.innerHTML += `<option value="${i}">${f.name || 'New Framer'}</option>`);
+  }
+  function onFramerChange() {
+    currentFramerIdx = parseInt(document.getElementById('framerSelect').value);
+    if(currentFramerIdx === -1) { document.getElementById('framerEditor').classList.add('hidden'); return; }
+    const f = makingData.framers[currentFramerIdx];
+    document.getElementById('framerName').value = f.name || '';
+    document.getElementById('framerPhoto').value = f.photoUrl || '';
+    document.getElementById('framerParty').value = f.party || '';
+    document.getElementById('framerConst').value = f.constituency || '';
+    document.getElementById('framerRoles').value = f.committees || '';
+    document.getElementById('framerEditor').classList.remove('hidden');
+  }
+  function addNewFramer() {
+    makingData.framers.push({ name: "New Framer", photoUrl: "", party: "", constituency: "", committees: "" });
+    populateFramerDropdown(); document.getElementById('framerSelect').value = makingData.framers.length - 1; onFramerChange();
+  }
+  function deleteCurrentFramer() { if(currentFramerIdx > -1 && confirm("Delete framer?")) { makingData.framers.splice(currentFramerIdx, 1); populateFramerDropdown(); document.getElementById('framerEditor').classList.add('hidden'); } }
 
   // --- ARTICLE CSV UPLOAD ---
   function handleArtCsvUpload(event) {
@@ -1093,6 +1246,7 @@
     if(activeTab === 'articles') { data = articlesData; name = 'articles.json'; }
     else if(activeTab === 'schedules') { data = schedulesData; name = 'schedules.json'; }
     else if(activeTab === 'judgments') { data = judgmentsData; name = 'judgments.json'; }
+    else if(activeTab === 'making') { data = makingData; name = 'making.json'; }
     else { data = quizData; name = 'quiz.json'; }
     
     const dataStr = JSON.stringify(data, null, 2);
