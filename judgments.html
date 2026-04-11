@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landmark Judgments - hiConstitution</title>
+  <meta name="description" content="Browse landmark Supreme Court judgments of India in a structured arrow-slab format." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      background:
+        radial-gradient(circle at top right, rgba(243, 115, 36, 0.08), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+      color: var(--body-text);
+      font-family: "Inter", sans-serif;
+    }
+
+    .judgments-page {
+      padding-top: var(--navbar-h);
+      min-height: 100vh;
+    }
+
+    .judgments-hero {
+      background: linear-gradient(135deg, #0f185f 0%, var(--navy) 58%, #23399a 100%);
+      color: var(--white);
+      padding: 56px 0 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .judgments-hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -60px -90px auto;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .judgments-hero .section-label,
+    .judgments-hero p {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .judgments-hero h1 {
+      color: var(--white);
+      font-family: "Lora", serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin: 12px 0 14px;
+    }
+
+    .judgments-hero p {
+      max-width: 760px;
+      line-height: 1.7;
+    }
+
+    .judgments-main {
+      padding: 32px 0 72px;
+    }
+
+    .judgments-toolbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .judgments-search {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.96);
+      padding: 15px 18px;
+      font-size: 0.98rem;
+      color: var(--dark-text);
+      box-shadow: 0 16px 40px rgba(16, 24, 80, 0.06);
+    }
+
+    .judgments-search:focus {
+      outline: none;
+      border-color: var(--saffron);
+      box-shadow: 0 0 0 4px rgba(243, 115, 36, 0.12);
+    }
+
+    .judgments-count {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+
+    .judgments-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .judgment-card {
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: 0 18px 44px rgba(17, 29, 93, 0.07);
+      overflow: hidden;
+    }
+
+    .judgment-card summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 22px;
+    }
+
+    .judgment-card summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .judgment-year {
+      min-width: 74px;
+      text-align: center;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(243, 115, 36, 0.14), rgba(243, 115, 36, 0.04));
+      color: var(--saffron);
+      padding: 12px 10px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .judgment-summary {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .judgment-title {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-family: "Lora", serif;
+      font-size: 1.28rem;
+      line-height: 1.35;
+    }
+
+    .judgment-gist {
+      margin: 0;
+      color: var(--body-text);
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+
+    .judgment-arrow {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      background: #eef2ff;
+      color: var(--navy);
+      font-size: 1.1rem;
+      font-weight: 800;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .judgment-card[open] .judgment-arrow {
+      transform: rotate(90deg);
+      background: var(--saffron);
+      color: var(--white);
+    }
+
+    .judgment-body {
+      padding: 0 22px 22px 114px;
+    }
+
+    .judgment-slabs {
+      display: grid;
+      gap: 12px;
+    }
+
+    .judgment-slab {
+      background: linear-gradient(180deg, #fffdf9 0%, #ffffff 100%);
+      border: 1px solid rgba(15, 24, 95, 0.08);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .judgment-slab-static {
+      padding: 16px 18px 18px;
+      color: var(--body-text);
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .judgment-slab-head,
+    .judgment-slab summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 15px 18px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--dark-text);
+      list-style: none;
+      cursor: pointer;
+      background: linear-gradient(90deg, rgba(243, 115, 36, 0.08), rgba(26, 35, 126, 0.03));
+    }
+
+    .judgment-slab summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .judgment-slab-arrow {
+      font-size: 1rem;
+      color: var(--saffron);
+      transition: transform 0.2s ease;
+    }
+
+    .judgment-slab[open] .judgment-slab-arrow {
+      transform: rotate(90deg);
+    }
+
+    .judgment-slab-body {
+      padding: 16px 18px 18px;
+      color: var(--body-text);
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .judgment-slab-body p {
+      margin: 0 0 14px;
+    }
+
+    .judgment-slab-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .judgment-slab-body strong {
+      color: var(--navy);
+    }
+
+    .judgments-empty,
+    .judgments-loading {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 26px;
+      text-align: center;
+      color: var(--muted);
+      box-shadow: var(--shadow-sm);
+    }
+
+    @media (max-width: 900px) {
+      .judgment-body {
+        padding: 0 18px 18px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .judgments-toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .judgment-card summary {
+        padding: 18px;
+        gap: 14px;
+      }
+
+      .judgment-year {
+        min-width: 64px;
+        font-size: 0.86rem;
+      }
+
+      .judgment-title {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-circle">हि</div>
+      <span class="logo-text">hi<span>Constitution</span></span>
+    </a>
+    <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>
+      <li><a href="study.html" class="nav-link">Study</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+      <li><a href="pulse.html" class="nav-link">Pulse</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="quiz.html" class="btn btn-primary btn-sm">Take Quiz</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<nav class="mobile-nav" aria-label="Mobile navigation">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="read-the-constitution.html" class="nav-link">Read</a>
+  <a href="study.html" class="nav-link">Study</a>
+  <a href="quiz.html" class="nav-link">Quiz</a>
+  <a href="pulse.html" class="nav-link">Pulse</a>
+</nav>
+
+<main class="judgments-page">
+  <section class="judgments-hero">
+    <div class="container">
+      <span class="section-label">Landmark Judgments</span>
+      <h1>Supreme Court Cases That Shaped Constitutional India</h1>
+      <p><strong>Exploring Judicial Landmarks:</strong> A Curated Collection of Supreme Court Judgments that Shaped India's Constitutional Landscape.</p>
+    </div>
+  </section>
+
+  <section class="judgments-main">
+    <div class="container">
+      <div class="judgments-toolbar">
+        <input
+          id="judgmentSearch"
+          class="judgments-search"
+          type="search"
+          placeholder="Search by case name, year, article, ruling, or story"
+          aria-label="Search landmark judgments"
+        />
+        <div class="judgments-count" id="judgmentsCount">Loading...</div>
+      </div>
+
+      <div class="judgments-list" id="judgmentsList">
+        <div class="judgments-loading">Landmark judgments are loading...</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,0.7);padding:48px 0 32px;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:40px;">
+      <div>
+        <div class="navbar-logo" style="margin-bottom:14px;">
+          <div class="logo-circle">हि</div>
+          <span style="color:#fff;font-weight:800;font-size:1.1rem;">hi<span style="color:var(--saffron);">Constitution</span></span>
+        </div>
+        <p style="font-size:0.88rem;line-height:1.7;color:rgba(255,255,255,0.55);">Making India's Constitution accessible through clear explanations, timelines, judgments, and study tools.</p>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">Explore</h4>
+        <ul style="display:flex;flex-direction:column;gap:10px;list-style:none;">
+          <li><a href="read-the-constitution.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;">Read Constitution</a></li>
+          <li><a href="study.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;">Study Hub</a></li>
+          <li><a href="pulse.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;">Constitutional Pulse</a></li>
+          <li><a href="judgments.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;">Landmark Judgments</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">What You Get</h4>
+        <ul style="display:flex;flex-direction:column;gap:10px;list-style:none;">
+          <li style="color:rgba(255,255,255,0.65);font-size:0.9rem;">Arrow-based expandable case slabs</li>
+          <li style="color:rgba(255,255,255,0.65);font-size:0.9rem;">Chronological Supreme Court coverage</li>
+          <li style="color:rgba(255,255,255,0.65);font-size:0.9rem;">Search by article, year, or case name</li>
+          <li style="color:rgba(255,255,255,0.65);font-size:0.9rem;">Imported local data for offline use</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  (function initJudgmentsPage() {
+    const listEl = document.getElementById('judgmentsList');
+    const searchEl = document.getElementById('judgmentSearch');
+    const countEl = document.getElementById('judgmentsCount');
+    let judgments = [];
+
+    function buildCard(item, index) {
+      const card = document.createElement('details');
+      card.className = 'judgment-card';
+
+      const summary = document.createElement('summary');
+      summary.innerHTML = `
+        <div class="judgment-year">${item.year || 'Case'}</div>
+        <div class="judgment-summary">
+          <h2 class="judgment-title">${item.title}</h2>
+          <p class="judgment-gist">${item.gist || 'Open to read the full ruling and story.'}</p>
+        </div>
+        <div class="judgment-arrow">&rsaquo;</div>
+      `;
+
+      const body = document.createElement('div');
+      body.className = 'judgment-body';
+      body.innerHTML = `
+        <div class="judgment-slabs">
+          <div class="judgment-slab">
+            <div class="judgment-slab-head"><span>Articles / Law</span></div>
+            <div class="judgment-slab-static">${item.articles || 'Not specified.'}</div>
+          </div>
+          <div class="judgment-slab">
+            <div class="judgment-slab-head"><span>Ruling</span></div>
+            <div class="judgment-slab-static">${item.ruling || item.gist || 'Not specified.'}</div>
+          </div>
+          <details class="judgment-slab">
+            <summary><span>The Story</span><span class="judgment-slab-arrow">&rsaquo;</span></summary>
+            <div class="judgment-slab-body">${item.story || '<p>Story not available.</p>'}</div>
+          </details>
+        </div>
+      `;
+
+      card.appendChild(summary);
+      card.appendChild(body);
+      return card;
+    }
+
+    function render(items) {
+      listEl.innerHTML = '';
+      if (!items.length) {
+        listEl.innerHTML = '<div class="judgments-empty">No judgments matched your search.</div>';
+        countEl.textContent = '0 judgments shown';
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      items.forEach((item, index) => fragment.appendChild(buildCard(item, index)));
+      listEl.appendChild(fragment);
+      countEl.textContent = `${items.length} judgment${items.length === 1 ? '' : 's'} shown`;
+    }
+
+    function applyFilter() {
+      const query = searchEl.value.trim().toLowerCase();
+      if (!query) {
+        render(judgments);
+        return;
+      }
+
+      const filtered = judgments.filter((item) => {
+        const haystack = [
+          item.year,
+          item.title,
+          item.gist,
+          item.articles,
+          item.ruling,
+          item.story
+        ].join(' ').toLowerCase();
+        return haystack.includes(query);
+      });
+      render(filtered);
+    }
+
+    fetch('data/judgments.json')
+      .then((response) => {
+        if (!response.ok) throw new Error('Could not load judgments.json');
+        return response.json();
+      })
+      .then((data) => {
+        judgments = Array.isArray(data) ? data : [];
+        const params = new URLSearchParams(window.location.search);
+        const presetQuery = params.get('q');
+        if (presetQuery) {
+          searchEl.value = presetQuery;
+          applyFilter();
+        } else {
+          render(judgments);
+        }
+      })
+      .catch(() => {
+        countEl.textContent = 'Load failed';
+        listEl.innerHTML = '<div class="judgments-empty">Judgments could not be loaded right now.</div>';
+      });
+
+    searchEl.addEventListener('input', applyFilter);
+  })();
+</script>
+</body>
+</html>

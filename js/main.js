@@ -258,13 +258,74 @@
 
   const bottomNum = document.getElementById('bottomAotdNum');
   if (bottomNum) {
-    bottomNum.textContent = article.num;
-    document.getElementById('bottomAotdTitle').textContent = `Article ${article.num} - ${article.title}`;
-    document.getElementById('bottomAotdBadge').textContent = article.badge;
-    document.getElementById('bottomAotdPart').textContent = article.part;
-    document.getElementById('bottomAotdSnippet').textContent = article.snippet;
-    const link = document.getElementById('bottomAotdLink');
-    if (link) link.href = `library-article.html?id=${article.num}`;
+    const questionOverrides = {
+      'kesavananda bharati v. state of kerala': "Who is the 'Saviour of the Indian Constitution' who lost his personal land case but won the battle for every Indian citizen's freedom?",
+      'maneka gandhi v. union of india': 'Which passport case transformed Article 21 from a narrow protection into a guarantee of fairness, reasonableness, and dignity?',
+      'adm jabalpur v. shivkant shukla': 'Which infamous Emergency-era case asked whether a citizen could seek liberty even when fundamental rights stood suspended?',
+      'i.c. golak nath v. state of punjab': 'Which case declared that Parliament could not amend Fundamental Rights, triggering a constitutional showdown?',
+      'justice k.s. puttaswamy v. union of india': 'Which landmark case declared that privacy is not a luxury, but a Fundamental Right flowing from liberty and dignity?',
+      'navtej singh johar v. union of india': 'Which case told India that the Constitution protects love, identity, and dignity for LGBTQ+ citizens?',
+      'shreya singhal v. union of india': 'Which internet freedom case struck down Section 66A and protected citizens from being jailed for online speech?',
+      'vishaka v. state of rajasthan': 'Which case created workplace sexual harassment guidelines years before Parliament made a law?',
+      's.r. bommai v. union of india': 'Which federalism case stopped Article 356 from becoming an easy political weapon against state governments?',
+      'indira nehru gandhi v. raj narain': 'Which election case reinforced that democracy and free elections are part of the Constitution\'s basic structure?'
+    };
+
+    function normalizeTitle(text) {
+      return (text || '')
+        .toLowerCase()
+        .replace(/\[[^\]]*]/g, '')
+        .replace(/[^a-z0-9]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function stripHtml(text) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = text || '';
+      return (tmp.textContent || tmp.innerText || '').trim();
+    }
+
+    function buildQuestion(item) {
+      const key = normalizeTitle(item.title);
+      if (questionOverrides[key]) return questionOverrides[key];
+
+      const cleanRuling = stripHtml(item.ruling || item.gist);
+      const trimmedRuling = cleanRuling.replace(/^The Court ruled that\s*/i, '').replace(/^The Supreme Court ruled that\s*/i, '');
+      if (trimmedRuling) {
+        return `Which landmark judgment held that ${trimmedRuling.charAt(0).toLowerCase()}${trimmedRuling.slice(1)}?`;
+      }
+      return `Which landmark Supreme Court case is known as ${item.title}?`;
+    }
+
+    fetch('data/judgments.json')
+      .then(function (response) {
+        if (!response.ok) throw new Error('Could not load judgments');
+        return response.json();
+      })
+      .then(function (judgments) {
+        if (!Array.isArray(judgments) || !judgments.length) return;
+        const judgment = judgments[dayOfYear % judgments.length];
+        bottomNum.textContent = judgment.year || 'Case';
+        document.getElementById('bottomAotdTitle').textContent = buildQuestion(judgment);
+        document.getElementById('bottomAotdBadge').textContent = 'Judgment of the Day';
+        document.getElementById('bottomAotdPart').textContent = 'Landmark Case';
+        document.getElementById('bottomAotdSnippet').textContent = `${judgment.title} (${judgment.year})`;
+        const link = document.getElementById('bottomAotdLink');
+        if (link) {
+          link.href = `judgments.html?q=${encodeURIComponent(judgment.title)}`;
+          link.textContent = 'Read Full Judgment →';
+        }
+      })
+      .catch(function () {
+        bottomNum.textContent = '1973';
+        document.getElementById('bottomAotdTitle').textContent = questionOverrides['kesavananda bharati v. state of kerala'];
+        document.getElementById('bottomAotdBadge').textContent = 'Judgment of the Day';
+        document.getElementById('bottomAotdPart').textContent = 'Landmark Case';
+        document.getElementById('bottomAotdSnippet').textContent = 'Kesavananda Bharati v. State of Kerala (1973)';
+        const link = document.getElementById('bottomAotdLink');
+        if (link) link.href = 'judgments.html?q=Kesavananda%20Bharati';
+      });
   }
 })();
 

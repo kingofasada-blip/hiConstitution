@@ -81,6 +81,7 @@
   <button id="tabBtn-articles" class="active" onclick="switchTab('articles')">Articles & Parts</button>
   <button id="tabBtn-schedules" onclick="switchTab('schedules')">Schedules</button>
   <button id="tabBtn-quizzes" onclick="switchTab('quizzes')">Quizzes</button>
+  <button id="tabBtn-judgments" onclick="switchTab('judgments')">Judgments</button>
 </div>
 
 <div id="view-articles" class="admin-wrapper">
@@ -301,6 +302,40 @@
   </div>
 </div>
 
+<!-- JUDGMENTS SECTION -->
+<div id="view-judgments" class="admin-wrapper hidden">
+  <div class="box">
+    <div class="box-header">
+      <h2>Select Landmark Judgment</h2>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-outline-navy btn-sm" onclick="addNewJudgment()">+ Add New Judgment</button>
+      </div>
+    </div>
+    <div class="flex-row">
+      <select id="judgSelect" onchange="onJudgmentChange()">
+        <option value="-1">Loading Judgments...</option>
+      </select>
+    </div>
+    <div id="judgmentEditor" class="hidden" style="margin-top: 24px; padding-top: 24px; border-top: 1px dashed var(--border);">
+      <div style="display:flex; justify-content:flex-end; margin-bottom:16px;">
+        <button class="btn-danger" onclick="deleteCurrentJudgment()">🗑️ Delete Judgment</button>
+      </div>
+      <div class="form-group"><label>Year</label><input type="text" id="judgYear" class="form-control"></div>
+      <div class="form-group"><label>Case Name (Title)</label><input type="text" id="judgTitle" class="form-control"></div>
+      <div class="form-group"><label>Gist / Short Summary</label><textarea id="judgGist" class="form-control" rows="2"></textarea></div>
+      <div class="form-group">
+        <label>Full Details [HTML Supported]</label>
+        <div class="rich-toolbar">
+          <button type="button" onclick="insertAtCursor('judgDetails', '<br><br>')">¶ Paragraph Break</button>
+          <button type="button" onclick="insertAtCursor('judgDetails', '<strong>', '</strong>')"><b>B</b> Bold</button>
+          <button type="button" onclick="insertAtCursor('judgDetails', '<i>', '</i>')"><i>I</i> Italic</button>
+        </div>
+        <textarea id="judgDetails" class="form-control editor-textarea"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="status-bar">
   <div class="auto-save-text" id="saveStatus">✅ All changes saved automatically to memory.</div>
   <button class="btn btn-primary btn-sm" id="downloadBtn">⬇️ Download articles.json</button>
@@ -310,6 +345,7 @@
   let articlesData = [];
   let schedulesData = [];
   let quizData = [];
+  let judgmentsData = [];
 
   let currentPartIdx = -1;
   let currentArtIdx = -1;
@@ -317,6 +353,7 @@
   let currentQuizCatIdx = -1;
   let currentQuizIdx = -1;
   let currentQuizQIdx = -1;
+  let currentJudgIdx = -1;
 
   let activeTab = 'articles';
 
@@ -332,23 +369,31 @@
     document.querySelectorAll('.admin-tabs button').forEach(b => b.classList.remove('active'));
     document.getElementById('tabBtn-' + tab).classList.add('active');
     
-    document.getElementById('downloadBtn').textContent = `⬇️ Download ${tab === 'articles' ? 'articles' : (tab === 'schedules' ? 'schedules' : 'quiz')}.json`;
+    let dlName = tab + '.json';
+    if(tab === 'articles') dlName = 'articles.json';
+    if(tab === 'schedules') dlName = 'schedules.json';
+    if(tab === 'quizzes') dlName = 'quiz.json';
+    if(tab === 'judgments') dlName = 'judgments.json';
+    document.getElementById('downloadBtn').textContent = `⬇️ Download ${dlName}`;
   }
 
   function loadData() {
     Promise.all([
       fetch('data/articles.json').then(r => r.ok ? r.json() : []),
       fetch('data/schedules.json').then(r => r.ok ? r.json() : []),
-      fetch('data/quiz.json').then(r => r.ok ? r.json() : [])
-    ]).then(([arts, schs, qzs]) => {
+      fetch('data/quiz.json').then(r => r.ok ? r.json() : []),
+      fetch('data/judgments.json').then(r => r.ok ? r.json() : [])
+    ]).then(([arts, schs, qzs, judgs]) => {
         articlesData = arts;
         schedulesData = schs;
         quizData = qzs;
+        judgmentsData = judgs;
         
         renderArticleOverview();
         populatePartDropdown();
         populateScheduleDropdown();
         populateQuizCatDropdown();
+        populateJudgmentDropdown();
         
         if (document.getElementById('richEditorsContainer').innerHTML === '') {
           buildRichEditors();
@@ -505,12 +550,14 @@
          if(dropdownUpdaterFn === populateScheduleDropdown) sel = document.getElementById('schSelect');
          if(dropdownUpdaterFn === populateQuizCatDropdown) sel = document.getElementById('qCatSelect');
          if(dropdownUpdaterFn === populateQuizQDropdown) sel = document.getElementById('qQSelect');
+         if(dropdownUpdaterFn === populateJudgmentDropdown) sel = document.getElementById('judgSelect');
          if(sel && sel.selectedIndex > 0) {
             if (dropdownUpdaterFn === populatePartDropdown) sel.options[sel.selectedIndex].text = obj.partId + ' - ' + obj.partTitle;
             if (dropdownUpdaterFn === populateArticleDropdown) sel.options[sel.selectedIndex].text = 'Article ' + obj.id + ' - ' + obj.title;
             if (dropdownUpdaterFn === populateScheduleDropdown) sel.options[sel.selectedIndex].text = 'Schedule ' + obj.id + ' - ' + obj.title;
             if (dropdownUpdaterFn === populateQuizCatDropdown) sel.options[sel.selectedIndex].text = obj.icon + ' ' + obj.title;
             if (dropdownUpdaterFn === populateQuizQDropdown) sel.options[sel.selectedIndex].text = 'Q' + sel.selectedIndex + ': ' + (obj.q ? obj.q.substring(0,30)+'...' : 'New Question');
+            if (dropdownUpdaterFn === populateJudgmentDropdown) sel.options[sel.selectedIndex].text = (obj.year || '') + ' - ' + (obj.title || 'New Judgment');
         }
       }
     });
@@ -554,6 +601,12 @@
     bindInput('qOpt3', () => currentQuizQIdx>-1 ? quizData[currentQuizCatIdx].quizzes[currentQuizIdx].questions[currentQuizQIdx] : null, 'options', null, 3);
     bindInput('qAns', () => currentQuizQIdx>-1 ? quizData[currentQuizCatIdx].quizzes[currentQuizIdx].questions[currentQuizQIdx] : null, 'answer');
     bindInput('qExp', () => currentQuizQIdx>-1 ? quizData[currentQuizCatIdx].quizzes[currentQuizIdx].questions[currentQuizQIdx] : null, 'explanation');
+
+    // Judgments
+    bindInput('judgYear', () => currentJudgIdx>-1 ? judgmentsData[currentJudgIdx] : null, 'year', populateJudgmentDropdown);
+    bindInput('judgTitle', () => currentJudgIdx>-1 ? judgmentsData[currentJudgIdx] : null, 'title', populateJudgmentDropdown);
+    bindInput('judgGist', () => currentJudgIdx>-1 ? judgmentsData[currentJudgIdx] : null, 'gist');
+    bindInput('judgDetails', () => currentJudgIdx>-1 ? judgmentsData[currentJudgIdx] : null, 'details');
   }
 
   // --- ARTICLES UI ---
@@ -736,6 +789,36 @@
       quizData[currentQuizCatIdx].quizzes[currentQuizIdx].questions.splice(currentQuizQIdx, 1);
       populateQuizQDropdown();
       document.getElementById('quizQEditor').classList.add('hidden');
+    }
+  }
+
+  // --- JUDGMENTS UI ---
+  function populateJudgmentDropdown() {
+    const sel = document.getElementById('judgSelect');
+    sel.innerHTML = '<option value="-1">-- Select a Judgment --</option>';
+    judgmentsData.forEach((j, i) => sel.innerHTML += `<option value="${i}">${j.year || ''} - ${j.title || 'New Judgment'}</option>`);
+  }
+  function onJudgmentChange() {
+    currentJudgIdx = parseInt(document.getElementById('judgSelect').value);
+    if(currentJudgIdx === -1) { document.getElementById('judgmentEditor').classList.add('hidden'); return; }
+    const j = judgmentsData[currentJudgIdx];
+    document.getElementById('judgYear').value = j.year || '';
+    document.getElementById('judgTitle').value = j.title || '';
+    document.getElementById('judgGist').value = j.gist || '';
+    document.getElementById('judgDetails').value = j.details || '';
+    document.getElementById('judgmentEditor').classList.remove('hidden');
+  }
+  function addNewJudgment() {
+    judgmentsData.push({ year: "", title: "New Judgment", gist: "", details: "" });
+    populateJudgmentDropdown();
+    document.getElementById('judgSelect').value = judgmentsData.length - 1;
+    onJudgmentChange();
+  }
+  function deleteCurrentJudgment() {
+    if(currentJudgIdx > -1 && confirm("Delete this judgment?")) {
+      judgmentsData.splice(currentJudgIdx, 1);
+      populateJudgmentDropdown();
+      document.getElementById('judgmentEditor').classList.add('hidden');
     }
   }
 
@@ -1009,6 +1092,7 @@
     let data, name;
     if(activeTab === 'articles') { data = articlesData; name = 'articles.json'; }
     else if(activeTab === 'schedules') { data = schedulesData; name = 'schedules.json'; }
+    else if(activeTab === 'judgments') { data = judgmentsData; name = 'judgments.json'; }
     else { data = quizData; name = 'quiz.json'; }
     
     const dataStr = JSON.stringify(data, null, 2);
