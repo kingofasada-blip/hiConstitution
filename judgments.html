@@ -111,7 +111,7 @@
       list-style: none;
       cursor: pointer;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 18px;
       padding: 22px;
     }
@@ -135,21 +135,17 @@
     .judgment-summary {
       min-width: 0;
       flex: 1;
+      display: flex;
+      align-items: center;
+      min-height: 74px;
     }
 
     .judgment-title {
-      margin: 0 0 8px;
+      margin: 0;
       color: var(--navy);
       font-family: "Lora", serif;
       font-size: 1.28rem;
       line-height: 1.35;
-    }
-
-    .judgment-gist {
-      margin: 0;
-      color: var(--body-text);
-      line-height: 1.7;
-      font-size: 0.96rem;
     }
 
     .judgment-arrow {
@@ -329,7 +325,7 @@
 
   <section class="judgments-main">
     <div class="container">
-      <div class="judgments-toolbar">
+      <div class="judgments-toolbar" style="grid-template-columns: minmax(0, 1fr);">
         <input
           id="judgmentSearch"
           class="judgments-search"
@@ -337,7 +333,6 @@
           placeholder="Search by case name, year, article, ruling, or story"
           aria-label="Search landmark judgments"
         />
-        <div class="judgments-count" id="judgmentsCount">Loading...</div>
       </div>
 
       <div class="judgments-list" id="judgmentsList">
@@ -384,7 +379,6 @@
   (function initJudgmentsPage() {
     const listEl = document.getElementById('judgmentsList');
     const searchEl = document.getElementById('judgmentSearch');
-    const countEl = document.getElementById('judgmentsCount');
     let judgments = [];
 
     function buildCard(item, index) {
@@ -396,7 +390,6 @@
         <div class="judgment-year">${item.year || 'Case'}</div>
         <div class="judgment-summary">
           <h2 class="judgment-title">${item.title}</h2>
-          <p class="judgment-gist">${item.gist || 'Open to read the full ruling and story.'}</p>
         </div>
         <div class="judgment-arrow">&rsaquo;</div>
       `;
@@ -409,8 +402,12 @@
             <div class="judgment-slab-head"><span>Articles / Law</span></div>
             <div class="judgment-slab-static">${item.articles || 'Not specified.'}</div>
           </div>
+          <div class="judgment-slab">
+            <div class="judgment-slab-head"><span>Ruling</span></div>
+            <div class="judgment-slab-static">${item.ruling || item.gist || 'Not specified.'}</div>
+          </div>
           <details class="judgment-slab">
-            <summary><span>The Story</span><span class="judgment-slab-arrow">&rsaquo;</span></summary>
+            <summary><span>Read Story</span><span class="judgment-slab-arrow">&rsaquo;</span></summary>
             <div class="judgment-slab-body">${item.story || '<p>Story not available.</p>'}</div>
           </details>
         </div>
@@ -425,14 +422,12 @@
       listEl.innerHTML = '';
       if (!items.length) {
         listEl.innerHTML = '<div class="judgments-empty">No judgments matched your search.</div>';
-        countEl.textContent = '0 judgments shown';
         return;
       }
 
       const fragment = document.createDocumentFragment();
       items.forEach((item, index) => fragment.appendChild(buildCard(item, index)));
       listEl.appendChild(fragment);
-      countEl.textContent = `${items.length} judgment${items.length === 1 ? '' : 's'} shown`;
     }
 
     function applyFilter() {
@@ -473,7 +468,6 @@
         }
       })
       .catch(() => {
-        countEl.textContent = 'Load failed';
         listEl.innerHTML = '<div class="judgments-empty">Judgments could not be loaded right now.</div>';
       });
 
