@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Full Constitutional Timeline - hiConstitution</title>
+  <meta name="description" content="Explore the full historical timeline of the Indian Constitution." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .timeline-page { padding-top: var(--navbar-h); min-height: 100vh; background: var(--bg-light); padding-bottom: 80px; }
+    .timeline-header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      padding: 56px 0;
+      color: var(--white);
+      text-align: center;
+    }
+    .timeline-header h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 12px; color: var(--white); font-family: "Lora", serif; }
+    .timeline-header p { color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+    
+    /* Vertical List View Styles */
+    .vertical-timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 40px auto 0;
+      padding: 0 20px;
+    }
+    .vertical-timeline::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 48px;
+      height: 100%; width: 4px;
+      background: var(--border);
+      border-radius: 2px;
+    }
+    .v-timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding-left: 70px;
+    }
+    .v-timeline-dot {
+      position: absolute;
+      left: 20px; top: 0;
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 4px solid var(--saffron);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.95rem; color: var(--navy);
+      box-shadow: var(--shadow-sm);
+      z-index: 2;
+    }
+    .v-timeline-content {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s ease;
+    }
+    .v-timeline-content:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--navy);
+    }
+    @media (max-width: 600px) {
+      .vertical-timeline::before { left: 38px; }
+      .v-timeline-item { padding-left: 64px; margin-bottom: 30px; }
+      .v-timeline-dot { left: 16px; width: 48px; height: 48px; font-size: 0.8rem; border-width: 3px; }
+      .v-timeline-content { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-circle">हि</div>
+      <span class="logo-text">hi<span>Constitution</span></span>
+    </a>
+    <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>
+      <li><a href="making.html" class="nav-link">Making</a></li>
+      <li><a href="amendments.html" class="nav-link">Amendments</a></li>
+      <li><a href="judgments.html" class="nav-link">Judgments</a></li>
+      <li><a href="draft.html" class="nav-link">Draft</a></li>
+      <li><a href="facts.html" class="nav-link">Facts</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<nav class="mobile-nav" aria-label="Mobile navigation">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="read-the-constitution.html" class="nav-link">Read</a>
+  <a href="making.html" class="nav-link">Making</a>
+  <a href="amendments.html" class="nav-link">Amendments</a>
+  <a href="judgments.html" class="nav-link">Judgments</a>
+  <a href="draft.html" class="nav-link">Draft</a>
+  <a href="facts.html" class="nav-link">Facts</a>
+  <a href="quiz.html" class="nav-link">Quiz</a>
+</nav>
+
+<main class="timeline-page">
+  <div class="timeline-header">
+    <div class="container">
+      <h1>Constitutional Timeline</h1>
+      <p>The complete chronological journey of the Constitution of India.</p>
+    </div>
+  </div>
+  
+  <section class="timeline-section section-pad">
+    <div class="vertical-timeline" id="verticalTimeline">
+      <!-- Data rendered by timeline.js -->
+    </div>
+  </section>
+</main>
+
+<script src="js/main.js"></script>
+<script src="js/timeline.js"></script>
+</body>
+</html>

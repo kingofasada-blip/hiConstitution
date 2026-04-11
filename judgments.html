@@ -58,6 +58,26 @@
       line-height: 1.7;
     }
 
+    .judgments-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .judgments-meta-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
     .judgments-main {
       padding: 32px 0 72px;
     }
@@ -188,14 +208,6 @@
       overflow: hidden;
     }
 
-    .judgment-slab-static {
-      padding: 16px 18px 18px;
-      color: var(--body-text);
-      line-height: 1.8;
-      font-size: 0.95rem;
-    }
-
-    .judgment-slab-head,
     .judgment-slab summary {
       display: flex;
       align-items: center;
@@ -291,9 +303,12 @@
     <ul class="navbar-nav" role="list">
       <li><a href="index.html" class="nav-link">Home</a></li>
       <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>
-      <li><a href="study.html" class="nav-link">Study</a></li>
+      <li><a href="making.html" class="nav-link">Making</a></li>
+      <li><a href="amendments.html" class="nav-link">Amendments</a></li>
+      <li><a href="judgments.html" class="nav-link">Judgments</a></li>
+      <li><a href="draft.html" class="nav-link">Draft</a></li>
+      <li><a href="facts.html" class="nav-link">Facts</a></li>
       <li><a href="quiz.html" class="nav-link">Quiz</a></li>
-      <li><a href="pulse.html" class="nav-link">Pulse</a></li>
     </ul>
     <div class="navbar-actions">
       <a href="quiz.html" class="btn btn-primary btn-sm">Take Quiz</a>
@@ -307,9 +322,12 @@
 <nav class="mobile-nav" aria-label="Mobile navigation">
   <a href="index.html" class="nav-link">Home</a>
   <a href="read-the-constitution.html" class="nav-link">Read</a>
-  <a href="study.html" class="nav-link">Study</a>
+  <a href="making.html" class="nav-link">Making</a>
+  <a href="amendments.html" class="nav-link">Amendments</a>
+  <a href="judgments.html" class="nav-link">Judgments</a>
+  <a href="draft.html" class="nav-link">Draft</a>
+  <a href="facts.html" class="nav-link">Facts</a>
   <a href="quiz.html" class="nav-link">Quiz</a>
-  <a href="pulse.html" class="nav-link">Pulse</a>
 </nav>
 
 <main class="judgments-page">
@@ -317,7 +335,13 @@
     <div class="container">
       <span class="section-label">Landmark Judgments</span>
       <h1>Supreme Court Cases That Shaped Constitutional India</h1>
-      <p><strong>Exploring Judicial Landmarks:</strong> A Curated Collection of Supreme Court Judgments that Shaped India's Constitutional Landscape.</p>
+      <p>
+        Imported from your Google Doc and arranged in arrow-based slabs. Serial numbering has been removed, and bold emphasis from the source has been preserved where it was available in the document export.
+      </p>
+      <div class="judgments-meta">
+        <span class="judgments-meta-chip">Chronological Order</span>
+        <span class="judgments-meta-chip" id="heroJudgmentCount">Loading cases...</span>
+      </div>
     </div>
   </section>
 
@@ -355,8 +379,8 @@
         <h4 style="color:#fff;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">Explore</h4>
         <ul style="display:flex;flex-direction:column;gap:10px;list-style:none;">
           <li><a href="read-the-constitution.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;">Read Constitution</a></li>
-          <li><a href="study.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;">Study Hub</a></li>
-          <li><a href="pulse.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;">Constitutional Pulse</a></li>
+          <li><a href="making.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;">Constitution Making</a></li>
+          <li><a href="timeline.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;">Full Timeline</a></li>
           <li><a href="judgments.html" style="color:rgba(255,255,255,0.65);font-size:0.9rem;">Landmark Judgments</a></li>
         </ul>
       </div>
@@ -379,11 +403,13 @@
     const listEl = document.getElementById('judgmentsList');
     const searchEl = document.getElementById('judgmentSearch');
     const countEl = document.getElementById('judgmentsCount');
+    const heroCountEl = document.getElementById('heroJudgmentCount');
     let judgments = [];
 
     function buildCard(item, index) {
       const card = document.createElement('details');
       card.className = 'judgment-card';
+      if (index < 2) card.open = true;
 
       const summary = document.createElement('summary');
       summary.innerHTML = `
@@ -399,14 +425,14 @@
       body.className = 'judgment-body';
       body.innerHTML = `
         <div class="judgment-slabs">
-          <div class="judgment-slab">
-            <div class="judgment-slab-head"><span>Articles / Law</span></div>
-            <div class="judgment-slab-static">${item.articles || 'Not specified.'}</div>
-          </div>
-          <div class="judgment-slab">
-            <div class="judgment-slab-head"><span>Ruling</span></div>
-            <div class="judgment-slab-static">${item.ruling || item.gist || 'Not specified.'}</div>
-          </div>
+          <details class="judgment-slab" open>
+            <summary><span>Articles / Law</span><span class="judgment-slab-arrow">&rsaquo;</span></summary>
+            <div class="judgment-slab-body">${item.articles || 'Not specified.'}</div>
+          </details>
+          <details class="judgment-slab" open>
+            <summary><span>Ruling</span><span class="judgment-slab-arrow">&rsaquo;</span></summary>
+            <div class="judgment-slab-body">${item.ruling || item.gist || 'Not specified.'}</div>
+          </details>
           <details class="judgment-slab">
             <summary><span>The Story</span><span class="judgment-slab-arrow">&rsaquo;</span></summary>
             <div class="judgment-slab-body">${item.story || '<p>Story not available.</p>'}</div>
@@ -461,16 +487,11 @@
       })
       .then((data) => {
         judgments = Array.isArray(data) ? data : [];
-        const params = new URLSearchParams(window.location.search);
-        const presetQuery = params.get('q');
-        if (presetQuery) {
-          searchEl.value = presetQuery;
-          applyFilter();
-        } else {
-          render(judgments);
-        }
+        heroCountEl.textContent = `${judgments.length} cases imported`;
+        render(judgments);
       })
       .catch(() => {
+        heroCountEl.textContent = 'Import unavailable';
         countEl.textContent = 'Load failed';
         listEl.innerHTML = '<div class="judgments-empty">Judgments could not be loaded right now.</div>';
       });
