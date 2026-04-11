@@ -208,6 +208,7 @@
       overflow: hidden;
     }
 
+    .judgment-slab-head,
     .judgment-slab summary {
       display: flex;
       align-items: center;
@@ -224,6 +225,13 @@
 
     .judgment-slab summary::-webkit-details-marker {
       display: none;
+    }
+
+    .judgment-slab-static {
+      padding: 16px 18px 18px;
+      color: var(--body-text);
+      line-height: 1.8;
+      font-size: 0.95rem;
     }
 
     .judgment-slab-arrow {
@@ -409,7 +417,6 @@
     function buildCard(item, index) {
       const card = document.createElement('details');
       card.className = 'judgment-card';
-      if (index < 2) card.open = true;
 
       const summary = document.createElement('summary');
       summary.innerHTML = `
@@ -425,14 +432,14 @@
       body.className = 'judgment-body';
       body.innerHTML = `
         <div class="judgment-slabs">
-          <details class="judgment-slab" open>
-            <summary><span>Articles / Law</span><span class="judgment-slab-arrow">&rsaquo;</span></summary>
-            <div class="judgment-slab-body">${item.articles || 'Not specified.'}</div>
-          </details>
-          <details class="judgment-slab" open>
-            <summary><span>Ruling</span><span class="judgment-slab-arrow">&rsaquo;</span></summary>
-            <div class="judgment-slab-body">${item.ruling || item.gist || 'Not specified.'}</div>
-          </details>
+          <div class="judgment-slab">
+            <div class="judgment-slab-head"><span>Articles / Law</span></div>
+            <div class="judgment-slab-static">${item.articles || 'Not specified.'}</div>
+          </div>
+          <div class="judgment-slab">
+            <div class="judgment-slab-head"><span>Ruling</span></div>
+            <div class="judgment-slab-static">${item.ruling || item.gist || 'Not specified.'}</div>
+          </div>
           <details class="judgment-slab">
             <summary><span>The Story</span><span class="judgment-slab-arrow">&rsaquo;</span></summary>
             <div class="judgment-slab-body">${item.story || '<p>Story not available.</p>'}</div>
