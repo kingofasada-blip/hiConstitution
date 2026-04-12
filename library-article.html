@@ -7,7 +7,7 @@
   <meta name="description" content="Read Article 21 of the Indian Constitution — Right to Life and Personal Liberty — with original text, simplified explanation, landmark cases, and Hindi translation." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <style>
     .article-page { padding-top: var(--navbar-h); min-height: 100vh; background: var(--bg-light); }
@@ -90,7 +90,7 @@
     .view-tabs {
       display: flex;
       width: fit-content;
-      margin: 0 auto;
+      margin: 0;
       background: var(--bg-subtle);
       padding: 5px;
       border-radius: 99px;
@@ -132,7 +132,8 @@
 
     /* Constitutional text */
     .const-text {
-      font-size: 1.05rem;
+      font-size: var(--dyn-font-size, 1.05rem);
+      font-family: var(--dyn-font-family-en, inherit);
       line-height: 1.85;
       color: var(--body-text);
       font-style: italic;
@@ -260,12 +261,20 @@
 
     /* Hindi view */
     .hindi-text {
-      font-size: 1.05rem;
+      font-size: var(--dyn-font-size, 1.05rem);
       line-height: 2;
       color: var(--body-text);
-      font-family: 'Noto Sans Devanagari', var(--font);
+      font-family: var(--dyn-font-family-hi, 'Noto Sans Devanagari', sans-serif);
       word-break: break-word;
       overflow-wrap: break-word;
+    }
+
+    /* Reader controls */
+    .reader-controls { display: flex; align-items: center; gap: 8px; }
+    .reader-btn { background: var(--bg-light); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; font-size: 0.85rem; font-weight: 600; color: var(--navy); cursor: pointer; transition: all 0.2s; }
+    .reader-btn:hover { background: var(--bg-subtle); border-color: var(--navy); }
+    @media (max-width: 600px) {
+      .reader-controls { width: 100%; justify-content: space-between; margin-top: 12px; }
     }
 
     /* Nav between articles */
@@ -382,10 +391,19 @@
 
   <!-- View Tabs -->
   <div class="view-tabs-bar">
-    <div class="container">
-      <div class="view-tabs" role="tablist" aria-label="Article view options">
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+      <div class="view-tabs" role="tablist" aria-label="Article view options" style="margin: 0;">
         <button class="view-tab active" role="tab" data-view="english" aria-selected="true">English</button>
         <button class="view-tab" role="tab" data-view="hindi" aria-selected="false">हिन्दी</button>
+      </div>
+      <div class="reader-controls">
+        <span style="font-size: 0.8rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Font</span>
+        <button class="reader-btn" id="btnFontSans" title="Sans-serif Font">Sans</button>
+        <button class="reader-btn" id="btnFontSerif" title="Serif Font">Serif</button>
+        <div style="width: 1px; height: 16px; background: var(--border); margin: 0 4px;"></div>
+        <span style="font-size: 0.8rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Size</span>
+        <button class="reader-btn" id="btnTextMinus" title="Decrease text size">A-</button>
+        <button class="reader-btn" id="btnTextPlus" title="Increase text size">A+</button>
       </div>
     </div>
   </div>
@@ -444,14 +462,6 @@
 
       <!-- Sidebar -->
       <aside class="article-sidebar">
-        <div class="side-card">
-          <div class="side-card-title">Article Details</div>
-          <div class="key-point"><span class="key-point-icon">📌</span><span><strong>Article:</strong> <span id="side-art-num">--</span></span></div>
-          <div class="key-point"><span class="key-point-icon">📁</span><span><strong>Part:</strong> <span id="side-part-id">--</span></span></div>
-          <div class="key-point"><span class="key-point-icon">🗂️</span><span><strong>Coverage:</strong> <span id="side-coverage">Checking…</span></span></div>
-          <div class="key-point"><span class="key-point-icon">🕒</span><span><strong>Page updated:</strong> <span id="side-last-updated">--</span></span></div>
-        </div>
-
         <div class="side-card" style="background:var(--navy);border-color:var(--navy);">
           <div class="side-card-title" style="color:rgba(255,255,255,0.5);">Test Your Knowledge</div>
           <p style="font-size:0.88rem;color:rgba(255,255,255,0.75);margin-bottom:16px;line-height:1.6;" id="quizCardText">Check how much you know about the Constitution.</p>
@@ -563,10 +573,7 @@
           document.getElementById('dyn-main-title').textContent = foundArt.title;
           document.getElementById('dyn-part-badge').textContent = "Part " + foundPart.partId;
           document.getElementById('dyn-header-subtitle').textContent = foundArt.preview || ('Read the original text and available explanations for ' + foundArt.title + '.');
-          document.getElementById('side-art-num').textContent = foundArt.id;
-          document.getElementById('side-part-id').textContent = foundPart.partId;
           document.getElementById('dyn-updated-badge').textContent = 'Updated ' + new Date(document.lastModified).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-          document.getElementById('side-last-updated').textContent = new Date(document.lastModified).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 
           const formatText = (text) => text ? text.split('\n').filter(p => p.trim() !== '').map(p => '<p>' + p + '</p>').join('') : null;
           const hasOriginal = Boolean(foundArt.text && foundArt.text.trim());
@@ -578,11 +585,6 @@
             statusPill('Original ' + (hasOriginal ? 'ready' : 'pending'), hasOriginal) +
             statusPill('Simple ' + (hasSimplified ? 'ready' : 'pending'), hasSimplified) +
             statusPill('Hindi ' + (hasHindi ? 'ready' : 'pending'), hasHindi);
-          document.getElementById('side-coverage').textContent = [
-            hasOriginal ? 'Original' : 'Original pending',
-            hasSimplified ? 'Simplified' : 'Simplified pending',
-            hasHindi ? 'Hindi' : 'Hindi pending'
-          ].join(' · ');
           
           if (foundArt.simplified) {
             document.getElementById('dyn-simplified-text').innerHTML = formatText(foundArt.simplified);
@@ -633,6 +635,29 @@
           }
         }
       });
+
+    // Reader Controls Logic
+    let currentFontSize = 1.05;
+    document.getElementById('btnTextPlus').addEventListener('click', () => {
+      if (currentFontSize < 1.6) {
+        currentFontSize += 0.1;
+        document.documentElement.style.setProperty('--dyn-font-size', currentFontSize + 'rem');
+      }
+    });
+    document.getElementById('btnTextMinus').addEventListener('click', () => {
+      if (currentFontSize > 0.8) {
+        currentFontSize -= 0.1;
+        document.documentElement.style.setProperty('--dyn-font-size', currentFontSize + 'rem');
+      }
+    });
+    document.getElementById('btnFontSans').addEventListener('click', () => {
+      document.documentElement.style.setProperty('--dyn-font-family-en', "'Inter', sans-serif");
+      document.documentElement.style.setProperty('--dyn-font-family-hi', "'Noto Sans Devanagari', sans-serif");
+    });
+    document.getElementById('btnFontSerif').addEventListener('click', () => {
+      document.documentElement.style.setProperty('--dyn-font-family-en', "'Georgia', 'Lora', serif");
+      document.documentElement.style.setProperty('--dyn-font-family-hi', "'Eczar', serif");
+    });
   });
 </script>
 </body>
