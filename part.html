@@ -12,7 +12,7 @@
   <style>
     .part-page { padding-top: var(--navbar-h); min-height: 100vh; background: var(--bg-light); padding-bottom: 80px; }
     .part-header {
-      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      background: linear-gradient(135deg, #28348e 0%, #3141ad 55%, #3d4fbe 100%);
       padding: 48px 0; color: var(--white); text-align: center;
     }
     .part-header h1 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 10px; color: var(--white); }
@@ -21,6 +21,66 @@
     .back-link:hover { text-decoration: underline; }
 
     .article-list-container { max-width: 800px; margin: 40px auto 0; padding: 0 20px; }
+    .part-special-card {
+      max-width: 980px;
+      margin: -24px auto 0;
+      padding: 0 20px;
+      display: none;
+    }
+    .part-special-card.visible { display: block; }
+    .part-special-shell {
+      background: linear-gradient(180deg, #fffef9 0%, #fff8ed 100%);
+      border: 1px solid rgba(164, 126, 63, 0.18);
+      border-radius: 24px;
+      box-shadow: 0 14px 34px rgba(34, 41, 87, 0.08);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      align-items: stretch;
+    }
+    .part-special-art {
+      background: linear-gradient(180deg, #efe1c5 0%, #e5d0aa 100%);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .part-special-art img {
+      width: 100%;
+      max-width: 260px;
+      display: block;
+      border-radius: 18px;
+      box-shadow: 0 10px 22px rgba(92, 68, 30, 0.16);
+      border: 1px solid rgba(120, 91, 39, 0.18);
+    }
+    .part-special-copy {
+      padding: 28px 30px;
+      text-align: left;
+    }
+    .part-special-label {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #8C5A1C;
+      background: rgba(243, 115, 36, 0.12);
+      border-radius: 999px;
+      padding: 6px 10px;
+      margin-bottom: 14px;
+    }
+    .part-special-copy h2 {
+      font-size: clamp(1.35rem, 2.8vw, 2rem);
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .part-special-copy p {
+      margin: 0;
+      color: var(--body-text);
+      line-height: 1.8;
+      font-size: 0.98rem;
+      max-width: 60ch;
+    }
     
     /* Colorful List View */
     .article-list-item {
@@ -64,6 +124,14 @@
     .art-status.pending { background: #FFF3E8; color: var(--saffron); }
     .art-arrow { font-size: 1.5rem; color: var(--muted); margin-left: 20px; transition: color 0.2s; }
     .article-list-item:hover .art-arrow { color: var(--saffron); }
+
+    @media (max-width: 760px) {
+      .part-special-card { margin-top: -18px; }
+      .part-special-shell { grid-template-columns: 1fr; }
+      .part-special-art { padding: 20px 20px 0; }
+      .part-special-art img { max-width: 280px; }
+      .part-special-copy { padding: 22px 20px 24px; }
+    }
   </style>
 </head>
 <body>
@@ -111,6 +179,8 @@
     </div>
   </div>
 
+  <div class="part-special-card" id="partSpecialCard" aria-live="polite"></div>
+
   <div class="article-list-container" id="articleListContainer">
     <div style="text-align:center; padding: 40px; color: var(--muted);">Loading articles...</div>
   </div>
@@ -136,6 +206,29 @@
     return `<span class="art-status ${ready ? 'ready' : 'pending'}">${label}</span>`;
   }
 
+  function renderPartArtwork(partId) {
+    const card = document.getElementById('partSpecialCard');
+    if (partId !== 'I') {
+      card.classList.remove('visible');
+      card.innerHTML = '';
+      return;
+    }
+
+    card.classList.add('visible');
+    card.innerHTML = `
+      <section class="part-special-shell" aria-label="Part I artwork and note">
+        <div class="part-special-art">
+          <img src="css/part1-bull.png" alt="Bull artwork from the Part I page of the Constitution of India" />
+        </div>
+        <div class="part-special-copy">
+          <div class="part-special-label">Artwork Note</div>
+          <h2>The Union and its Territory</h2>
+          <p>Part I of the Constitution, titled <strong>"The Union and its Territory,"</strong> establishes the geographical and legal identity of India. The page is illustrated with a <strong>"Bull"</strong> from the Indus Valley Civilization, which represents the strength and ancient historical foundation of the Indian territory. This specific page was designed and decorated by the artist <strong>Kripal Singh (Kripal Singh Shekhawat)</strong>, whose name is inscribed at the bottom of the artwork.</p>
+        </div>
+      </section>
+    `;
+  }
+
   document.addEventListener("DOMContentLoaded", function() {
     const urlParams = new URLSearchParams(window.location.search);
     const partId = urlParams.get('id');
@@ -159,6 +252,7 @@
         // Update Header and SEO Meta Tags
         document.getElementById('partTitleDisplay').textContent = part.partTitle;
         document.getElementById('partDescDisplay').textContent = part.partDesc;
+        renderPartArtwork(part.partId);
         
         document.title = `${part.partTitle} - Indian Constitution | hiConstitution`;
         document.querySelector('meta[name="description"]').setAttribute("content", part.partDesc);

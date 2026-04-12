@@ -269,10 +269,39 @@
       overflow-wrap: break-word;
     }
 
+    /* Interactive MCQ Section */
+    .mcq-section { margin-top: 40px; padding-top: 32px; border-top: 2px dashed var(--border); }
+    .mcq-section-title { font-size: 1.2rem; font-weight: 800; color: var(--navy); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .mcq-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin-bottom: 20px; box-shadow: var(--shadow-sm); }
+    .mcq-question { font-size: 1.05rem; font-weight: 700; color: var(--dark-text); margin-bottom: 16px; line-height: 1.6; }
+    .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+    .mcq-option {
+      background: var(--bg-light); border: 1px solid var(--border); padding: 12px 16px;
+      border-radius: var(--radius-sm); cursor: pointer; font-size: 0.95rem; color: var(--body-text);
+      transition: all 0.2s; display: flex; align-items: center; gap: 12px;
+    }
+    .mcq-option:hover:not(.disabled) { background: var(--bg-subtle); border-color: var(--navy); }
+    .mcq-option.correct { background: #E8F5E9; border-color: #4CAF50; color: #2E7D32; font-weight: 600; }
+    .mcq-option.incorrect { background: #FFEBEE; border-color: #F44336; color: #C62828; }
+    .mcq-option.disabled { cursor: not-allowed; pointer-events: none; }
+    .mcq-explanation {
+      margin-top: 16px; background: #FFF9F5; border-left: 4px solid var(--saffron);
+      padding: 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.95rem; color: var(--body-text); line-height: 1.7;
+      display: none; animation: fadeInDown 0.4s ease forwards;
+    }
+    .mcq-explanation.show { display: block; }
+    .mcq-exp-title { font-weight: 800; color: var(--saffron); margin-bottom: 8px; display: block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* Reader controls */
     .reader-controls { display: flex; align-items: center; gap: 8px; }
     .reader-btn { background: var(--bg-light); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; font-size: 0.85rem; font-weight: 600; color: var(--navy); cursor: pointer; transition: all 0.2s; }
     .reader-btn:hover { background: var(--bg-subtle); border-color: var(--navy); }
+    .reader-btn.speak-active { background: var(--saffron); color: white; border-color: var(--saffron); animation: pulse 2s infinite; }
     @media (max-width: 600px) {
       .reader-controls { width: 100%; justify-content: space-between; margin-top: 12px; }
     }
@@ -309,8 +338,8 @@
     @media (max-width: 600px) {
       .article-header { padding: 36px 0 48px; }
       .article-content-panel { padding: 20px 16px; }
-      .const-text { padding: 14px 16px; font-size: 0.98rem; }
-      .hindi-text { font-size: 1rem; }
+      .const-text { padding: 14px 16px; font-size: var(--dyn-font-size, 0.98rem); }
+      .hindi-text { font-size: var(--dyn-font-size, 1rem); }
       .article-num-large { font-size: 3.2rem; top: -5px; right: -5px; }
       .article-nav-inner { flex-wrap: wrap; gap: 12px; }
       .art-nav-btn { max-width: 48%; padding: 10px 12px; gap: 6px; }
@@ -323,6 +352,11 @@
         border-radius: var(--radius-md);
         margin-top: 4px;
       }
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(243, 115, 36, 0.4); }
+      70% { box-shadow: 0 0 0 6px rgba(243, 115, 36, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(243, 115, 36, 0); }
     }
   </style>
 </head>
@@ -397,6 +431,8 @@
         <button class="view-tab" role="tab" data-view="hindi" aria-selected="false">हिन्दी</button>
       </div>
       <div class="reader-controls">
+        <button class="reader-btn" id="btnSpeak" title="Read Aloud" style="color: var(--saffron); border-color: rgba(243, 115, 36, 0.5);">🔊 Play</button>
+        <div style="width: 1px; height: 16px; background: var(--border); margin: 0 4px;"></div>
         <span style="font-size: 0.8rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Font</span>
         <button class="reader-btn" id="btnFontSans" title="Sans-serif Font">Sans</button>
         <button class="reader-btn" id="btnFontSerif" title="Serif Font">Serif</button>
@@ -440,6 +476,12 @@
             </blockquote>
           </div>
         </div><!-- /hindi -->
+
+        <!-- Interactive MCQ Section -->
+        <div id="mcq-container" class="mcq-section" style="display: none;">
+          <div class="mcq-section-title">📝 Test Your Understanding (UPSC Level)</div>
+          <div id="dyn-mcq-list"></div>
+        </div>
       </div><!-- /content col -->
 
       <!-- Article Nav (Next / Prev) -->
@@ -462,12 +504,6 @@
 
       <!-- Sidebar -->
       <aside class="article-sidebar">
-        <div class="side-card" style="background:var(--navy);border-color:var(--navy);">
-          <div class="side-card-title" style="color:rgba(255,255,255,0.5);">Test Your Knowledge</div>
-          <p style="font-size:0.88rem;color:rgba(255,255,255,0.75);margin-bottom:16px;line-height:1.6;" id="quizCardText">Check how much you know about the Constitution.</p>
-          <a href="quiz.html" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;" id="quizCardLink">Take Quiz →</a>
-        </div>
-
         <div class="side-card">
           <div class="side-card-title">Related Articles</div>
           <div id="relatedArticlesList">
@@ -517,27 +553,6 @@
       .replace(/"/g, '&quot;');
   }
 
-  function buildQuizLink(foundPart, foundArt) {
-    const partMap = {
-      'III': 'fundamental-rights',
-      'IV': 'directive-principles',
-      'IVA': 'fundamental-duties',
-      'XVIII': 'emergency',
-      'XX': 'amendments',
-      'V': 'parliament'
-    };
-    const articleMap = {
-      '32': 'fundamental-rights',
-      '21': 'fundamental-rights',
-      '21A': 'fundamental-rights',
-      '44': 'directive-principles',
-      '51A': 'preamble',
-      '368': 'amendments'
-    };
-    const quizId = articleMap[foundArt.id] || partMap[foundPart.partId];
-    return quizId ? ('quiz.html?topic=' + encodeURIComponent(quizId)) : 'quiz.html';
-  }
-
   document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const artId = urlParams.get('id');
@@ -575,7 +590,11 @@
           document.getElementById('dyn-header-subtitle').textContent = foundArt.preview || ('Read the original text and available explanations for ' + foundArt.title + '.');
           document.getElementById('dyn-updated-badge').textContent = 'Updated ' + new Date(document.lastModified).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 
-          const formatText = (text) => text ? text.split('\n').filter(p => p.trim() !== '').map(p => '<p>' + p + '</p>').join('') : null;
+          const formatText = (text) => {
+            if (!text) return null;
+            const normalized = String(text).replace(/`n/g, '\n');
+            return normalized.split('\n').filter(p => p.trim() !== '').map(p => '<p>' + p + '</p>').join('');
+          };
           const hasOriginal = Boolean(foundArt.text && foundArt.text.trim());
           const hasSimplified = Boolean(foundArt.simplified && foundArt.simplified.trim());
           const hasHindi = Boolean(foundArt.hindi && foundArt.hindi.trim());
@@ -599,9 +618,49 @@
             document.getElementById('dyn-hindi-text').innerHTML = "<span style='color:var(--muted); font-style:italic;'>हिंदी अनुवाद जल्द ही अपडेट किया जाएगा। (Admin Panel से डेटा भरें)</span>";
           }
 
-          const quizLink = buildQuizLink(foundPart, foundArt);
-          document.getElementById('quizCardLink').href = quizLink;
-          document.getElementById('quizCardText').textContent = 'Take a targeted quiz based on this article or its part of the Constitution.';
+          // Render MCQs if available
+          const mcqContainer = document.getElementById('mcq-container');
+          const mcqList = document.getElementById('dyn-mcq-list');
+          if (foundArt.mcqs && foundArt.mcqs.length > 0) {
+            mcqContainer.style.display = 'block';
+            let mcqHTML = '';
+            foundArt.mcqs.forEach((mcq, qIndex) => {
+              mcqHTML += `
+                <div class="mcq-card">
+                  <div class="mcq-question"><strong>Q${qIndex + 1}.</strong> ${escapeHtml(mcq.question)}</div>
+                  <div class="mcq-options" id="mcq-opts-${qIndex}">
+                    ${mcq.options.map((opt, oIndex) => `
+                      <div class="mcq-option" data-qindex="${qIndex}" data-oindex="${oIndex}" data-correct="${mcq.correctIndex === oIndex}">
+                        <span style="font-weight:bold; color:var(--navy);">${String.fromCharCode(65 + oIndex)}.</span> ${escapeHtml(opt)}
+                      </div>
+                    `).join('')}
+                  </div>
+                  <div class="mcq-explanation" id="mcq-exp-${qIndex}">
+                    <span class="mcq-exp-title">व्याख्या (Explanation)</span>
+                    ${mcq.explanation}
+                  </div>
+                </div>
+              `;
+            });
+            mcqList.innerHTML = mcqHTML;
+
+            document.querySelectorAll('.mcq-option').forEach(optEl => {
+              optEl.addEventListener('click', function() {
+                if (this.classList.contains('disabled')) return;
+                const qIdx = this.getAttribute('data-qindex');
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                
+                document.querySelectorAll(`#mcq-opts-${qIdx} .mcq-option`).forEach(sib => {
+                  sib.classList.add('disabled');
+                  if (sib.getAttribute('data-correct') === 'true') sib.classList.add('correct');
+                });
+                if (!isCorrect) this.classList.add('incorrect');
+                document.getElementById(`mcq-exp-${qIdx}`).classList.add('show');
+              });
+            });
+          } else {
+            mcqContainer.style.display = 'none';
+          }
 
           const currentIndex = flatArticles.findIndex(item => item.art.id === artId);
           const prev = currentIndex > 0 ? flatArticles[currentIndex - 1] : null;
@@ -657,6 +716,68 @@
     document.getElementById('btnFontSerif').addEventListener('click', () => {
       document.documentElement.style.setProperty('--dyn-font-family-en', "'Georgia', 'Lora', serif");
       document.documentElement.style.setProperty('--dyn-font-family-hi', "'Eczar', serif");
+    });
+
+    // Text-to-Speech (Read Aloud) Logic
+    const btnSpeak = document.getElementById('btnSpeak');
+    let synth = window.speechSynthesis;
+    
+    // Load available voices
+    let voices = [];
+    function loadVoices() { voices = synth.getVoices(); }
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+    btnSpeak.addEventListener('click', () => {
+      if (synth.speaking) {
+        synth.cancel();
+        btnSpeak.innerHTML = '🔊 Play';
+        btnSpeak.classList.remove('speak-active');
+        return;
+      }
+
+      // Determine Active Language
+      const isHindi = document.querySelector('.view-tab[data-view="hindi"]').classList.contains('active');
+      let textToRead = '';
+      let langCode = 'en-IN';
+      
+      if (isHindi) {
+        textToRead = document.getElementById('dyn-hindi-text').innerText;
+        langCode = 'hi-IN';
+      } else {
+        const origText = document.getElementById('dyn-original-text').innerText;
+        const simpText = document.getElementById('dyn-simplified-text').innerText;
+        const isSimpVisible = document.getElementById('simplified-section').style.display !== 'none';
+        textToRead = isSimpVisible ? (origText + ". Simplified Explanation: " + simpText) : origText;
+        langCode = 'en-IN';
+      }
+
+      if (!textToRead || textToRead.includes('Loading')) return;
+
+      const utterance = new SpeechSynthesisUtterance(textToRead);
+      utterance.lang = langCode;
+      utterance.rate = 0.85; // Slightly slower reading speed for a natural feel
+
+      // Try to pick the most natural "Google" voice if available
+      loadVoices(); 
+      let bestVoice = voices.find(v => v.lang.startsWith(langCode.split('-')[0]) && v.name.includes('Google'));
+      if (!bestVoice) bestVoice = voices.find(v => v.lang.startsWith(langCode.split('-')[0]));
+      if (bestVoice) utterance.voice = bestVoice;
+
+      utterance.onend = () => { btnSpeak.innerHTML = '🔊 Play'; btnSpeak.classList.remove('speak-active'); };
+      utterance.onerror = () => { btnSpeak.innerHTML = '🔊 Play'; btnSpeak.classList.remove('speak-active'); };
+
+      synth.speak(utterance);
+      btnSpeak.innerHTML = '⏹ Stop';
+      btnSpeak.classList.add('speak-active');
+    });
+
+    // Stop speaking if language tab is switched
+    document.querySelectorAll('.view-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        if (synth.speaking) { synth.cancel(); btnSpeak.innerHTML = '🔊 Play'; btnSpeak.classList.remove('speak-active'); }
+      });
     });
   });
 </script>
