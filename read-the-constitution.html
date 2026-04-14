@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Read the Constitution — hiConstitution</title>
-  <meta name="description" content="Read the full Constitution of India. Explore the Preamble, Parts, and Schedules with a clean, easy-to-navigate interface." />
+  <title>Read the Constitution of India — All Parts & Schedules | hiConstitution</title>
+  <meta name="description" content="Read the full text of the Indian Constitution — all 22 Parts, 12 Schedules, and 448 Articles — with simplified explanations and Hindi translation." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -103,30 +103,30 @@
       gap: 10px;
     }
     .read-tab-btn:hover { border-color: var(--navy); color: var(--navy); transform: translateY(-2px); }
-    .read-tab-btn.parts-tab.active {
-      background: var(--navy-light); color: #FFFFFF; border-color: var(--saffron);
-      box-shadow: 0 8px 24px rgba(243,115,36,0.2);
+    .read-tab-btn.active {
+      background: var(--navy); color: #FFFFFF; border-color: var(--navy);
+      box-shadow: var(--shadow-navy);
     }
-    .read-tab-btn.schedules-tab.active {
-      background: var(--saffron); color: #FFFFFF; border-color: var(--saffron);
-      box-shadow: 0 8px 24px rgba(243,115,36,0.2);
-    }
+    .read-tab-btn.active:hover { transform: none; }
 
     /* Accordion Styles */
     .part-card-link {
-      display: block;
+      display: flex;
       text-decoration: none;
       background: var(--white);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: var(--radius-md);
-      margin-bottom: 16px;
-      padding: 20px 24px;
-      display: flex;
+      margin-bottom: 12px;
+      padding: var(--card-pad);
       justify-content: space-between;
       align-items: center;
-      transition: all 0.2s ease;
+      transition: all var(--transition);
     }
-    .part-card-link:hover { border-color: var(--navy); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .part-card-link:hover {
+      border-color: var(--navy);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
     
     .part-info { flex: 1; }
     .part-info h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 6px; }
@@ -147,21 +147,6 @@
       padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;
     }
 
-    /* Article List inside Accordion */
-    .art-list-item {
-      border-left: 3px solid var(--border);
-      padding-left: 16px;
-      margin-bottom: 24px;
-      transition: border-color var(--transition-fast);
-    }
-    .art-list-item:hover { border-left-color: var(--saffron); }
-    .art-list-item:last-child { margin-bottom: 0; }
-    .art-title {
-      font-size: 1rem; font-weight: 700; color: var(--navy);
-      margin-bottom: 6px; display: inline-block; text-decoration: none;
-    }
-    .art-title:hover { text-decoration: underline; color: var(--saffron); }
-    .art-preview { font-size: 0.9rem; color: var(--body-text); line-height: 1.6; }
 
     @media (max-width: 600px) {
       .preamble-card { padding: 24px 20px; }
@@ -169,6 +154,56 @@
       .accordion-content-inner { padding: 16px; }
     }
   </style>
+
+  <!-- SEO BLOCK -->
+
+  <!-- HTTPS Redirect (client-side fallback) -->
+  <script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.host+location.pathname+location.search+location.hash);</script>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#1A237E" />
+  <meta name="msapplication-TileColor" content="#1A237E" />
+
+  <!-- Canonical & Robots -->
+  <link rel="canonical" href="https://hiconstitution.com/read-the-constitution.html" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="hiConstitution" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="hiConstitution" />
+  <meta property="og:title" content="Read the Constitution of India — All Parts & Schedules | hiConstitution" />
+  <meta property="og:description" content="Read the full text of the Indian Constitution — all 22 Parts, 12 Schedules, and 448 Articles — with simplified explanations and Hindi translation." />
+  <meta property="og:url" content="https://hiconstitution.com/read-the-constitution.html" />
+  <meta property="og:image" content="https://hiconstitution.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Read the Constitution of India — All Parts & Schedules | hiConstitution" />
+  <meta name="twitter:description" content="Read the full text of the Indian Constitution — all 22 Parts, 12 Schedules, and 448 Articles — with simplified explanations and Hindi translation." />
+  <meta name="twitter:image" content="https://hiconstitution.com/og-image.jpg" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Read the Constitution of India — All Parts & Schedules | hiConstitution",
+    "description": "Read the full text of the Indian Constitution — all 22 Parts, 12 Schedules, and 448 Articles — with simplified explanations and Hindi translation.",
+    "url": "https://hiconstitution.com/read-the-constitution.html",
+    "inLanguage": "en-IN",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://hiconstitution.com/#website"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -176,7 +211,7 @@
 <nav class="navbar" aria-label="Main navigation">
   <div class="navbar-inner">
     <a href="index.html" class="navbar-logo">
-      <div class="logo-circle">हि</div>
+      <div class="logo-circle"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M2 7C4 6 8 5.5 12 7.5C16 5.5 20 6 22 7V19C20 18 16 17.5 12 19.5C8 17.5 4 18 2 19V7Z'/><line x1='12' y1='7.5' x2='12' y2='19.5'/></svg></div>
       <span class="logo-text">hi<span>Constitution</span></span>
     </a>
     <ul class="navbar-nav" role="list">
@@ -281,11 +316,6 @@
     btn.textContent = card.classList.contains('open') ? '↑ Show Less' : 'Read Full Preamble ↓';
   }
 
-  function toggleAccordion(headerElement) {
-    const item = headerElement.parentElement;
-    item.classList.toggle('open');
-  }
-
   // SEO Slug Generator
   function createSlug(text) {
     return text.toString().toLowerCase()
@@ -312,11 +342,14 @@
     });
 
     fetch('data/articles.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) throw new Error('HTTP ' + response.status + ' fetching articles.json');
+        return response.json();
+      })
       .then(data => {
         const container = document.getElementById('dynamicPartsContainer');
-        container.innerHTML = ''; // clear loading text
-        
+        container.innerHTML = '';
+
         data.forEach(part => {
           const partHtml = `
             <a href="part.html?id=${part.partId}&slug=${createSlug(part.partTitle)}" class="part-card-link">
@@ -332,8 +365,8 @@
       })
       .catch(err => {
         console.error("Failed to load articles.json.", err);
-        document.getElementById('dynamicPartsContainer').innerHTML = 
-          '<div style="padding:40px; text-align:center; color:var(--red); background:#FFEBEE; border-radius:8px; border:1px solid #ffcdd2; margin-top:20px;"><strong>Error Loading Data!</strong><br><br>Browsers block reading JSON files directly from your computer (file:// protocol) due to security.<br>Please open this folder using a Local Server like <strong>VS Code Live Server</strong>.</div>';
+        document.getElementById('dynamicPartsContainer').innerHTML =
+          '<div style="padding:40px; text-align:center; color:var(--muted);">Failed to load Constitution Parts.</div>';
       });
 
     // Fetch Schedules from JSON and render
@@ -359,7 +392,7 @@
       .catch(err => {
         console.error("Failed to load schedules.json", err);
         document.getElementById('dynamicSchedulesContainer').innerHTML = 
-          '<div style="padding:40px; text-align:center; color:var(--red);">Failed to load schedules. Ensure you are running a local server.</div>';
+          '<div style="padding:40px; text-align:center; color:var(--muted);">Failed to load schedules.</div>';
       });
   });
 </script>

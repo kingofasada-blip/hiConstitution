@@ -16,21 +16,39 @@ function initQuiz(categories) {
   initDailyChallenge();
   bindModalEvents();
   maybeAutoOpenTopic();
+  // Populate hero stats
+  var totalQ = QUIZ_CATEGORIES.reduce((s, c) => s + (c.quizzes || []).reduce((ss, qz) => ss + (qz.questions || []).length, 0), 0);
+  var hq = document.getElementById('heroTotalQ');
+  var hc = document.getElementById('heroCatCount');
+  if (hq) hq.textContent = totalQ || '—';
+  if (hc) hc.textContent = QUIZ_CATEGORIES.length || '—';
 }
 
-fetch('data/quiz.json')
-  .then(function(res) {
-    if (!res.ok) throw new Error('JSON not found');
-    return res.json();
-  })
-  .then(function(data) {
-    if (!data || data.length === 0) throw new Error('Empty JSON');
-    initQuiz(data);
-  })
-  .catch(function() {
-    // Fallback to hardcoded data
-    initQuiz(QUIZ_CATEGORIES_HARDCODED);
-  });
+// Load chain: Google Sheet → local JSON → hardcoded fallback
+(function loadQuizData() {
+  var sheetPromise = (typeof HiConstSheets !== 'undefined' && HiConstSheets.hasUrl('quiz'))
+    ? HiConstSheets.fetchQuiz()
+    : Promise.reject('no sheet configured');
+
+  sheetPromise
+    .catch(function() {
+      return fetch('data/quiz.json')
+        .then(function(res) {
+          if (!res.ok) throw new Error('JSON not found');
+          return res.json();
+        })
+        .then(function(data) {
+          if (!data || data.length === 0) throw new Error('Empty JSON');
+          return data;
+        });
+    })
+    .catch(function() {
+      return QUIZ_CATEGORIES_HARDCODED;
+    })
+    .then(function(data) {
+      initQuiz(data);
+    });
+}());
 
 /* ── Hardcoded Fallback Data ── */
 var QUIZ_CATEGORIES_HARDCODED = [
@@ -306,18 +324,23 @@ function renderCategories() {
     var quizCount = (cat.quizzes || []).length;
     var questionCount = (cat.quizzes || []).reduce((sum, qz) => sum + (qz.questions || []).length, 0);
 
+    var diff = cat.difficulty || 'mixed';
+    var diffLabel = diff.charAt(0).toUpperCase() + diff.slice(1);
+
     var card = document.createElement('div');
     card.className = 'category-card';
-    card.style.borderTop = "3px solid var(--navy)";
+    card.setAttribute('data-difficulty', diff);
     card.setAttribute('tabindex', '0');
     card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', cat.title);
 
     card.innerHTML =
-      '<div class="category-icon">' + (cat.icon || '📚') + '</div>' +
+      '<span class="category-icon">' + (cat.icon || '📚') + '</span>' +
       '<div class="category-title">' + escapeHtmlQuiz(cat.title) + '</div>' +
-      '<p style="font-size:0.82rem;color:var(--muted);line-height:1.5;margin-top:4px;">' + escapeHtmlQuiz(cat.description || '') + '</p>' +
+      '<div class="category-desc">' + escapeHtmlQuiz(cat.description || '') + '</div>' +
       '<div class="category-meta">' +
-        '<span class="q-count" style="font-weight:600; color:var(--navy);">' + quizCount + ' Quizzes • ' + questionCount + ' Qs</span>' +
+        '<span class="q-count">' + questionCount + ' questions</span>' +
+        '<span class="difficulty-pill diff-' + diff + '">' + diffLabel + '</span>' +
       '</div>';
 
     card.addEventListener('click', function () { openCategoryView(cat.id); });

@@ -3,19 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Read Article · hiConstitution</title>
-  <meta name="description" content="Read Article 21 of the Indian Constitution — Right to Life and Personal Liberty — with original text, simplified explanation, landmark cases, and Hindi translation." />
+  <title>Article of the Indian Constitution | hiConstitution</title>
+  <meta name="description" content="Read the original text, simplified explanation, and Hindi translation of this Article of the Indian Constitution." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <style>
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
     .article-page { padding-top: var(--navbar-h); min-height: 100vh; background: var(--bg-light); }
 
     /* Breadcrumb */
     .breadcrumb {
-      padding: 14px 0;
-      font-size: 0.82rem;
+      padding: 0;
+      font-size: 0.95rem;
       color: rgba(255, 255, 255, 0.6);
       display: flex;
       align-items: center;
@@ -29,43 +33,23 @@
     /* Article header */
     .article-header {
       background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
-      padding: 56px 0 64px;
+      padding: 20px 0;
       color: var(--white);
       position: relative;
       overflow: hidden;
     }
-    .article-header::before {
-      content: '';
-      position: absolute;
-      top: -80px; right: -80px;
-      width: 320px; height: 320px;
-      border-radius: 50%;
-      background: rgba(255,107,0,0.1);
-    }
-    .article-header-inner { position: relative; z-index: 1; }
+    .article-header-inner { position: relative; z-index: 1; min-height: 40px; display: flex; align-items: center; }
     .article-num-large {
-      font-size: 6rem;
+      font-size: 4.5rem;
       font-weight: 900;
-      color: rgba(255,255,255,0.07);
+      color: var(--saffron);
+      opacity: 0.35;
       line-height: 1;
       position: absolute;
-      top: -16px; right: 0;
+      top: 50%; right: 10px;
+      transform: translateY(-50%);
       letter-spacing: -0.04em;
-    }
-    .article-header-meta {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .article-header h1 { color: var(--white); font-size: clamp(1.6rem,4vw,2.5rem); margin-bottom: 14px; }
-    .article-header-subtitle { color: rgba(255,255,255,0.65); font-size:0.95rem; max-width:560px; }
-    .article-header-statuses {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
+      pointer-events: none;
     }
     .status-pill {
       font-size: 0.72rem;
@@ -298,7 +282,7 @@
     }
 
     /* Reader controls */
-    .reader-controls { display: flex; align-items: center; gap: 8px; }
+    .reader-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .reader-btn { background: var(--bg-light); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; font-size: 0.85rem; font-weight: 600; color: var(--navy); cursor: pointer; transition: all 0.2s; }
     .reader-btn:hover { background: var(--bg-subtle); border-color: var(--navy); }
     .reader-btn.speak-active { background: var(--saffron); color: white; border-color: var(--saffron); animation: pulse 2s infinite; }
@@ -307,51 +291,100 @@
     }
 
     /* Nav between articles */
-    .article-nav-inner {
+    .article-nav {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-top: 24px;
+      align-items: stretch;
+      gap: 12px;
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 2px solid var(--border);
     }
-    .art-nav-btn {
-      display: inline-flex;
+    .article-nav-btn {
+      flex: 1;
+      display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 10px 18px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      font-size: 0.88rem;
-      font-weight: 600;
+      gap: 14px;
+      padding: 16px 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
       color: var(--navy);
-      transition: all var(--transition-fast);
+      transition: all 0.2s ease;
       background: var(--white);
-      box-shadow: var(--shadow-sm);
-      max-width: 42%;
+      text-decoration: none;
+      min-height: 72px;
     }
-    .art-nav-btn:hover { background: var(--bg-subtle); border-color: var(--navy); }
-    .art-nav-label { font-size: 0.72rem; color: var(--muted); font-weight: 400; display: block; }
+    .article-nav-btn:hover {
+      border-color: var(--navy);
+      background: #f0f2ff;
+      box-shadow: 0 4px 16px rgba(26,35,126,0.12);
+      transform: translateY(-1px);
+    }
+    .article-nav-btn--next { justify-content: flex-end; }
+    .article-nav-arrow {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--saffron);
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(243,115,36,0.1);
+      border-radius: 50%;
+    }
+    .article-nav-text { display: flex; flex-direction: column; gap: 2px; overflow: hidden; }
+    .article-nav-label { font-size: 0.7rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .article-nav-title { font-size: 0.88rem; font-weight: 700; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .article-nav-all {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 24px;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-decoration: none;
+      background: var(--white);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      min-width: 110px;
+    }
+    .article-nav-all svg { opacity: 0.6; }
+    .article-nav-all:hover {
+      border-color: var(--navy);
+      background: var(--navy-bg);
+      box-shadow: 0 4px 16px rgba(26,35,126,0.10);
+      transform: translateY(-1px);
+    }
+    .article-nav-all:hover svg { opacity: 1; }
 
     @media (max-width: 900px) {
       .article-main { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
-      .article-header { padding: 36px 0 48px; }
+      .article-header { padding: 16px 0; }
       .article-content-panel { padding: 20px 16px; }
       .const-text { padding: 14px 16px; font-size: var(--dyn-font-size, 0.98rem); }
       .hindi-text { font-size: var(--dyn-font-size, 1rem); }
-      .article-num-large { font-size: 3.2rem; top: -5px; right: -5px; }
-      .article-nav-inner { flex-wrap: wrap; gap: 12px; }
-      .art-nav-btn { max-width: 48%; padding: 10px 12px; gap: 6px; }
-      .article-nav-inner > a[href="read-the-constitution.html"] {
-        order: 3;
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-        background: var(--border);
-        border-radius: var(--radius-md);
-        margin-top: 4px;
+      .article-num-large { font-size: 3.5rem; right: 0; }
+      .article-nav {
+        flex-wrap: wrap;
       }
+      .article-nav-btn { min-width: calc(50% - 6px); }
+      .article-nav-all {
+        order: 3;
+        flex: 1 0 100%;
+        flex-direction: row;
+        gap: 8px;
+        padding: 12px;
+      }
+      .article-nav-btn { min-height: 60px; padding: 12px 14px; gap: 10px; }
+      .article-nav-title { font-size: 0.82rem; }
     }
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 rgba(243, 115, 36, 0.4); }
@@ -359,6 +392,61 @@
       100% { box-shadow: 0 0 0 0 rgba(243, 115, 36, 0); }
     }
   </style>
+
+  <!-- SEO BLOCK -->
+
+  <!-- HTTPS Redirect (client-side fallback) -->
+  <script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.host+location.pathname+location.search+location.hash);</script>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#1A237E" />
+  <meta name="msapplication-TileColor" content="#1A237E" />
+
+  <!-- Canonical & Robots -->
+  <link rel="canonical" href="https://hiconstitution.com/library-article.html" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="hiConstitution" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="hiConstitution" />
+  <meta property="og:title" content="Article of the Indian Constitution | hiConstitution" />
+  <meta property="og:description" content="Read the original text, simplified explanation, and Hindi translation of this Article of the Indian Constitution." />
+  <meta property="og:url" content="https://hiconstitution.com/library-article.html" />
+  <meta property="og:image" content="https://hiconstitution.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Article of the Indian Constitution | hiConstitution" />
+  <meta name="twitter:description" content="Read the original text, simplified explanation, and Hindi translation of this Article of the Indian Constitution." />
+  <meta name="twitter:image" content="https://hiconstitution.com/og-image.jpg" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "name": "Article of the Indian Constitution | hiConstitution",
+    "description": "Read the original text, simplified explanation, and Hindi translation of this Article of the Indian Constitution.",
+    "url": "https://hiconstitution.com/library-article.html",
+    "inLanguage": "en-IN",
+    "publisher": {
+      "@type": "Organization",
+      "name": "hiConstitution",
+      "url": "https://hiconstitution.com"
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://hiconstitution.com/#website"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -366,7 +454,7 @@
 <nav class="navbar" aria-label="Main navigation">
   <div class="navbar-inner">
     <a href="index.html" class="navbar-logo">
-      <div class="logo-circle">हि</div>
+      <div class="logo-circle"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M2 7C4 6 8 5.5 12 7.5C16 5.5 20 6 22 7V19C20 18 16 17.5 12 19.5C8 17.5 4 18 2 19V7Z'/><line x1='12' y1='7.5' x2='12' y2='19.5'/></svg></div>
       <span class="logo-text">hi<span>Constitution</span></span>
     </a>
     <ul class="navbar-nav" role="list">
@@ -412,13 +500,6 @@
           <span class="breadcrumb-sep">›</span>
           <span style="color:rgba(255,255,255,0.8);" id="dyn-bread-art">Article --</span>
         </nav>
-        <div class="article-header-meta">
-          <span class="badge badge-navy" id="dyn-part-badge">Part --</span>
-          <span class="badge badge-saffron" id="dyn-updated-badge">Updated --</span>
-        </div>
-        <h1 id="dyn-main-title">Loading Article...</h1>
-        <p class="article-header-subtitle" id="dyn-header-subtitle">Please wait while we load the constitutional text and related reading tools.</p>
-        <div class="article-header-statuses" id="dyn-header-statuses"></div>
       </div>
     </div>
   </div>
@@ -482,25 +563,29 @@
           <div class="mcq-section-title">📝 Test Your Understanding (UPSC Level)</div>
           <div id="dyn-mcq-list"></div>
         </div>
-      </div><!-- /content col -->
 
-      <!-- Article Nav (Next / Prev) -->
-      <div class="article-nav-inner">
-        <a href="#" class="art-nav-btn" id="prevArticleLink" style="visibility:hidden;">
-          <span style="flex-shrink:0;">←</span>
-          <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
-            <span class="art-nav-label">Previous</span><span id="prevArticleLabel">Article</span>
-          </span>
-        </a>
-        <a href="read-the-constitution.html" style="font-size: 0.88rem; font-weight: 600; color: var(--muted); text-decoration: none;">🏠 All</a>
-        <a href="#" class="art-nav-btn" id="nextArticleLink" style="visibility:hidden; flex-direction:row-reverse; text-align:right;">
-          <span style="flex-shrink:0;">→</span>
-          <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
-            <span class="art-nav-label">Next</span><span id="nextArticleLabel">Article</span>
-          </span>
-        </a>
-      </div>
-    </div><!-- /content col wrapper ends here -->
+        <!-- Article Nav (Next / Prev) -->
+        <div class="article-nav">
+          <a href="#" class="article-nav-btn" id="prevArticleLink" style="display:none;">
+            <span class="article-nav-arrow">←</span>
+            <span class="article-nav-text">
+              <span class="article-nav-label">Previous</span>
+              <span class="article-nav-title" id="prevArticleLabel">Article</span>
+            </span>
+          </a>
+          <a href="read-the-constitution.html" class="article-nav-all">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            All Articles
+          </a>
+          <a href="#" class="article-nav-btn article-nav-btn--next" id="nextArticleLink" style="display:none;">
+            <span class="article-nav-text" style="text-align:right;">
+              <span class="article-nav-label">Next</span>
+              <span class="article-nav-title" id="nextArticleLabel">Article</span>
+            </span>
+            <span class="article-nav-arrow">→</span>
+          </a>
+        </div>
+      </div><!-- /content col -->
 
       <!-- Sidebar -->
       <aside class="article-sidebar">
@@ -585,10 +670,6 @@
 
           document.getElementById('dyn-bg-num').textContent = foundArt.id;
           document.getElementById('dyn-bread-art').textContent = "Article " + foundArt.id;
-          document.getElementById('dyn-main-title').textContent = foundArt.title;
-          document.getElementById('dyn-part-badge').textContent = "Part " + foundPart.partId;
-          document.getElementById('dyn-header-subtitle').textContent = foundArt.preview || ('Read the original text and available explanations for ' + foundArt.title + '.');
-          document.getElementById('dyn-updated-badge').textContent = 'Updated ' + new Date(document.lastModified).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 
           const formatText = (text) => {
             if (!text) return null;
@@ -600,10 +681,6 @@
           const hasHindi = Boolean(foundArt.hindi && foundArt.hindi.trim());
           
           document.getElementById('dyn-original-text').innerHTML = formatText(foundArt.text) || foundArt.preview;
-          document.getElementById('dyn-header-statuses').innerHTML =
-            statusPill('Original ' + (hasOriginal ? 'ready' : 'pending'), hasOriginal) +
-            statusPill('Simple ' + (hasSimplified ? 'ready' : 'pending'), hasSimplified) +
-            statusPill('Hindi ' + (hasHindi ? 'ready' : 'pending'), hasHindi);
           
           if (foundArt.simplified) {
             document.getElementById('dyn-simplified-text').innerHTML = formatText(foundArt.simplified);
@@ -669,14 +746,14 @@
           if (prev) {
             const prevLink = document.getElementById('prevArticleLink');
             prevLink.href = 'library-article.html?id=' + encodeURIComponent(prev.art.id) + '&slug=' + createSlug(prev.art.title);
-            prevLink.style.visibility = 'visible';
+            prevLink.style.display = 'flex';
             document.getElementById('prevArticleLabel').textContent = trimTitle(prev.art.title);
           }
 
           if (next) {
             const nextLink = document.getElementById('nextArticleLink');
             nextLink.href = 'library-article.html?id=' + encodeURIComponent(next.art.id) + '&slug=' + createSlug(next.art.title);
-            nextLink.style.visibility = 'visible';
+            nextLink.style.display = 'flex';
             document.getElementById('nextArticleLabel').textContent = trimTitle(next.art.title);
           }
 

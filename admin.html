@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel - hiConstitution</title>
+  <title>Admin Panel — hiConstitution</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
     body { background: var(--bg-light); font-family: 'Inter', sans-serif; color: var(--body-text); }
@@ -60,12 +60,69 @@
     
     .hidden { display: none !important; }
 
+    /* Sheets tab */
+    .sheet-status { font-size:0.8rem; padding:4px 12px; border-radius:99px; background:#f5f5f5; color:var(--muted); font-weight:600; }
+    .sheet-result { padding:12px 16px; border-radius:8px; font-size:0.88rem; line-height:1.6; border:1px solid; }
+    .sheet-result.ok  { background:#e8f5e9; color:#2e7d32; border-color:#c8e6c9; }
+    .sheet-result.err { background:#ffebee; color:#c62828; border-color:#ffcdd2; }
+    .sheet-template { margin-top:12px; background:var(--bg-subtle); border-radius:8px; padding:14px; font-size:0.8rem; font-family:monospace; overflow-x:auto; line-height:1.9; border:1px solid var(--border); color:var(--dark-text); }
+
     /* Tabs */
     .admin-tabs { background: var(--white); padding: 0 20px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; }
     .admin-tabs button { padding: 16px 24px; font-size: 1rem; font-weight: 600; background: none; border: none; border-bottom: 3px solid transparent; color: var(--muted); cursor: pointer; transition: 0.2s; }
     .admin-tabs button.active { color: var(--saffron); border-bottom-color: var(--saffron); }
     .admin-tabs button:hover { color: var(--navy); }
   </style>
+
+  <!-- SEO BLOCK -->
+
+  <!-- HTTPS Redirect (client-side fallback) -->
+  <script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.host+location.pathname+location.search+location.hash);</script>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#1A237E" />
+  <meta name="msapplication-TileColor" content="#1A237E" />
+
+  <!-- Canonical & Robots -->
+  <link rel="canonical" href="https://hiconstitution.com/admin.html" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="author" content="hiConstitution" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="hiConstitution" />
+  <meta property="og:title" content="Admin Panel — hiConstitution" />
+  <meta property="og:description" content="Admin panel for content management." />
+  <meta property="og:url" content="https://hiconstitution.com/admin.html" />
+  <meta property="og:image" content="https://hiconstitution.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Admin Panel — hiConstitution" />
+  <meta name="twitter:description" content="Admin panel for content management." />
+  <meta name="twitter:image" content="https://hiconstitution.com/og-image.jpg" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Admin Panel — hiConstitution",
+    "description": "Admin panel for content management.",
+    "url": "https://hiconstitution.com/admin.html",
+    "inLanguage": "en-IN",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://hiconstitution.com/#website"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -83,6 +140,8 @@
   <button id="tabBtn-quizzes" onclick="switchTab('quizzes')">Quizzes</button>
   <button id="tabBtn-judgments" onclick="switchTab('judgments')">Judgments</button>
   <button id="tabBtn-making" onclick="switchTab('making')">Making</button>
+  <button id="tabBtn-news" onclick="switchTab('news')">📰 News</button>
+  <button id="tabBtn-sheets" onclick="switchTab('sheets')">🔗 Google Sheets</button>
 </div>
 
 <div id="view-articles" class="admin-wrapper">
@@ -384,16 +443,195 @@
   </div>
 </div>
 
+<!-- ════ NEWS TAB ════ -->
+<div id="view-news" class="admin-wrapper hidden">
+  <div class="box">
+    <div class="box-header">
+      <h2>📰 News Posts</h2>
+      <button class="btn btn-outline-navy btn-sm" onclick="addNewPost()">+ New Post</button>
+    </div>
+    <div id="newsPostList" style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;"></div>
+  </div>
+
+  <div class="box" id="newsEditorBox" style="display:none;">
+    <div class="box-header">
+      <h2 id="newsEditorTitle">Edit Post</h2>
+      <button class="btn-danger" onclick="deleteCurrentPost()">🗑️ Delete Post</button>
+    </div>
+
+    <div class="form-group">
+      <label>Title *</label>
+      <input type="text" id="nTitle" class="form-control" placeholder="e.g. Supreme Court rules on..." oninput="autoSlug()">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+      <div class="form-group">
+        <label>Date *</label>
+        <input type="date" id="nDate" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Category *</label>
+        <select id="nCategory" class="form-control">
+          <option value="judgment">Judgment</option>
+          <option value="amendment">Amendment</option>
+          <option value="legislation">Legislation</option>
+          <option value="rights">Rights</option>
+          <option value="politics">Politics</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Post ID (auto)</label>
+        <input type="text" id="nId" class="form-control" placeholder="auto-generated" style="background:var(--bg-subtle);">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Excerpt * <small style="font-weight:400;color:var(--muted);">(2–3 sentence preview, shown on cards)</small></label>
+      <textarea id="nExcerpt" class="form-control" rows="3" placeholder="Short preview shown on the news listing and homepage..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Full Article Content * <small style="font-weight:400;color:var(--muted);">(use blank lines to separate paragraphs)</small></label>
+      <div class="rich-toolbar">
+        <button type="button" onclick="insertAtCursorNews('nContent', '\n\n')">¶ New Para</button>
+        <button type="button" onclick="insertAtCursorNews('nContent', '**', '**')"><b>Bold</b></button>
+      </div>
+      <textarea id="nContent" class="form-control editor-textarea" rows="12" placeholder="Full article text. Separate paragraphs with a blank line.&#10;&#10;Example:&#10;&#10;The Supreme Court held that...&#10;&#10;The ruling builds on Article 21..."></textarea>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div class="form-group">
+        <label>Source Name</label>
+        <input type="text" id="nSource" class="form-control" placeholder="e.g. LiveLaw / The Hindu">
+      </div>
+      <div class="form-group">
+        <label>Source URL</label>
+        <input type="url" id="nSourceUrl" class="form-control" placeholder="https://...">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Tags <small style="font-weight:400;color:var(--muted);">(comma-separated, e.g. Article 21, Privacy, Supreme Court)</small></label>
+      <input type="text" id="nTags" class="form-control" placeholder="Article 21, Fundamental Rights, Supreme Court">
+    </div>
+
+    <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px;">
+      <button class="btn btn-outline-navy" onclick="cancelNewsEdit()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveCurrentPost()">💾 Save Post</button>
+    </div>
+  </div>
+</div>
+
+<div id="view-sheets" class="admin-wrapper hidden">
+
+  <!-- Intro -->
+  <div class="box">
+    <div class="box-header"><h2>🔗 Google Sheets Integration</h2></div>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:16px;">Connect live Google Sheets as data sources. The app will fetch from your Sheet first, then fall back to local JSON files.</p>
+    <div style="background:#f0f4ff;border-radius:8px;padding:14px 18px;font-size:0.85rem;color:#1a237e;line-height:1.7;border-left:4px solid var(--navy);">
+      <strong>How to get the URL:</strong> Open your Google Sheet → <em>File → Share → Publish to web → select sheet tab → CSV → Publish</em> → copy the URL.<br>
+      <strong>Shortcut:</strong> You can also paste the regular edit URL (<code>https://docs.google.com/spreadsheets/d/…</code>) — it is converted automatically.
+    </div>
+  </div>
+
+  <!-- Quiz Sheet -->
+  <div class="box">
+    <div class="box-header">
+      <h2>📋 Quiz Data Sheet</h2>
+      <span id="sheetStatus-quiz" class="sheet-status">Not configured</span>
+    </div>
+    <div class="form-group">
+      <label>Google Sheet URL</label>
+      <input type="url" id="sheetUrl-quiz" class="form-control" placeholder="https://docs.google.com/spreadsheets/d/…">
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
+      <button class="btn btn-primary btn-sm" onclick="saveSheetUrl('quiz')">💾 Save URL</button>
+      <button class="btn btn-outline-navy btn-sm" onclick="testSheetUrl('quiz')">🔍 Test Connection</button>
+      <button class="btn btn-outline-navy btn-sm" onclick="importFromSheet('quiz')">⬇️ Import to Memory</button>
+      <button class="btn-danger" onclick="clearSheetUrl('quiz')">✕ Clear</button>
+    </div>
+    <div id="sheetResult-quiz" class="sheet-result" style="display:none;"></div>
+    <details style="margin-top:8px;">
+      <summary style="cursor:pointer;font-size:0.85rem;font-weight:700;color:var(--navy);user-select:none;">📐 Column Format</summary>
+      <div class="sheet-template">
+        <strong>Header row (row 1):</strong><br>
+        category_id, category_title, category_icon, category_description, category_order, category_difficulty, quiz_id, quiz_title, quiz_difficulty, question, option_a, option_b, option_c, option_d, correct_index, explanation<br><br>
+        <strong>Example data row:</strong><br>
+        fundamental-rights, Fundamental Rights, ⚖️, Articles 12–35, 1, medium, fr-basics, Level 1: Basics, medium, Which article guarantees Right to Equality?, Article 12, Article 14, Article 19, Article 21, 1, Article 14 guarantees equality before law.
+      </div>
+    </details>
+  </div>
+
+  <!-- News Sheet -->
+  <div class="box">
+    <div class="box-header">
+      <h2>📰 News Sheet</h2>
+      <span id="sheetStatus-news" class="sheet-status">Not configured</span>
+    </div>
+    <div class="form-group">
+      <label>Google Sheet URL</label>
+      <input type="url" id="sheetUrl-news" class="form-control" placeholder="https://docs.google.com/spreadsheets/d/…">
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
+      <button class="btn btn-primary btn-sm" onclick="saveSheetUrl('news')">💾 Save URL</button>
+      <button class="btn btn-outline-navy btn-sm" onclick="testSheetUrl('news')">🔍 Test Connection</button>
+      <button class="btn btn-outline-navy btn-sm" onclick="importFromSheet('news')">⬇️ Import to Memory</button>
+      <button class="btn-danger" onclick="clearSheetUrl('news')">✕ Clear</button>
+    </div>
+    <div id="sheetResult-news" class="sheet-result" style="display:none;"></div>
+    <details style="margin-top:8px;">
+      <summary style="cursor:pointer;font-size:0.85rem;font-weight:700;color:var(--navy);user-select:none;">📐 Column Format</summary>
+      <div class="sheet-template">
+        <strong>Header row (row 1):</strong><br>
+        id, title, date, category, excerpt, content, source, source_url, tags<br><br>
+        <strong>date format:</strong> YYYY-MM-DD &nbsp; <strong>category values:</strong> judgment / amendment / legislation / rights / politics<br>
+        <strong>tags:</strong> comma-separated inside the cell (e.g. <em>Article 21, Privacy</em>)<br>
+        <strong>content:</strong> use \n for paragraph breaks inside the cell
+      </div>
+    </details>
+  </div>
+
+  <!-- Judgments Sheet -->
+  <div class="box">
+    <div class="box-header">
+      <h2>⚖️ Judgments Sheet</h2>
+      <span id="sheetStatus-judgments" class="sheet-status">Not configured</span>
+    </div>
+    <div class="form-group">
+      <label>Google Sheet URL</label>
+      <input type="url" id="sheetUrl-judgments" class="form-control" placeholder="https://docs.google.com/spreadsheets/d/…">
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
+      <button class="btn btn-primary btn-sm" onclick="saveSheetUrl('judgments')">💾 Save URL</button>
+      <button class="btn btn-outline-navy btn-sm" onclick="testSheetUrl('judgments')">🔍 Test Connection</button>
+      <button class="btn btn-outline-navy btn-sm" onclick="importFromSheet('judgments')">⬇️ Import to Memory</button>
+      <button class="btn-danger" onclick="clearSheetUrl('judgments')">✕ Clear</button>
+    </div>
+    <div id="sheetResult-judgments" class="sheet-result" style="display:none;"></div>
+    <details style="margin-top:8px;">
+      <summary style="cursor:pointer;font-size:0.85rem;font-weight:700;color:var(--navy);user-select:none;">📐 Column Format</summary>
+      <div class="sheet-template">
+        <strong>Header row (row 1):</strong><br>
+        id, year, case_name, court, summary, significance, articles<br><br>
+        <strong>articles:</strong> comma-separated article numbers inside the cell (e.g. <em>21, 22</em>)<br>
+        <strong>court default:</strong> "Supreme Court of India" if left blank
+      </div>
+    </details>
+  </div>
+
+</div><!-- /#view-sheets -->
+
 <div class="status-bar">
   <div class="auto-save-text" id="saveStatus">✅ All changes saved automatically to memory.</div>
   <button class="btn btn-primary btn-sm" id="downloadBtn">⬇️ Download articles.json</button>
 </div>
 
+<script src="js/sheets.js"></script>
 <script>
   let articlesData = [];
   let schedulesData = [];
   let quizData = [];
   let judgmentsData = [];
+  let newsData = [];
   
   let defaultMakingData = {
     stages: [
@@ -443,13 +681,21 @@
     document.querySelectorAll('.admin-tabs button').forEach(b => b.classList.remove('active'));
     document.getElementById('tabBtn-' + tab).classList.add('active');
     
-    let dlName = tab + '.json';
-    if(tab === 'articles') dlName = 'articles.json';
-    if(tab === 'schedules') dlName = 'schedules.json';
-    if(tab === 'quizzes') dlName = 'quiz.json';
-    if(tab === 'judgments') dlName = 'judgments.json';
-    if(tab === 'making') dlName = 'making.json';
-    document.getElementById('downloadBtn').textContent = `⬇️ Download ${dlName}`;
+    const dlBtn = document.getElementById('downloadBtn');
+    if (tab === 'sheets') {
+      dlBtn.style.display = 'none';
+    } else {
+      dlBtn.style.display = '';
+      let dlName = tab + '.json';
+      if(tab === 'articles') dlName = 'articles.json';
+      if(tab === 'schedules') dlName = 'schedules.json';
+      if(tab === 'quizzes') dlName = 'quiz.json';
+      if(tab === 'judgments') dlName = 'judgments.json';
+      if(tab === 'making') dlName = 'making.json';
+      if(tab === 'news') dlName = 'news.json';
+      dlBtn.textContent = `⬇️ Download ${dlName}`;
+    }
+    if (tab === 'sheets') initSheetsTab();
   }
 
   function loadData() {
@@ -458,13 +704,16 @@
       fetch('data/schedules.json').then(r => r.ok ? r.json() : []),
       fetch('data/quiz.json').then(r => r.ok ? r.json() : []),
       fetch('data/judgments.json').then(r => r.ok ? r.json() : []),
-      fetch('data/making.json').then(r => r.ok ? r.json() : defaultMakingData)
-    ]).then(([arts, schs, qzs, judgs, mkng]) => {
+      fetch('data/making.json').then(r => r.ok ? r.json() : defaultMakingData),
+      fetch('data/news.json').then(r => r.ok ? r.json() : [])
+    ]).then(([arts, schs, qzs, judgs, mkng, news]) => {
         articlesData = arts;
         schedulesData = schs;
         quizData = qzs;
         judgmentsData = judgs;
         makingData = mkng;
+        newsData = news;
+        renderNewsList();
         
         renderArticleOverview();
         populatePartDropdown();
@@ -772,6 +1021,7 @@
     document.getElementById('partSelect').value = articlesData.length - 1;
     onPartChange();
   }
+
   function addNewArticle() {
     if(currentPartIdx === -1) return;
     if(!articlesData[currentPartIdx].articles) articlesData[currentPartIdx].articles = [];
@@ -1247,6 +1497,7 @@
     else if(activeTab === 'schedules') { data = schedulesData; name = 'schedules.json'; }
     else if(activeTab === 'judgments') { data = judgmentsData; name = 'judgments.json'; }
     else if(activeTab === 'making') { data = makingData; name = 'making.json'; }
+    else if(activeTab === 'news') { data = newsData; name = 'news.json'; }
     else { data = quizData; name = 'quiz.json'; }
     
     const dataStr = JSON.stringify(data, null, 2);
@@ -1260,6 +1511,218 @@
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   });
+
+  /* ── NEWS TAB ── */
+  let currentNewsIdx = -1;
+
+  function renderNewsList() {
+    const list = document.getElementById('newsPostList');
+    if (!newsData.length) {
+      list.innerHTML = '<p style="color:var(--muted);font-size:0.9rem;">No posts yet. Click "+ New Post" to add one.</p>';
+      return;
+    }
+    const sorted = [...newsData].sort((a,b) => b.date.localeCompare(a.date));
+    list.innerHTML = sorted.map((p, i) => {
+      const realIdx = newsData.indexOf(p);
+      const catColors = { judgment:'#7b1fa2', amendment:'#e65100', legislation:'#1565c0', rights:'#2e7d32', politics:'#c62828' };
+      const col = catColors[p.category] || 'var(--navy)';
+      return `<div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid var(--border);border-radius:8px;background:var(--white);cursor:pointer;" onclick="editPost(${realIdx})">
+        <span style="font-size:0.7rem;font-weight:700;padding:3px 10px;border-radius:99px;background:${col}18;color:${col};text-transform:uppercase;letter-spacing:0.06em;flex-shrink:0;">${p.category}</span>
+        <span style="flex:1;font-weight:600;font-size:0.9rem;color:var(--dark-text);">${p.title}</span>
+        <span style="font-size:0.78rem;color:var(--muted);flex-shrink:0;">${p.date}</span>
+      </div>`;
+    }).join('');
+  }
+
+  function addNewPost() {
+    currentNewsIdx = -1;
+    document.getElementById('newsEditorTitle').textContent = 'New Post';
+    document.getElementById('nId').value = '';
+    document.getElementById('nTitle').value = '';
+    document.getElementById('nDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('nCategory').value = 'judgment';
+    document.getElementById('nExcerpt').value = '';
+    document.getElementById('nContent').value = '';
+    document.getElementById('nSource').value = '';
+    document.getElementById('nSourceUrl').value = '';
+    document.getElementById('nTags').value = '';
+    document.getElementById('newsEditorBox').style.display = 'block';
+    document.getElementById('newsEditorBox').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  function editPost(idx) {
+    currentNewsIdx = idx;
+    const p = newsData[idx];
+    document.getElementById('newsEditorTitle').textContent = 'Edit Post';
+    document.getElementById('nId').value = p.id || '';
+    document.getElementById('nTitle').value = p.title || '';
+    document.getElementById('nDate').value = p.date || '';
+    document.getElementById('nCategory').value = p.category || 'judgment';
+    document.getElementById('nExcerpt').value = p.excerpt || '';
+    document.getElementById('nContent').value = p.content || '';
+    document.getElementById('nSource').value = p.source || '';
+    document.getElementById('nSourceUrl').value = p.sourceUrl || '';
+    document.getElementById('nTags').value = (p.tags || []).join(', ');
+    document.getElementById('newsEditorBox').style.display = 'block';
+    document.getElementById('newsEditorBox').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  function autoSlug() {
+    const title = document.getElementById('nTitle').value;
+    if (currentNewsIdx === -1) {
+      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').substring(0, 60);
+      const year = document.getElementById('nDate').value.split('-')[0] || new Date().getFullYear();
+      document.getElementById('nId').value = slug + '-' + year;
+    }
+  }
+
+  function saveCurrentPost() {
+    const title = document.getElementById('nTitle').value.trim();
+    const date  = document.getElementById('nDate').value.trim();
+    if (!title || !date) { alert('Title and Date are required.'); return; }
+    const post = {
+      id:        document.getElementById('nId').value.trim() || (title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/,'') + '-' + date.split('-')[0]),
+      title,
+      date,
+      category:  document.getElementById('nCategory').value,
+      excerpt:   document.getElementById('nExcerpt').value.trim(),
+      content:   document.getElementById('nContent').value.trim(),
+      source:    document.getElementById('nSource').value.trim(),
+      sourceUrl: document.getElementById('nSourceUrl').value.trim(),
+      tags:      document.getElementById('nTags').value.split(',').map(t=>t.trim()).filter(Boolean)
+    };
+    if (currentNewsIdx === -1) {
+      newsData.unshift(post);
+    } else {
+      newsData[currentNewsIdx] = post;
+    }
+    renderNewsList();
+    document.getElementById('newsEditorBox').style.display = 'none';
+    document.getElementById('saveStatus').textContent = '✅ Post saved. Click Download to export news.json.';
+    currentNewsIdx = -1;
+  }
+
+  function cancelNewsEdit() {
+    document.getElementById('newsEditorBox').style.display = 'none';
+    currentNewsIdx = -1;
+  }
+
+  function deleteCurrentPost() {
+    if (currentNewsIdx === -1) return;
+    if (!confirm('Delete this post? This cannot be undone.')) return;
+    newsData.splice(currentNewsIdx, 1);
+    renderNewsList();
+    document.getElementById('newsEditorBox').style.display = 'none';
+    currentNewsIdx = -1;
+    document.getElementById('saveStatus').textContent = '🗑️ Post deleted. Download news.json to save.';
+  }
+
+  function insertAtCursorNews(id, start, end='') {
+    const el = document.getElementById(id);
+    const s = el.selectionStart, e = el.selectionEnd;
+    const sel = el.value.substring(s, e);
+    el.value = el.value.substring(0,s) + start + sel + end + el.value.substring(e);
+    el.focus();
+    el.selectionStart = s + start.length;
+    el.selectionEnd = s + start.length + sel.length;
+  }
+
+  /* ── GOOGLE SHEETS TAB ── */
+  function initSheetsTab() {
+    ['quiz','news','judgments'].forEach(function(type) {
+      const url = HiConstSheets.getUrl(type);
+      const input = document.getElementById('sheetUrl-' + type);
+      if (input) input.value = url;
+      if (url) setSheetStatus(type, 'saved', '✅ URL saved');
+      else setSheetStatus(type, 'default', 'Not configured');
+    });
+  }
+
+  function setSheetStatus(type, state, msg) {
+    const el = document.getElementById('sheetStatus-' + type);
+    if (!el) return;
+    el.className = 'sheet-status';
+    const bg = { saved:'background:#e8f5e9;color:#2e7d32', error:'background:#ffebee;color:#c62828', loading:'background:#e3f2fd;color:#1565c0', default:'background:#f5f5f5;color:var(--muted)' };
+    el.style.cssText = (bg[state] || bg.default) + ';font-size:0.8rem;padding:4px 12px;border-radius:99px;font-weight:600;';
+    el.textContent = msg;
+  }
+
+  function setSheetResult(type, html, ok) {
+    const el = document.getElementById('sheetResult-' + type);
+    if (!el) return;
+    el.className = 'sheet-result ' + (ok ? 'ok' : 'err');
+    el.style.display = 'block';
+    el.innerHTML = html;
+  }
+
+  function saveSheetUrl(type) {
+    const url = (document.getElementById('sheetUrl-' + type).value || '').trim();
+    if (!url) { clearSheetUrl(type); return; }
+    if (!HiConstSheets.toCsvUrl(url)) {
+      setSheetStatus(type, 'error', '❌ Invalid URL');
+      setSheetResult(type, '❌ Could not extract a Spreadsheet ID from this URL. Paste the full edit or published URL.', false);
+      return;
+    }
+    HiConstSheets.setUrl(type, url);
+    setSheetStatus(type, 'saved', '✅ URL saved');
+    setSheetResult(type, '✅ URL saved to browser storage. The app will use this Sheet as its data source on next load.', true);
+  }
+
+  function clearSheetUrl(type) {
+    HiConstSheets.clearUrl(type);
+    const input = document.getElementById('sheetUrl-' + type);
+    if (input) input.value = '';
+    setSheetStatus(type, 'default', 'Not configured');
+    const el = document.getElementById('sheetResult-' + type);
+    if (el) el.style.display = 'none';
+  }
+
+  function testSheetUrl(type) {
+    const rawUrl = (document.getElementById('sheetUrl-' + type).value || '').trim();
+    if (!rawUrl) { alert('Enter a Sheet URL first.'); return; }
+    const csvUrl = HiConstSheets.toCsvUrl(rawUrl);
+    if (!csvUrl) {
+      setSheetStatus(type, 'error', '❌ Invalid URL');
+      setSheetResult(type, '❌ Could not extract a Spreadsheet ID. Check the URL.', false);
+      return;
+    }
+    setSheetStatus(type, 'loading', '⏳ Testing…');
+    HiConstSheets.fetchCsv(csvUrl).then(function(rows) {
+      const n = rows.length - 1;
+      setSheetStatus(type, 'saved', '✅ Connected');
+      setSheetResult(type, '✅ Connection successful! Found <strong>' + n + ' data row' + (n!==1?'s':'') + '</strong> (plus 1 header).<br><small style="word-break:break-all;color:#555;">CSV endpoint: ' + csvUrl + '</small>', true);
+    }).catch(function(err) {
+      setSheetStatus(type, 'error', '❌ Failed');
+      setSheetResult(type, '❌ Could not fetch: ' + err.message + '<br><small>Make sure the Sheet is published (File → Share → Publish to web → CSV).</small>', false);
+    });
+  }
+
+  function importFromSheet(type) {
+    const rawUrl = (document.getElementById('sheetUrl-' + type).value || '').trim();
+    if (!rawUrl) { alert('Enter a Sheet URL first.'); return; }
+    if (!HiConstSheets.toCsvUrl(rawUrl)) {
+      setSheetResult(type, '❌ Invalid URL — cannot import.', false); return;
+    }
+    HiConstSheets.setUrl(type, rawUrl);
+    setSheetStatus(type, 'loading', '⏳ Importing…');
+
+    const fetchFn = type === 'quiz' ? HiConstSheets.fetchQuiz
+                  : type === 'news' ? HiConstSheets.fetchNews
+                  : HiConstSheets.fetchJudgments;
+
+    fetchFn().then(function(data) {
+      if (type === 'quiz')      { quizData = data;      populateQuizCatDropdown(); }
+      else if (type === 'news') { newsData = data;      renderNewsList(); }
+      else                      { judgmentsData = data; populateJudgmentDropdown(); }
+
+      const n = data.length;
+      setSheetStatus(type, 'saved', '✅ Imported ' + n + ' items');
+      setSheetResult(type, '✅ Imported <strong>' + n + ' item' + (n!==1?'s':'') + '</strong> into memory. Switch to the relevant tab and click "Download" to save as JSON.', true);
+    }).catch(function(err) {
+      setSheetStatus(type, 'error', '❌ Import failed');
+      setSheetResult(type, '❌ Import failed: ' + err.message, false);
+    });
+  }
 
 </script>
 </body>

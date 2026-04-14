@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Important Facts — hiConstitution</title>
-  <meta name="description" content="Discover historical trivia, global borrowings, and the craftsmanship behind the Constitution of India." />
+  <title>Amazing Facts About the Indian Constitution | hiConstitution</title>
+  <meta name="description" content="Discover 50+ fascinating facts about the Indian Constitution — the world's longest written constitution, its global borrowings, and the original hand-calligraphed document." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -76,19 +76,34 @@
       min-height: 460px;
       scroll-snap-align: center;
       background: var(--white);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 30px;
+      padding: var(--card-pad);
       box-shadow: var(--shadow-sm);
       transform: scale(0.95);
-      opacity: 0.6;
-      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      opacity: 0.65;
+      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
       display: flex;
       flex-direction: column;
       cursor: pointer;
     }
+    @media (prefers-reduced-motion: reduce) {
+      .fact-card { transform: none; opacity: 1; transition: none; }
+    }
     @media(min-width: 768px) {
       .fact-card { height: 600px; padding: 40px; }
+    }
+    @media(max-width: 480px) {
+      .fact-card {
+        flex: 0 0 92%;
+        height: auto;
+        min-height: 320px;
+        padding: 20px;
+      }
+      .facts-horizontal-scroll {
+        padding: 16px 16px;
+        gap: 16px;
+      }
     }
     .fact-card.active {
       transform: scale(1);
@@ -120,13 +135,68 @@
     .fact-card-body ul ul { margin-top: 8px; list-style-type: circle; }
     .fact-card-body strong { color: var(--navy); }
   </style>
+
+  <!-- SEO BLOCK -->
+
+  <!-- HTTPS Redirect (client-side fallback) -->
+  <script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.host+location.pathname+location.search+location.hash);</script>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#1A237E" />
+  <meta name="msapplication-TileColor" content="#1A237E" />
+
+  <!-- Canonical & Robots -->
+  <link rel="canonical" href="https://hiconstitution.com/facts.html" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="hiConstitution" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="hiConstitution" />
+  <meta property="og:title" content="Amazing Facts About the Indian Constitution | hiConstitution" />
+  <meta property="og:description" content="Discover 50+ fascinating facts about the Indian Constitution — the world's longest written constitution, its global borrowings, and the original hand-calligraphed document." />
+  <meta property="og:url" content="https://hiconstitution.com/facts.html" />
+  <meta property="og:image" content="https://hiconstitution.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Amazing Facts About the Indian Constitution | hiConstitution" />
+  <meta name="twitter:description" content="Discover 50+ fascinating facts about the Indian Constitution — the world's longest written constitution, its global borrowings, and the original hand-calligraphed document." />
+  <meta name="twitter:image" content="https://hiconstitution.com/og-image.jpg" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "name": "Amazing Facts About the Indian Constitution | hiConstitution",
+    "description": "Discover 50+ fascinating facts about the Indian Constitution — the world's longest written constitution, its global borrowings, and the original hand-calligraphed document.",
+    "url": "https://hiconstitution.com/facts.html",
+    "inLanguage": "en-IN",
+    "publisher": {
+      "@type": "Organization",
+      "name": "hiConstitution",
+      "url": "https://hiconstitution.com"
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://hiconstitution.com/#website"
+    }
+  }
+  </script>
 </head>
 <body>
 
 <nav class="navbar" aria-label="Main navigation">
   <div class="navbar-inner">
     <a href="index.html" class="navbar-logo">
-      <div class="logo-circle">हि</div>
+      <div class="logo-circle"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M2 7C4 6 8 5.5 12 7.5C16 5.5 20 6 22 7V19C20 18 16 17.5 12 19.5C8 17.5 4 18 2 19V7Z'/><line x1='12' y1='7.5' x2='12' y2='19.5'/></svg></div>
       <span class="logo-text">hi<span>Constitution</span></span>
     </a>
     <ul class="navbar-nav" role="list">

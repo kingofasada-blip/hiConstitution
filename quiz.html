@@ -3,13 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quiz — hiConstitution</title>
-  <meta name="description" content="Test your knowledge of the Indian Constitution with daily challenges and topic-based quizzes." />
+  <title>Indian Constitution Quiz — UPSC & GK Practice | hiConstitution</title>
+  <meta name="description" content="Test your knowledge of the Indian Constitution with UPSC-level MCQs. Topic-wise quizzes on Fundamental Rights, Preamble, Amendments, Directive Principles, and more." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/quiz.css" />
+
+  <!-- SEO BLOCK -->
+
+  <!-- HTTPS Redirect (client-side fallback) -->
+  <script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.host+location.pathname+location.search+location.hash);</script>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#1A237E" />
+  <meta name="msapplication-TileColor" content="#1A237E" />
+
+  <!-- Canonical & Robots -->
+  <link rel="canonical" href="https://hiconstitution.com/quiz.html" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="hiConstitution" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="hiConstitution" />
+  <meta property="og:title" content="Indian Constitution Quiz — UPSC & GK Practice | hiConstitution" />
+  <meta property="og:description" content="Test your knowledge of the Indian Constitution with UPSC-level MCQs. Topic-wise quizzes on Fundamental Rights, Preamble, Amendments, Directive Principles, and more." />
+  <meta property="og:url" content="https://hiconstitution.com/quiz.html" />
+  <meta property="og:image" content="https://hiconstitution.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Indian Constitution Quiz — UPSC & GK Practice | hiConstitution" />
+  <meta name="twitter:description" content="Test your knowledge of the Indian Constitution with UPSC-level MCQs. Topic-wise quizzes on Fundamental Rights, Preamble, Amendments, Directive Principles, and more." />
+  <meta name="twitter:image" content="https://hiconstitution.com/og-image.jpg" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Indian Constitution Quiz — UPSC & GK Practice | hiConstitution",
+    "description": "Test your knowledge of the Indian Constitution with UPSC-level MCQs. Topic-wise quizzes on Fundamental Rights, Preamble, Amendments, Directive Principles, and more.",
+    "url": "https://hiconstitution.com/quiz.html",
+    "inLanguage": "en-IN",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://hiconstitution.com/#website"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -17,7 +67,7 @@
 <nav class="navbar" aria-label="Main navigation">
   <div class="navbar-inner">
     <a href="index.html" class="navbar-logo">
-      <div class="logo-circle">हि</div>
+      <div class="logo-circle"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M2 7C4 6 8 5.5 12 7.5C16 5.5 20 6 22 7V19C20 18 16 17.5 12 19.5C8 17.5 4 18 2 19V7Z'/><line x1='12' y1='7.5' x2='12' y2='19.5'/></svg></div>
       <span class="logo-text">hi<span>Constitution</span></span>
     </a>
     <ul class="navbar-nav" role="list">
@@ -54,9 +104,25 @@
   <!-- Quiz Header -->
   <div class="quiz-header">
     <div class="container">
-      <div class="quiz-header-icon" aria-hidden="true">🎯</div>
-      <h1>Constitution Quiz Arena</h1>
-      <p>Test your knowledge with daily challenges and topic-based quizzes. Explanations included.</p>
+      <div class="quiz-header-inner">
+        <div class="quiz-header-eyebrow">📋 Practice &amp; Test</div>
+        <h1>Constitution Quiz Arena</h1>
+        <p>UPSC-level MCQs with detailed explanations. Test your knowledge across all parts of the Indian Constitution.</p>
+        <div class="quiz-hero-stats">
+          <div class="quiz-hero-stat">
+            <div class="quiz-hero-stat-val" id="heroTotalQ">—</div>
+            <div class="quiz-hero-stat-label">Questions</div>
+          </div>
+          <div class="quiz-hero-stat">
+            <div class="quiz-hero-stat-val" id="heroCatCount">—</div>
+            <div class="quiz-hero-stat-label">Categories</div>
+          </div>
+          <div class="quiz-hero-stat">
+            <div class="quiz-hero-stat-val">3</div>
+            <div class="quiz-hero-stat-label">Difficulty<br>levels</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -223,6 +289,7 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/sheets.js"></script>
 <script src="js/quiz.js"></script>
 </body>
 </html>

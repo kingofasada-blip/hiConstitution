@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Constitution Making — hiConstitution</title>
-  <meta name="description" content="Explore the Constituent Assembly, the stages of Constitution making, and the framers of the Indian Constitution." />
+  <title>Making of India's Constitution — Constituent Assembly History | hiConstitution</title>
+  <meta name="description" content="Discover how India's Constitution was made. Explore the Constituent Assembly sessions, key framers like Dr. Ambedkar, Nehru, and Patel, and the 2 year 11 month drafting process." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -19,7 +19,7 @@
 
     .making-header {
       background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
-      padding: 64px 0 100px;
+      padding: 56px 0 80px;
       color: var(--white);
       text-align: center;
       position: relative;
@@ -81,6 +81,17 @@
         display: block;
         font-size: 0.85rem;
       }
+    }
+
+    @media (max-width: 480px) {
+      .making-nav-cards {
+        padding: 0 12px;
+        margin-top: -20px;
+      }
+      .m-card { padding: 12px; gap: 12px; }
+      .m-card-icon { font-size: 1.8rem; }
+      .m-card h3 { font-size: 1rem; }
+      .m-card p { font-size: 0.8rem; }
     }
 
     .m-card {
@@ -223,10 +234,10 @@
 
     /* Framers (Right Column) */
     .stats-box {
-      background: #E8EAFF;
-      border: 1px dashed rgba(26, 35, 126, 0.3);
-      border-radius: 8px;
-      padding: 16px;
+      background: var(--navy-bg);
+      border: 1.5px solid rgba(26,35,126,0.14);
+      border-radius: var(--radius-md);
+      padding: var(--card-pad-sm);
       margin-bottom: 20px;
       font-size: 0.88rem;
       color: var(--navy);
@@ -383,6 +394,61 @@
       margin-bottom: 16px;
     }
   </style>
+
+  <!-- SEO BLOCK -->
+
+  <!-- HTTPS Redirect (client-side fallback) -->
+  <script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.host+location.pathname+location.search+location.hash);</script>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#1A237E" />
+  <meta name="msapplication-TileColor" content="#1A237E" />
+
+  <!-- Canonical & Robots -->
+  <link rel="canonical" href="https://hiconstitution.com/making.html" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="hiConstitution" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="hiConstitution" />
+  <meta property="og:title" content="Making of India's Constitution — Constituent Assembly History | hiConstitution" />
+  <meta property="og:description" content="Discover how India's Constitution was made. Explore the Constituent Assembly sessions, key framers like Dr. Ambedkar, Nehru, and Patel, and the 2 year 11 month drafting process." />
+  <meta property="og:url" content="https://hiconstitution.com/making.html" />
+  <meta property="og:image" content="https://hiconstitution.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Making of India's Constitution — Constituent Assembly History | hiConstitution" />
+  <meta name="twitter:description" content="Discover how India's Constitution was made. Explore the Constituent Assembly sessions, key framers like Dr. Ambedkar, Nehru, and Patel, and the 2 year 11 month drafting process." />
+  <meta name="twitter:image" content="https://hiconstitution.com/og-image.jpg" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "name": "Making of India's Constitution — Constituent Assembly History | hiConstitution",
+    "description": "Discover how India's Constitution was made. Explore the Constituent Assembly sessions, key framers like Dr. Ambedkar, Nehru, and Patel, and the 2 year 11 month drafting process.",
+    "url": "https://hiconstitution.com/making.html",
+    "inLanguage": "en-IN",
+    "publisher": {
+      "@type": "Organization",
+      "name": "hiConstitution",
+      "url": "https://hiconstitution.com"
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://hiconstitution.com/#website"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -390,7 +456,7 @@
 <nav class="navbar" aria-label="Main navigation">
   <div class="navbar-inner">
     <a href="index.html" class="navbar-logo">
-      <div class="logo-circle">हि</div>
+      <div class="logo-circle"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M2 7C4 6 8 5.5 12 7.5C16 5.5 20 6 22 7V19C20 18 16 17.5 12 19.5C8 17.5 4 18 2 19V7Z'/><line x1='12' y1='7.5' x2='12' y2='19.5'/></svg></div>
       <span class="logo-text">hi<span>Constitution</span></span>
     </a>
     <ul class="navbar-nav" role="list">

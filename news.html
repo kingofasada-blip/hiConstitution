@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Constitutional News — hiConstitution</title>
+  <meta name="description" content="Stay updated with the latest Supreme Court judgments, constitutional amendments, and legislative news from India." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .news-list-page { padding-top: var(--navbar-h); background: var(--bg-light); min-height: 100vh; }
+
+    /* ── Hero header ── */
+    .news-page-header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      padding: 56px 0 64px;
+    }
+    .news-page-header h1 {
+      font-family: 'Eczar', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    .news-page-header p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1.05rem;
+      max-width: 560px;
+    }
+    .news-header-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .news-stat-block { display: flex; align-items: baseline; gap: 10px; }
+    .news-stat-val {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--saffron);
+      line-height: 1;
+    }
+    .news-stat-meta { display: flex; flex-direction: column; gap: 1px; }
+    .news-stat-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+    .news-stat-sub {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ── Filter bar ── */
+    .news-section { padding: 40px 0 80px; }
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .filter-btn {
+      padding: 8px 18px;
+      border-radius: 99px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--navy); color: var(--navy); }
+    .filter-btn.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #ffffff;
+    }
+
+    /* ── News grid ── */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    /* Card is a DIV — no <a> wrapper to fight global link CSS */
+    .nc {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      text-decoration: none;
+      display: block;   /* explicit block */
+    }
+    .nc:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-strong);
+    }
+    .nc-body { padding: 22px 22px 0; }
+    .nc-cat {
+      display: inline-block;
+      padding: 3px 11px;
+      border-radius: 99px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .nc-title {
+      display: block;
+      font-size: 0.97rem;
+      font-weight: 800;
+      color: var(--dark-text);
+      line-height: 1.4;
+      margin-bottom: 10px;
+      text-decoration: none;
+    }
+    .nc:hover .nc-title { color: var(--navy); }
+    .nc-excerpt {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted-strong);
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+    .nc-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 22px;
+      margin-top: 16px;
+      border-top: 1px solid var(--border-light);
+    }
+    .nc-date { font-size: 0.73rem; color: var(--muted); }
+    .nc-read {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .nc:hover .nc-read { color: var(--saffron); }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      .news-grid { grid-template-columns: 1fr; }
+      .news-page-header { padding: 36px 0 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-circle"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M2 7C4 6 8 5.5 12 7.5C16 5.5 20 6 22 7V19C20 18 16 17.5 12 19.5C8 17.5 4 18 2 19V7Z'/><line x1='12' y1='7.5' x2='12' y2='19.5'/></svg></div>
+      <span class="logo-text">hi<span>Constitution</span></span>
+    </a>
+    <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>
+      <li><a href="news.html" class="nav-link active">News</a></li>
+      <li><a href="amendments.html" class="nav-link">Amendments</a></li>
+      <li><a href="judgments.html" class="nav-link">Judgments</a></li>
+      <li><a href="facts.html" class="nav-link">Facts</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="quiz.html" class="btn btn-primary btn-sm">Take Quiz</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="mobile-nav" aria-label="Mobile navigation">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="read-the-constitution.html" class="nav-link">Read</a>
+  <a href="news.html" class="nav-link">News</a>
+  <a href="amendments.html" class="nav-link">Amendments</a>
+  <a href="judgments.html" class="nav-link">Judgments</a>
+  <a href="facts.html" class="nav-link">Facts</a>
+  <a href="quiz.html" class="nav-link">Quiz</a>
+</nav>
+
+<main class="news-list-page">
+  <div class="news-page-header">
+    <div class="container">
+      <h1>Constitutional News</h1>
+      <p>Latest Supreme Court judgments, amendments, and legislation shaping India's constitutional landscape.</p>
+      <div class="news-header-stats">
+        <div class="news-stat-block">
+          <div class="news-stat-val" id="stat-count">—</div>
+          <div class="news-stat-meta">
+            <span class="news-stat-label">Articles</span>
+          </div>
+        </div>
+        <div class="news-stat-block">
+          <div class="news-stat-meta">
+            <span class="news-stat-label">Latest update</span>
+            <span class="news-stat-sub" id="stat-latest">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="news-section">
+    <div class="container">
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-cat="all">All</button>
+        <button class="filter-btn" data-cat="judgment">Judgments</button>
+        <button class="filter-btn" data-cat="amendment">Amendments</button>
+        <button class="filter-btn" data-cat="legislation">Legislation</button>
+        <button class="filter-btn" data-cat="rights">Rights</button>
+        <button class="filter-btn" data-cat="politics">Politics</button>
+      </div>
+      <div class="news-grid" id="newsGrid">
+        <div class="no-results">Loading news…</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,0.6);padding:32px 0;">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <a href="index.html" style="color:#fff;font-weight:700;font-size:0.95rem;">hiConstitution.com</a>
+    <p style="font-size:0.82rem;">© 2025 — Educational use only.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/sheets.js"></script>
+<script>
+const CAT_META = {
+  judgment:    { label: 'Judgment',    color: '#7b1fa2', bg: 'rgba(123,31,162,0.10)' },
+  amendment:   { label: 'Amendment',   color: '#e65100', bg: 'rgba(230,81,0,0.09)' },
+  legislation: { label: 'Legislation', color: '#1565c0', bg: 'rgba(21,101,192,0.09)' },
+  rights:      { label: 'Rights',      color: '#2e7d32', bg: 'rgba(46,125,50,0.09)' },
+  politics:    { label: 'Politics',    color: '#c62828', bg: 'rgba(198,40,40,0.09)' },
+};
+
+function formatDate(d) {
+  const [y,m,day] = d.split('-');
+  return new Date(+y, +m-1, +day).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+}
+
+let allArticles = [];
+let activeFilter = 'all';
+
+function renderGrid(filter) {
+  const grid = document.getElementById('newsGrid');
+  const items = filter === 'all' ? allArticles : allArticles.filter(a => a.category === filter);
+  if (!items.length) {
+    grid.innerHTML = '<div class="no-results">No articles in this category yet.</div>';
+    return;
+  }
+  grid.innerHTML = items.map(a => {
+    const cat = CAT_META[a.category] || { label: a.category, color: 'var(--navy)', bg: 'var(--navy-bg)' };
+    const url = 'news-article.html?id=' + encodeURIComponent(a.id);
+    return `<div class="nc" onclick="location.href='${url}'" role="link" tabindex="0" onkeydown="if(event.key==='Enter')location.href='${url}'">
+      <div class="nc-body">
+        <span class="nc-cat" style="color:${cat.color};background:${cat.bg}">${cat.label}</span>
+        <span class="nc-title">${a.title}</span>
+        <span class="nc-excerpt">${a.excerpt}</span>
+      </div>
+      <div class="nc-footer">
+        <span class="nc-date">${formatDate(a.date)}</span>
+        <span class="nc-read">Read article →</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+var newsSheetPromise = (typeof HiConstSheets !== 'undefined' && HiConstSheets.hasUrl('news'))
+  ? HiConstSheets.fetchNews()
+  : Promise.reject('no sheet');
+
+newsSheetPromise
+  .catch(function() { return fetch('data/news.json').then(r => r.json()); })
+  .then(data => {
+    allArticles = data.sort((a,b) => b.date.localeCompare(a.date));
+    document.getElementById('stat-count').textContent = allArticles.length;
+    if (allArticles.length) {
+      document.getElementById('stat-latest').textContent = formatDate(allArticles[0].date);
+    }
+    // Hide stat-latest block if empty
+
+    renderGrid('all');
+
+    document.getElementById('filterBar').addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderGrid(btn.dataset.cat);
+    });
+  })
+  .catch(() => {
+    document.getElementById('newsGrid').innerHTML = '<div class="no-results">Failed to load news. Make sure you are running via a local server (not file://).</div>';
+  });
+</script>
+</body>
+</html>

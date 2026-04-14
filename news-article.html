@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News — hiConstitution</title>
+  <meta name="description" content="Read the latest constitutional law news, Supreme Court judgments, and legislative updates from India." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .news-page { padding-top: var(--navbar-h); background: var(--bg-light); min-height: 100vh; }
+    .news-header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      padding: 56px 0 64px;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .news-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .news-header-inner { position: relative; }
+    .news-category-pill {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 99px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .news-header h1 {
+      font-family: 'Eczar', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--white);
+      margin-bottom: 16px;
+      max-width: 800px;
+    }
+    .news-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.65);
+    }
+    .news-meta-item { display: flex; align-items: center; gap: 6px; }
+
+    .news-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 32px;
+      padding: 40px 0 80px;
+    }
+
+    .news-body {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+    }
+    .news-body p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--body-text);
+      margin-bottom: 20px;
+    }
+    .news-source-box {
+      margin-top: 32px;
+      padding: 16px 20px;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .news-source-box a { color: var(--navy); font-weight: 600; }
+    .news-source-box a:hover { color: var(--saffron); }
+
+    .news-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .news-tag {
+      padding: 4px 12px;
+      background: var(--navy-bg);
+      color: var(--navy);
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Sidebar */
+    .news-sidebar { display: flex; flex-direction: column; gap: 20px; }
+    .side-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+    .side-card-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .related-news-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .related-news-item:last-child { border-bottom: none; }
+    .related-news-item a {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.4;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .related-news-item a:hover { color: var(--saffron); }
+    .related-news-date { font-size: 0.75rem; color: var(--muted); }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--saffron); }
+
+    @media (max-width: 900px) {
+      .news-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .news-header { padding: 36px 0 48px; }
+      .news-body { padding: 24px 18px; }
+      .news-body p { font-size: 0.97rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-circle"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M2 7C4 6 8 5.5 12 7.5C16 5.5 20 6 22 7V19C20 18 16 17.5 12 19.5C8 17.5 4 18 2 19V7Z'/><line x1='12' y1='7.5' x2='12' y2='19.5'/></svg></div>
+      <span class="logo-text">hi<span>Constitution</span></span>
+    </a>
+    <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>
+      <li><a href="news.html" class="nav-link active">News</a></li>
+      <li><a href="amendments.html" class="nav-link">Amendments</a></li>
+      <li><a href="judgments.html" class="nav-link">Judgments</a></li>
+      <li><a href="facts.html" class="nav-link">Facts</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="quiz.html" class="btn btn-primary btn-sm">Take Quiz</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="mobile-nav" aria-label="Mobile navigation">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="read-the-constitution.html" class="nav-link">Read</a>
+  <a href="news.html" class="nav-link">News</a>
+  <a href="amendments.html" class="nav-link">Amendments</a>
+  <a href="judgments.html" class="nav-link">Judgments</a>
+  <a href="facts.html" class="nav-link">Facts</a>
+  <a href="quiz.html" class="nav-link">Quiz</a>
+</nav>
+
+<main class="news-page">
+  <div class="news-header">
+    <div class="container">
+      <div class="news-header-inner">
+        <a href="news.html" class="back-link">← All News</a>
+        <div class="news-category-pill" id="dyn-category-pill" style="background:rgba(255,255,255,0.12);color:#fff;">—</div>
+        <h1 id="dyn-title">Loading…</h1>
+        <div class="news-meta">
+          <span class="news-meta-item">📅 <span id="dyn-date">—</span></span>
+          <span class="news-meta-item">📰 <span id="dyn-source">—</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="news-layout">
+      <div>
+        <article class="news-body" id="dyn-body">
+          <p style="color:var(--muted);">Loading article…</p>
+        </article>
+      </div>
+      <aside class="news-sidebar">
+        <div class="side-card">
+          <div class="side-card-title">More News</div>
+          <div id="dyn-related"></div>
+        </div>
+        <div class="side-card">
+          <div class="side-card-title">Quick Links</div>
+          <a href="amendments.html" style="display:block;padding:9px 0;border-bottom:1px solid var(--border-light);font-size:0.88rem;color:var(--navy);font-weight:600;">Constitutional Amendments →</a>
+          <a href="judgments.html" style="display:block;padding:9px 0;border-bottom:1px solid var(--border-light);font-size:0.88rem;color:var(--navy);font-weight:600;">Landmark Judgments →</a>
+          <a href="timeline.html" style="display:block;padding:9px 0;font-size:0.88rem;color:var(--navy);font-weight:600;">Full Timeline →</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,0.6);padding:32px 0;">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <a href="index.html" style="color:#fff;font-weight:700;font-size:0.95rem;">hiConstitution.com</a>
+    <p style="font-size:0.82rem;">© 2025 — Educational use only.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/sheets.js"></script>
+<script>
+const CAT_META = {
+  judgment:    { label: 'Judgment',    color: '#7b1fa2', bg: 'rgba(123,31,162,0.12)' },
+  amendment:   { label: 'Amendment',   color: 'var(--saffron)', bg: 'var(--saffron-bg)' },
+  legislation: { label: 'Legislation', color: 'var(--navy)', bg: 'var(--navy-bg)' },
+  rights:      { label: 'Rights',      color: '#2e7d32', bg: 'rgba(46,125,50,0.10)' },
+  politics:    { label: 'Politics',    color: '#c62828', bg: 'rgba(198,40,40,0.10)' },
+};
+
+function formatDate(d) {
+  const [y,m,day] = d.split('-');
+  return new Date(y,m-1,day).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+}
+
+const params = new URLSearchParams(location.search);
+const newsId = params.get('id');
+
+var artSheetPromise = (typeof HiConstSheets !== 'undefined' && HiConstSheets.hasUrl('news'))
+  ? HiConstSheets.fetchNews()
+  : Promise.reject('no sheet');
+
+artSheetPromise
+  .catch(function() { return fetch('data/news.json').then(r => r.json()); })
+  .then(articles => {
+    const art = articles.find(a => a.id === newsId);
+    if (!art) { document.getElementById('dyn-title').textContent = 'Article not found.'; return; }
+
+    const cat = CAT_META[art.category] || { label: art.category, color: 'var(--navy)', bg: 'var(--navy-bg)' };
+
+    document.title = art.title + ' | hiConstitution';
+    document.getElementById('dyn-title').textContent = art.title;
+    document.getElementById('dyn-date').textContent = formatDate(art.date);
+    document.getElementById('dyn-source').textContent = art.source;
+
+    const pill = document.getElementById('dyn-category-pill');
+    pill.textContent = cat.label;
+    pill.style.background = cat.bg;
+    pill.style.color = cat.color;
+
+    const bodyEl = document.getElementById('dyn-body');
+    const paras = art.content.split('\n\n').filter(p => p.trim());
+    let html = paras.map(p => '<p>' + p.replace(/\n/g,' ') + '</p>').join('');
+
+    if (art.tags && art.tags.length) {
+      html += '<div class="news-tags">' + art.tags.map(t => '<span class="news-tag">' + t + '</span>').join('') + '</div>';
+    }
+    if (art.sourceUrl) {
+      html += '<div class="news-source-box">📰 Source: <a href="' + art.sourceUrl + '" target="_blank" rel="noopener">' + art.source + '</a></div>';
+    }
+    bodyEl.innerHTML = html;
+
+    // Related
+    const relEl = document.getElementById('dyn-related');
+    const others = articles.filter(a => a.id !== art.id).slice(0, 4);
+    relEl.innerHTML = others.map(a =>
+      '<div class="related-news-item">' +
+        '<a href="news-article.html?id=' + a.id + '">' + a.title + '</a>' +
+        '<div class="related-news-date">' + formatDate(a.date) + '</div>' +
+      '</div>'
+    ).join('');
+  })
+  .catch(() => { document.getElementById('dyn-title').textContent = 'Failed to load article.'; });
+</script>
+</body>
+</html>

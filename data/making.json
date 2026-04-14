@@ -1,0 +1,33 @@
+{
+  "stages": [
+    { "title": "First Session", "dates": "9-23 December, 1946", "details": "<p><span class='fact-tag fact-blue'>Inaugural Meeting</span> The Constituent Assembly met for the first time in New Delhi.</p><p><span class='fact-tag fact-orange'>Objective Resolution</span> Introduced by Jawaharlal Nehru on Dec 13, laying the philosophical fundamentals.</p>" },
+    { "title": "Second Session", "dates": "20-25 January, 1947", "details": "<p><span class='fact-tag fact-green'>Resolution Adopted</span> The Assembly unanimously adopted the Objective Resolution on January 22, 1947.</p>" },
+    { "title": "Third Session", "dates": "28 April – 2 May, 1947", "details": "<p><span class='fact-tag fact-orange'>Princely States Join</span> Representatives from the Princely States took their seats in the Assembly.</p>" },
+    { "title": "Fourth Session", "dates": "14-31 July, 1947", "details": "<p><span class='fact-tag fact-green'>National Flag</span> On July 22, 1947, the Assembly adopted the Free India National Flag.</p>" },
+    { "title": "Fifth Session", "dates": "14-30 August, 1947", "details": "<p><span class='fact-tag fact-blue'>Midnight Session</span> The Assembly met at midnight on August 14 to assume power for independent India.</p><p><span class='fact-tag fact-green'>Drafting Committee</span> Appointed on August 29, 1947, with Dr. B.R. Ambedkar as its Chairman.</p>" },
+    { "title": "Sixth Session", "dates": "27 January, 1948", "details": "<p><span class='fact-tag fact-orange'>Short Session</span> A brief session held to discuss minor procedural matters.</p>" },
+    { "title": "Seventh Session", "dates": "4 November, 1948 – 8 January, 1949", "details": "<p><span class='fact-tag fact-blue'>First Reading</span> Dr. B.R. Ambedkar introduced the final Draft Constitution and delivered a brilliant speech defending its provisions.</p>" },
+    { "title": "Eighth Session", "dates": "16 May – 16 June, 1949", "details": "<p><span class='fact-tag fact-green'>Debates Continue</span> Intensive clause-by-clause debates continued, focusing heavily on Fundamental Rights and Directive Principles.</p>" },
+    { "title": "Ninth Session", "dates": "30 July – 18 September, 1949", "details": "<p><span class='fact-tag fact-orange'>Crucial Debates</span> The Assembly saw fierce debates regarding the Official Language and Citizenship.</p>" },
+    { "title": "Tenth Session", "dates": "6-17 October, 1949", "details": "<p><span class='fact-tag fact-green'>Second Reading Completed</span> The second reading of the Constitution, the most rigorous part of the drafting process, was finally concluded.</p>" },
+    { "title": "Eleventh Session", "dates": "14-26 November, 1949", "details": "<p><span class='fact-tag fact-blue'>Third Reading</span> Final revisions and the third reading of the draft.</p><p><span class='fact-tag fact-green'>Adoption Day</span> On November 26, 1949, the Constitution was officially adopted, enacted, and given to the people of India.</p>" },
+    { "title": "Final Meeting", "dates": "24 January, 1950", "details": "<p><span class='fact-tag fact-orange'>Signatures</span> The Assembly met once again on 24 January, 1950, when the members appended their signatures to the Constitution of India.</p><p><span class='fact-tag fact-blue'>National Anthem & Song</span> 'Jana Gana Mana' and 'Vande Mataram' adopted.</p>" }
+  ],
+  "framers": [
+    { "name": "Dr. B.R. Ambedkar", "party": "Scheduled Castes Federation", "constituency": "Bombay (earlier Bengal)", "committees": "Chairman, Drafting Committee", "initials": "BA" },
+    { "name": "Dr. Rajendra Prasad", "party": "Indian National Congress", "constituency": "Bihar", "committees": "President of the Assembly", "initials": "RP" },
+    { "name": "Jawaharlal Nehru", "party": "Indian National Congress", "constituency": "United Provinces", "committees": "Union Power, Union Constitution", "initials": "JN" },
+    { "name": "Sardar Vallabhbhai Patel", "party": "Indian National Congress", "constituency": "Bombay", "committees": "Provincial Constitution, Advisory Comm.", "initials": "SP" },
+    { "name": "Alladi Krishnaswami Ayyar", "party": "Independent", "constituency": "Madras", "committees": "Drafting Committee", "initials": "AK" },
+    { "name": "N. Gopalaswami Ayyangar", "party": "Indian National Congress", "constituency": "Madras", "committees": "Drafting Committee", "initials": "GA" },
+    { "name": "K.M. Munshi", "party": "Indian National Congress", "constituency": "Bombay", "committees": "Drafting Committee", "initials": "KM" },
+    { "name": "Mohammad Saadulla", "party": "Muslim League", "constituency": "Assam", "committees": "Drafting Committee", "initials": "MS" },
+    { "name": "B.L. Mitter", "party": "Independent", "constituency": "Bengal", "committees": "Drafting Committee (resigned, replaced)", "initials": "BM" },
+    { "name": "D.P. Khaitan", "party": "Indian National Congress", "constituency": "Bengal", "committees": "Drafting Committee (died, replaced)", "initials": "DK" },
+    { "name": "T.T. Krishnamachari", "party": "Indian National Congress", "constituency": "Madras", "committees": "Drafting Committee (replaced Khaitan)", "initials": "TK" },
+    { "name": "Sarojini Naidu", "party": "Indian National Congress", "constituency": "United Provinces", "committees": "Member, Constitutional Adviser", "initials": "SN" },
+    { "name": "Hansa Mehta", "party": "Indian National Congress", "constituency": "Bombay", "committees": "Fundamental Rights Sub-Committee", "initials": "HM" },
+    { "name": "B.N. Rau", "party": "Independent (Constitutional Adviser)", "constituency": "N/A", "committees": "Constitutional Adviser to the Assembly", "initials": "BR" },
+    { "name": "Frank Anthony", "party": "Anglo-Indian", "constituency": "Anglo-Indian seats", "committees": "Member", "initials": "FA" }
+  ]
+}

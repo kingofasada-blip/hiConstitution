@@ -3,82 +3,311 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Full Constitutional Timeline - hiConstitution</title>
-  <meta name="description" content="Explore the full historical timeline of the Indian Constitution." />
+  <title>Constitutional Timeline of India — 1934 to 2023 | hiConstitution</title>
+  <meta name="description" content="Explore the full chronological history of India's Constitution — from the first demand in 1934 to the Women's Reservation Act in 2023." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <style>
-    .timeline-page { padding-top: var(--navbar-h); min-height: 100vh; background: var(--bg-light); padding-bottom: 80px; }
+    .timeline-page {
+      padding-top: var(--navbar-h);
+      min-height: 100vh;
+      background: var(--bg-light);
+      padding-bottom: 80px;
+    }
+
+    /* ── Header ── */
     .timeline-header {
-      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
-      padding: 56px 0;
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, #3141ad 100%);
+      padding: 56px 0 64px;
       color: var(--white);
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    .timeline-header h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 12px; color: var(--white); font-family: "Lora", serif; }
-    .timeline-header p { color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
-    
-    /* Vertical List View Styles */
+    .timeline-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .timeline-header .container { position: relative; }
+    .timeline-header h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 14px;
+      color: var(--white);
+      font-family: "Lora", serif;
+    }
+    .timeline-header p {
+      color: rgba(255,255,255,0.75);
+      max-width: 560px;
+      margin: 0 auto 28px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .timeline-header-stats {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .tl-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .tl-stat-num {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .tl-stat-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+    }
+
+    /* ── Category Filter ── */
+    .tl-filter-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 28px 20px 0;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .tl-filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 99px;
+      border: 1.5px solid var(--border-strong);
+      background: var(--white);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted-strong);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      font-family: var(--font);
+    }
+    .tl-filter-btn:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+    }
+    .tl-filter-btn.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+    .tl-filter-btn .tl-filter-icon { font-size: 1rem; }
+
+    /* ── Vertical Timeline ── */
     .vertical-timeline {
       position: relative;
       max-width: 800px;
-      margin: 40px auto 0;
-      padding: 0 20px;
+      margin: 32px auto 0;
+      padding: 0 20px 60px;
     }
+
+    /* Spine line — sits behind the dots */
     .vertical-timeline::before {
       content: '';
       position: absolute;
-      top: 0; left: 48px;
-      height: 100%; width: 4px;
-      background: var(--border);
-      border-radius: 2px;
+      top: 28px; bottom: 28px;
+      left: calc(20px + 28px); /* padding + half dot-width */
+      width: 2px;
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        var(--border-strong) 4%,
+        var(--border-strong) 96%,
+        transparent 100%
+      );
     }
+
+    /* Each row */
     .v-timeline-item {
       position: relative;
-      margin-bottom: 40px;
-      padding-left: 70px;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+      align-items: start;
     }
+
+    /* ── Dot ── */
     .v-timeline-dot {
-      position: absolute;
-      left: 20px; top: 0;
-      width: 60px; height: 60px;
+      width: 56px; height: 56px;
       border-radius: 50%;
       background: var(--white);
-      border: 4px solid var(--saffron);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 0.95rem; color: var(--navy);
-      box-shadow: var(--shadow-sm);
-      z-index: 2;
+      border: 2.5px solid;           /* color set by JS inline style */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: var(--z-base);
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: var(--shadow-xs);
     }
+    .v-dot-icon {
+      font-size: 1.55rem;
+      line-height: 1;
+      display: block;
+      transition: transform var(--transition);
+    }
+    .v-dot-year { display: none; } /* year lives in card, not dot */
+
+    .v-timeline-item:hover .v-timeline-dot {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-sm);
+    }
+    .v-timeline-item:hover .v-dot-icon { transform: scale(1.08); }
+
+    /* ── Card ── */
     .v-timeline-content {
       background: var(--white);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 24px;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.3s ease;
+      padding: 20px 24px;
+      box-shadow: var(--shadow-xs);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
     }
-    .v-timeline-content:hover {
-      transform: translateY(-4px);
+    .v-timeline-item:hover .v-timeline-content {
+      transform: translateY(-2px);
       box-shadow: var(--shadow-md);
-      border-color: var(--navy);
+      border-color: var(--border-strong);
     }
+
+    /* Card header row: year (big) + badge (right-aligned) */
+    .v-timeline-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .v-timeline-year-label {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--dark-text);
+    }
+    .v-timeline-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      padding: 4px 10px;
+      border-radius: 99px;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .v-timeline-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .v-timeline-detail {
+      color: var(--muted-strong);
+      font-size: 0.9rem;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Left accent — thin coloured bar matching category */
+    .v-timeline-content {
+      border-left-width: 4px;
+    }
+
     @media (max-width: 600px) {
-      .vertical-timeline::before { left: 38px; }
-      .v-timeline-item { padding-left: 64px; margin-bottom: 30px; }
-      .v-timeline-dot { left: 16px; width: 48px; height: 48px; font-size: 0.8rem; border-width: 3px; }
-      .v-timeline-content { padding: 20px; }
+      .vertical-timeline::before { left: calc(20px + 22px); }
+      .v-timeline-item { grid-template-columns: 44px 1fr; gap: 14px; margin-bottom: 18px; }
+      .v-timeline-dot { width: 44px; height: 44px; }
+      .v-dot-icon { font-size: 1.2rem; }
+      .v-timeline-year-label { font-size: 1.5rem; }
+      .v-timeline-content { padding: 14px 16px; }
+      .timeline-header-stats { gap: 20px; }
+      .tl-stat-num { font-size: 1.4rem; }
     }
   </style>
+
+  <!-- SEO BLOCK -->
+
+  <!-- HTTPS Redirect (client-side fallback) -->
+  <script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.host+location.pathname+location.search+location.hash);</script>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#1A237E" />
+  <meta name="msapplication-TileColor" content="#1A237E" />
+
+  <!-- Canonical & Robots -->
+  <link rel="canonical" href="https://hiconstitution.com/timeline.html" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="hiConstitution" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="hiConstitution" />
+  <meta property="og:title" content="Constitutional Timeline of India — 1934 to 2023 | hiConstitution" />
+  <meta property="og:description" content="Explore the full chronological history of India's Constitution — from the first demand in 1934 to the Women's Reservation Act in 2023." />
+  <meta property="og:url" content="https://hiconstitution.com/timeline.html" />
+  <meta property="og:image" content="https://hiconstitution.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Constitutional Timeline of India — 1934 to 2023 | hiConstitution" />
+  <meta name="twitter:description" content="Explore the full chronological history of India's Constitution — from the first demand in 1934 to the Women's Reservation Act in 2023." />
+  <meta name="twitter:image" content="https://hiconstitution.com/og-image.jpg" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "name": "Constitutional Timeline of India — 1934 to 2023 | hiConstitution",
+    "description": "Explore the full chronological history of India's Constitution — from the first demand in 1934 to the Women's Reservation Act in 2023.",
+    "url": "https://hiconstitution.com/timeline.html",
+    "inLanguage": "en-IN",
+    "publisher": {
+      "@type": "Organization",
+      "name": "hiConstitution",
+      "url": "https://hiconstitution.com"
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://hiconstitution.com/#website"
+    }
+  }
+  </script>
 </head>
 <body>
 
 <nav class="navbar" aria-label="Main navigation">
   <div class="navbar-inner">
     <a href="index.html" class="navbar-logo">
-      <div class="logo-circle">हि</div>
+      <div class="logo-circle"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M2 7C4 6 8 5.5 12 7.5C16 5.5 20 6 22 7V19C20 18 16 17.5 12 19.5C8 17.5 4 18 2 19V7Z'/><line x1='12' y1='7.5' x2='12' y2='19.5'/></svg></div>
       <span class="logo-text">hi<span>Constitution</span></span>
     </a>
     <ul class="navbar-nav" role="list">
@@ -91,12 +320,14 @@
       <li><a href="facts.html" class="nav-link">Facts</a></li>
       <li><a href="quiz.html" class="nav-link">Quiz</a></li>
     </ul>
+    <div class="navbar-actions">
+      <a href="quiz.html" class="btn btn-primary btn-sm">Take Quiz</a>
+    </div>
     <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
-
 <nav class="mobile-nav" aria-label="Mobile navigation">
   <a href="index.html" class="nav-link">Home</a>
   <a href="read-the-constitution.html" class="nav-link">Read</a>
@@ -109,19 +340,85 @@
 </nav>
 
 <main class="timeline-page">
-  <div class="timeline-header">
+
+  <header class="timeline-header">
     <div class="container">
+      <p class="section-label" style="color:rgba(255,255,255,0.6);margin-bottom:10px;">History</p>
       <h1>Constitutional Timeline</h1>
-      <p>The complete chronological journey of the Constitution of India.</p>
+      <p>The complete chronological journey of the Constitution of India — from the first proposal in 1934 to landmark rulings shaping modern rights.</p>
+      <div class="timeline-header-stats">
+        <div class="tl-stat">
+          <span class="tl-stat-num">20</span>
+          <span class="tl-stat-label">Key Events</span>
+        </div>
+        <div class="tl-stat">
+          <span class="tl-stat-num">89</span>
+          <span class="tl-stat-label">Years Covered</span>
+        </div>
+        <div class="tl-stat">
+          <span class="tl-stat-num">299</span>
+          <span class="tl-stat-label">Assembly Members</span>
+        </div>
+        <div class="tl-stat">
+          <span class="tl-stat-num">2 yrs<br>11 mo</span>
+          <span class="tl-stat-label">Time to Draft</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Category Filter -->
+  <div class="tl-filter-bar">
+    <button class="tl-filter-btn active" data-filter="all">🗂 All Events</button>
+    <button class="tl-filter-btn" data-filter="formation">💡 Formation</button>
+    <button class="tl-filter-btn" data-filter="drafting">✍️ Drafting</button>
+    <button class="tl-filter-btn" data-filter="republic">🌅 Republic</button>
+    <button class="tl-filter-btn" data-filter="amendment">📝 Amendments</button>
+    <button class="tl-filter-btn" data-filter="landmark">🏛️ Landmark Cases</button>
+  </div>
+
+  <!-- Vertical timeline rendered by JS -->
+  <section>
+    <div class="vertical-timeline" id="verticalTimeline"></div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer style="background:var(--navy);color:rgba(255,255,255,0.7);padding:40px 0 28px;">
+  <div class="container">
+    <div class="footer-cols-grid">
+      <div>
+        <div class="navbar-logo" style="margin-bottom:14px;">
+          <div class="logo-circle"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M2 7C4 6 8 5.5 12 7.5C16 5.5 20 6 22 7V19C20 18 16 17.5 12 19.5C8 17.5 4 18 2 19V7Z'/><line x1='12' y1='7.5' x2='12' y2='19.5'/></svg></div>
+          <span style="color:#fff;font-weight:800;font-size:1.1rem;">hi<span style="color:var(--saffron);">Constitution</span></span>
+        </div>
+        <p style="font-size:0.88rem;line-height:1.7;color:rgba(255,255,255,0.55);">Making India's Constitution accessible to every citizen.</p>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">Explore</h4>
+        <ul style="display:flex;flex-direction:column;gap:10px;list-style:none;">
+          <li><a href="read-the-constitution.html" class="footer-quick-link">Read Constitution</a></li>
+          <li><a href="making.html" class="footer-quick-link">Constitution Making</a></li>
+          <li><a href="amendments.html" class="footer-quick-link">Amendments</a></li>
+          <li><a href="quiz.html" class="footer-quick-link">Quiz Arena</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">Quick Articles</h4>
+        <ul style="display:flex;flex-direction:column;gap:10px;list-style:none;">
+          <li><a href="library-article.html?id=14&slug=article-14-equality-before-law" class="footer-quick-link">Article 14 - Right to Equality</a></li>
+          <li><a href="library-article.html?id=21&slug=article-21-protection-of-life-and-personal-liberty" class="footer-quick-link">Article 21 - Right to Life</a></li>
+          <li><a href="library-article.html?id=32&slug=article-32-remedies-for-enforcement-of-rights" class="footer-quick-link">Article 32 - Constitutional Remedies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:32px;">
+      <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);">&copy; 2025 hiConstitution.com — For educational purposes only.</p>
+      <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);">Content based on the Constitution of India as amended.</p>
     </div>
   </div>
-  
-  <section class="timeline-section section-pad">
-    <div class="vertical-timeline" id="verticalTimeline">
-      <!-- Data rendered by timeline.js -->
-    </div>
-  </section>
-</main>
+</footer>
 
 <script src="js/main.js"></script>
 <script src="js/timeline.js"></script>
