@@ -258,14 +258,11 @@
 
   function renderPartArtwork(partId) {
     const card = document.getElementById('partSpecialCard');
-    if (partId !== 'I') {
-      card.classList.remove('visible');
-      card.innerHTML = '';
-      return;
-    }
+    
+    let artworkHtml = '';
 
-    card.classList.add('visible');
-    card.innerHTML = `
+    if (partId === 'I') {
+      artworkHtml = `
       <section class="part-special-shell" aria-label="Part I artwork and note">
         <div class="part-special-art">
           <img src="css/part1-bull.png" alt="Bull artwork from the Part I page of the Constitution of India" />
@@ -276,7 +273,43 @@
           <p>Part I of the Constitution, titled <strong>"The Union and its Territory,"</strong> establishes the geographical and legal identity of India. The page is illustrated with a <strong>"Bull"</strong> from the Indus Valley Civilization, which represents the strength and ancient historical foundation of the Indian territory. This specific page was designed and decorated by the artist <strong>Kripal Singh (Kripal Singh Shekhawat)</strong>, whose name is inscribed at the bottom of the artwork.</p>
         </div>
       </section>
-    `;
+      `;
+    } else if (partId === 'II') {
+      artworkHtml = `
+      <section class="part-special-shell" aria-label="Part II artwork and note">
+        <div class="part-special-art">
+          <img src="css/part2-gurukul.png" alt="Gurukul artwork from the Part II page of the Constitution of India" />
+        </div>
+        <div class="part-special-copy">
+          <div class="part-special-label">Artwork Note</div>
+          <h2>Citizenship</h2>
+          <p>The illustration for Part II (Citizenship) depicts a <strong>Vedic-era Gurukul</strong>, featuring a sage and his disciples. By choosing this scene, the <strong>Santiniketan artists</strong> framed Indian citizenship as more than a legal status; it is a cultural inheritance rooted in ancient wisdom and discipline. It suggests that the modern citizen is a successor to a millennia-old tradition of ethical living and shared knowledge, grounding the Constitution in India’s oldest historical foundations.</p>
+        </div>
+      </section>
+      `;
+    } else if (partId === 'IV') {
+      artworkHtml = `
+      <section class="part-special-shell" aria-label="Part IV artwork and note">
+        <div class="part-special-art">
+          <img src="css/part4-krishna.png" alt="Bhagavad Gita artwork from the Part IV page of the Constitution of India" />
+        </div>
+        <div class="part-special-copy">
+          <div class="part-special-label">Artwork Note</div>
+          <h2>Directive Principles of State Policy</h2>
+          <p><strong>The Illustration:</strong> The opening page of Part IV features a depiction of <strong>Lord Krishna preaching the Bhagavad Gita to Arjuna on the battlefield of Kurukshetra</strong>. The scene shows a chariot drawn by horses with Krishna acting as the charioteer and Arjuna as the warrior receiving guidance.</p>
+          <p style="margin-top: 12px;"><strong>Connection to Part IV:</strong> Part IV details the Directive Principles of State Policy, which are fundamental guidelines for the governance of the country. Just as Krishna provided Arjuna with the <strong>moral and ethical framework ("Dharma")</strong> to perform his <strong>duty</strong>, these principles serve as the <strong>moral conscience for the State</strong> to ensure a just social order and the welfare of its people.</p>
+        </div>
+      </section>
+      `;
+    }
+
+    if (artworkHtml) {
+      card.classList.add('visible');
+      card.innerHTML = artworkHtml;
+    } else {
+      card.classList.remove('visible');
+      card.innerHTML = '';
+    }
   }
 
   document.addEventListener("DOMContentLoaded", function() {
