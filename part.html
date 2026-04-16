@@ -107,7 +107,7 @@
     .article-list-item:nth-child(even) { border-left-color: var(--green); }
     .article-list-item:nth-child(even):hover { border-left-color: var(--navy); }
     
-    .art-content { flex: 1; }
+    .art-content { flex: 1; min-width: 0; word-wrap: break-word; overflow-wrap: break-word; }
     .art-content h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 6px; }
     .art-content p { font-size: 0.9rem; color: var(--body-text); margin: 0; line-height: 1.5; }
     .art-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
@@ -131,6 +131,15 @@
       .part-special-art { padding: 20px 20px 0; }
       .part-special-art img { max-width: 280px; }
       .part-special-copy { padding: 22px 20px 24px; }
+    }
+    @media (max-width: 600px) {
+      .article-list-container { padding: 0 16px; }
+      .article-list-item { padding: 16px; margin-bottom: 12px; }
+      .art-content h3 { font-size: 1.05rem; }
+      .art-content p { font-size: 0.85rem; }
+      .art-meta { gap: 6px; }
+      .art-status { font-size: 0.65rem; padding: 3px 6px; }
+      .art-arrow { margin-left: 12px; font-size: 1.2rem; }
     }
   </style>
 
