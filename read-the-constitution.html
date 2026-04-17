@@ -351,13 +351,25 @@
         container.innerHTML = '';
 
         data.forEach(part => {
+          let customStyle = '';
+          let titleStyle = '';
+          let arrowStyle = '';
+          let descStyle = '';
+          
+          if(part.partId === 'VII') {
+            customStyle = 'border-color: #fecaca; background-color: #fff5f5; border-left: 5px solid #ef4444;';
+            titleStyle = 'color: #b91c1c;';
+            descStyle = 'color: #991b1b; font-weight: 500; font-size: 0.85rem;';
+            arrowStyle = 'color: #ef4444;';
+          }
+          
           const partHtml = `
-            <a href="part.html?id=${part.partId}&slug=${createSlug(part.partTitle)}" class="part-card-link">
+            <a href="part.html?id=${part.partId}&slug=${createSlug(part.partTitle)}" class="part-card-link" style="${customStyle}">
               <div class="part-info">
-                <h3>${part.partTitle}</h3>
-                <p>${part.partDesc}</p>
+                <h3 style="${titleStyle}">${part.partTitle}</h3>
+                <p style="${descStyle}">${part.partDesc}</p>
               </div>
-              <div class="part-arrow">→</div>
+              <div class="part-arrow" style="${arrowStyle}">→</div>
             </a>
           `;
           container.innerHTML += partHtml;
