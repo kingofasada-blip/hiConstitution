@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Making of India's Constitution — Constituent Assembly History | hiConstitution</title>
+  <meta name="description" content="Discover how India's Constitution was made. Explore the Constituent Assembly sessions, key framers like Dr. Ambedkar, Nehru, and Patel, and the 2 year 11 month drafting process." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .making-page {
+      padding-top: var(--navbar-h);
+      min-height: 100vh;
+      background: var(--bg-light);
+      padding-bottom: 80px;
+    }
+
+    .making-header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      padding: 56px 0 80px;
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .making-header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 12px;
+      color: var(--white);
+      font-family: 'Lora', serif;
+    }
+
+    .making-header p {
+      color: rgba(255,255,255,0.7);
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+    }
+
+    /* Top 3 Navigation Cards */
+    .making-nav-cards {
+      max-width: 1200px;
+      margin: -50px auto 40px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (max-width: 768px) {
+      .making-nav-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: -30px;
+      }
+      .m-card {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        padding: 16px;
+        gap: 16px;
+      }
+      .m-card.active, .m-card:hover {
+        transform: translateY(-3px);
+      }
+      .m-card-icon {
+        font-size: 2.2rem;
+        margin-bottom: 0;
+      }
+      .m-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+      }
+      .m-card p {
+        display: block;
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .making-nav-cards {
+        padding: 0 12px;
+        margin-top: -20px;
+      }
+      .m-card { padding: 12px; gap: 12px; }
+      .m-card-icon { font-size: 1.8rem; }
+      .m-card h3 { font-size: 1rem; }
+      .m-card p { font-size: 0.8rem; }
+    }
+
+    .m-card {
+      background: var(--white);
+      border: 2px solid transparent;
+      border-radius: var(--radius-lg);
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-sm);
+    }
+    .m-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+    }
+    .m-card.active {
+      border-color: var(--saffron);
+      background: #FFF9F5;
+      box-shadow: 0 12px 32px rgba(243,115,36,0.15);
+      transform: translateY(-6px);
+    }
+    .m-card-icon {
+      font-size: 2.8rem;
+      margin-bottom: 16px;
+    }
+    .m-card h3 {
+      font-size: 1.25rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-family: 'Lora', serif;
+    }
+    .m-card p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Content Panels */
+    .m-panel-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+    }
+    .m-panel {
+      display: none;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+      animation: slideFadeUp 0.4s ease forwards;
+    }
+    .m-panel.active { display: block; }
+    @keyframes slideFadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-title {
+      font-family: 'Lora', serif;
+      font-size: 1.8rem;
+      color: var(--navy);
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--border-light);
+      padding-bottom: 16px;
+    }
+
+    /* Assembly Info Grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .info-card {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+    .info-card h4 {
+      color: var(--navy);
+      font-size: 1.15rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .info-card ul {
+      padding-left: 20px;
+      color: var(--body-text);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+    .info-card li { margin-bottom: 10px; }
+
+    /* Timeline Accordion (Dropdowns) */
+    .stages-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .stage-dropdown {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      transition: all 0.2s ease;
+    }
+    .stage-dropdown[open] {
+      border-color: var(--saffron);
+      box-shadow: var(--shadow-sm);
+    }
+    .stage-summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 4px solid var(--saffron);
+      border-radius: var(--radius-md);
+      background: var(--bg-light);
+    }
+    .stage-dropdown[open] .stage-summary {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .stage-summary::-webkit-details-marker { display: none; }
+    .stage-title {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+    .stage-date-badge { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
+    .stage-arrow { font-size: 0.9rem; color: var(--saffron); transition: transform 0.3s ease; }
+    .stage-dropdown[open] .stage-arrow { transform: rotate(180deg); }
+    .stage-content { padding: 20px 20px 8px 20px; border-top: 1px solid var(--border-light); background: var(--white); border-radius: 0 0 var(--radius-md) var(--radius-md); }
+
+    /* Framers (Right Column) */
+    .stats-box {
+      background: var(--navy-bg);
+      border: 1.5px solid rgba(26,35,126,0.14);
+      border-radius: var(--radius-md);
+      padding: var(--card-pad-sm);
+      margin-bottom: 20px;
+      font-size: 0.88rem;
+      color: var(--navy);
+      line-height: 1.6;
+    }
+
+    .search-wrap {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .search-wrap input {
+      width: 100%;
+      padding: 12px 16px 12px 40px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-wrap input:focus {
+      border-color: var(--navy);
+    }
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    .framers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    
+    .framer-card {
+      display: flex;
+      gap: 16px;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 16px;
+      background: var(--bg-light);
+      transition: box-shadow 0.2s;
+    }
+    .framer-card:hover {
+      box-shadow: var(--shadow-sm);
+      background: var(--white);
+    }
+    .framer-photo {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--navy-light);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .framer-details h4 {
+      color: var(--navy);
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+    .framer-details p {
+      font-size: 0.82rem;
+      color: var(--body-text);
+      margin: 0 0 4px 0;
+      line-height: 1.4;
+    }
+    .framer-label {
+      font-weight: 600;
+      color: var(--dark-text);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-content {
+      background: var(--white);
+      width: 90%;
+      max-width: 600px;
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+    .modal-overlay.show .modal-content {
+      transform: translateY(0);
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .modal-close:hover { color: var(--navy); }
+    
+    .modal-title {
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+      padding-right: 24px;
+    }
+    .modal-dates {
+      font-size: 0.9rem;
+      color: var(--saffron);
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+    .fact-tag {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      margin-right: 8px;
+    }
+    .fact-green { background: #E8F5E9; color: #2E7D32; border: 1px solid #C8E6C9; }
+    .fact-blue { background: #E3F2FD; color: #1565C0; border: 1px solid #BBDEFB; }
+    .fact-orange { background: #FFF3E0; color: #E65100; border: 1px solid #FFE0B2; }
+    
+    .modal-body p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--body-text);
+      margin-bottom: 16px;
+    }
+  </style>
+
+  <!-- SEO BLOCK -->
+
+  <!-- HTTPS Redirect (client-side fallback) -->
+  <script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.host+location.pathname+location.search+location.hash);</script>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#1A237E" />
+  <meta name="msapplication-TileColor" content="#1A237E" />
+
+  <!-- Canonical & Robots -->
+  <link rel="canonical" href="https://hiconstitution.com/Constitution-making.html" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="hiConstitution" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="hiConstitution" />
+  <meta property="og:title" content="Making of India's Constitution — Constituent Assembly History | hiConstitution" />
+  <meta property="og:description" content="Discover how India's Constitution was made. Explore the Constituent Assembly sessions, key framers like Dr. Ambedkar, Nehru, and Patel, and the 2 year 11 month drafting process." />
+  <meta property="og:url" content="https://hiconstitution.com/Constitution-making.html" />
+  <meta property="og:image" content="https://hiconstitution.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Making of India's Constitution — Constituent Assembly History | hiConstitution" />
+  <meta name="twitter:description" content="Discover how India's Constitution was made. Explore the Constituent Assembly sessions, key framers like Dr. Ambedkar, Nehru, and Patel, and the 2 year 11 month drafting process." />
+  <meta name="twitter:image" content="https://hiconstitution.com/og-image.jpg" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "name": "Making of India's Constitution — Constituent Assembly History | hiConstitution",
+    "description": "Discover how India's Constitution was made. Explore the Constituent Assembly sessions, key framers like Dr. Ambedkar, Nehru, and Patel, and the 2 year 11 month drafting process.",
+    "url": "https://hiconstitution.com/Constitution-making.html",
+    "inLanguage": "en-IN",
+    "publisher": {
+      "@type": "Organization",
+      "name": "hiConstitution",
+      "url": "https://hiconstitution.com"
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://hiconstitution.com/#website"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-circle"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M2 7C4 6 8 5.5 12 7.5C16 5.5 20 6 22 7V19C20 18 16 17.5 12 19.5C8 17.5 4 18 2 19V7Z'/><line x1='12' y1='7.5' x2='12' y2='19.5'/></svg></div>
+      <span class="logo-text">hi<span>Constitution</span></span>
+    </a>
+    <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>
+      <li><a href="Constitution-making.html" class="nav-link active">Making</a></li>
+      <li><a href="amendments.html" class="nav-link">Amendments</a></li>
+      <li><a href="landmark-judgments.html" class="nav-link">Judgments</a></li>
+      <li><a href="draft-Constitution-of-India.html" class="nav-link">Draft</a></li>
+      <li><a href="facts.html" class="nav-link">Facts</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<nav class="mobile-nav" aria-label="Mobile navigation">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="read-the-constitution.html" class="nav-link">Read</a>
+  <a href="Constitution-making.html" class="nav-link active">Making</a>
+  <a href="amendments.html" class="nav-link">Amendments</a>
+  <a href="landmark-judgments.html" class="nav-link">Judgments</a>
+  <a href="draft-Constitution-of-India.html" class="nav-link">Draft</a>
+  <a href="facts.html" class="nav-link">Facts</a>
+  <a href="quiz.html" class="nav-link">Quiz</a>
+</nav>
+
+<main class="making-page">
+  <div class="making-header">
+    <div class="container">
+      <h1>Constitution Making</h1>
+      <p>Explore the Constituent Assembly, the sessions that shaped the nation, and the framers behind the Supreme Law.</p>
+    </div>
+  </div>
+
+  <!-- 3 Clickable Columns/Cards -->
+  <div class="making-nav-cards">
+    <div class="m-card active" data-panel="panel-assembly">
+      <div class="m-card-icon">🏛️</div>
+      <div>
+        <h3>Constituent Assembly</h3>
+        <p>Explore the formation, key committees, and foundational notes of the assembly.</p>
+      </div>
+    </div>
+    <div class="m-card" data-panel="panel-timeline">
+      <div class="m-card-icon">⏳</div>
+      <div>
+        <h3>Stages of Making</h3>
+        <p>Trace the chronological journey across 12 sessions, from the first meeting to adoption.</p>
+      </div>
+    </div>
+    <div class="m-card" data-panel="panel-framers">
+      <div class="m-card-icon">👥</div>
+      <div>
+        <h3>The Framers</h3>
+        <p>Discover the visionaries and key architects who debated and shaped the supreme law.</p>
+      </div>
+    </div>
+  </div>
+    
+  <div class="m-panel-container">
+    
+    <!-- Assembly Panel -->
+    <div class="m-panel active" id="panel-assembly">
+      <h2 class="panel-title">Constituent Assembly & Committees</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <h4><span style="font-size:1.4rem">📌</span> Key Facts</h4>
+          <ul>
+            <li><strong>Formation:</strong> Under Cabinet Mission Plan (1946)</li>
+            <li><strong>First Meeting:</strong> December 9, 1946</li>
+            <li><strong>Time Taken:</strong> 2 years, 11 months, and 18 days</li>
+            <li><strong>Total Sessions:</strong> 11 sessions over 165 days</li>
+            <li><strong>Adoption Date:</strong> November 26, 1949</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4><span style="font-size:1.4rem">🏛️</span> Major Committees</h4>
+          <ul>
+            <li><strong>Drafting Committee:</strong> Dr. B.R. Ambedkar (7 members)</li>
+            <li><strong>Union Power Committee:</strong> Jawaharlal Nehru</li>
+            <li><strong>Provincial Constitution:</strong> Sardar Vallabhbhai Patel</li>
+            <li><strong>Fundamental Rights:</strong> Sardar Vallabhbhai Patel</li>
+            <li><strong>Rules of Procedure:</strong> Dr. Rajendra Prasad</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline Panel -->
+    <div class="m-panel" id="panel-timeline">
+      <h2 class="panel-title">Detailed Stages of Constitution Making</h2>
+      <p style="color:var(--muted); margin-bottom:24px;">There were 11 sessions of the Constituent assembly. Expand any session below to read detailed historical facts and key decisions made during that period.</p>
+      <div class="stages-accordion" id="stagesList">
+        <!-- Generated by JS -->
+      </div>
+    </div>
+
+    <!-- Framers Panel -->
+    <div class="m-panel" id="panel-framers">
+      <h2 class="panel-title">The Constitution Framers</h2>
+        <div class="stats-box">
+        <strong>Snapshot:</strong> Originally 389 members, the assembly was reduced to 299 after the partition of India. It included 15 women. 284 members were actually present to sign the Constitution on 24 Jan 1950.
+        </div>
+        
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="framerSearch" placeholder="Search by Name..." />
+        </div>
+
+      <div class="framers-grid" id="framersList">
+          <!-- Generated by JS -->
+        </div>
+    </div>
+
+  </div>
+</main>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,0.6);padding:32px 0;">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <a href="index.html" style="color:#fff;font-weight:700;font-size:0.95rem;">hiConstitution.com</a>
+    <p style="font-size:0.82rem;">© 2025 — Educational use only.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // Fallback Default Data
+  const defaultStages = [
+    { title: "First Session", dates: "9-23 December, 1946", details: "<p><span class='fact-tag fact-blue'>Inaugural Meeting</span> The Constituent Assembly met for the first time in New Delhi.</p><p><span class='fact-tag fact-orange'>Objective Resolution</span> Introduced by Jawaharlal Nehru on Dec 13, laying the philosophical fundamentals.</p>" },
+    { title: "Second Session", dates: "20-25 January, 1947", details: "<p><span class='fact-tag fact-green'>Resolution Adopted</span> The Assembly unanimously adopted the Objective Resolution on January 22, 1947.</p>" },
+    { title: "Third Session", dates: "28 April – 2 May, 1947", details: "<p><span class='fact-tag fact-orange'>Princely States Join</span> Representatives from the Princely States took their seats in the Assembly.</p>" },
+    { title: "Fourth Session", dates: "14-31 July, 1947", details: "<p><span class='fact-tag fact-green'>National Flag</span> On July 22, 1947, the Assembly adopted the Free India National Flag.</p>" },
+    { title: "Fifth Session", dates: "14-30 August, 1947", details: "<p><span class='fact-tag fact-blue'>Midnight Session</span> The Assembly met at midnight on August 14 to assume power for independent India.</p><p><span class='fact-tag fact-green'>Drafting Committee</span> Appointed on August 29, 1947, with Dr. B.R. Ambedkar as its Chairman.</p>" },
+    { title: "Sixth Session", dates: "27 January, 1948", details: "<p><span class='fact-tag fact-orange'>Short Session</span> A brief session held to discuss minor procedural matters.</p>" },
+    { title: "Seventh Session", dates: "4 November, 1948 – 8 January, 1949", details: "<p><span class='fact-tag fact-blue'>First Reading</span> Dr. B.R. Ambedkar introduced the final Draft Constitution and delivered a brilliant speech defending its provisions.</p>" },
+    { title: "Eighth Session", dates: "16 May – 16 June, 1949", details: "<p><span class='fact-tag fact-green'>Debates Continue</span> Intensive clause-by-clause debates continued, focusing heavily on Fundamental Rights and Directive Principles.</p>" },
+    { title: "Ninth Session", dates: "30 July – 18 September, 1949", details: "<p><span class='fact-tag fact-orange'>Crucial Debates</span> The Assembly saw fierce debates regarding the Official Language and Citizenship.</p>" },
+    { title: "Tenth Session", dates: "6-17 October, 1949", details: "<p><span class='fact-tag fact-green'>Second Reading Completed</span> The second reading of the Constitution, the most rigorous part of the drafting process, was finally concluded.</p>" },
+    { title: "Eleventh Session", dates: "14-26 November, 1949", details: "<p><span class='fact-tag fact-blue'>Third Reading</span> Final revisions and the third reading of the draft.</p><p><span class='fact-tag fact-green'>Adoption Day</span> On November 26, 1949, the Constitution was officially adopted, enacted, and given to the people of India.</p>" },
+    { title: "Final Meeting", dates: "24 January, 1950", details: "<p><span class='fact-tag fact-orange'>Signatures</span> The Assembly met once again on 24 January, 1950, when the members appended their signatures to the Constitution of India.</p><p><span class='fact-tag fact-blue'>National Anthem & Song</span> 'Jana Gana Mana' and 'Vande Mataram' adopted.</p>" }
+  ];
+
+  const defaultFramers = [
+    { name: "Dr. B.R. Ambedkar", party: "Scheduled Castes Federation", constituency: "Bombay (earlier Bengal)", committees: "Chairman, Drafting Committee", initials: "BA" },
+    { name: "Dr. Rajendra Prasad", party: "Indian National Congress", constituency: "Bihar", committees: "President of the Assembly", initials: "RP" },
+    { name: "Jawaharlal Nehru", party: "Indian National Congress", constituency: "United Provinces", committees: "Union Power, Union Constitution", initials: "JN" },
+    { name: "Sardar Vallabhbhai Patel", party: "Indian National Congress", constituency: "Bombay", committees: "Provincial Constitution, Advisory Comm.", initials: "SP" },
+    { name: "Alladi Krishnaswami Ayyar", party: "Independent", constituency: "Madras", committees: "Drafting Committee", initials: "AK" }
+  ];
+
+  let stages = [];
+  let framers = [];
+
+  // DOM Elements
+  const stagesList = document.getElementById('stagesList');
+  const framersList = document.getElementById('framersList');
+  const searchInput = document.getElementById('framerSearch');
+
+  function renderStagesList(data) {
+    stagesList.innerHTML = '';
+    data.forEach(stage => {
+      const details = document.createElement('details');
+      details.className = 'stage-dropdown';
+      
+      let contentHtml = stage.details || '';
+      // Backward compatibility for old format
+      if (!contentHtml && stage.facts) {
+        contentHtml = stage.facts.map(fact => `<p style="margin-bottom: 12px; line-height: 1.7; color: var(--body-text); font-size: 0.95rem;">${fact}</p>`).join('');
+      }
+
+      details.innerHTML = `
+        <summary class="stage-summary">
+          <div>
+            <div class="stage-title">${stage.title}</div>
+            <div class="stage-date-badge">${stage.dates}</div>
+          </div>
+          <span class="stage-arrow">▼</span>
+        </summary>
+        <div class="stage-content">
+          ${contentHtml}
+        </div>
+      `;
+      stagesList.appendChild(details);
+    });
+  }
+
+  // Render Framers
+  function renderFramers(filter = "") {
+    framersList.innerHTML = '';
+    const filtered = framers.filter(f => f.name.toLowerCase().includes(filter.toLowerCase()));
+    if(filtered.length === 0) {
+      framersList.innerHTML = '<div style="padding:16px; color:var(--muted); text-align:center;">No framers found.</div>';
+      return;
+    }
+    filtered.forEach(f => {
+      const div = document.createElement('div');
+      div.className = 'framer-card';
+      
+      let avatarHtml = '';
+      if (f.photoUrl && f.photoUrl.trim() !== '') {
+        avatarHtml = `<img src="${f.photoUrl}" alt="${f.name}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
+      } else {
+        let inits = f.initials;
+        if(!inits && f.name) {
+          let parts = f.name.split(' ');
+          inits = parts[0][0] + (parts.length > 1 ? parts[parts.length-1][0] : '');
+        }
+        avatarHtml = inits || '👤';
+      }
+
+      div.innerHTML = `
+        <div class="framer-photo">${avatarHtml}</div>
+        <div class="framer-details">
+          <h4>${f.name}</h4>
+          <p><span class="framer-label">Party:</span> ${f.party}</p>
+          <p><span class="framer-label">Constituency:</span> ${f.constituency}</p>
+          <p><span class="framer-label">Roles:</span> ${f.committees}</p>
+        </div>
+      `;
+      framersList.appendChild(div);
+    });
+  }
+
+  // Search Filter
+  searchInput.addEventListener('input', (e) => renderFramers(e.target.value));
+  
+  // Fetch Data
+  fetch('data/making.json')
+    .then(res => res.ok ? res.json() : Promise.reject('No file'))
+    .then(data => {
+      stages = data.stages && data.stages.length ? data.stages : defaultStages;
+      framers = data.framers && data.framers.length ? data.framers : defaultFramers;
+      renderStagesList(stages);
+      renderFramers("");
+    })
+    .catch(() => {
+      stages = defaultStages;
+      framers = defaultFramers;
+      renderStagesList(stages);
+      renderFramers("");
+    });
+
+  // Tab Switching Logic
+  const mCards = document.querySelectorAll('.m-card');
+  const mPanels = document.querySelectorAll('.m-panel');
+
+  mCards.forEach(card => {
+    card.addEventListener('click', () => {
+      mCards.forEach(c => c.classList.remove('active'));
+      mPanels.forEach(p => p.classList.remove('active'));
+
+      card.classList.add('active');
+      document.getElementById(card.dataset.panel).classList.add('active');
+      
+      if (window.innerWidth <= 768) {
+        const panelContainer = document.querySelector('.m-panel-container');
+        const yOffset = panelContainer.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: yOffset, behavior: 'smooth' });
+      }
+    });
+  });
+
+</script>
+</body>
+</html>

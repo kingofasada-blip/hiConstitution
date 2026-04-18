@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amazing Facts About the Indian Constitution | hiConstitution</title>
+  <meta name="description" content="Discover 50+ fascinating facts about the Indian Constitution — the world's longest written constitution, its global borrowings, and the original hand-calligraphed document." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .facts-page { padding-top: var(--navbar-h); min-height: 100vh; background: var(--bg-light); padding-bottom: 80px; }
+    
+    .facts-header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      padding: 56px 0;
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .facts-header h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 12px; color: var(--white); }
+    .facts-header p { color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+    
+    .facts-container { max-width: 900px; margin: 40px auto; padding: 0 20px; animation: fadeIn 0.4s ease; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .intro-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--saffron);
+    }
+    .intro-box h2 { font-size: 1.4rem; color: var(--navy); margin-bottom: 12px; }
+    .intro-box p { font-size: 0.95rem; color: var(--body-text); line-height: 1.6; }
+    .intro-box blockquote {
+      background: rgba(243, 115, 36, 0.05);
+      border-left: 4px solid var(--saffron);
+      padding: 16px 20px;
+      margin: 20px 0 0 0;
+      font-style: italic;
+      color: var(--navy);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .intro-box blockquote strong { color: var(--saffron); font-style: normal; display: block; margin-top: 8px; font-size: 0.9rem; }
+
+    /* --- Horizontal Scroll Peek UI --- */
+    .facts-slider-container {
+      width: 100%;
+      overflow: hidden;
+      margin: 20px 0 60px;
+    }
+    .facts-horizontal-scroll {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 24px;
+      padding: 20px max(5%, calc(50% - 400px)); /* Safe padding for perfect centering */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE */
+    }
+    .facts-horizontal-scroll::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+    
+    .fact-card {
+      flex: 0 0 90%;
+      max-width: 800px;
+      height: 65vh;
+      min-height: 460px;
+      scroll-snap-align: center;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--card-pad);
+      box-shadow: var(--shadow-sm);
+      transform: scale(0.95);
+      opacity: 0.65;
+      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fact-card { transform: none; opacity: 1; transition: none; }
+    }
+    @media(min-width: 768px) {
+      .fact-card { height: 600px; padding: 40px; }
+    }
+    @media(max-width: 480px) {
+      .fact-card {
+        flex: 0 0 92%;
+        height: auto;
+        min-height: 320px;
+        padding: 20px;
+      }
+      .facts-horizontal-scroll {
+        padding: 16px 16px;
+        gap: 16px;
+      }
+    }
+    .fact-card.active {
+      transform: scale(1);
+      opacity: 1;
+      box-shadow: var(--shadow-lg);
+      border-color: var(--navy);
+      cursor: default;
+    }
+    
+    .fact-card-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light);
+    }
+    .fact-card-header h3 { font-size: 1.3rem; color: var(--navy); margin: 0; line-height: 1.4; }
+    .fact-card-arrow { color: var(--saffron); font-size: 1.3rem; transition: transform 0.3s; flex-shrink: 0; margin-left: 12px; }
+    .fact-card:hover:not(.active) .fact-card-arrow { transform: translateX(4px); }
+    .fact-card.active .fact-card-arrow { opacity: 0; } /* Hide arrow when focused */
+    
+    .fact-card-body { overflow-y: auto; padding-right: 16px; flex: 1; }
+    .fact-card-body::-webkit-scrollbar { width: 4px; }
+    .fact-card-body::-webkit-scrollbar-track { background: transparent; }
+    .fact-card-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    .fact-card-body::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+    
+    .fact-card-body p { color: var(--body-text); font-size: 1rem; line-height: 1.7; margin-bottom: 14px; }
+    .fact-card-body h4 { color: var(--navy); margin-top: 24px; margin-bottom: 12px; font-size: 1.05rem; }
+    .fact-card-body ul { margin-left: 20px; list-style-type: disc; color: var(--body-text); font-size: 1rem; line-height: 1.7; }
+    .fact-card-body ul li { margin-bottom: 10px; }
+    .fact-card-body ul ul { margin-top: 8px; list-style-type: circle; }
+    .fact-card-body strong { color: var(--navy); }
+  </style>
+
+  <!-- SEO BLOCK -->
+
+  <!-- HTTPS Redirect (client-side fallback) -->
+  <script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.host+location.pathname+location.search+location.hash);</script>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#1A237E" />
+  <meta name="msapplication-TileColor" content="#1A237E" />
+
+  <!-- Canonical & Robots -->
+  <link rel="canonical" href="https://hiconstitution.com/facts.html" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="hiConstitution" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="hiConstitution" />
+  <meta property="og:title" content="Amazing Facts About the Indian Constitution | hiConstitution" />
+  <meta property="og:description" content="Discover 50+ fascinating facts about the Indian Constitution — the world's longest written constitution, its global borrowings, and the original hand-calligraphed document." />
+  <meta property="og:url" content="https://hiconstitution.com/facts.html" />
+  <meta property="og:image" content="https://hiconstitution.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Amazing Facts About the Indian Constitution | hiConstitution" />
+  <meta name="twitter:description" content="Discover 50+ fascinating facts about the Indian Constitution — the world's longest written constitution, its global borrowings, and the original hand-calligraphed document." />
+  <meta name="twitter:image" content="https://hiconstitution.com/og-image.jpg" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "name": "Amazing Facts About the Indian Constitution | hiConstitution",
+    "description": "Discover 50+ fascinating facts about the Indian Constitution — the world's longest written constitution, its global borrowings, and the original hand-calligraphed document.",
+    "url": "https://hiconstitution.com/facts.html",
+    "inLanguage": "en-IN",
+    "publisher": {
+      "@type": "Organization",
+      "name": "hiConstitution",
+      "url": "https://hiconstitution.com"
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://hiconstitution.com/#website"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<nav class="navbar" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-circle"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M2 7C4 6 8 5.5 12 7.5C16 5.5 20 6 22 7V19C20 18 16 17.5 12 19.5C8 17.5 4 18 2 19V7Z'/><line x1='12' y1='7.5' x2='12' y2='19.5'/></svg></div>
+      <span class="logo-text">hi<span>Constitution</span></span>
+    </a>
+    <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>
+      <li><a href="making.html" class="nav-link">Making</a></li>
+      <li><a href="Constitutional-amendments.html" class="nav-link">Amendments</a></li>
+      <li><a href="landmark-judgments.html" class="nav-link">Judgments</a></li>
+      <li><a href="draft-Constitution-of-India.html" class="nav-link">Draft</a></li>
+      <li><a href="facts.html" class="nav-link active">Facts</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="quiz.html" class="btn btn-primary btn-sm">Take Quiz</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<nav class="mobile-nav" aria-label="Mobile navigation">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="read-the-constitution.html" class="nav-link">Read</a>
+  <a href="making.html" class="nav-link">Making</a>
+  <a href="Constitutional-amendments.html" class="nav-link">Amendments</a>
+  <a href="landmark-judgments.html" class="nav-link">Judgments</a>
+  <a href="draft-Constitution-of-India.html" class="nav-link">Draft</a>
+  <a href="facts.html" class="nav-link active">Facts</a>
+  <a href="quiz.html" class="nav-link">Quiz</a>
+</nav>
+
+<main class="facts-page">
+  <div class="facts-header">
+    <div class="container">
+      <h1>Important Facts</h1>
+      <p>Discover fascinating historical trivia and the craftsmanship behind India's supreme law.</p>
+    </div>
+  </div>
+
+  <div class="facts-container">
+    
+    <div class="intro-box">
+      <h2>The Constitution of India: A Legacy of Democracy</h2>
+      <p>The Constitution of India is the foundational legal and political framework of the nation. Adopted on November 26, 1949 (now celebrated as Constitution Day), and enforced on January 26, 1950, it transformed the Dominion of India into a Sovereign, Socialist, Secular, and Democratic Republic.</p>
+      <blockquote>
+        "However good a Constitution may be, if those who are implementing it are not good, it will prove to be bad. However bad a Constitution may be, if those implementing it are good, it will prove to be good."
+        <strong>— Dr. B.R. Ambedkar</strong>
+      </blockquote>
+    </div>
+  </div>
+
+  <div class="facts-slider-container">
+    <div class="facts-horizontal-scroll">
+      
+      <div class="fact-card">
+        <div class="fact-card-header">
+          <h3>1. Historical Background: The Crucible of the Constitution</h3>
+          <span class="fact-card-arrow">➔</span>
+        </div>
+        <div class="fact-card-body">
+        <p>The genesis of the Constitution is inextricably linked to the socio-political awakening during the Indian freedom struggle and subsequent legislative enactments by the British government.</p>
+        <h4>The Revolutionary &amp; Ideological Spark</h4>
+        <ul>
+          <li><strong>The Chapekar Brothers (1897):</strong> The foundation of the British Empire was shaken early on by Damodar Hari, Balkrishna Hari, and Vasudev Hari, who orchestrated the first localized revolutionary blast on June 22, 1897.</li>
+          <li><strong>The Martyrdom of Khudiram Bose:</strong> Born on December 3, 1889, in Mohobani, Midnapore, he became a symbol of youth sacrifice, martyred at just 18 years old.</li>
+          <li><strong>The "Lal-Bal-Pal" Triumvirate:</strong> Lala Lajpat Rai (Punjab), Bal Gangadhar Tilak (Maharashtra), and Bipin Chandra Pal (Bengal) vociferously articulated the demand for self-governance.</li>
+          <li><strong>Tilak’s Galvanizing Declaration:</strong> "Swaraj is no alms that we Indians have to beg for. Swaraj is my birthright, and I shall have it."</li>
+        </ul>
+        <h4>Early Constitutional Blueprints</h4>
+        <ul>
+          <li><strong>The Swaraj Bill (1895):</strong> Influenced by Tilak, it demanded freedom of speech, the right to property, and equality before the law.</li>
+          <li><strong>The Motilal Nehru Report (1928):</strong> Drafted by Nehru and eight Congress leaders to define a constitutional framework.</li>
+          <li><strong>Karachi Session (1931):</strong> Resolutions passed here further refined the vision for civil liberties.</li>
+          <li><strong>Sapru Report (1945):</strong> A final major draft by Dr. Tej Bahadur Sapru before the Constituent Assembly was formed.</li>
+        </ul>
+        <h4>Legislative Milestones (British India)</h4>
+        <ul>
+          <li><strong>Government of India Act, 1919:</strong> Introduced 'dyarchy' (dual government) in provinces, delegating subjects like health, education, and agriculture to Indian ministers.</li>
+          <li><strong>Simon Commission &amp; Round Table Conferences:</strong> The 1919 Act was reviewed by the Simon Commission (1928). The resulting deadlock led to three Round Table Conferences (1930, 1931, 1932) and the subsequent "White Papers."</li>
+          <li><strong>Government of India Act, 1935:</strong> Passed in February 1935, this Act serves as the primary structural foundation for the modern Constitution.</li>
+        </ul>
+      </div>
+      </div>
+
+      <div class="fact-card">
+        <div class="fact-card-header">
+          <h3>2. The Constituent Assembly: Crafting the Republic</h3>
+          <span class="fact-card-arrow">➔</span>
+        </div>
+        <div class="fact-card-body">
+        <ul>
+          <li><strong>Inception:</strong> The radical idea for a Constituent Assembly was first proposed by M.N. Roy in 1934 and materialized under the 1946 Cabinet Mission Plan.</li>
+          <li><strong>Composition:</strong> Originally 389 members, revised to 299 post-Partition. This included 292 delegates from British India and 93 from Princely States. Members were indirectly elected by provincial assemblies using a single transferable vote system.</li>
+          <li><strong>Leadership:</strong>
+            <ul>
+              <li>Interim President: Dr. Sachchidananda Sinha (First meeting: Dec 9, 1946).</li>
+              <li>President: Dr. Rajendra Prasad.</li>
+              <li>Vice Presidents: H.C. Mukherjee and V.T. Krishnamachari.</li>
+              <li>Constitutional Advisor: Sir B.N. Rau.</li>
+            </ul>
+          </li>
+          <li><strong>The 15 Women Architects:</strong> Includes pioneers like Sarojini Naidu, Sucheta Kripalani, Rajkumari Amrit Kaur, Dakshayani Velayudhan, and Durgabai Deshmukh.</li>
+          <li><strong>The Drafting Committee:</strong> Constituted on August 29, 1947. This 7-member body was chaired by Dr. B.R. Ambedkar.</li>
+          <li><strong>The Labor of Creation:</strong> The process spanned exactly 2 years, 11 months, and 18 days, covering 11 sessions over 165 days. The final draft was submitted on November 4, 1948.</li>
+        </ul>
+      </div>
+      </div>
+
+      <div class="fact-card">
+        <div class="fact-card-header">
+          <h3>3. The Global Synthesis: "A Bag of Borrowings"</h3>
+          <span class="fact-card-arrow">➔</span>
+        </div>
+        <div class="fact-card-body">
+        <p>India's Constitution is a sophisticated synthesis of global legal systems, adapted for local needs.</p>
+        <ul>
+          <li><strong>Govt. of India Act, 1935:</strong> Federal scheme, emergency provisions, Public Service Commissions, office of the Governor, and judicial structures.</li>
+          <li><strong>United Kingdom:</strong> Parliamentary governance, Rule of Law, legislative speaker, single citizenship, bicameralism, and prerogative writs.</li>
+          <li><strong>United States:</strong> Preamble, Fundamental Rights, Judicial Review, Independence of Judiciary, Electoral College, and the President as Supreme Commander.</li>
+          <li><strong>Ireland:</strong> Directive Principles of State Policy (DPSP), Presidential election methodology, and Rajya Sabha nominations.</li>
+          <li><strong>Canada:</strong> Strong Central government, distribution of powers, and residuary powers vested in the Center.</li>
+          <li><strong>France:</strong> Ideals of Liberty, Equality, and Fraternity; the concept of a "Republic."</li>
+          <li><strong>Germany (Weimar):</strong> Suspension of Fundamental Rights during Emergency.</li>
+          <li><strong>USSR (Russia):</strong> Fundamental Duties and the ideals of Justice (Social, Economic, Political) in the Preamble.</li>
+          <li><strong>Australia:</strong> Concurrent List, Freedom of Trade and Commerce, and joint sittings of Parliament.</li>
+          <li><strong>South Africa:</strong> Amendment procedures and election of Rajya Sabha members.</li>
+          <li><strong>Japan:</strong> "Procedure established by law."</li>
+        </ul>
+      </div>
+      </div>
+
+      <div class="fact-card">
+        <div class="fact-card-header">
+          <h3>4. Key Provisions &amp; Landmark Amendments</h3>
+          <span class="fact-card-arrow">➔</span>
+        </div>
+        <div class="fact-card-body">
+        <ul>
+          <li><strong>Article 1:</strong> Unambiguously states, "India, that is Bharat, shall be a Union of States."</li>
+          <li><strong>The Seventh Schedule:</strong> Defines power via the Union List (originally 97 subjects), State List (66), and Concurrent List (47).</li>
+          <li><strong>First Amendment (1951):</strong> Placed reasonable restrictions on free speech and created the Ninth Schedule to protect land reforms (Zamindari Abolition) from judicial review.</li>
+          <li><strong>The "Mini Constitution" (42nd Amendment, 1976):</strong> Inserted "Socialist" and "Secular" into the Preamble and codified Fundamental Duties during the Emergency.</li>
+          <li><strong>Emergency Safeguards (44th Amendment, 1978):</strong> Introduced to prevent future misuse of emergency powers (Article 356) and safeguard civil liberties.</li>
+          <li><strong>Voting Age (61st Amendment, 1989):</strong> Lowered from 21 to 18.</li>
+          <li><strong>Right to Education (86th Amendment, 2002):</strong> Guaranteed free education for children aged 6 to 14.</li>
+          <li><strong>Women's Reservation (106th Amendment, 2023):</strong> Reserved 33% of seats in Lok Sabha and State Assemblies for women.</li>
+        </ul>
+      </div>
+      </div>
+
+      <div class="fact-card">
+        <div class="fact-card-header">
+          <h3>5. Judicial Interpretations &amp; Landmark Cases</h3>
+          <span class="fact-card-arrow">➔</span>
+        </div>
+        <div class="fact-card-body">
+        <ul>
+          <li><strong>Kameshwar Singh vs. State of Bihar (1951):</strong> The crucible for the First Amendment. Zamindars challenged land reforms under Article 14. Its striking down by the court prompted the creation of the Ninth Schedule.</li>
+          <li><strong>Kesavananda Bharati vs. State of Kerala (1973):</strong> A 13-judge bench established the "Basic Structure Doctrine," ruling that Parliament cannot alter the foundational features of the Constitution.</li>
+          <li><strong>S.R. Bommai vs. Union of India (1994):</strong> Curtailed the arbitrary use of Article 356 (President's Rule), mandating that a government's majority must be tested on the floor of the House.</li>
+          <li><strong>I.R. Coelho vs. State of Tamil Nadu (2007):</strong> Ruled that laws added to the Ninth Schedule after the Kesavananda verdict (April 24, 1973) are subject to judicial review.</li>
+        </ul>
+      </div>
+      </div>
+
+      <div class="fact-card">
+        <div class="fact-card-header">
+          <h3>6. Craftsmanship &amp; Historical Trivia</h3>
+          <span class="fact-card-arrow">➔</span>
+        </div>
+        <div class="fact-card-body">
+        <ul>
+          <li><strong>The Master Calligrapher:</strong> Prem Behari Narain Raizada spent six months in Room 204 of Constitution House, using over 250 pen nibs to write the document in a flowing italic script.</li>
+          <li><strong>Raizada’s Conditions:</strong> When Prime Minister Nehru offered payment, Raizada refused financial compensation and instead requested two conditions:
+            <ul>
+              <li>He be allowed to sign his name on every page of the Constitution.</li>
+              <li>His grandfather's name (Ram Prasad Saxena) be included alongside his on the final page.</li>
+            </ul>
+          </li>
+          <li><strong>Artistic Illumination:</strong> Artists Nandalal Bose and Beohar Rammanohar Sinha wove India's history into the law:
+            <ul>
+              <li>Fundamental Rights: Features Lord Rama, Sita, and Lakshmana returning to Ayodhya.</li>
+              <li>Directive Principles: Features Lord Krishna and Arjuna.</li>
+              <li>Other Pages: Feature Buddha, Mahavira, Nataraja, Chhatrapati Shivaji, and Rani Lakshmibai.</li>
+            </ul>
+          </li>
+          <li><strong>Purna Swaraj Connection:</strong> January 26 was chosen to honor the 1930 declaration of "Complete Independence" from the Lahore session.</li>
+          <li><strong>Scientific Preservation:</strong> Original copies are stored in hermetically sealed, nitrogen-filled glass receptacles (upgraded from helium in the 1980s). The National Physical Laboratory collaborated with the Getty Conservation Institute (experts in Egyptian mummies) to ensure their safety.</li>
+          <li><strong>Cost &amp; Weight:</strong> Produced at a cost of ₹6.4 million (₹64 lakhs). The manuscript weighs approximately 3.75 kg (though some historical accounts mention up to 13 kg including binding).</li>
+        </ul>
+        <p style="margin-top: 16px; font-weight: 600; color: var(--saffron);">The Preamble is the soul of the document, declaring ultimate sovereignty rests with "We, the People."</p>
+      </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,0.6);padding:32px 0;">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <a href="index.html" style="color:#fff;font-weight:700;font-size:0.95rem;">hiConstitution.com</a>
+    <p style="font-size:0.82rem;">© 2025 — Educational use only.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollContainer = document.querySelector('.facts-horizontal-scroll');
+    const cards = document.querySelectorAll('.fact-card');
+
+    // 1. Interactivity: Click to center the card
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        if (!card.classList.contains('active')) {
+          card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      });
+    });
+
+    // 2. Logic for the "active" state scale effect using Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          cards.forEach(c => c.classList.remove('active'));
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      root: scrollContainer,
+        threshold: 0.5 // Card becomes active when 50% of it is in the viewport
+    });
+
+    cards.forEach(card => observer.observe(card));
+  });
+</script>
+</body>
+</html>

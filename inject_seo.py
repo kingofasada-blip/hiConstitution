@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿﻿#!/usr/bin/env python3
 """
 inject_seo.py — Injects SEO tags into hiConstitution HTML files.
 Run from: C:/Users/epicb/Downloads/hiCONSTITUTION/hiCONSTITUTION/
@@ -29,18 +29,18 @@ pages = {
         'schema': 'WebPage',
         'noindex': False,
     },
-    'amendments.html': {
+    'Constitutional-amendments.html': {
         'title': 'All 106 Constitutional Amendments of India | hiConstitution',
         'desc': "Explore all 106 Constitutional Amendments of India. Understand what changed, when, and why — from the 1st Amendment in 1951 to the 106th Women's Reservation Act in 2023.",
-        'url': f'{DOMAIN}/amendments.html',
+        'url': f'{DOMAIN}/Constitutional-amendments.html',
         'type': 'article',
         'schema': 'Article',
         'noindex': False,
     },
-    'judgments.html': {
+    'landmark-judgments.html': {
         'title': 'Landmark Supreme Court Judgments on the Indian Constitution | hiConstitution',
         'desc': "Study landmark Supreme Court judgments that shaped India's Constitution — Kesavananda Bharati, Maneka Gandhi, Vishaka, and more.",
-        'url': f'{DOMAIN}/judgments.html',
+        'url': f'{DOMAIN}/landmark-judgments.html',
         'type': 'article',
         'schema': 'Article',
         'noindex': False,
@@ -61,10 +61,10 @@ pages = {
         'schema': 'Article',
         'noindex': False,
     },
-    'facts.html': {
+    'facts-about-indian-constitution.html': {
         'title': 'Amazing Facts About the Indian Constitution | hiConstitution',
         'desc': "Discover 50+ fascinating facts about the Indian Constitution — the world's longest written constitution, its global borrowings, and the original hand-calligraphed document.",
-        'url': f'{DOMAIN}/facts.html',
+        'url': f'{DOMAIN}/facts-about-indian-constitution.html',
         'type': 'article',
         'schema': 'Article',
         'noindex': False,
@@ -77,10 +77,10 @@ pages = {
         'schema': 'WebPage',
         'noindex': False,
     },
-    'draft.html': {
+    'draft-Constitution-of-India.html': {
         'title': 'Draft Constitution of India 1948 — Original Draft Outline | hiConstitution',
         'desc': "Explore the 1948 Draft Constitution of India prepared by Dr. Ambedkar's Drafting Committee, with 395 Articles and 8 Schedules. Compare with the final adopted Constitution.",
-        'url': f'{DOMAIN}/draft.html',
+        'url': f'{DOMAIN}/draft-Constitution-of-India.html',
         'type': 'article',
         'schema': 'Article',
         'noindex': False,

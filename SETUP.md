@@ -1,4 +1,4 @@
-# hiCONSTITUTION — Setup & Deployment Guide
+﻿# hiCONSTITUTION — Setup & Deployment Guide
 
 ## Prerequisites
 
@@ -98,13 +98,14 @@ Edit `data/articles.json` (or the relevant JSON file) to add new entries. Use th
 index.html                    — Homepage
 read-the-constitution.html    — Browse articles by part/chapter
 library-article.html          — Read individual articles
-amendments.html               — All 106 constitutional amendments
-judgments.html                — Landmark Supreme Court judgments
+Constitutional-amendments.html — All 106 constitutional amendments
+landmark-judgments.html       — Landmark Supreme Court judgments
 making.html                   — History of the Constitution's making
 timeline.html                 — Constitutional timeline
 facts.html                    — Interesting constitutional facts
+facts-about-indian-constitution.html — Interesting constitutional facts
 quiz.html                     — Practice quizzes
-draft.html                    — 1948 Draft Constitution
+draft-Constitution-of-India.html — 1948 Draft Constitution
 admin.html                    — Content admin panel (keep private)
 
 css/style.css                 — Main stylesheet
