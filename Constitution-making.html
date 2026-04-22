@@ -189,6 +189,66 @@
     }
     .info-card li { margin-bottom: 10px; }
 
+    /* Committee Slabs */
+    .committee-slab {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px 24px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .committee-slab:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--saffron);
+    }
+    .committee-slab-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .committee-slab h4 {
+      color: var(--navy);
+      font-size: 1.1rem;
+      margin: 0;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+    }
+    .committee-chair {
+      background: var(--bg-light);
+      color: var(--saffron);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      border: 1px solid rgba(243, 115, 36, 0.2);
+      white-space: nowrap;
+    }
+    .committee-slab p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--body-text);
+      line-height: 1.6;
+    }
+    .committee-grid {
+      margin-top: 32px;
+    }
+    .committee-grid h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.5rem;
+      color: var(--navy);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
     /* Timeline Accordion (Dropdowns) */
     .stages-accordion {
       display: flex;
@@ -523,27 +583,93 @@
     
     <!-- Assembly Panel -->
     <div class="m-panel active" id="panel-assembly">
-      <h2 class="panel-title">Constituent Assembly & Committees</h2>
-      <div class="info-grid">
-        <div class="info-card">
-          <h4><span style="font-size:1.4rem">📌</span> Key Facts</h4>
-          <ul>
-            <li><strong>Formation:</strong> Under Cabinet Mission Plan (1946)</li>
-            <li><strong>First Meeting:</strong> December 9, 1946</li>
-            <li><strong>Time Taken:</strong> 2 years, 11 months, and 18 days</li>
-            <li><strong>Total Sessions:</strong> 11 sessions over 165 days</li>
-            <li><strong>Adoption Date:</strong> November 26, 1949</li>
+      <h2 class="panel-title">Constituent Assembly & Key Facts</h2>
+      <div class="info-grid" style="grid-template-columns: 1fr;">
+        <div class="info-card" style="margin-bottom: 0;">
+          <h4><span style="font-size:1.4rem">📌</span> Assembly Quick Facts</h4>
+          <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; padding-left: 0; list-style: none;">
+            <li><strong>⏳ Time Taken:</strong> 2 yrs, 11 mos, 18 days</li>
+            <li><strong>📅 First Meeting:</strong> December 9, 1946</li>
+            <li><strong>🏛️ Total Sessions:</strong> 11 sessions over 165 days</li>
+            <li><strong>✅ Adoption Date:</strong> November 26, 1949</li>
           </ul>
         </div>
-        <div class="info-card">
-          <h4><span style="font-size:1.4rem">🏛️</span> Major Committees</h4>
-          <ul>
-            <li><strong>Drafting Committee:</strong> Dr. B.R. Ambedkar (7 members)</li>
-            <li><strong>Union Power Committee:</strong> Jawaharlal Nehru</li>
-            <li><strong>Provincial Constitution:</strong> Sardar Vallabhbhai Patel</li>
-            <li><strong>Fundamental Rights:</strong> Sardar Vallabhbhai Patel</li>
-            <li><strong>Rules of Procedure:</strong> Dr. Rajendra Prasad</li>
-          </ul>
+      </div>
+
+      <div class="committee-grid">
+        <h3>Committees of the Constituent Assembly</h3>
+        <p style="color:var(--muted); margin-bottom: 24px; max-width: 800px;">To streamline the monumental task of drafting the Constitution, the Assembly appointed various committees to conduct preliminary research and shape specific provisions. Below are the key committees and their focus areas.</p>
+        
+        <div class="committee-slab">
+          <div class="committee-slab-header">
+            <h4>Drafting Committee</h4>
+            <span class="committee-chair">Chair: Dr. B.R. Ambedkar</span>
+          </div>
+          <p>Tasked with examining the initial working draft prepared by the Constitutional Advisor and structuring the comprehensive blueprint of the Indian Constitution.</p>
+        </div>
+
+        <div class="committee-slab">
+          <div class="committee-slab-header">
+            <h4>Advisory Committee on Fundamental Rights, Minorities & Tribal Areas</h4>
+            <span class="committee-chair">Chair: Sardar Vallabhbhai Patel</span>
+          </div>
+          <p>An overarching advisory body responsible for formulating robust safeguards for minority communities, tribal populations, and establishing the core justiciable rights of citizens.</p>
+        </div>
+
+        <div class="committee-slab">
+          <div class="committee-slab-header">
+            <h4>Union Powers Committee</h4>
+            <span class="committee-chair">Chair: Jawaharlal Nehru</span>
+          </div>
+          <p>Deliberated on the extent of federal authority, defining the jurisdiction, responsibilities, and legislative powers of the Central Government over Union subjects.</p>
+        </div>
+
+        <div class="committee-slab">
+          <div class="committee-slab-header">
+            <h4>Provincial Constitution Committee</h4>
+            <span class="committee-chair">Chair: Sardar Vallabhbhai Patel</span>
+          </div>
+          <p>Focused on the administrative and legislative frameworks for individual provinces iteratively, balancing regional autonomy with the necessity of national unity.</p>
+        </div>
+        
+        <div class="committee-slab">
+          <div class="committee-slab-header">
+            <h4>Committee on the Rules of Procedure</h4>
+            <span class="committee-chair">Chair: Dr. Rajendra Prasad</span>
+          </div>
+          <p>Designed the foundational parliamentary protocols, debate formats, and procedural guidelines governing the sessions of the Constituent Assembly itself.</p>
+        </div>
+
+        <div class="committee-slab">
+          <div class="committee-slab-header">
+            <h4>Sub-Committee on Fundamental Rights</h4>
+            <span class="committee-chair">Chair: J.B. Kripalani</span>
+          </div>
+          <p>Dedicated explicitly to defining the scope, meaning, and limitations of individual liberties that were to form the bedrock of Part III of the Constitution.</p>
+        </div>
+
+        <div class="committee-slab">
+          <div class="committee-slab-header">
+            <h4>Sub-Committee on Minorities</h4>
+            <span class="committee-chair">Chair: H.C. Mukherjee</span>
+          </div>
+          <p>Evaluated mechanisms for equitable political representation, cultural preservation, and targeted constitutional safeguards for diverse religious and linguistic minority groups.</p>
+        </div>
+
+        <div class="committee-slab">
+          <div class="committee-slab-header">
+            <h4>Sub-Committee on the North East Frontier Tribal and Excluded Areas</h4>
+            <span class="committee-chair">Chair: Gopinath Bardoloi</span>
+          </div>
+          <p>Studied the unique geopolitical and cultural landscapes of Assam and surrounding tribal belts to create distinct administrative provisions, which evolved into Schedule VI.</p>
+        </div>
+
+        <div class="committee-slab">
+          <div class="committee-slab-header">
+            <h4>The Committee on Chief Commissioners’ Provinces</h4>
+            <span class="committee-chair">Chair: B. Pattabhi Sitaramayya</span>
+          </div>
+          <p>Examined the administrative setup, laws, and future governance models for centrally administered territories, acting as the precursors to modern-day Union Territories.</p>
         </div>
       </div>
     </div>
