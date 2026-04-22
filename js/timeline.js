@@ -166,9 +166,9 @@
     // Auto-activate the most pivotal event (Constitution Adopted) on load
     const defaultIdx = 3;
     const defaultEl = track.querySelectorAll('.timeline-item')[defaultIdx];
-    if (defaultEl) activateItem(defaultIdx, defaultEl, homeEvents[defaultIdx]);
+    if (defaultEl) activateItem(defaultIdx, defaultEl, homeEvents[defaultIdx], true);
 
-    function activateItem(index, el, item) {
+    function activateItem(index, el, item, isAutoInit = false) {
       const allItems = track.querySelectorAll('.timeline-item');
       // Toggle off if already active
       if (activeIndex === index) {
@@ -195,7 +195,18 @@
       detailsPanel.querySelector('.timeline-details-content h3').textContent = item.title;
       detailsPanel.querySelector('.timeline-details-content p').textContent = item.detail;
       detailsPanel.classList.add('open');
-      el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      
+      if (!isAutoInit) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      } else {
+        const scrollWrap = document.querySelector('.timeline-scroll-wrap');
+        if (scrollWrap) {
+          scrollWrap.scrollTo({
+            left: el.offsetLeft - scrollWrap.offsetWidth / 2 + el.offsetWidth / 2,
+            behavior: 'auto'
+          });
+        }
+      }
     }
 
     /* ── Drag-to-scroll ── */
