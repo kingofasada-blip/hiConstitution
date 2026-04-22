@@ -196,16 +196,23 @@
       border-radius: var(--radius-md);
       padding: 18px 24px;
       margin-bottom: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
       box-shadow: var(--shadow-sm);
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      transition: box-shadow 0.2s, border-color 0.2s;
     }
     .committee-slab:hover {
-      transform: translateY(-2px);
       box-shadow: var(--shadow-md);
       border-color: var(--saffron);
+    }
+    .committee-slab[open] {
+      border-color: var(--saffron);
+    }
+    .committee-slab summary {
+      cursor: pointer;
+      list-style: none;
+      outline: none;
+    }
+    .committee-slab summary::-webkit-details-marker {
+      display: none;
     }
     .committee-slab-header {
       display: flex;
@@ -213,13 +220,36 @@
       align-items: flex-start;
       gap: 16px;
       flex-wrap: wrap;
+      position: relative;
+      padding-right: 28px;
+    }
+    .committee-slab-header::after {
+      content: '▼';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.85rem;
+      color: var(--saffron);
+      transition: transform 0.3s ease;
+    }
+    .committee-slab[open] .committee-slab-header::after {
+      transform: translateY(-50%) rotate(180deg);
     }
     .committee-slab h4 {
       color: var(--navy);
       font-size: 1.1rem;
-      margin: 0;
+      margin: 0 0 10px 0;
       font-weight: 700;
       font-family: 'Inter', sans-serif;
+      width: 100%;
+    }
+    .committee-chair-wrap {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+      margin-bottom: 6px;
     }
     .committee-chair {
       background: var(--bg-light);
@@ -231,12 +261,66 @@
       border: 1px solid rgba(243, 115, 36, 0.2);
       white-space: nowrap;
     }
-    .committee-slab p {
-      margin: 0;
+    .committee-summary-text {
+      margin: 4px 0 0;
       font-size: 0.95rem;
       color: var(--body-text);
       line-height: 1.6;
     }
+    
+    .committee-deep {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--border-light);
+    }
+    .deep-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .deep-meta-box {
+      background: var(--bg-light);
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .deep-meta-box h5 {
+      margin: 0 0 10px 0;
+      font-size: 0.85rem;
+      color: var(--saffron);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .member-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .member-tag {
+      font-size: 0.8rem;
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      padding: 4px 10px;
+      border-radius: 6px;
+      color: var(--navy);
+      font-weight: 600;
+    }
+    .deep-date {
+      font-size: 0.92rem;
+      color: var(--navy);
+      font-weight: 600;
+    }
+    .deep-text p {
+      font-size: 0.96rem;
+      line-height: 1.75;
+      color: var(--body-text);
+      margin-bottom: 14px;
+    }
+    .deep-text p:last-child {
+      margin-bottom: 0;
+    }
+    
     .committee-grid {
       margin-top: 32px;
     }
@@ -600,77 +684,318 @@
         <h3>Committees of the Constituent Assembly</h3>
         <p style="color:var(--muted); margin-bottom: 24px; max-width: 800px;">To streamline the monumental task of drafting the Constitution, the Assembly appointed various committees to conduct preliminary research and shape specific provisions. Below are the key committees and their focus areas.</p>
         
-        <div class="committee-slab">
-          <div class="committee-slab-header">
-            <h4>Drafting Committee</h4>
-            <span class="committee-chair">Chair: Dr. B.R. Ambedkar</span>
+        <details class="committee-slab">
+          <summary>
+            <div class="committee-slab-header">
+              <h4>Drafting Committee</h4>
+              <div class="committee-chair-wrap">
+                <span class="committee-chair">Chair: Dr. B.R. Ambedkar</span>
+              </div>
+              <p class="committee-summary-text">Tasked with examining the initial working draft prepared by the Constitutional Advisor and structuring the comprehensive blueprint of the Indian Constitution.</p>
+            </div>
+          </summary>
+          <div class="committee-deep">
+            <div class="deep-meta">
+              <div class="deep-meta-box">
+                <h5>Members</h5>
+                <div class="member-tags">
+                  <span class="member-tag">Alladi Krishnaswamy Ayyar</span>
+                  <span class="member-tag">N. Gopalaswami Ayyangar</span>
+                  <span class="member-tag">K.M. Munshi</span>
+                  <span class="member-tag">Mohammad Saadulla</span>
+                  <span class="member-tag">B.L. Mitter (replaced by N. Madhava Rau)</span>
+                  <span class="member-tag">D.P. Khaitan (replaced by T.T. Krishnamachari)</span>
+                </div>
+              </div>
+              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
+                <h5>Formed On</h5>
+                <span class="deep-date">August 29, 1947</span>
+              </div>
+            </div>
+            <div class="deep-text">
+              <p>Recognized as the most pivotal body in the making of the Republic, the Drafting Committee was entrusted with the monumental duty of creating the final, legally sound text of the Constitution. After synthesizing reports and recommendations from all other sub-committees, they reviewed the original structural draft prepared by Constitutional Advisor B.N. Rau.</p>
+              <p>Despite consisting of seven eminent minds, a significant portion of the exhaustive drafting fell on the shoulders of its Chairman, Dr. B.R. Ambedkar. The committee completed their initial draft in February 1948 and opened it up for eight months of intense public and political scrutiny before introducing the final version to the Assembly.</p>
+            </div>
           </div>
-          <p>Tasked with examining the initial working draft prepared by the Constitutional Advisor and structuring the comprehensive blueprint of the Indian Constitution.</p>
-        </div>
+        </details>
 
-        <div class="committee-slab">
-          <div class="committee-slab-header">
-            <h4>Advisory Committee on Fundamental Rights, Minorities & Tribal Areas</h4>
-            <span class="committee-chair">Chair: Sardar Vallabhbhai Patel</span>
+        <details class="committee-slab">
+          <summary>
+            <div class="committee-slab-header">
+              <h4>Advisory Committee on Fundamental Rights, Minorities & Tribal Areas</h4>
+              <div class="committee-chair-wrap">
+                <span class="committee-chair">Chair: Sardar Vallabhbhai Patel</span>
+              </div>
+              <p class="committee-summary-text">An overarching advisory body responsible for formulating robust safeguards for minority communities, tribal populations, and establishing the core justiciable rights of citizens.</p>
+            </div>
+          </summary>
+          <div class="committee-deep">
+            <div class="deep-meta">
+              <div class="deep-meta-box">
+                <h5>Key Members</h5>
+                <div class="member-tags">
+                  <span class="member-tag">Over 54 diverse members</span>
+                  <span class="member-tag">J.B. Kripalani</span>
+                  <span class="member-tag">H.C. Mukherjee</span>
+                  <span class="member-tag">Gopinath Bardoloi</span>
+                  <span class="member-tag">A.V. Thakkar</span>
+                </div>
+              </div>
+              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
+                <h5>Meeting Dates</h5>
+                <span class="deep-date">Formed Jan 24, 1947. Multiple sessions across 1947.</span>
+              </div>
+            </div>
+            <div class="deep-text">
+              <p>This massive Advisory Committee acted as the umbrella organization guiding some of the most sensitive and essential aspects of independent India's foundation. It coordinated directly with specialized sub-committees to aggregate reports concerning minority protections, marginalized communities, and fundamental liberties.</p>
+              <p>Under Sardar Patel's leadership, the committee effectively bridged extreme ideological divides and reached necessary compromises regarding controversial issues like religious reservations, cultural preservation, and universally accessible rights, helping to weave together a cohesive, secular democracy.</p>
+            </div>
           </div>
-          <p>An overarching advisory body responsible for formulating robust safeguards for minority communities, tribal populations, and establishing the core justiciable rights of citizens.</p>
-        </div>
+        </details>
 
-        <div class="committee-slab">
-          <div class="committee-slab-header">
-            <h4>Union Powers Committee</h4>
-            <span class="committee-chair">Chair: Jawaharlal Nehru</span>
+        <details class="committee-slab">
+          <summary>
+            <div class="committee-slab-header">
+              <h4>Union Powers Committee</h4>
+              <div class="committee-chair-wrap">
+                <span class="committee-chair">Chair: Jawaharlal Nehru</span>
+              </div>
+              <p class="committee-summary-text">Deliberated on the extent of federal authority, defining the jurisdiction, responsibilities, and legislative powers of the Central Government over Union subjects.</p>
+            </div>
+          </summary>
+          <div class="committee-deep">
+            <div class="deep-meta">
+              <div class="deep-meta-box">
+                <h5>Members</h5>
+                <div class="member-tags">
+                  <span class="member-tag">Sarat Chandra Bose</span>
+                  <span class="member-tag">Dr. B.R. Ambedkar</span>
+                  <span class="member-tag">Govind Ballabh Pant</span>
+                  <span class="member-tag">A.K. Ayyar</span>
+                  <span class="member-tag">K.M. Munshi</span>
+                  <span class="member-tag">and others</span>
+                </div>
+              </div>
+              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
+                <h5>Key Reports</h5>
+                <span class="deep-date">July 1947</span>
+              </div>
+            </div>
+            <div class="deep-text">
+              <p>The Union Powers Committee was organized to decisively settle the distribution of power between the central government and the provinces. In the volatile aftermath of partition, the committee recognized that a weak center could lead to national disintegration.</p>
+              <p>Consequently, Jawaharlal Nehru and his team strongly advocated for a powerful federal center, assigning it exclusive authority over critical domains like defense, foreign affairs, communications, and national finance. Their recommendations formed the constitutional backbone of India's robust federal structure.</p>
+            </div>
           </div>
-          <p>Deliberated on the extent of federal authority, defining the jurisdiction, responsibilities, and legislative powers of the Central Government over Union subjects.</p>
-        </div>
+        </details>
 
-        <div class="committee-slab">
-          <div class="committee-slab-header">
-            <h4>Provincial Constitution Committee</h4>
-            <span class="committee-chair">Chair: Sardar Vallabhbhai Patel</span>
+        <details class="committee-slab">
+          <summary>
+            <div class="committee-slab-header">
+              <h4>Provincial Constitution Committee</h4>
+              <div class="committee-chair-wrap">
+                <span class="committee-chair">Chair: Sardar Vallabhbhai Patel</span>
+              </div>
+              <p class="committee-summary-text">Focused on the administrative and legislative frameworks for individual provinces iteratively, balancing regional autonomy with the necessity of national unity.</p>
+            </div>
+          </summary>
+          <div class="committee-deep">
+            <div class="deep-meta">
+              <div class="deep-meta-box">
+                <h5>Members</h5>
+                <div class="member-tags">
+                  <span class="member-tag">Dr. B.R. Ambedkar</span>
+                  <span class="member-tag">B.G. Kher</span>
+                  <span class="member-tag">K.N. Katju</span>
+                  <span class="member-tag">P. Subbarayan</span>
+                  <span class="member-tag">Rafi Ahmed Kidwai</span>
+                  <span class="member-tag">Hans Mehta</span>
+                </div>
+              </div>
+              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
+                <h5>Sub-Committees Included</h5>
+                <span class="deep-date">Sub-Committee I & Sub-Committee II</span>
+              </div>
+            </div>
+            <div class="deep-text">
+              <p>While the Union Powers Committee crafted the central apparatus, this committee architected the governance model for the states (then provinces). Sardar Patel, having immense experience in integrating the diverse princely states, led the deliberations on how provincial executives and legislatures should operate.</p>
+              <p>A primary debate within the committee was whether to adopt the American presidential model for state governors. Ultimately, they chose the British parliamentary model, ensuring that the Governor acted on the binding advice of a council of ministers led by a Chief Minister, thereby mirroring the federal layout.</p>
+            </div>
           </div>
-          <p>Focused on the administrative and legislative frameworks for individual provinces iteratively, balancing regional autonomy with the necessity of national unity.</p>
-        </div>
+        </details>
         
-        <div class="committee-slab">
-          <div class="committee-slab-header">
-            <h4>Committee on the Rules of Procedure</h4>
-            <span class="committee-chair">Chair: Dr. Rajendra Prasad</span>
+        <details class="committee-slab">
+          <summary>
+            <div class="committee-slab-header">
+              <h4>Committee on the Rules of Procedure</h4>
+              <div class="committee-chair-wrap">
+                <span class="committee-chair">Chair: Dr. Rajendra Prasad</span>
+              </div>
+              <p class="committee-summary-text">Designed the foundational parliamentary protocols, debate formats, and procedural guidelines governing the sessions of the Constituent Assembly itself.</p>
+            </div>
+          </summary>
+          <div class="committee-deep">
+            <div class="deep-meta">
+              <div class="deep-meta-box">
+                <h5>Members</h5>
+                <div class="member-tags">
+                  <span class="member-tag">Jagjivan Ram</span>
+                  <span class="member-tag">Sarat Chandra Bose</span>
+                  <span class="member-tag">A.K. Ayyar</span>
+                  <span class="member-tag">G. Durgabai</span>
+                  <span class="member-tag">K.M. Munshi</span>
+                  <span class="member-tag">Frank Anthony</span>
+                  <span class="member-tag">and others</span>
+                </div>
+              </div>
+              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
+                <h5>Meeting Dates</h5>
+                <span class="deep-date">December 10 & 20, 1946</span>
+              </div>
+            </div>
+            <div class="deep-text">
+              <p>Functioning as the procedural engine of the Constituent Assembly, this committee defined exactly how India's founding body would operate. It meticulously drafted the rules addressing member resignations, speaking limits, business conduct, and the establishment of subsequent auxiliary committees.</p>
+              <p>Crucially, the committee asserted the supreme sovereignty of the Assembly, explicitly stating in its rules that the body could not be dissolved by the British Government, but only by a two-thirds majority vote of the Assembly itself.</p>
+            </div>
           </div>
-          <p>Designed the foundational parliamentary protocols, debate formats, and procedural guidelines governing the sessions of the Constituent Assembly itself.</p>
-        </div>
+        </details>
 
-        <div class="committee-slab">
-          <div class="committee-slab-header">
-            <h4>Sub-Committee on Fundamental Rights</h4>
-            <span class="committee-chair">Chair: J.B. Kripalani</span>
+        <details class="committee-slab">
+          <summary>
+            <div class="committee-slab-header">
+              <h4>Sub-Committee on Fundamental Rights</h4>
+              <div class="committee-chair-wrap">
+                <span class="committee-chair">Chair: J.B. Kripalani</span>
+              </div>
+              <p class="committee-summary-text">Dedicated explicitly to defining the scope, meaning, and limitations of individual liberties that were to form the bedrock of Part III of the Constitution.</p>
+            </div>
+          </summary>
+          <div class="committee-deep">
+            <div class="deep-meta">
+              <div class="deep-meta-box">
+                <h5>Members</h5>
+                <div class="member-tags">
+                  <span class="member-tag">Rajkumari Amrit Kaur</span>
+                  <span class="member-tag">Minoo Masani</span>
+                  <span class="member-tag">K.T. Shah</span>
+                  <span class="member-tag">Harnam Singh</span>
+                  <span class="member-tag">B.R. Ambedkar</span>
+                  <span class="member-tag">Alladi Krishnaswamy Ayyar</span>
+                  <span class="member-tag">K.M. Munshi</span>
+                </div>
+              </div>
+              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
+                <h5>Meeting Dates</h5>
+                <span class="deep-date">Feb 27 - April 19, 1947</span>
+              </div>
+            </div>
+            <div class="deep-text">
+              <p>This highly consequential sub-committee took on the profound task of sifting through dozens of civil, political, and social rights proposals to construct what would become Part III of the Constitution. Every right, from free speech to the abolition of untouchability, was intensely scrutinized here.</p>
+              <p>During their numerous sessions, the committee split the proposed rights into two monumental categories: 'justiciable rights' (which could be enforced in a court of law) and 'non-justiciable rights' (which eventually formed the Directive Principles of State Policy). This clever categorisation successfully balanced absolute freedoms with the realistic limitations of a newly born state.</p>
+            </div>
           </div>
-          <p>Dedicated explicitly to defining the scope, meaning, and limitations of individual liberties that were to form the bedrock of Part III of the Constitution.</p>
-        </div>
+        </details>
 
-        <div class="committee-slab">
-          <div class="committee-slab-header">
-            <h4>Sub-Committee on Minorities</h4>
-            <span class="committee-chair">Chair: H.C. Mukherjee</span>
+        <details class="committee-slab">
+          <summary>
+            <div class="committee-slab-header">
+              <h4>Sub-Committee on Minorities</h4>
+              <div class="committee-chair-wrap">
+                <span class="committee-chair">Chair: H.C. Mukherjee</span>
+              </div>
+              <p class="committee-summary-text">Evaluated mechanisms for equitable political representation, cultural preservation, and targeted constitutional safeguards for diverse religious and linguistic minority groups.</p>
+            </div>
+          </summary>
+          <div class="committee-deep">
+            <div class="deep-meta">
+              <div class="deep-meta-box">
+                <h5>Members</h5>
+                <div class="member-tags">
+                  <span class="member-tag">Dr. B.R. Ambedkar</span>
+                  <span class="member-tag">B.G. Kher</span>
+                  <span class="member-tag">Rajkumari Amrit Kaur</span>
+                  <span class="member-tag">Syama Prasad Mookerjee</span>
+                  <span class="member-tag">Govind Ballabh Pant</span>
+                  <span class="member-tag">Frank Anthony</span>
+                  <span class="member-tag">Homi Mody</span>
+                </div>
+              </div>
+              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
+                <h5>Meeting Dates</h5>
+                <span class="deep-date">Feb 27 - July 27, 1947</span>
+              </div>
+            </div>
+            <div class="deep-text">
+              <p>Formed in the crucible of escalating communal tensions, the Sub-Committee on Minorities was tasked with creating constitutional reassurances for India's diverse populations without fostering long-term divisions. They debated heavily over the future of separate electorates, which the British had employed previously.</p>
+              <p>Ultimately, to foster a united Indian identity, the committee rejected the continuation of separate religious electorates. However, to guarantee political safety, they recommended a system of reserved seats for certain underrepresented minority communities in the initial years of the Republic.</p>
+            </div>
           </div>
-          <p>Evaluated mechanisms for equitable political representation, cultural preservation, and targeted constitutional safeguards for diverse religious and linguistic minority groups.</p>
-        </div>
+        </details>
 
-        <div class="committee-slab">
-          <div class="committee-slab-header">
-            <h4>Sub-Committee on the North East Frontier Tribal and Excluded Areas</h4>
-            <span class="committee-chair">Chair: Gopinath Bardoloi</span>
+        <details class="committee-slab">
+          <summary>
+            <div class="committee-slab-header">
+              <h4>Sub-Committee on North East Frontier Tribal Areas</h4>
+              <div class="committee-chair-wrap">
+                <span class="committee-chair">Chair: Gopinath Bardoloi</span>
+              </div>
+              <p class="committee-summary-text">Studied the unique geopolitical and cultural landscapes of Assam and surrounding tribal belts to create distinct administrative provisions, which evolved into Schedule VI.</p>
+            </div>
+          </summary>
+          <div class="committee-deep">
+            <div class="deep-meta">
+              <div class="deep-meta-box">
+                <h5>Members</h5>
+                <div class="member-tags">
+                  <span class="member-tag">J.J.M. Nichols-Roy</span>
+                  <span class="member-tag">Rup Nath Brahma</span>
+                  <span class="member-tag">A.V. Thakkar</span>
+                  <span class="member-tag">Aliba Imti</span>
+                </div>
+              </div>
+              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
+                <h5>Meeting Dates</h5>
+                <span class="deep-date">July 28, 1947</span>
+              </div>
+            </div>
+            <div class="deep-text">
+              <p>Recognizing that the North-East Frontier and Assam's tribal territories possessed distinct historical, social, and cultural structures unlike the rest of the nation, this committee investigated models of local self-governance. Their objective was to integrate these regions with democratic India without disrupting their indigenous customs.</p>
+              <p>Their groundbreaking recommendations laid the foundation for the Sixth Schedule of the Constitution, which established Autonomous District Councils. This structural innovation allowed indigenous communities to self-govern according to their own customary laws while remaining an integral part of the Indian state.</p>
+            </div>
           </div>
-          <p>Studied the unique geopolitical and cultural landscapes of Assam and surrounding tribal belts to create distinct administrative provisions, which evolved into Schedule VI.</p>
-        </div>
+        </details>
 
-        <div class="committee-slab">
-          <div class="committee-slab-header">
-            <h4>The Committee on Chief Commissioners’ Provinces</h4>
-            <span class="committee-chair">Chair: B. Pattabhi Sitaramayya</span>
+        <details class="committee-slab">
+          <summary>
+            <div class="committee-slab-header">
+              <h4>The Committee on Chief Commissioners’ Provinces</h4>
+              <div class="committee-chair-wrap">
+                <span class="committee-chair">Chair: B. Pattabhi Sitaramayya</span>
+              </div>
+              <p class="committee-summary-text">Examined the administrative setup, laws, and future governance models for centrally administered territories, acting as the precursors to modern-day Union Territories.</p>
+            </div>
+          </summary>
+          <div class="committee-deep">
+            <div class="deep-meta">
+              <div class="deep-meta-box">
+                <h5>Members</h5>
+                <div class="member-tags">
+                  <span class="member-tag">Mukut Bihari Lal Bhargava</span>
+                  <span class="member-tag">Deshbandhu Gupta</span>
+                  <span class="member-tag">N. Gopalaswamy Ayyangar</span>
+                  <span class="member-tag">K. Santhanam</span>
+                </div>
+              </div>
+              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
+                <h5>Meeting Dates</h5>
+                <span class="deep-date">August - September 1947</span>
+              </div>
+            </div>
+            <div class="deep-text">
+              <p>At the time of independence, areas like Delhi, Ajmer-Merwara, and Coorg were categorized as Chief Commissioners’ Provinces—territories administered directly by the central government largely without democratic legislatures. This committee explored how to democratize these regions.</p>
+              <p>Instead of completely merging them with adjacent states, the committee recommended providing them with a responsible local legislature under a Lieutenant Governor. These critical discussions heavily influenced how today's Union Territories (like Delhi) are constitutionally administered.</p>
+            </div>
           </div>
-          <p>Examined the administrative setup, laws, and future governance models for centrally administered territories, acting as the precursors to modern-day Union Territories.</p>
-        </div>
+        </details>
       </div>
     </div>
 
