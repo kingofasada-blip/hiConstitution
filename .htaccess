@@ -18,6 +18,12 @@ RewriteCond %{HTTP_HOST} ^www\.hiconstitution\.com$ [NC]
 RewriteRule ^ https://hiconstitution.com%{REQUEST_URI} [L,R=301]
 
 # ------------------------------------------------------------
+# 2b. Draft page canonical redirects
+# ------------------------------------------------------------
+RewriteRule ^draft\.html$ /draft-Constitution-of-India.html [L,R=301,NC]
+RewriteRule ^Draft-Constitution-of-India\.html$ /draft-Constitution-of-India.html [L,R=301]
+
+# ------------------------------------------------------------
 # 3. Gzip Compression
 # ------------------------------------------------------------
 <IfModule mod_deflate.c>

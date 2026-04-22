@@ -26,6 +26,18 @@
   status = 301
   force  = true
 
+[[redirects]]
+  from   = "/draft.html"
+  to     = "/draft-Constitution-of-India.html"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from   = "/Draft-Constitution-of-India.html"
+  to     = "/draft-Constitution-of-India.html"
+  status = 301
+  force  = true
+
 # ------------------------------------------------------------
 # Security Headers — applied to all routes
 # ------------------------------------------------------------

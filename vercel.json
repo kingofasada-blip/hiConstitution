@@ -5,6 +5,16 @@
       "has": [{ "type": "host", "value": "www.hiconstitution.com" }],
       "destination": "https://hiconstitution.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/draft.html",
+      "destination": "/draft-Constitution-of-India.html",
+      "permanent": true
+    },
+    {
+      "source": "/Draft-Constitution-of-India.html",
+      "destination": "/draft-Constitution-of-India.html",
+      "permanent": true
     }
   ],
   "headers": [
