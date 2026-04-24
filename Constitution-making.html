@@ -40,16 +40,22 @@
       font-size: 1.05rem;
     }
 
-    /* Top 3 Navigation Cards */
+    /* Top 4 Navigation Cards */
     .making-nav-cards {
       max-width: 1200px;
       margin: -50px auto 40px;
       padding: 0 20px;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
       position: relative;
       z-index: 10;
+    }
+
+    @media (max-width: 992px) {
+      .making-nav-cards {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     @media (max-width: 768px) {
@@ -189,22 +195,33 @@
     }
     .info-card li { margin-bottom: 10px; }
 
-    /* Committee Slabs */
+    /* Committee Slabs - Dynamic Pastel Colors */
+    .committee-grid details:nth-of-type(9n+1) { --slab-bg: #F4F8FF; --slab-border: #D1E0FC; --slab-hover: #8AB4F8; --slab-icon: #1A73E8; }
+    .committee-grid details:nth-of-type(9n+2) { --slab-bg: #FFF6F0; --slab-border: #FCE1D4; --slab-hover: #F8A77B; --slab-icon: #E65100; }
+    .committee-grid details:nth-of-type(9n+3) { --slab-bg: #F5FEF7; --slab-border: #C8E6D3; --slab-hover: #72C78E; --slab-icon: #2E7D32; }
+    .committee-grid details:nth-of-type(9n+4) { --slab-bg: #FCF5FF; --slab-border: #EED3FA; --slab-hover: #D28CEC; --slab-icon: #8E24AA; }
+    .committee-grid details:nth-of-type(9n+5) { --slab-bg: #FFF9E6; --slab-border: #FCE8B2; --slab-hover: #F9C328; --slab-icon: #F57F17; }
+    .committee-grid details:nth-of-type(9n+6) { --slab-bg: #F4FBFF; --slab-border: #CBEAFA; --slab-hover: #6EC0F0; --slab-icon: #0288D1; }
+    .committee-grid details:nth-of-type(9n+7) { --slab-bg: #FDF5F6; --slab-border: #FBD5DA; --slab-hover: #F08E9D; --slab-icon: #C2185B; }
+    .committee-grid details:nth-of-type(9n+8) { --slab-bg: #F5F6FA; --slab-border: #D9DCED; --slab-hover: #9AA3D2; --slab-icon: #3F51B5; }
+    .committee-grid details:nth-of-type(9n+9) { --slab-bg: #E8FAED; --slab-border: #BCE3CB; --slab-hover: #64BB85; --slab-icon: #00796B; }
+
     .committee-slab {
-      background: var(--white);
-      border: 1px solid var(--border);
+      background: var(--slab-bg, var(--white));
+      border: 1px solid var(--slab-border, var(--border));
       border-radius: var(--radius-md);
       padding: 18px 24px;
       margin-bottom: 16px;
       box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.2s, border-color 0.2s;
+      transition: box-shadow 0.2s, border-color 0.2s, background-color 0.3s;
     }
     .committee-slab:hover {
       box-shadow: var(--shadow-md);
-      border-color: var(--saffron);
+      border-color: var(--slab-hover, var(--saffron));
     }
     .committee-slab[open] {
-      border-color: var(--saffron);
+      border-color: var(--slab-hover, var(--saffron));
+      background-color: var(--white);
     }
     .committee-slab summary {
       cursor: pointer;
@@ -230,7 +247,7 @@
       top: 50%;
       transform: translateY(-50%);
       font-size: 0.85rem;
-      color: var(--saffron);
+      color: var(--slab-icon, var(--saffron));
       transition: transform 0.3s ease;
     }
     .committee-slab[open] .committee-slab-header::after {
@@ -252,13 +269,13 @@
       margin-bottom: 6px;
     }
     .committee-chair {
-      background: var(--bg-light);
-      color: var(--saffron);
+      background: var(--white);
+      color: var(--slab-icon, var(--saffron));
       font-size: 0.82rem;
       font-weight: 700;
       padding: 4px 10px;
       border-radius: 99px;
-      border: 1px solid rgba(243, 115, 36, 0.2);
+      border: 1px solid var(--slab-hover, rgba(243, 115, 36, 0.2));
       white-space: nowrap;
     }
     .committee-summary-text {
@@ -274,37 +291,76 @@
       border-top: 1px dashed var(--border-light);
     }
     .deep-meta {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
       gap: 16px;
       margin-bottom: 20px;
+      align-items: stretch;
     }
     .deep-meta-box {
       background: var(--bg-light);
       padding: 16px;
       border-radius: 12px;
       border: 1px solid var(--border);
+      flex: 1 1 350px;
+    }
+    .deep-meta-box.small-box {
+      flex: 0 0 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .deep-meta-box h5 {
-      margin: 0 0 10px 0;
+      margin: 0 0 12px 0;
       font-size: 0.85rem;
-      color: var(--saffron);
+      color: var(--slab-icon, var(--saffron));
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
-    .member-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+    .member-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 12px;
     }
-    .member-tag {
-      font-size: 0.8rem;
+    .member-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 10px 6px 6px;
       background: var(--white);
-      border: 1px solid var(--border-light);
-      padding: 4px 10px;
-      border-radius: 6px;
+      border: 1px solid #E2E8F0;
+      border-radius: 99px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .member-card:hover {
+      border-color: var(--navy-light);
+      background: #F8FAFC;
+    }
+    .m-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .m-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .m-name {
+      font-size: 0.82rem;
       color: var(--navy);
       font-weight: 600;
+      line-height: 1.25;
     }
     .deep-date {
       font-size: 0.92rem;
@@ -638,13 +694,13 @@
     </div>
   </div>
 
-  <!-- 3 Clickable Columns/Cards -->
+  <!-- 4 Clickable Columns/Cards -->
   <div class="making-nav-cards">
     <div class="m-card active" data-panel="panel-assembly">
       <div class="m-card-icon">🏛️</div>
       <div>
         <h3>Constituent Assembly</h3>
-        <p>Explore the formation, key committees, and foundational notes of the assembly.</p>
+        <p>Explore the formation, key facts, and foundational notes of the assembly.</p>
       </div>
     </div>
     <div class="m-card" data-panel="panel-timeline">
@@ -659,6 +715,13 @@
       <div>
         <h3>The Framers</h3>
         <p>Discover the visionaries and key architects who debated and shaped the supreme law.</p>
+      </div>
+    </div>
+    <div class="m-card" data-panel="panel-committees">
+      <div class="m-card-icon">📋</div>
+      <div>
+        <h3>Committees of the Constituent Assembly</h3>
+        <p>Explore the specialized committees that drafted various provisions of the Constitution.</p>
       </div>
     </div>
   </div>
@@ -679,11 +742,14 @@
           </ul>
         </div>
       </div>
+    </div>
 
-      <div class="committee-grid">
-        <h3>Committees of the Constituent Assembly</h3>
-        <p style="color:var(--muted); margin-bottom: 24px; max-width: 800px;">To streamline the monumental task of drafting the Constitution, the Assembly appointed various committees to conduct preliminary research and shape specific provisions. Below are the key committees and their focus areas.</p>
-        
+    <!-- Committees Panel -->
+    <div class="m-panel" id="panel-committees">
+      <h2 class="panel-title">Committees of the Constituent Assembly</h2>
+      <p style="color:var(--muted); margin-bottom: 24px; max-width: 800px;">To streamline the monumental task of drafting the Constitution, the Assembly appointed various committees to conduct preliminary research and shape specific provisions. Below are the key committees and their focus areas.</p>
+      
+      <div class="committee-grid" style="margin-top: 0;">
         <details class="committee-slab">
           <summary>
             <div class="committee-slab-header">
@@ -698,23 +764,27 @@
             <div class="deep-meta">
               <div class="deep-meta-box">
                 <h5>Members</h5>
-                <div class="member-tags">
-                  <span class="member-tag">Alladi Krishnaswamy Ayyar</span>
-                  <span class="member-tag">N. Gopalaswami Ayyangar</span>
-                  <span class="member-tag">K.M. Munshi</span>
-                  <span class="member-tag">Mohammad Saadulla</span>
-                  <span class="member-tag">B.L. Mitter (replaced by N. Madhava Rau)</span>
-                  <span class="member-tag">D.P. Khaitan (replaced by T.T. Krishnamachari)</span>
+                <div class="member-grid">
+                  <div class="member-card"><div class="m-avatar">BA</div><span class="m-name">Dr. B.R. Ambedkar</span></div>
+                  <div class="member-card"><div class="m-avatar">AA</div><span class="m-name">Alladi Krishnaswamy Ayyar</span></div>
+                  <div class="member-card"><div class="m-avatar">NA</div><span class="m-name">N. Gopalaswami Ayyangar</span></div>
+                  <div class="member-card"><div class="m-avatar">KM</div><span class="m-name">K.M. Munshi</span></div>
+                  <div class="member-card"><div class="m-avatar">MS</div><span class="m-name">Mohammad Saadulla</span></div>
+                  <div class="member-card"><div class="m-avatar">BM</div><span class="m-name">B.L. Mitter (replaced)</span></div>
+                  <div class="member-card"><div class="m-avatar">NM</div><span class="m-name">N. Madhava Rau</span></div>
+                  <div class="member-card"><div class="m-avatar">DK</div><span class="m-name">D.P. Khaitan (replaced)</span></div>
+                  <div class="member-card"><div class="m-avatar">TK</div><span class="m-name">T.T. Krishnamachari</span></div>
                 </div>
               </div>
-              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
-                <h5>Formed On</h5>
-                <span class="deep-date">August 29, 1947</span>
+              <div class="deep-meta-box small-box">
+                <h5>Key Dates</h5>
+                <span class="deep-date">Aug 29, 1947<br><br>Feb 1948 (Draft)</span>
               </div>
             </div>
             <div class="deep-text">
-              <p>Recognized as the most pivotal body in the making of the Republic, the Drafting Committee was entrusted with the monumental duty of creating the final, legally sound text of the Constitution. After synthesizing reports and recommendations from all other sub-committees, they reviewed the original structural draft prepared by Constitutional Advisor B.N. Rau.</p>
-              <p>Despite consisting of seven eminent minds, a significant portion of the exhaustive drafting fell on the shoulders of its Chairman, Dr. B.R. Ambedkar. The committee completed their initial draft in February 1948 and opened it up for eight months of intense public and political scrutiny before introducing the final version to the Assembly.</p>
+              <p>Recognized as the primary architectural body in the making of the Republic, the Drafting Committee was entrusted with the monumental duty of creating the final text of the Constitution. Upon its formation in August 1947, the group was faced with the colossal challenge of synthesizing reports, recommendations, and decisions from all other functional sub-committees.</p>
+              <p>Their foundation was the comprehensive, albeit raw, structural draft prepared by Constitutional Advisor B.N. Rau. Under the visionary stewardship of Chairman Dr. B.R. Ambedkar, the committee meticulously reviewed and revised this bedrock text line by line. The grueling process saw them balancing divergent philosophies regarding state power, fundamental rights, and executive autonomy.</p>
+              <p>In February 1948, the committee published the first Draft Constitution consisting of 315 articles and 8 schedules. It was then placed before the Indian public and provincial legislatures for intense scrutiny, accumulating over 7,000 proposed amendments over a period of eight months. The committee methodically debated thousands of these revisions before championing the final document through the Assembly's grueling reading phases.</p>
             </div>
           </div>
         </details>
@@ -722,7 +792,7 @@
         <details class="committee-slab">
           <summary>
             <div class="committee-slab-header">
-              <h4>Advisory Committee on Fundamental Rights, Minorities & Tribal Areas</h4>
+              <h4>Advisory Committee on Fundamental Rights & Minorities</h4>
               <div class="committee-chair-wrap">
                 <span class="committee-chair">Chair: Sardar Vallabhbhai Patel</span>
               </div>
@@ -732,23 +802,27 @@
           <div class="committee-deep">
             <div class="deep-meta">
               <div class="deep-meta-box">
-                <h5>Key Members</h5>
-                <div class="member-tags">
-                  <span class="member-tag">Over 54 diverse members</span>
-                  <span class="member-tag">J.B. Kripalani</span>
-                  <span class="member-tag">H.C. Mukherjee</span>
-                  <span class="member-tag">Gopinath Bardoloi</span>
-                  <span class="member-tag">A.V. Thakkar</span>
+                <h5>Key Members (Out of 54)</h5>
+                <div class="member-grid">
+                  <div class="member-card"><div class="m-avatar">SP</div><span class="m-name">Sardar Patel</span></div>
+                  <div class="member-card"><div class="m-avatar">JK</div><span class="m-name">J.B. Kripalani</span></div>
+                  <div class="member-card"><div class="m-avatar">HM</div><span class="m-name">H.C. Mukherjee</span></div>
+                  <div class="member-card"><div class="m-avatar">GB</div><span class="m-name">Gopinath Bardoloi</span></div>
+                  <div class="member-card"><div class="m-avatar">AT</div><span class="m-name">A.V. Thakkar</span></div>
+                  <div class="member-card"><div class="m-avatar">RA</div><span class="m-name">Rajkumari Amrit Kaur</span></div>
+                  <div class="member-card"><div class="m-avatar">BA</div><span class="m-name">Dr. B.R. Ambedkar</span></div>
+                  <div class="member-card"><div class="m-avatar">JN</div><span class="m-name">Jawaharlal Nehru</span></div>
                 </div>
               </div>
-              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
-                <h5>Meeting Dates</h5>
-                <span class="deep-date">Formed Jan 24, 1947. Multiple sessions across 1947.</span>
+              <div class="deep-meta-box small-box">
+                <h5>Formed On</h5>
+                <span class="deep-date">January 24, 1947</span>
               </div>
             </div>
             <div class="deep-text">
-              <p>This massive Advisory Committee acted as the umbrella organization guiding some of the most sensitive and essential aspects of independent India's foundation. It coordinated directly with specialized sub-committees to aggregate reports concerning minority protections, marginalized communities, and fundamental liberties.</p>
-              <p>Under Sardar Patel's leadership, the committee effectively bridged extreme ideological divides and reached necessary compromises regarding controversial issues like religious reservations, cultural preservation, and universally accessible rights, helping to weave together a cohesive, secular democracy.</p>
+              <p>The majestic Advisory Committee acted as the supreme umbrella organization charged with integrating the socio-political rights of India's massively diverse population. Because handling rights and minorities was an intensely complex and sensitive issue in a newly partitioned India, the Assembly mandated this singular powerhouse committee (with over 54 members) to coordinate these efforts across multiple sub-committees.</p>
+              <p>Under Sardar Patel's unifying leadership, the committee debated extensively on bridging extreme ideological divides. They tackled controversial issues ranging from religious freedom and reservations in the public sector, to language barriers and cultural preservation rights. The committee was fundamentally responsible for guaranteeing that the core tenets of the Constitution were undeniably secular and democratic.</p>
+              <p>Their final reports aggregated the findings of the sub-committees on Minorities, Fundamental Rights, and Tribal Excluded Areas. By advocating for universal adult franchise while simultaneously rejecting separate electorates (in favor of highly controlled safeguards), the committee established the egalitarian framework of modern independent India.</p>
             </div>
           </div>
         </details>
@@ -767,23 +841,25 @@
             <div class="deep-meta">
               <div class="deep-meta-box">
                 <h5>Members</h5>
-                <div class="member-tags">
-                  <span class="member-tag">Sarat Chandra Bose</span>
-                  <span class="member-tag">Dr. B.R. Ambedkar</span>
-                  <span class="member-tag">Govind Ballabh Pant</span>
-                  <span class="member-tag">A.K. Ayyar</span>
-                  <span class="member-tag">K.M. Munshi</span>
-                  <span class="member-tag">and others</span>
+                <div class="member-grid">
+                  <div class="member-card"><div class="m-avatar">JN</div><span class="m-name">Jawaharlal Nehru</span></div>
+                  <div class="member-card"><div class="m-avatar">SB</div><span class="m-name">Sarat Chandra Bose</span></div>
+                  <div class="member-card"><div class="m-avatar">BA</div><span class="m-name">Dr. B.R. Ambedkar</span></div>
+                  <div class="member-card"><div class="m-avatar">GP</div><span class="m-name">Govind Ballabh Pant</span></div>
+                  <div class="member-card"><div class="m-avatar">KM</div><span class="m-name">K.M. Munshi</span></div>
+                  <div class="member-card"><div class="m-avatar">AA</div><span class="m-name">A. Krishnaswamy Ayyar</span></div>
+                  <div class="member-card"><div class="m-avatar">BS</div><span class="m-name">B. Pattabhi Sitaramayya</span></div>
                 </div>
               </div>
-              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
+              <div class="deep-meta-box small-box">
                 <h5>Key Reports</h5>
                 <span class="deep-date">July 1947</span>
               </div>
             </div>
             <div class="deep-text">
-              <p>The Union Powers Committee was organized to decisively settle the distribution of power between the central government and the provinces. In the volatile aftermath of partition, the committee recognized that a weak center could lead to national disintegration.</p>
-              <p>Consequently, Jawaharlal Nehru and his team strongly advocated for a powerful federal center, assigning it exclusive authority over critical domains like defense, foreign affairs, communications, and national finance. Their recommendations formed the constitutional backbone of India's robust federal structure.</p>
+              <p>The Union Powers Committee was organized with an intensely critical mandate: to decisively settle the distribution of power between the newly forming federal central government and its constituent provinces. In the volatile, tragic aftermath of the subcontinent’s partition, the committee's outlook fundamentally shifted from a loose federation toward advocating for a fiercely capable, centralized authority.</p>
+              <p>Recognizing that a weak center could lead to national disintegration and severe economic fracturing, Jawaharlal Nehru and his team strongly recommended retaining significant fiscal and administrative leverage at the Union level. They designated exclusive national authority over critical domains such as defense, foreign affairs, inter-state communications, and national currency.</p>
+              <p>Their meticulously analyzed reports formed the constitutional backbone of India's robust federal structure, introducing the Union List paradigm that ensures uniformity while still allowing provincial autonomy in concurrent areas.</p>
             </div>
           </div>
         </details>
@@ -802,23 +878,25 @@
             <div class="deep-meta">
               <div class="deep-meta-box">
                 <h5>Members</h5>
-                <div class="member-tags">
-                  <span class="member-tag">Dr. B.R. Ambedkar</span>
-                  <span class="member-tag">B.G. Kher</span>
-                  <span class="member-tag">K.N. Katju</span>
-                  <span class="member-tag">P. Subbarayan</span>
-                  <span class="member-tag">Rafi Ahmed Kidwai</span>
-                  <span class="member-tag">Hans Mehta</span>
+                <div class="member-grid">
+                  <div class="member-card"><div class="m-avatar">SP</div><span class="m-name">Sardar Patel</span></div>
+                  <div class="member-card"><div class="m-avatar">BA</div><span class="m-name">Dr. B.R. Ambedkar</span></div>
+                  <div class="member-card"><div class="m-avatar">BK</div><span class="m-name">B.G. Kher</span></div>
+                  <div class="member-card"><div class="m-avatar">KK</div><span class="m-name">K.N. Katju</span></div>
+                  <div class="member-card"><div class="m-avatar">RK</div><span class="m-name">Rafi Ahmed Kidwai</span></div>
+                  <div class="member-card"><div class="m-avatar">HM</div><span class="m-name">Hans Mehta</span></div>
+                  <div class="member-card"><div class="m-avatar">PS</div><span class="m-name">P. Subbarayan</span></div>
                 </div>
               </div>
-              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
-                <h5>Sub-Committees Included</h5>
-                <span class="deep-date">Sub-Committee I & Sub-Committee II</span>
+              <div class="deep-meta-box small-box">
+                <h5>Formation</h5>
+                <span class="deep-date">May 1947</span>
               </div>
             </div>
             <div class="deep-text">
-              <p>While the Union Powers Committee crafted the central apparatus, this committee architected the governance model for the states (then provinces). Sardar Patel, having immense experience in integrating the diverse princely states, led the deliberations on how provincial executives and legislatures should operate.</p>
-              <p>A primary debate within the committee was whether to adopt the American presidential model for state governors. Ultimately, they chose the British parliamentary model, ensuring that the Governor acted on the binding advice of a council of ministers led by a Chief Minister, thereby mirroring the federal layout.</p>
+              <p>While the Union Powers Committee crafted the massive machinery of the central apparatus, the Provincial Constitution Committee architected the governance model for the states (which were then termed provinces). Sardar Patel, possessing immense experience and political acuity in integrating the diverse princely states, led the deliberations on how provincial executives, legislatures, and state relations should structurally operate.</p>
+              <p>A highly consequential debate within the committee centered around the role of the Governor. Some members advocated for adopting the American presidential model, pushing for an elected Governor with independent executive authority. Alternatively, others warned this would conflict directly with the Chief Minister and foster instability.</p>
+              <p>Ultimately, to maintain structural harmony across the nascent nation, they chose the British parliamentary model. They ensured that the Governor acted as a constitutional head functioning entirely on the binding advice of a council of ministers led by a democratically elected Chief Minister, thereby perfectly mirroring the federal layout at the state level.</p>
             </div>
           </div>
         </details>
@@ -837,24 +915,31 @@
             <div class="deep-meta">
               <div class="deep-meta-box">
                 <h5>Members</h5>
-                <div class="member-tags">
-                  <span class="member-tag">Jagjivan Ram</span>
-                  <span class="member-tag">Sarat Chandra Bose</span>
-                  <span class="member-tag">A.K. Ayyar</span>
-                  <span class="member-tag">G. Durgabai</span>
-                  <span class="member-tag">K.M. Munshi</span>
-                  <span class="member-tag">Frank Anthony</span>
-                  <span class="member-tag">and others</span>
+                <div class="member-grid">
+                  <div class="member-card"><div class="m-avatar">RP</div><span class="m-name">Dr. Rajendra Prasad</span></div>
+                  <div class="member-card"><div class="m-avatar">JR</div><span class="m-name">Jagjivan Ram</span></div>
+                  <div class="member-card"><div class="m-avatar">SB</div><span class="m-name">Sarat Chandra Bose</span></div>
+                  <div class="member-card"><div class="m-avatar">AA</div><span class="m-name">A. Krishnaswamy Ayyar</span></div>
+                  <div class="member-card"><div class="m-avatar">BT</div><span class="m-name">Bakshi Tek Chand</span></div>
+                  <div class="member-card"><div class="m-avatar">RK</div><span class="m-name">Rafi Ahmed Kidwai</span></div>
+                  <div class="member-card"><div class="m-avatar">GD</div><span class="m-name">G. Durgabai</span></div>
+                  <div class="member-card"><div class="m-avatar">NA</div><span class="m-name">N. Gopalaswami Ayyangar</span></div>
+                  <div class="member-card"><div class="m-avatar">PT</div><span class="m-name">Purushottam Tandon</span></div>
+                  <div class="member-card"><div class="m-avatar">KM</div><span class="m-name">K.M. Munshi</span></div>
+                  <div class="member-card"><div class="m-avatar">BS</div><span class="m-name">B. Pattabhi Sitaramayya</span></div>
+                  <div class="member-card"><div class="m-avatar">FA</div><span class="m-name">Frank Anthony</span></div>
+                  <div class="member-card"><div class="m-avatar">GB</div><span class="m-name">Gopinath Bordoloi</span></div>
                 </div>
               </div>
-              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
+              <div class="deep-meta-box small-box">
                 <h5>Meeting Dates</h5>
-                <span class="deep-date">December 10 & 20, 1946</span>
+                <span class="deep-date">Dec 10 & 20, 1946</span>
               </div>
             </div>
             <div class="deep-text">
-              <p>Functioning as the procedural engine of the Constituent Assembly, this committee defined exactly how India's founding body would operate. It meticulously drafted the rules addressing member resignations, speaking limits, business conduct, and the establishment of subsequent auxiliary committees.</p>
-              <p>Crucially, the committee asserted the supreme sovereignty of the Assembly, explicitly stating in its rules that the body could not be dissolved by the British Government, but only by a two-thirds majority vote of the Assembly itself.</p>
+              <p>Acting as the procedural engine of the entire constitution-making process, this committee defined exactly how India's founding body would operate on a day-to-day level. It meticulously drafted the comprehensive rules addressing member admissions, resignations, speaking limitations, bill readings, and the establishment of subsequent auxiliary sub-committees.</p>
+              <p>On 10 December 1946, the Constituent Assembly adopted a decisive resolution to appoint this body, realizing that without stringent internal discipline, managing 300+ debating leaders would result in legislative chaos. The rules established by this 15-member team proved to be a masterclass in parliamentary democracy.</p>
+              <p>Crucially, as noted by constitutional historian Granville Austin, the committee effectively codified the supreme sovereignty of the Assembly itself. They aggressively stated in the newly drafted rules that the Assembly could not be forcefully dissolved by the British colonial government, but rather, only by an internal two-thirds majority vote of its own members, cementing their autonomous right to construct the nation's future.</p>
             </div>
           </div>
         </details>
@@ -873,24 +958,26 @@
             <div class="deep-meta">
               <div class="deep-meta-box">
                 <h5>Members</h5>
-                <div class="member-tags">
-                  <span class="member-tag">Rajkumari Amrit Kaur</span>
-                  <span class="member-tag">Minoo Masani</span>
-                  <span class="member-tag">K.T. Shah</span>
-                  <span class="member-tag">Harnam Singh</span>
-                  <span class="member-tag">B.R. Ambedkar</span>
-                  <span class="member-tag">Alladi Krishnaswamy Ayyar</span>
-                  <span class="member-tag">K.M. Munshi</span>
+                <div class="member-grid">
+                  <div class="member-card"><div class="m-avatar">JK</div><span class="m-name">J.B. Kripalani</span></div>
+                  <div class="member-card"><div class="m-avatar">RA</div><span class="m-name">Rajkumari Amrit Kaur</span></div>
+                  <div class="member-card"><div class="m-avatar">MM</div><span class="m-name">Minoo Masani</span></div>
+                  <div class="member-card"><div class="m-avatar">KS</div><span class="m-name">K.T. Shah</span></div>
+                  <div class="member-card"><div class="m-avatar">HS</div><span class="m-name">Harnam Singh</span></div>
+                  <div class="member-card"><div class="m-avatar">BA</div><span class="m-name">Dr. B.R. Ambedkar</span></div>
+                  <div class="member-card"><div class="m-avatar">AA</div><span class="m-name">A. Krishnaswamy Ayyar</span></div>
+                  <div class="member-card"><div class="m-avatar">KM</div><span class="m-name">K.M. Munshi</span></div>
                 </div>
               </div>
-              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
+              <div class="deep-meta-box small-box">
                 <h5>Meeting Dates</h5>
-                <span class="deep-date">Feb 27 - April 19, 1947</span>
+                <span class="deep-date">Feb 27 - Apr 19, 1947</span>
               </div>
             </div>
             <div class="deep-text">
-              <p>This highly consequential sub-committee took on the profound task of sifting through dozens of civil, political, and social rights proposals to construct what would become Part III of the Constitution. Every right, from free speech to the abolition of untouchability, was intensely scrutinized here.</p>
-              <p>During their numerous sessions, the committee split the proposed rights into two monumental categories: 'justiciable rights' (which could be enforced in a court of law) and 'non-justiciable rights' (which eventually formed the Directive Principles of State Policy). This clever categorisation successfully balanced absolute freedoms with the realistic limitations of a newly born state.</p>
+              <p>This highly consequential sub-committee took on the profound, philosophically dense task of sifting through dozens of international and domestic rights proposals to construct what would become the formidable Part III of the Constitution. Every individual right—ranging from the absolute abolition of untouchability, freedom of speech, and religious worship, to labor rights and equality before the law—was intensely scrutinized here.</p>
+              <p>The debates were remarkably rigorous, often pitting deep-rooted traditional conservatism against sweeping reformist ideals. The members engaged thoroughly on how to construct safeguards ensuring the government could maintain public order without reverting to colonial-era authoritarianism. This delicate balance resulted in the creation of 'reasonable restrictions' placed upon absolute liberties.</p>
+              <p>Perhaps their most significant structural contribution was splitting the proposed liberties into two monumental categories over multiple grueling sessions between February and April 1947. They defined 'justiciable rights' (freedoms that citizens could definitively enforce in a court of law against the State) versus 'non-justiciable rights' (aspirational social and economic targets). This clever categorisation eventually birthed the modern distinction between our enforceable Fundamental Rights and our guiding Directive Principles of State Policy.</p>
             </div>
           </div>
         </details>
@@ -909,24 +996,27 @@
             <div class="deep-meta">
               <div class="deep-meta-box">
                 <h5>Members</h5>
-                <div class="member-tags">
-                  <span class="member-tag">Dr. B.R. Ambedkar</span>
-                  <span class="member-tag">B.G. Kher</span>
-                  <span class="member-tag">Rajkumari Amrit Kaur</span>
-                  <span class="member-tag">Syama Prasad Mookerjee</span>
-                  <span class="member-tag">Govind Ballabh Pant</span>
-                  <span class="member-tag">Frank Anthony</span>
-                  <span class="member-tag">Homi Mody</span>
+                <div class="member-grid">
+                  <div class="member-card"><div class="m-avatar">HM</div><span class="m-name">H.C. Mukherjee</span></div>
+                  <div class="member-card"><div class="m-avatar">BA</div><span class="m-name">Dr. B.R. Ambedkar</span></div>
+                  <div class="member-card"><div class="m-avatar">BK</div><span class="m-name">B.G. Kher</span></div>
+                  <div class="member-card"><div class="m-avatar">RA</div><span class="m-name">Rajkumari Amrit Kaur</span></div>
+                  <div class="member-card"><div class="m-avatar">SM</div><span class="m-name">Syama Prasad Mookerjee</span></div>
+                  <div class="member-card"><div class="m-avatar">GP</div><span class="m-name">Govind Ballabh Pant</span></div>
+                  <div class="member-card"><div class="m-avatar">FA</div><span class="m-name">Frank Anthony</span></div>
+                  <div class="member-card"><div class="m-avatar">HM</div><span class="m-name">Homi Mody</span></div>
+                  <div class="member-card"><div class="m-avatar">RD</div><span class="m-name">R.R. Diwakar</span></div>
                 </div>
               </div>
-              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
+              <div class="deep-meta-box small-box">
                 <h5>Meeting Dates</h5>
-                <span class="deep-date">Feb 27 - July 27, 1947</span>
+                <span class="deep-date">Feb 27 - Jul 27, 1947</span>
               </div>
             </div>
             <div class="deep-text">
-              <p>Formed in the crucible of escalating communal tensions, the Sub-Committee on Minorities was tasked with creating constitutional reassurances for India's diverse populations without fostering long-term divisions. They debated heavily over the future of separate electorates, which the British had employed previously.</p>
-              <p>Ultimately, to foster a united Indian identity, the committee rejected the continuation of separate religious electorates. However, to guarantee political safety, they recommended a system of reserved seats for certain underrepresented minority communities in the initial years of the Republic.</p>
+              <p>Formed within the volatile crucible of escalating communal tensions pre and post-partition, the Sub-Committee on Minorities was tasked with an unimaginably burdensome mandate. They needed to draft permanent constitutional reassurances and protective legislation for India's wildly diverse religious and linguistic populations entirely without fostering permanent institutional divisions.</p>
+              <p>The most explosive and heavily debated subject was the future of 'separate electorates'—an extremely divisive system which the British colonial administration had previously employed to deepen communal divides. After agonizing discussions, the committee overwhelmingly concluded that fostering a united Indian identity demanded the total rejection of religion-based separate electorates.</p>
+              <p>However, realizing that marginalized groups still required guaranteed political safety nets, they engineered a powerful compromise mechanism. They recommended a comprehensive, historically significant system of politically reserved seats in legislative assemblies for specific underrepresented minority communities (like Scheduled Castes) for the initial developmental years of the Republic, ensuring representation without segregation.</p>
             </div>
           </div>
         </details>
@@ -934,7 +1024,7 @@
         <details class="committee-slab">
           <summary>
             <div class="committee-slab-header">
-              <h4>Sub-Committee on North East Frontier Tribal Areas</h4>
+              <h4>Committee on North East Frontier Tribal Areas</h4>
               <div class="committee-chair-wrap">
                 <span class="committee-chair">Chair: Gopinath Bardoloi</span>
               </div>
@@ -945,21 +1035,23 @@
             <div class="deep-meta">
               <div class="deep-meta-box">
                 <h5>Members</h5>
-                <div class="member-tags">
-                  <span class="member-tag">J.J.M. Nichols-Roy</span>
-                  <span class="member-tag">Rup Nath Brahma</span>
-                  <span class="member-tag">A.V. Thakkar</span>
-                  <span class="member-tag">Aliba Imti</span>
+                <div class="member-grid">
+                  <div class="member-card"><div class="m-avatar">GB</div><span class="m-name">Gopinath Bardoloi</span></div>
+                  <div class="member-card"><div class="m-avatar">JN</div><span class="m-name">J.J.M. Nichols-Roy</span></div>
+                  <div class="member-card"><div class="m-avatar">RB</div><span class="m-name">Rup Nath Brahma</span></div>
+                  <div class="member-card"><div class="m-avatar">AT</div><span class="m-name">A.V. Thakkar</span></div>
+                  <div class="member-card"><div class="m-avatar">AI</div><span class="m-name">Aliba Imti</span></div>
                 </div>
               </div>
-              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
-                <h5>Meeting Dates</h5>
+              <div class="deep-meta-box small-box">
+                <h5>Key Reports</h5>
                 <span class="deep-date">July 28, 1947</span>
               </div>
             </div>
             <div class="deep-text">
-              <p>Recognizing that the North-East Frontier and Assam's tribal territories possessed distinct historical, social, and cultural structures unlike the rest of the nation, this committee investigated models of local self-governance. Their objective was to integrate these regions with democratic India without disrupting their indigenous customs.</p>
-              <p>Their groundbreaking recommendations laid the foundation for the Sixth Schedule of the Constitution, which established Autonomous District Councils. This structural innovation allowed indigenous communities to self-govern according to their own customary laws while remaining an integral part of the Indian state.</p>
+              <p>Recognizing that the North-East Frontier and Assam's sprawling tribal territories possessed entirely distinct historical, social, and radically unique cultural structures structurally unlike any other part of the emerging nation, the Assembly empowered this highly specialized committee to investigate and build localized models of governance from the ground up.</p>
+              <p>The committee, led by Chief Minister Gopinath Bardoloi, travelled extensively through incredibly difficult terrain to consult locally with tribal chiefs and organizations. Their primary objective was to harmoniously integrate these sensitive geopolitical borderlands with democratic India seamlessly, without aggressively disrupting or imposing mainland administrative laws over deeply entrenched indigenous customs regarding land, forest, and social life.</p>
+              <p>Their findings and resulting groundbreaking recommendations laid the undisputed foundation for the visionary Sixth Schedule of the Constitution. They proposed the establishment of localized Autonomous District Councils (ADCs), a structural innovation allocating indigenous tribal communities the constitutional power to self-govern according to their own customary laws while remaining a proud, integral pillar of the Indian State.</p>
             </div>
           </div>
         </details>
@@ -967,7 +1059,7 @@
         <details class="committee-slab">
           <summary>
             <div class="committee-slab-header">
-              <h4>The Committee on Chief Commissioners’ Provinces</h4>
+              <h4>Committee on Chief Commissioners’ Provinces</h4>
               <div class="committee-chair-wrap">
                 <span class="committee-chair">Chair: B. Pattabhi Sitaramayya</span>
               </div>
@@ -978,21 +1070,25 @@
             <div class="deep-meta">
               <div class="deep-meta-box">
                 <h5>Members</h5>
-                <div class="member-tags">
-                  <span class="member-tag">Mukut Bihari Lal Bhargava</span>
-                  <span class="member-tag">Deshbandhu Gupta</span>
-                  <span class="member-tag">N. Gopalaswamy Ayyangar</span>
-                  <span class="member-tag">K. Santhanam</span>
+                <div class="member-grid">
+                  <div class="member-card"><div class="m-avatar">BS</div><span class="m-name">B. Pattabhi Sitaramayya</span></div>
+                  <div class="member-card"><div class="m-avatar">MB</div><span class="m-name">M.B. Lal Bhargava</span></div>
+                  <div class="member-card"><div class="m-avatar">DG</div><span class="m-name">Deshbandhu Gupta</span></div>
+                  <div class="member-card"><div class="m-avatar">NA</div><span class="m-name">N. Gopalaswamy Ayyangar</span></div>
+                  <div class="member-card"><div class="m-avatar">KS</div><span class="m-name">K. Santhanam</span></div>
+                  <div class="member-card"><div class="m-avatar">CP</div><span class="m-name">C.M. Poonacha</span></div>
+                  <div class="member-card"><div class="m-avatar">HI</div><span class="m-name">Hussain Imam</span></div>
                 </div>
               </div>
-              <div class="deep-meta-box" style="display:flex; flex-direction:column; justify-content:center;">
+              <div class="deep-meta-box small-box">
                 <h5>Meeting Dates</h5>
-                <span class="deep-date">August - September 1947</span>
+                <span class="deep-date">August - Sept 1947</span>
               </div>
             </div>
             <div class="deep-text">
-              <p>At the time of independence, areas like Delhi, Ajmer-Merwara, and Coorg were categorized as Chief Commissioners’ Provinces—territories administered directly by the central government largely without democratic legislatures. This committee explored how to democratize these regions.</p>
-              <p>Instead of completely merging them with adjacent states, the committee recommended providing them with a responsible local legislature under a Lieutenant Governor. These critical discussions heavily influenced how today's Union Territories (like Delhi) are constitutionally administered.</p>
+              <p>At the time of independence, distinct geographical and administrative areas such as Delhi, Ajmer-Merwara, Coorg, and the Andaman Islands were categorized under colonial law as Chief Commissioners’ Provinces. These territories were uniquely administered directly by the central government, almost entirely operating without democratic legislatures or self-governance. The fundamental question the Assembly faced was whether this centralized system should stubbornly continue in Independent India.</p>
+              <p>On July 30, 1947, Deshbandhu Gupta explicitly moved an amendment pushing for a dedicated research committee to formally determine the political future of these zones. Consequently, under Sitaramayya's chairmanship, the 7-member group held extensive meetings to review the administrative efficiency and demographic mechanics of the five prominent centrally controlled areas.</p>
+              <p>Instead of completely stripping their autonomy and mechanically merging them with geographically adjacent massive states, the committee recommended providing them with responsible, albeit functionally limited, local legislatures headed by a centrally appointed Lieutenant Governor. Rather than passing smoothly, these recommendations were fiercely debated in the Assembly but ultimately laid the structural groundwork detailing exactly how modern-day Union Territories are democratically administered today.</p>
             </div>
           </div>
         </details>
