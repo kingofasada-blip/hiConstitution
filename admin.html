@@ -441,6 +441,22 @@
       <div class="form-group"><label>Roles / Committees</label><input type="text" id="framerRoles" class="form-control"></div>
     </div>
   </div>
+  <div class="box">
+    <div class="box-header">
+      <h2>3. Committees</h2>
+      <button class="btn btn-outline-navy btn-sm" onclick="addNewCommittee()">+ Add Committee</button>
+    </div>
+    <div class="flex-row"><select id="commSelect" onchange="onCommitteeChange()"><option value="-1">Loading Committees...</option></select></div>
+    <div id="commEditor" class="hidden" style="margin-top: 24px; padding-top: 24px; border-top: 1px dashed var(--border);">
+      <div style="display:flex; justify-content:flex-end; margin-bottom:16px;"><button class="btn-danger" onclick="deleteCurrentCommittee()">🗑️ Delete Committee</button></div>
+      <div class="form-group"><label>Committee Name (Title)</label><input type="text" id="commName" class="form-control"></div>
+      <div class="form-group"><label>Chairman</label><input type="text" id="commChairman" class="form-control"></div>
+      <div class="form-group"><label>Date Label (e.g. Formed On)</label><input type="text" id="commDateLabel" class="form-control"></div>
+      <div class="form-group"><label>Date</label><input type="text" id="commDate" class="form-control"></div>
+      <div class="form-group"><label>Members (JSON Array)</label><textarea id="commMembers" class="form-control" rows="5" placeholder='[{"initials": "AA", "name": "A. Krishnaswamy Ayyar"}]'></textarea></div>
+      <div class="form-group"><label>Details HTML</label><textarea id="commDetails" class="form-control" rows="8"></textarea></div>
+    </div>
+  </div>
 </div>
 
 <!-- ════ NEWS TAB ════ -->
@@ -653,9 +669,12 @@
       { name: "Dr. Rajendra Prasad", party: "Indian National Congress", constituency: "Bihar", committees: "President of the Assembly", initials: "RP", photoUrl: "" },
       { name: "Jawaharlal Nehru", party: "Indian National Congress", constituency: "United Provinces", committees: "Union Power, Union Constitution", initials: "JN", photoUrl: "" },
       { name: "Sardar Vallabhbhai Patel", party: "Indian National Congress", constituency: "Bombay", committees: "Provincial Constitution, Advisory Comm.", initials: "SP", photoUrl: "" }
+    ],
+    committees: [
+      { name: "Drafting Committee", chairman: "Dr. B.R. Ambedkar", members: "N. Gopalaswami Ayyangar, Alladi Krishnaswami Ayyar, K.M. Munshi, Mohammad Saadulla, N. Madhava Rau, T.T. Krishnamachari" }
     ]
   };
-  let makingData = { stages: [], framers: [] };
+  let makingData = { stages: [], framers: [], committees: [] };
 
   let currentPartIdx = -1;
   let currentArtIdx = -1;
@@ -666,6 +685,7 @@
   let currentJudgIdx = -1;
   let currentStageIdx = -1;
   let currentFramerIdx = -1;
+  let currentCommIdx = -1;
 
   let activeTab = 'articles';
 
@@ -722,6 +742,7 @@
         populateJudgmentDropdown();
         populateStageDropdown();
         populateFramerDropdown();
+        populateCommDropdown();
         
         if (document.getElementById('richEditorsContainer').innerHTML === '') {
           buildRichEditors();
@@ -890,6 +911,7 @@
          if(dropdownUpdaterFn === populateJudgmentDropdown) sel = document.getElementById('judgSelect');
          if(dropdownUpdaterFn === populateStageDropdown) sel = document.getElementById('stageSelect');
          if(dropdownUpdaterFn === populateFramerDropdown) sel = document.getElementById('framerSelect');
+         if(dropdownUpdaterFn === populateCommDropdown) sel = document.getElementById('commSelect');
          if(sel && sel.selectedIndex > 0) {
             if (dropdownUpdaterFn === populatePartDropdown) sel.options[sel.selectedIndex].text = obj.partId + ' - ' + obj.partTitle;
             if (dropdownUpdaterFn === populateArticleDropdown) sel.options[sel.selectedIndex].text = 'Article ' + obj.id + ' - ' + obj.title;
@@ -899,6 +921,7 @@
             if (dropdownUpdaterFn === populateJudgmentDropdown) sel.options[sel.selectedIndex].text = (obj.year || '') + ' - ' + (obj.title || 'New Judgment');
             if (dropdownUpdaterFn === populateStageDropdown) sel.options[sel.selectedIndex].text = obj.title || 'New Stage';
             if (dropdownUpdaterFn === populateFramerDropdown) sel.options[sel.selectedIndex].text = obj.name || 'New Framer';
+            if (dropdownUpdaterFn === populateCommDropdown) sel.options[sel.selectedIndex].text = obj.name || 'New Committee';
         }
       }
     });
@@ -959,6 +982,18 @@
     bindInput('framerParty', () => currentFramerIdx>-1 ? makingData.framers[currentFramerIdx] : null, 'party');
     bindInput('framerConst', () => currentFramerIdx>-1 ? makingData.framers[currentFramerIdx] : null, 'constituency');
     bindInput('framerRoles', () => currentFramerIdx>-1 ? makingData.framers[currentFramerIdx] : null, 'committees');
+    
+    bindInput('commName', () => currentCommIdx>-1 ? makingData.committees[currentCommIdx] : null, 'title', populateCommDropdown);
+    bindInput('commChairman', () => currentCommIdx>-1 ? makingData.committees[currentCommIdx] : null, 'chair');
+    bindInput('commDateLabel', () => currentCommIdx>-1 ? makingData.committees[currentCommIdx] : null, 'dateLabel');
+    bindInput('commDate', () => currentCommIdx>-1 ? makingData.committees[currentCommIdx] : null, 'date');
+    bindInput('commDetails', () => currentCommIdx>-1 ? makingData.committees[currentCommIdx] : null, 'details');
+    document.getElementById('commMembers').addEventListener('input', (e) => {
+      triggerSave();
+      if(currentCommIdx > -1) {
+        try { makingData.committees[currentCommIdx].members = JSON.parse(e.target.value); } catch(err) { /* ignore invalid json while typing */ }
+      }
+    });
   }
 
   // --- ARTICLES UI ---
@@ -1224,6 +1259,32 @@
     populateFramerDropdown(); document.getElementById('framerSelect').value = makingData.framers.length - 1; onFramerChange();
   }
   function deleteCurrentFramer() { if(currentFramerIdx > -1 && confirm("Delete framer?")) { makingData.framers.splice(currentFramerIdx, 1); populateFramerDropdown(); document.getElementById('framerEditor').classList.add('hidden'); } }
+
+  function populateCommDropdown() {
+    const sel = document.getElementById('commSelect');
+    sel.innerHTML = '<option value="-1">-- Select a Committee --</option>';
+    (makingData.committees || []).forEach((c, i) => sel.innerHTML += `<option value="${i}">${c.title || 'New Committee'}</option>`);
+  }
+  function onCommitteeChange() {
+    currentCommIdx = parseInt(document.getElementById('commSelect').value);
+    if(currentCommIdx === -1) { document.getElementById('commEditor').classList.add('hidden'); return; }
+    const c = makingData.committees[currentCommIdx];
+    document.getElementById('commName').value = c.title || '';
+    document.getElementById('commChairman').value = c.chair || '';
+    document.getElementById('commDateLabel').value = c.dateLabel || '';
+    document.getElementById('commDate').value = c.date || '';
+    document.getElementById('commDetails').value = c.details || '';
+    document.getElementById('commMembers').value = c.members ? JSON.stringify(c.members, null, 2) : '';
+    document.getElementById('commEditor').classList.remove('hidden');
+  }
+  function addNewCommittee() {
+    if (!makingData.committees) makingData.committees = [];
+    makingData.committees.push({ title: "New Committee", chair: "", dateLabel: "Formed On", date: "", members: [], details: "" });
+    populateCommDropdown(); document.getElementById('commSelect').value = makingData.committees.length - 1; onCommitteeChange();
+  }
+  function deleteCurrentCommittee() {
+    if(currentCommIdx > -1 && confirm("Delete committee?")) { makingData.committees.splice(currentCommIdx, 1); populateCommDropdown(); document.getElementById('commEditor').classList.add('hidden'); }
+  }
 
   // --- ARTICLE CSV UPLOAD ---
   function handleArtCsvUpload(event) {
