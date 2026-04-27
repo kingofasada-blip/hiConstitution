@@ -565,6 +565,13 @@
               हिंदी अनुवाद लोड हो रहा है...
             </blockquote>
           </div>
+
+          <div class="article-section" id="hindi-simplified-section">
+            <div class="article-section-title">सरल व्याख्या</div>
+            <blockquote class="const-text hindi-text" style="font-style:normal; background:#F8F9FC; border-left-color:var(--green);" id="dyn-hindi-simplified-text">
+              हिंदी सरल व्याख्या जल्द ही अपडेट की जाएगी।
+            </blockquote>
+          </div>
         </div><!-- /hindi -->
 
         <!-- Interactive MCQ Section -->
@@ -689,6 +696,7 @@
           const hasOriginal = Boolean(foundArt.text && foundArt.text.trim());
           const hasSimplified = Boolean(foundArt.simplified && foundArt.simplified.trim());
           const hasHindi = Boolean(foundArt.hindi && foundArt.hindi.trim());
+          const hasHindiSimplified = Boolean(foundArt.hindiSimplified && foundArt.hindiSimplified.trim());
           
           document.getElementById('dyn-original-text').innerHTML = formatText(foundArt.text) || foundArt.preview;
           
@@ -703,6 +711,13 @@
             document.getElementById('dyn-hindi-text').innerHTML = formatText(foundArt.hindi);
           } else {
             document.getElementById('dyn-hindi-text').innerHTML = "<span style='color:var(--muted); font-style:italic;'>हिंदी अनुवाद जल्द ही अपडेट किया जाएगा। (Admin Panel से डेटा भरें)</span>";
+          }
+
+          if (hasHindiSimplified) {
+            document.getElementById('dyn-hindi-simplified-text').innerHTML = formatText(foundArt.hindiSimplified);
+            document.getElementById('hindi-simplified-section').style.display = 'block';
+          } else {
+            document.getElementById('hindi-simplified-section').style.display = 'none';
           }
 
           // Render MCQs if available
@@ -830,7 +845,11 @@
       let langCode = 'en-IN';
       
       if (isHindi) {
-        textToRead = document.getElementById('dyn-hindi-text').innerText;
+        const hindiOrigText = document.getElementById('dyn-hindi-text').innerText;
+        const hindiSimpSection = document.getElementById('hindi-simplified-section');
+        const hindiSimpText = document.getElementById('dyn-hindi-simplified-text').innerText;
+        const isHindiSimpVisible = hindiSimpSection && hindiSimpSection.style.display !== 'none';
+        textToRead = isHindiSimpVisible ? (hindiOrigText + ". सरल व्याख्या: " + hindiSimpText) : hindiOrigText;
         langCode = 'hi-IN';
       } else {
         const origText = document.getElementById('dyn-original-text').innerText;
