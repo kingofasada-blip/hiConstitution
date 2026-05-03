@@ -1,0 +1,31 @@
+﻿Article 308 (Interpretation): In this Part, the term "State" does not include the State of Jammu and Kashmir.
+Article 309 (Recruitment and Conditions of Service): Parliament and State Legislatures regulate the recruitment and service conditions of public servants. Until they make laws, the President (for the Union) and the Governor (for the State) have the power to make these rules.
+Article 310 (Tenure of Office - "Pleasure Doctrine"): Any person holding a civil or defense post under the Union holds it during the pleasure of the President. Similarly, state civil servants hold office during the pleasure of the Governor. The Constitution allows exceptions for special contract-based appointments to provide compensation if the post is abolished early.
+Article 311 (Protections against Dismissal/Removal): Provides two major safeguards for civil servants:
+They cannot be dismissed or removed by an authority subordinate to the one that appointed them.
+They cannot be dismissed, removed, or reduced in rank without an inquiry where they are given a reasonable opportunity to be heard.
+Exceptions (No inquiry needed): (a) Conviction on a criminal charge; (b) the authority records in writing that an inquiry is not reasonably practicable; or (c) the President/Governor is satisfied that an inquiry is not expedient in the interest of State security.
+Article 312 (All-India Services): Parliament can create new All-India Services (including an All-India Judicial Service) common to both the Union and States, only if the Rajya Sabha passes a resolution supported by at least two-thirds of the members present and voting. The IAS and IPS are deemed created under this article. An All-India Judicial Service cannot include a post inferior to a District Judge.
+Article 312A (Power to vary conditions of certain officers): Parliament has the power to change or revoke the service conditions, pension, and remuneration of officers appointed by the Secretary of State (Crown in India) before the Constitution commenced. Courts are barred from interfering in these disputes.
+Article 313 (Transitional Provisions): Pre-constitution laws regarding public services will continue in force until a new provision is made, provided they are consistent with the Constitution.
+Article 314: This article was omitted by the 28th Amendment Act, 1972.
+CHAPTER II: PUBLIC SERVICE COMMISSIONS (Articles 315 - 323)
+Article 315 (Establishment of PSCs): There shall be a Union Public Service Commission (UPSC) for the Centre and a State PSC for each State.
+Joint PSC: Two or more states can agree to have a Joint PSC if their legislatures pass a resolution and Parliament makes a law for it.
+UPSC can also serve a State's needs if the Governor requests it and the President approves.
+Article 316 (Appointment and Term):
+Appointment: By the President (for UPSC/Joint PSC) and by the Governor (for State PSC). As close to half the members as possible must have at least 10 years of government service experience.
+Term: Members hold office for 6 years, or until they reach the age of 65 years (for UPSC) or 62 years (for State/Joint PSC), whichever is earlier.
+They are ineligible for re-appointment to the exact same office.
+Article 317 (Removal and Suspension): A Chairman or member of a PSC can only be removed by the President on grounds of misbehaviour, and only after the Supreme Court holds an inquiry and recommends removal. During the inquiry, they can be suspended. The President can directly remove them if they become insolvent, take outside paid employment, or become unfit due to infirmity of mind/body.
+Article 318 (Regulations of Service Conditions): The President (UPSC/Joint PSC) and Governor (State PSC) determine the number of members and their service conditions. These conditions cannot be changed to their disadvantage after appointment.
+Article 319 (Prohibition on Holding Office after Retirement):
+UPSC Chairman: Ineligible for any further government employment.
+State PSC Chairman: Eligible only to become UPSC Chairman/Member or another State PSC Chairman.
+UPSC Member: Eligible only to become UPSC Chairman or a State PSC Chairman.
+State PSC Member: Eligible only to become UPSC Chairman/Member or Chairman of a State PSC.
+Article 320 (Functions of PSCs): Their primary duty is to conduct examinations for appointments to services. They must be consulted on: methods of recruitment, promotions, transfers, disciplinary matters, and claims for legal defense costs or injury pensions.
+Exception: The President/Governor can make regulations specifying matters where consultation is not required. They are also not consulted on reservation matters under Article 16(4) or Article 335.
+Article 321 (Power to Extend Functions): Parliament or the State Legislature can legally add additional functions to the UPSC or State PSC regarding local authorities, corporate bodies, or public institutions.
+Article 322 (Expenses): All expenses of the UPSC/State PSC (including salaries and pensions) are charged directly on the Consolidated Fund of India or the Consolidated Fund of the State, respectively.
+Article 323 (Reports): The UPSC presents an annual report of its work to the President (laid before Parliament), and State/Joint PSCs present their report to the Governor (laid before the State Legislature). The government must attach a memorandum explaining the reasons for any cases where the PSC's advice was not accepted.
