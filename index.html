@@ -7,7 +7,7 @@
   <meta name="description" content="Explore, understand, and master the Constitution of India. Read every Article, browse landmark judgments, take quizzes, and study the making of India's founding document." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Yatra+One&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <style>
     :root {
@@ -134,14 +134,12 @@
     }
 
     .hero-motto {
-      font-family: "Lora", serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--navy);
-      display: inline-flex;
-      align-items: center;
-      gap: 16px;
-      margin-top: 12px;
+      margin-top: 14px;
+      display: block;
+      width: min(100%, 760px);
+      font-size: 0;
+      line-height: 0;
+      color: transparent;
     }
 
     .hero-motto::before,
@@ -149,6 +147,18 @@
       content: '✦';
       font-size: 1.2rem;
       color: var(--accent-orange);
+    }
+
+    .hero-motto::before,
+    .hero-motto::after {
+      content: none;
+    }
+
+    .hero-motto svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
     }
 
     .btn {
@@ -395,8 +405,23 @@
           Every article, every right, every duty - explained simply and clearly.
           Study smarter, quiz yourself, and track what's happening in constitutional law today.
         </p>
-      <div class="hero-motto">
+      <div class="hero-motto" aria-label="हमारा संविधान, हमारा अभिमान">
         हमारा संविधान, हमारा अभिमान
+        <svg viewBox="0 0 1180 180" role="img" aria-hidden="true" preserveAspectRatio="xMinYMid meet">
+          <defs>
+            <filter id="mottoShadow" x="-20%" y="-20%" width="140%" height="160%">
+              <feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#000000" flood-opacity="0.28" />
+            </filter>
+          </defs>
+          <g fill="#111111" filter="url(#mottoShadow)">
+            <text x="8" y="88" font-family="'Yatra One', serif" font-size="72">हमारा</text>
+            <text x="208" y="88" font-family="'Yatra One', serif" font-size="72">संविधान,</text>
+            <text x="617" y="88" font-family="'Yatra One', serif" font-size="72">हमारा</text>
+            <text x="817" y="88" font-family="'Yatra One', serif" font-size="72">अभिमान</text>
+            <path d="M46 114 C74 152, 125 158, 192 116" fill="none" stroke="#111111" stroke-width="6" stroke-linecap="round"/>
+            <path d="M658 114 C688 152, 742 158, 806 118" fill="none" stroke="#111111" stroke-width="6" stroke-linecap="round"/>
+          </g>
+        </svg>
       </div>
       </div>
       <div class="hero-visual">
