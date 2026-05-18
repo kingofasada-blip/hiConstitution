@@ -297,15 +297,18 @@
 
     /* Nav between articles */
     .article-nav {
-      display: flex;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-areas:
+        "prev next"
+        "all all";
       align-items: stretch;
-      gap: 12px;
+      gap: 16px;
       margin-top: 40px;
       padding-top: 28px;
       border-top: 2px solid var(--border);
     }
     .article-nav-btn {
-      flex: 1;
       display: flex;
       align-items: center;
       gap: 14px;
@@ -317,7 +320,14 @@
       background: var(--white);
       text-decoration: none;
       min-height: 72px;
+      width: 100%;
+      box-sizing: border-box;
+      justify-self: stretch;
+      align-self: stretch;
+      max-width: none;
     }
+    #prevArticleLink { grid-area: prev; }
+    #nextArticleLink { grid-area: next; }
     .article-nav-btn:hover {
       border-color: var(--navy);
       background: #f0f2ff;
@@ -343,11 +353,12 @@
     .article-nav-title { font-size: 0.88rem; font-weight: 700; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .article-nav-all {
       display: flex;
-      flex-direction: column;
+      grid-area: all;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 14px 24px;
+      padding: 16px 24px;
       border: 1.5px solid var(--border);
       border-radius: 14px;
       font-size: 0.8rem;
@@ -358,6 +369,9 @@
       transition: all 0.2s ease;
       white-space: nowrap;
       min-width: 110px;
+      width: 100%;
+      box-sizing: border-box;
+      justify-self: stretch;
     }
     .article-nav-all svg { opacity: 0.6; }
     .article-nav-all:hover {
@@ -378,16 +392,13 @@
       .hindi-text { font-size: var(--dyn-font-size, 1rem); }
       .article-num-large { font-size: 3.5rem; right: 0; }
       .article-nav {
-        flex-wrap: wrap;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "prev next"
+          "all all";
+        gap: 12px;
       }
-      .article-nav-btn { width: calc(50% - 6px); flex: none; }
-      .article-nav-all {
-        order: 3;
-        flex: 1 0 100%;
-        flex-direction: row;
-        gap: 8px;
-        padding: 12px;
-      }
+      .article-nav-all { gap: 8px; padding: 12px; }
       .article-nav-btn { min-height: 60px; padding: 12px 14px; gap: 10px; }
       .article-nav-title { font-size: 0.82rem; }
       .reader-controls { width: 100%; justify-content: center; gap: 6px; margin-top: 12px; }
@@ -585,7 +596,7 @@
           <a href="#" class="article-nav-btn" id="prevArticleLink" style="display:none;">
             <span class="article-nav-arrow">←</span>
             <span class="article-nav-text">
-              <span class="article-nav-label">Previous</span>
+              <span class="article-nav-label">Previous Article</span>
               <span class="article-nav-title" id="prevArticleLabel">Article</span>
             </span>
           </a>
@@ -595,7 +606,7 @@
           </a>
           <a href="#" class="article-nav-btn article-nav-btn--next" id="nextArticleLink" style="display:none;">
             <span class="article-nav-text" style="text-align:right;">
-              <span class="article-nav-label">Next</span>
+              <span class="article-nav-label">Next Article</span>
               <span class="article-nav-title" id="nextArticleLabel">Article</span>
             </span>
             <span class="article-nav-arrow">→</span>
@@ -670,10 +681,10 @@
           for (let art of (part.articles || [])) {
             flatArticles.push({ part, art });
             if (art.id === artId) {
-              foundArt = art; foundPart = part; break;
+              foundArt = art;
+              foundPart = part;
             }
           }
-          if (foundArt) break;
         }
         
         if (foundArt) {
@@ -772,14 +783,14 @@
             const prevLink = document.getElementById('prevArticleLink');
             prevLink.href = 'library-article.html?id=' + encodeURIComponent(prev.art.id) + '&slug=' + createSlug(prev.art.title);
             prevLink.style.display = 'flex';
-            document.getElementById('prevArticleLabel').textContent = trimTitle(prev.art.title);
+            document.getElementById('prevArticleLabel').textContent = 'Article ' + prev.art.id;
           }
 
           if (next) {
             const nextLink = document.getElementById('nextArticleLink');
             nextLink.href = 'library-article.html?id=' + encodeURIComponent(next.art.id) + '&slug=' + createSlug(next.art.title);
             nextLink.style.display = 'flex';
-            document.getElementById('nextArticleLabel').textContent = trimTitle(next.art.title);
+            document.getElementById('nextArticleLabel').textContent = 'Article ' + next.art.id;
           }
 
           const relatedArticles = (foundPart.articles || []).filter(art => art.id !== foundArt.id).slice(0, 4);
