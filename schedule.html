@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -128,19 +128,37 @@
       <div class="logo-circle"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M2 7C4 6 8 5.5 12 7.5C16 5.5 20 6 22 7V19C20 18 16 17.5 12 19.5C8 17.5 4 18 2 19V7Z'/><line x1='12' y1='7.5' x2='12' y2='19.5'/></svg></div>
       <span class="logo-text">hi<span>Constitution</span></span>
     </a>
-        <ul class="navbar-nav" role="list">`n      <li><a href="index.html" class="nav-link">Home</a></li>`n      <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>`n      <li><a href="news.html" class="nav-link">News</a></li>`n      <li><a href="Constitution-making.html" class="nav-link">Making</a></li>`n      <li><a href="Constitutional-amendments.html" class="nav-link">Amendments</a></li>`n      <li><a href="landmark-judgments.html" class="nav-link">Judgments</a></li>`n      <li><a href="facts-about-indian-constitution.html" class="nav-link">Facts</a></li>`n      <li><a href="quiz.html" class="nav-link">Quiz</a></li>`n    </ul>
+        <ul class="navbar-nav" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>
+      <li><a href="news.html" class="nav-link">News</a></li>
+      <li><a href="Constitution-making.html" class="nav-link">Making</a></li>
+      <li><a href="Constitutional-amendments.html" class="nav-link">Amendments</a></li>
+      <li><a href="landmark-judgments.html" class="nav-link">Judgments</a></li>
+      <li><a href="facts-about-indian-constitution.html" class="nav-link">Facts</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+    </ul>
     <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<nav class="mobile-nav" aria-label="Mobile navigation">`n  <a href="index.html" class="nav-link">Home</a>`n  <a href="read-the-constitution.html" class="nav-link">Read</a>`n  <a href="news.html" class="nav-link">News</a>`n  <a href="Constitution-making.html" class="nav-link">Making</a>`n  <a href="Constitutional-amendments.html" class="nav-link">Amendments</a>`n  <a href="landmark-judgments.html" class="nav-link">Judgments</a>`n  <a href="facts-about-indian-constitution.html" class="nav-link">Facts</a>`n  <a href="quiz.html" class="nav-link">Quiz</a>`n</nav>
+<nav class="mobile-nav" aria-label="Mobile navigation">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="read-the-constitution.html" class="nav-link">Read</a>
+  <a href="news.html" class="nav-link">News</a>
+  <a href="Constitution-making.html" class="nav-link">Making</a>
+  <a href="Constitutional-amendments.html" class="nav-link">Amendments</a>
+  <a href="landmark-judgments.html" class="nav-link">Judgments</a>
+  <a href="facts-about-indian-constitution.html" class="nav-link">Facts</a>
+  <a href="quiz.html" class="nav-link">Quiz</a>
+</nav>
 
 <main class="sch-page">
   <div class="sch-header">
     <div class="container">
-      <a href="read-the-constitution.html" class="back-link">â† Back to All Schedules</a>
+      <a href="read-the-constitution.html" class="back-link">← Back to All Schedules</a>
       <h1 id="schTitleDisplay">Loading Schedule...</h1>
       <p id="schDescDisplay">Please wait while we fetch the details.</p>
     </div>
@@ -151,7 +169,7 @@
     <div class="container">
       <div class="view-tabs" role="tablist">
         <button class="view-tab active" role="tab" data-view="english">English</button>
-        <button class="view-tab" role="tab" data-view="hindi">à¤¹à¤¿à¤¨à¥à¤¦à¥€</button>
+        <button class="view-tab" role="tab" data-view="hindi">हिन्दी</button>
       </div>
     </div>
   </div>
@@ -162,7 +180,7 @@
     </div>
     
     <div id="hindiPanel" class="sch-content-panel">
-      <div class="sch-details-box hindi-text" id="schDetailsHi">à¤¹à¤¿à¤‚à¤¦à¥€ à¤…à¤¨à¥à¤µà¤¾à¤¦ à¤²à¥‹à¤¡ à¤¹à¥‹ à¤°à¤¹à¤¾ à¤¹à¥ˆ...</div>
+      <div class="sch-details-box hindi-text" id="schDetailsHi">हिंदी अनुवाद लोड हो रहा है...</div>
     </div>
   </div>
 </main>
@@ -224,7 +242,7 @@
         if (sch.hindi && sch.hindi.trim() !== '') {
           hiPanel.innerHTML = sch.hindi.replace(/\n/g, '<br><br>');
         } else {
-          hiPanel.innerHTML = "<span style='color:var(--muted); font-style:italic;'>à¤¹à¤¿à¤‚à¤¦à¥€ à¤…à¤¨à¥à¤µà¤¾à¤¦ à¤œà¤²à¥à¤¦ à¤¹à¥€ à¤…à¤ªà¤¡à¥‡à¤Ÿ à¤•à¤¿à¤¯à¤¾ à¤œà¤¾à¤à¤—à¤¾à¥¤</span>";
+          hiPanel.innerHTML = "<span style='color:var(--muted); font-style:italic;'>हिंदी अनुवाद जल्द ही अपडेट किया जाएगा।</span>";
         }
       })
       .catch(err => {

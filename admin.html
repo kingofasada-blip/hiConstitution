@@ -638,7 +638,7 @@
 
 <div class="status-bar">
   <div class="auto-save-text" id="saveStatus">✅ All changes saved automatically to memory.</div>
-  <button class="btn btn-primary btn-sm" id="downloadBtnBottom">⬇️ Download articles.json</button>
+  <button class="btn btn-primary btn-sm" id="downloadBtn">⬇️ Download articles.json</button>
 </div>
 
 <script src="js/sheets.js"></script>
@@ -718,7 +718,7 @@
         if(tab === 'judgments') dlName = 'judgments.json';
         if(tab === 'making') dlName = 'making.json';
         if(tab === 'news') dlName = 'news.json';
-        btn.textContent = `⬇️ Download ${dlName}`;
+        btn.textContent = '\u2B07\uFE0F Download ' + dlName;
       }
     });
     if (tab === 'sheets') initSheetsTab();
