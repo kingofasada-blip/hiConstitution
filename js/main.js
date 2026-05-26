@@ -313,7 +313,7 @@
         document.getElementById('bottomAotdSnippet').textContent = `${judgment.title} (${judgment.year})`;
         const link = document.getElementById('bottomAotdLink');
         if (link) {
-          link.href = `judgments.html?q=${encodeURIComponent(judgment.title)}`;
+          link.href = `landmark-judgments.html?q=${encodeURIComponent(judgment.title)}`;
           link.textContent = 'Read Full Judgment →';
         }
       })
@@ -324,7 +324,7 @@
         document.getElementById('bottomAotdPart').textContent = 'Landmark Case';
         document.getElementById('bottomAotdSnippet').textContent = 'Kesavananda Bharati v. State of Kerala (1973)';
         const link = document.getElementById('bottomAotdLink');
-        if (link) link.href = 'judgments.html?q=Kesavananda%20Bharati';
+        if (link) link.href = 'landmark-judgments.html?q=Kesavananda%20Bharati';
       });
   }
 })();

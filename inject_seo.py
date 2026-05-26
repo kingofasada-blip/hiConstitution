@@ -1,4 +1,4 @@
-﻿﻿#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 inject_seo.py — Injects SEO tags into hiConstitution HTML files.
 Run from: C:/Users/epicb/Downloads/hiCONSTITUTION/hiCONSTITUTION/
@@ -45,10 +45,10 @@ pages = {
         'schema': 'Article',
         'noindex': False,
     },
-    'making.html': {
+    'Constitution-making.html': {
         'title': "Making of India's Constitution — Constituent Assembly History | hiConstitution",
         'desc': "Discover how India's Constitution was made. Explore the Constituent Assembly sessions, key framers like Dr. Ambedkar, Nehru, and Patel, and the 2 year 11 month drafting process.",
-        'url': f'{DOMAIN}/making.html',
+        'url': f'{DOMAIN}/Constitution-making.html',
         'type': 'article',
         'schema': 'Article',
         'noindex': False,
@@ -109,6 +109,23 @@ pages = {
         'url': f'{DOMAIN}/schedule.html',
         'type': 'article',
         'schema': 'WebPage',
+        'dynamic': True,
+        'noindex': False,
+    },
+    'news.html': {
+        'title': 'Constitutional News — hiConstitution',
+        'desc': 'Stay updated with the latest Supreme Court judgments, constitutional amendments, and legislative news from India.',
+        'url': f'{DOMAIN}/news.html',
+        'type': 'website',
+        'schema': 'WebPage',
+        'noindex': False,
+    },
+    'news-article.html': {
+        'title': 'Constitutional News Update | hiConstitution',
+        'desc': 'Read the latest updates and analysis on constitutional law, Supreme Court rulings, and legislative developments in India.',
+        'url': f'{DOMAIN}/news-article.html',
+        'type': 'article',
+        'schema': 'Article',
         'dynamic': True,
         'noindex': False,
     },

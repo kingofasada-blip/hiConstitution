@@ -27,6 +27,30 @@
   force  = true
 
 [[redirects]]
+  from   = "/making.html"
+  to     = "/Constitution-making.html"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from   = "/amendments.html"
+  to     = "/Constitutional-amendments.html"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from   = "/judgments.html"
+  to     = "/landmark-judgments.html"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from   = "/facts.html"
+  to     = "/facts-about-indian-constitution.html"
+  status = 301
+  force  = true
+
+[[redirects]]
   from   = "/draft.html"
   to     = "/draft-Constitution-of-India.html"
   status = 301

@@ -638,7 +638,7 @@
 
 <div class="status-bar">
   <div class="auto-save-text" id="saveStatus">✅ All changes saved automatically to memory.</div>
-  <button class="btn btn-primary btn-sm" id="downloadBtn">⬇️ Download articles.json</button>
+  <button class="btn btn-primary btn-sm" id="downloadBtnBottom">⬇️ Download articles.json</button>
 </div>
 
 <script src="js/sheets.js"></script>
@@ -690,7 +690,10 @@
   let activeTab = 'articles';
 
   // Load Data
-  document.addEventListener("DOMContentLoaded", loadData);
+  document.addEventListener("DOMContentLoaded", () => {
+    loadData();
+    switchTab('articles');
+  });
   document.getElementById("loadLocalBtn").addEventListener("click", loadData);
 
   function switchTab(tab) {
@@ -701,20 +704,23 @@
     document.querySelectorAll('.admin-tabs button').forEach(b => b.classList.remove('active'));
     document.getElementById('tabBtn-' + tab).classList.add('active');
     
-    const dlBtn = document.getElementById('downloadBtn');
-    if (tab === 'sheets') {
-      dlBtn.style.display = 'none';
-    } else {
-      dlBtn.style.display = '';
-      let dlName = tab + '.json';
-      if(tab === 'articles') dlName = 'articles.json';
-      if(tab === 'schedules') dlName = 'schedules.json';
-      if(tab === 'quizzes') dlName = 'quiz.json';
-      if(tab === 'judgments') dlName = 'judgments.json';
-      if(tab === 'making') dlName = 'making.json';
-      if(tab === 'news') dlName = 'news.json';
-      dlBtn.textContent = `⬇️ Download ${dlName}`;
-    }
+    const dlBtns = [document.getElementById('downloadBtn'), document.getElementById('downloadBtnBottom')];
+    dlBtns.forEach(btn => {
+      if (!btn) return;
+      if (tab === 'sheets') {
+        btn.style.display = 'none';
+      } else {
+        btn.style.display = '';
+        let dlName = tab + '.json';
+        if(tab === 'articles') dlName = 'articles.json';
+        if(tab === 'schedules') dlName = 'schedules.json';
+        if(tab === 'quizzes') dlName = 'quiz.json';
+        if(tab === 'judgments') dlName = 'judgments.json';
+        if(tab === 'making') dlName = 'making.json';
+        if(tab === 'news') dlName = 'news.json';
+        btn.textContent = `⬇️ Download ${dlName}`;
+      }
+    });
     if (tab === 'sheets') initSheetsTab();
   }
 
@@ -1552,7 +1558,7 @@
   }
 
   // --- DOWNLOAD ---
-  document.getElementById('downloadBtn').addEventListener('click', () => {
+  const triggerDownload = () => {
     let data, name;
     if(activeTab === 'articles') { data = articlesData; name = 'articles.json'; }
     else if(activeTab === 'schedules') { data = schedulesData; name = 'schedules.json'; }
@@ -1571,7 +1577,13 @@
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-  });
+  };
+
+  document.getElementById('downloadBtn').addEventListener('click', triggerDownload);
+  const dlBtnBottom = document.getElementById('downloadBtnBottom');
+  if (dlBtnBottom) {
+    dlBtnBottom.addEventListener('click', triggerDownload);
+  }
 
   /* ── NEWS TAB ── */
   let currentNewsIdx = -1;

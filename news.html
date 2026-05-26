@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Constitutional News — hiConstitution</title>
+  <title>Constitutional News â€” hiConstitution</title>
   <meta name="description" content="Stay updated with the latest Supreme Court judgments, constitutional amendments, and legislative news from India." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,7 +12,7 @@
   <style>
     .news-list-page { padding-top: var(--navbar-h); background: var(--bg-light); min-height: 100vh; }
 
-    /* ── Hero header ── */
+    /* â”€â”€ Hero header â”€â”€ */
     .news-page-header {
       background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
       padding: 56px 0 64px;
@@ -57,7 +57,7 @@
       color: rgba(255,255,255,0.75);
     }
 
-    /* ── Filter bar ── */
+    /* â”€â”€ Filter bar â”€â”€ */
     .news-section { padding: 40px 0 80px; }
     .filter-bar {
       display: flex;
@@ -83,14 +83,14 @@
       color: #ffffff;
     }
 
-    /* ── News grid ── */
+    /* â”€â”€ News grid â”€â”€ */
     .news-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 20px;
     }
 
-    /* Card is a DIV — no <a> wrapper to fight global link CSS */
+    /* Card is a DIV â€” no <a> wrapper to fight global link CSS */
     .nc {
       background: #ffffff;
       border: 1px solid var(--border);
@@ -171,15 +171,7 @@
       <div class="logo-circle"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M2 7C4 6 8 5.5 12 7.5C16 5.5 20 6 22 7V19C20 18 16 17.5 12 19.5C8 17.5 4 18 2 19V7Z'/><line x1='12' y1='7.5' x2='12' y2='19.5'/></svg></div>
       <span class="logo-text">hi<span>Constitution</span></span>
     </a>
-    <ul class="navbar-nav" role="list">
-      <li><a href="index.html" class="nav-link">Home</a></li>
-      <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>
-      <li><a href="news.html" class="nav-link active">News</a></li>
-      <li><a href="Constitutional-amendments.html" class="nav-link">Amendments</a></li>
-      <li><a href="landmark-judgments.html" class="nav-link">Judgments</a></li>
-      <li><a href="facts.html" class="nav-link">Facts</a></li>
-      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
-    </ul>
+        <ul class="navbar-nav" role="list">`n      <li><a href="index.html" class="nav-link">Home</a></li>`n      <li><a href="read-the-constitution.html" class="nav-link">Read</a></li>`n      <li><a href="news.html" class="nav-link">News</a></li>`n      <li><a href="Constitution-making.html" class="nav-link">Making</a></li>`n      <li><a href="Constitutional-amendments.html" class="nav-link">Amendments</a></li>`n      <li><a href="landmark-judgments.html" class="nav-link">Judgments</a></li>`n      <li><a href="facts-about-indian-constitution.html" class="nav-link">Facts</a></li>`n      <li><a href="quiz.html" class="nav-link">Quiz</a></li>`n    </ul>
     <div class="navbar-actions">
       <a href="quiz.html" class="btn btn-primary btn-sm">Take Quiz</a>
     </div>
@@ -188,15 +180,7 @@
     </button>
   </div>
 </nav>
-<nav class="mobile-nav" aria-label="Mobile navigation">
-  <a href="index.html" class="nav-link">Home</a>
-  <a href="read-the-constitution.html" class="nav-link">Read</a>
-  <a href="news.html" class="nav-link">News</a>
-  <a href="Constitutional-amendments.html" class="nav-link">Amendments</a>
-  <a href="landmark-judgments.html" class="nav-link">Judgments</a>
-  <a href="facts.html" class="nav-link">Facts</a>
-  <a href="quiz.html" class="nav-link">Quiz</a>
-</nav>
+<nav class="mobile-nav" aria-label="Mobile navigation">`n  <a href="index.html" class="nav-link">Home</a>`n  <a href="read-the-constitution.html" class="nav-link">Read</a>`n  <a href="news.html" class="nav-link">News</a>`n  <a href="Constitution-making.html" class="nav-link">Making</a>`n  <a href="Constitutional-amendments.html" class="nav-link">Amendments</a>`n  <a href="landmark-judgments.html" class="nav-link">Judgments</a>`n  <a href="facts-about-indian-constitution.html" class="nav-link">Facts</a>`n  <a href="quiz.html" class="nav-link">Quiz</a>`n</nav>
 
 <main class="news-list-page">
   <div class="news-page-header">
@@ -205,7 +189,7 @@
       <p>Latest Supreme Court judgments, amendments, and legislation shaping India's constitutional landscape.</p>
       <div class="news-header-stats">
         <div class="news-stat-block">
-          <div class="news-stat-val" id="stat-count">—</div>
+          <div class="news-stat-val" id="stat-count">â€”</div>
           <div class="news-stat-meta">
             <span class="news-stat-label">Articles</span>
           </div>
@@ -213,7 +197,7 @@
         <div class="news-stat-block">
           <div class="news-stat-meta">
             <span class="news-stat-label">Latest update</span>
-            <span class="news-stat-sub" id="stat-latest">—</span>
+            <span class="news-stat-sub" id="stat-latest">â€”</span>
           </div>
         </div>
       </div>
@@ -231,7 +215,7 @@
         <button class="filter-btn" data-cat="politics">Politics</button>
       </div>
       <div class="news-grid" id="newsGrid">
-        <div class="no-results">Loading news…</div>
+        <div class="no-results">Loading newsâ€¦</div>
       </div>
     </div>
   </div>
@@ -240,7 +224,7 @@
 <footer style="background:var(--navy);color:rgba(255,255,255,0.6);padding:32px 0;">
   <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
     <a href="index.html" style="color:#fff;font-weight:700;font-size:0.95rem;">hiConstitution.com</a>
-    <p style="font-size:0.82rem;">© 2025 — Educational use only.</p>
+    <p style="font-size:0.82rem;">Â© 2025 â€” Educational use only.</p>
   </div>
 </footer>
 
@@ -281,7 +265,7 @@ function renderGrid(filter) {
       </div>
       <div class="nc-footer">
         <span class="nc-date">${formatDate(a.date)}</span>
-        <span class="nc-read">Read article →</span>
+        <span class="nc-read">Read article â†’</span>
       </div>
     </div>`;
   }).join('');

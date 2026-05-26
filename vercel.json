@@ -7,6 +7,26 @@
       "permanent": true
     },
     {
+      "source": "/making.html",
+      "destination": "/Constitution-making.html",
+      "permanent": true
+    },
+    {
+      "source": "/amendments.html",
+      "destination": "/Constitutional-amendments.html",
+      "permanent": true
+    },
+    {
+      "source": "/judgments.html",
+      "destination": "/landmark-judgments.html",
+      "permanent": true
+    },
+    {
+      "source": "/facts.html",
+      "destination": "/facts-about-indian-constitution.html",
+      "permanent": true
+    },
+    {
       "source": "/draft.html",
       "destination": "/draft-Constitution-of-India.html",
       "permanent": true
