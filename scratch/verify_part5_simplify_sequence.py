@@ -1,0 +1,40 @@
+import zipfile, sys, io, re
+from xml.etree import ElementTree as ET
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
+
+with zipfile.ZipFile(r'c:\Users\DeLL\Desktop\hiCONSTITUTION\Part 5 - Simplified english and hindi.docx', 'r') as z:
+    with z.open('word/document.xml') as f:
+        tree = ET.parse(f)
+root = tree.getroot()
+
+paras = []
+for para in root.iter('{%s}p' % W):
+    runs = list(para.iter('{%s}r' % W))
+    if not runs: continue
+    full_text = []
+    first_bold = False; first_checked = False
+    for r in runs:
+        t = r.find('{%s}t' % W)
+        if t is not None and t.text:
+            rpr = r.find('{%s}rPr' % W)
+            is_bold = rpr is not None and (rpr.find('{%s}b' % W) is not None or rpr.find('{%s}bCs' % W) is not None)
+            if not first_checked and t.text.strip():
+                first_bold = is_bold; first_checked = True
+            full_text.append(t.text)
+    line = ''.join(full_text).strip()
+    if line:
+        paras.append({'text': line, 'bold': first_bold})
+
+heading_indices = []
+for idx, p in enumerate(paras):
+    if p['text'].startswith('Article'):
+        heading_indices.append(idx)
+
+for k, idx in enumerate(heading_indices):
+    next_idx = heading_indices[k+1] if k+1 < len(heading_indices) else len(paras)
+    between = paras[idx+1:next_idx]
+    print(f"Heading at {idx}: '{paras[idx]['text']}' -> {len(between)} paragraphs between next heading")
+    for b_idx, b in enumerate(between):
+        print(f"   [{b_idx}] {b['text'][:120]}")

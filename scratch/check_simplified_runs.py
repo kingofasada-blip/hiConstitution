@@ -1,0 +1,34 @@
+import zipfile, sys, io
+from xml.etree import ElementTree as ET
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
+
+with zipfile.ZipFile(r'c:\Users\DeLL\Desktop\hiCONSTITUTION\part 3 english and hindi simplify.docx', 'r') as z:
+    with z.open('word/document.xml') as f:
+        tree = ET.parse(f)
+root = tree.getroot()
+
+paras = []
+for para in root.iter('{%s}p' % W):
+    runs = list(para.iter('{%s}r' % W))
+    if not runs: continue
+    full_text = []
+    first_bold = False; first_checked = False
+    for r in runs:
+        t = r.find('{%s}t' % W)
+        if t is not None and t.text:
+            rpr = r.find('{%s}rPr' % W)
+            is_bold = rpr is not None and (rpr.find('{%s}b' % W) is not None or rpr.find('{%s}bCs' % W) is not None)
+            if not first_checked and t.text.strip():
+                first_bold = is_bold; first_checked = True
+            full_text.append((t.text, is_bold))
+    if full_text:
+        paras.append(full_text)
+
+# Let's inspect the first 10 paragraphs
+for idx, p in enumerate(paras[:10]):
+    text = ''.join(t[0] for t in p)
+    bolds = [t[0] for t in p if t[1]]
+    print(f"Para {idx} text: {text[:100]}")
+    print(f"Para {idx} bold runs: {bolds}")
