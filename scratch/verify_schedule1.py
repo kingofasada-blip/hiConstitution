@@ -114,17 +114,24 @@ def verify():
                     
             print(f"  Verified {states_and_uts_found} bolded English State/UT entries.")
                 
-            if '<strong>Amendments:</strong>' not in details:
-                print("  ERROR: English details are missing '<strong>Amendments:</strong>'!")
+            if '<details>' not in details or '</details>' not in details:
+                print("  ERROR: English details are missing collapsible <details> tag!")
                 errors += 1
-            else:
-                idx_amend = details.index('<strong>Amendments:</strong>')
+            if 'Amendments (Click to expand)' not in details:
+                print("  ERROR: English details are missing 'Amendments (Click to expand)' summary!")
+                errors += 1
+            
+            idx_amend = details.find('<details>')
+            if idx_amend != -1:
                 amend_part = details[idx_amend:]
                 footnotes = re.findall(r'<sup><strong>\d+</strong></sup>', amend_part)
                 print(f"  Found {len(footnotes)} English footnotes.")
                 if len(footnotes) != 58:
                     print(f"  ERROR: Expected 58 English footnotes, found {len(footnotes)}!")
                     errors += 1
+            else:
+                print("  ERROR: Could not locate <details> tag in English details!")
+                errors += 1
                     
         # Check hindi
         hindi = s_tmp.get('hindi')
@@ -173,17 +180,24 @@ def verify():
                     
             print(f"  Verified {states_and_uts_found_hi} bolded Hindi State/UT entries.")
                 
-            if '<strong>संशोधन:</strong>' not in hindi:
-                print("  ERROR: Hindi field is missing '<strong>संशोधन:</strong>'!")
+            if '<details>' not in hindi or '</details>' not in hindi:
+                print("  ERROR: Hindi field is missing collapsible <details> tag!")
                 errors += 1
-            else:
-                idx_amend_hi = hindi.index('<strong>संशोधन:</strong>')
+            if 'संशोधन (विस्तार के लिए क्लिक करें)' not in hindi:
+                print("  ERROR: Hindi field is missing 'संशोधन (विस्तार के लिए क्लिक करें)' summary!")
+                errors += 1
+                
+            idx_amend_hi = hindi.find('<details>')
+            if idx_amend_hi != -1:
                 amend_part_hi = hindi[idx_amend_hi:]
                 footnotes_hi = re.findall(r'<sup>\d+</sup>', amend_part_hi)
                 print(f"  Found {len(footnotes_hi)} Hindi footnotes.")
                 if len(footnotes_hi) != 58:
                     print(f"  ERROR: Expected 58 Hindi footnotes, found {len(footnotes_hi)}!")
                     errors += 1
+            else:
+                print("  ERROR: Could not locate <details> tag in Hindi original!")
+                errors += 1
 
     if errors == 0:
         print("\nSUCCESS: All verifications passed successfully! No errors found.")

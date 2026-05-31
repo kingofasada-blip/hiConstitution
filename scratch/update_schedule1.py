@@ -68,10 +68,8 @@ def bold_name_at_start(para_text, name_list):
         if idx != -1:
             prefix = para_text[:idx]
             # Ensure the prefix only contains characters commonly found before the name
-            # (numbers, brackets, spaces, dots, footnotes and HTML tags like <sup>, </sup>, <strong>, </strong>)
             if re.match(r'^[¹²³⁴⁵⁶⁷⁸⁹⁰\d\.\s\[\]\*\-\—<>supstrong/]*$', prefix):
                 rest = para_text[idx + len(name):]
-                # Return with bold tags wrapped around name
                 return prefix + f"<strong>{name}</strong>" + rest
     return para_text
 
@@ -154,7 +152,6 @@ def main():
     english_paras.append(heading_en)
     
     # Body (index 1 to 42)
-    # 1 is States Header, 2 to 30 are States, 31 is UT Header, 32 to 42 are UTs
     english_paras.append(process_superscripts(paras[1]))
     
     for p in paras[2:31]:
@@ -169,13 +166,19 @@ def main():
         bolded = bold_name_at_start(processed, NAMES_EN)
         english_paras.append(bolded)
         
-    # Amendments Header (index 43)
-    english_paras.append("<strong>Amendments:</strong>")
+    # Amendments Collapsible Container
+    amend_start = "<details><summary style='cursor: pointer; font-weight: 700; color: var(--navy); outline: none; margin-top: 20px; user-select: none;'>Amendments (Click to expand)</summary><div style='margin-top: 10px; font-size: 0.95rem; line-height: 1.65;'>"
     
     # Footnotes (index 44 to 101)
     for idx, p in enumerate(paras[44:102]):
         clean_p = process_superscripts(p)
-        english_paras.append(f"<sup><strong>{idx+1}</strong></sup> {clean_p}")
+        footnote_text = f"<sup><strong>{idx+1}</strong></sup> {clean_p}"
+        if idx == 0:
+            english_paras.append(amend_start + footnote_text)
+        elif idx == len(paras[44:102]) - 1:
+            english_paras.append(footnote_text + "</div></details>")
+        else:
+            english_paras.append(footnote_text)
         
     details_content = "\n".join(english_paras)
     
@@ -189,7 +192,6 @@ def main():
     hindi_paras.append(heading_hi)
     
     # Body (index 103 to 144)
-    # 103 is States Header, 104 to 132 are States, 133 is UT Header, 134 to 144 are UTs
     hindi_paras.append(process_superscripts(paras[103]))
     
     for p in paras[104:133]:
@@ -204,13 +206,19 @@ def main():
         bolded = bold_name_at_start(processed, NAMES_HI)
         hindi_paras.append(bolded)
         
-    # Amendments Header (index 145)
-    hindi_paras.append("<strong>संशोधन:</strong>")
+    # Amendments Collapsible Container (Hindi)
+    amend_start_hi = "<details><summary style='cursor: pointer; font-weight: 700; color: var(--navy); outline: none; margin-top: 20px; user-select: none;'>संशोधन (विस्तार के लिए क्लिक करें)</summary><div style='margin-top: 10px; font-size: 0.95rem; line-height: 1.65;'>"
     
     # Footnotes (index 146 to 203)
     for idx, p in enumerate(paras[146:204]):
         clean_p = process_superscripts(p)
-        hindi_paras.append(f"<sup>{idx+1}</sup> {clean_p}")
+        footnote_text = f"<sup>{idx+1}</sup> {clean_p}"
+        if idx == 0:
+            hindi_paras.append(amend_start_hi + footnote_text)
+        elif idx == len(paras[146:204]) - 1:
+            hindi_paras.append(footnote_text + "</div></details>")
+        else:
+            hindi_paras.append(footnote_text)
         
     hindi_content = "\n".join(hindi_paras)
     
